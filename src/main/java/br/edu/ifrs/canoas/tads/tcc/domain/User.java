@@ -18,11 +18,14 @@ public class User {
 	private String username;
 	private boolean active;
 	private String password;
+	private String lattes;
 	@ManyToMany(fetch = FetchType.EAGER) private Set<Role> roles;
 	@NotBlank private String name;
     @NotBlank @javax.validation.constraints.Email private String email;
 	@NotBlank private String experience;
 	@NotBlank private String skill;
     @OneToOne @JsonIgnore private File picture;
+	
+	
 
 }

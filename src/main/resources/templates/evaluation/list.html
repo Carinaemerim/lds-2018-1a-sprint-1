@@ -35,7 +35,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="table-list-evaluate" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>Aluno</th>
@@ -123,10 +123,10 @@
 
 <th:block layout:fragment="js-view">
     <script
-            src="/webjars/datatables/1.10.13/media/js/jquery.dataTables.min.css"></script>
+            src="/webjars/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#example1').DataTable()
+            $('#table-list-evaluate').DataTable()
         });
     </script>
 

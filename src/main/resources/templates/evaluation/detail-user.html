@@ -1,0 +1,20 @@
+<!-- Widget: user widget style 1 -->
+<div class="box box-widget widget-user">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-aqua-active">
+        <h3 class="widget-user-username text-center">Alonsinho da Costa</h3>
+    </div>
+    <div class="widget-user-image">
+        <img src="/photos/face.png"
+             th:src="${#authentication.principal.user.picture?.pictureBase64}"
+             class="img-circle" alt="User Image">
+    </div>
+    <div class="box-footer">
+        <div class="row">
+            <p class="box-title text-center">Análise e Desenvolvimento de Sistemas</p>
+            <p class="text-muted text-center">IFRS - Campus Canoas</p>
+        </div>
+        <!-- /.row -->
+    </div>
+</div>
+<!-- /.widget-user -->

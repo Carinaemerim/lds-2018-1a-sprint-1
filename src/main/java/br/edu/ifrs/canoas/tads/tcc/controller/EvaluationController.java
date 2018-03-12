@@ -17,4 +17,9 @@ public class EvaluationController {
 		return new ModelAndView("/evaluation/list");
 	}
 
+	@GetMapping("/evaluate-theme")
+	public ModelAndView theme() {
+		return new ModelAndView("/evaluation/evaluate-theme");
+	}
+
 }

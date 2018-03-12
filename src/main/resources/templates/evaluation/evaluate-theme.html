@@ -1,0 +1,78 @@
+<html layout:decorate="~{/layouts/main}">
+
+<head>
+    <title th:text="#{item.header}"/>
+</head>
+
+<!-- CONTENT HEADER -->
+<div layout:fragment="content-header">
+    <section class="content-header">
+        <!-- PAGE TITLE -->
+        <h1>
+            <span th:text="#{index.header}"/>
+            <small><span th:text="#{index.title}"/></small>
+        </h1>
+        <!-- BREADCRUMB -->
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> <span
+                    th:text="#{index.breadcrumb-1}"/></a></li>
+            <li><a href="#"><span th:text="#{index.breadcrumb-2}"/></a></li>
+            <li class="active"><span th:text="#{index.breadcrumb-3}"/></li>
+        </ol>
+    </section>
+</div>
+
+
+<div layout:fragment="content">
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="box box-info" th:insert="/evaluation/detail">
+                </div>
+                <!-- /.box -->
+            </div>
+            <div class="col-md-4">
+                <div th:insert="/evaluation/detail-user">
+                </div>
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Avaliação do Tema</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" th:insert="/evaluation/insert">
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+
+</div>
+<th:block layout:fragment="css-view">
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/datatables/1.10.13/media/css/jquery.dataTables.min.css"/>
+</th:block>
+
+<th:block layout:fragment="js-view">
+    <script
+            src="/webjars/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table-list-evaluate').DataTable()
+        });
+    </script>
+
+</th:block>
+</html>

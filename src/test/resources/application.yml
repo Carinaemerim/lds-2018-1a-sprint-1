@@ -1,3 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:h2:~/tcc-teste;DB_CLOSE_ON_EXIT=FALSE

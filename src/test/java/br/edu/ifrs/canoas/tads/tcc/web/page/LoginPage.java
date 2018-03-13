@@ -5,6 +5,8 @@ import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @PageUrl("http://localhost:{port}/")
@@ -22,13 +24,12 @@ public class LoginPage extends FluentPage {
     public LoginPage fillAndSubmitForm(String... paramsOrdered) {
         $("input").fill().with(paramsOrdered);
         submitButton.submit();
-        //awaitUntilFormDisappear();
         return this;
     }
 
 
-    private LoginPage awaitUntilFormDisappear() {
-        //await().atMost(5, TimeUnit.SECONDS).until(el(LOGIN_FORM)).not().present();
+    public LoginPage awaitUntilFormDisappear() {
+        await().atMost(5, TimeUnit.SECONDS).until(el(LOGIN_FORM)).not().present();
         return this;
     }
 

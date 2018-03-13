@@ -22,4 +22,9 @@ public class EvaluationController {
 		return new ModelAndView("/evaluation/evaluate-theme");
 	}
 
+	@GetMapping("/evaluate-proposal")
+	public ModelAndView proposal() {
+		return new ModelAndView("/evaluation/evaluate-proposal");
+	}
+
 }

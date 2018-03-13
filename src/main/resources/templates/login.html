@@ -20,7 +20,7 @@ div {
             <img th:src="@{/img/canoasLogo.jpg}" style="width: 80%"/>
 			<p class="login-box-msg" th:text="#{login.info}"></p>
 
-			<form name="f" th:action="@{/login}" method="post"
+			<form name="f" th:action="@{/login}" method="post" id="login-form"
 				class="form-signin">
 
 				<div th:if="${param.error}" class="alert alert-danger"
@@ -49,7 +49,7 @@ div {
 					<!-- /.col -->
 					<div class="col-xs-4">
 						<button type="submit" class="btn btn-primary btn-block btn-flat"
-							th:text="#{login.enter}"></button>
+                                id="submit-button" th:text="#{login.enter}"></button>
 					</div>
 
 					<!-- /.col -->

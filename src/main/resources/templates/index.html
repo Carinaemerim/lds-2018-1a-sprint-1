@@ -1,8 +1,8 @@
 <html layout:decorate="~{/layouts/main}">
 
-<head>
-    <title th:text="#{item.header}"/>
-</head>
+<th:block layout:fragment="head-title">
+    <title th:text="#{index.header}"/>
+</th:block>
 
 <!-- CONTENT HEADER -->
 <div layout:fragment="content-header">

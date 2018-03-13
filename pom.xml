@@ -22,6 +22,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
+        <!-- Configure this property to latest available version -->
+        <fluentlenium.version>3.4.1</fluentlenium.version>
+        <spock.version>1.0-groovy-2.4</spock.version>
+        <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
+        <selenium.version>3.5.3</selenium.version>
 	</properties>
 
 	<dependencies>
@@ -82,6 +88,46 @@
             <version>3.0.2.RELEASE</version>
         </dependency>
 
+
+
+        <!-- FLUENTLENIUM -->
+        <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-junit</artifactId>
+            <version>${fluentlenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fluentlenium</groupId>
+            <artifactId>fluentlenium-assertj</artifactId>
+            <version>${fluentlenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>2.25</version>
+            <scope>test</scope>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.seleniumhq.selenium</groupId>-->
+            <!--<artifactId>selenium-chrome-driver</artifactId>-->
+            <!--<version>${selenium.version}</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- FIM FLUENTLENIUM -->
 
 
 

@@ -1,7 +1,9 @@
 
 
 <head th:fragment="head">
-    <title th:text="#{head.title}"></title>
+    <th:block layout:fragment="head-title">
+        <title th:text="#{head.title}"></title>
+    </th:block>
     <meta name="theme-color" content="#ffffff"/>
 
     <!-- Tell the browser to be responsive to screen width -->

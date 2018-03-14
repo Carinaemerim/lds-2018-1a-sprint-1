@@ -17,14 +17,18 @@ public class EvaluationController {
 		return new ModelAndView("/evaluation/list");
 	}
 
-	@GetMapping("/evaluate-theme")
+	@GetMapping("/theme")
 	public ModelAndView theme() {
 		return new ModelAndView("/evaluation/evaluate-theme");
 	}
 
-	@GetMapping("/evaluate-proposal")
+	@GetMapping("/proposal")
 	public ModelAndView proposal() {
 		return new ModelAndView("/evaluation/evaluate-proposal");
 	}
 
+	@GetMapping("/monograph")
+	public ModelAndView monograph() {
+		return new ModelAndView("/evaluation/evaluate-monograph");
+	}
 }

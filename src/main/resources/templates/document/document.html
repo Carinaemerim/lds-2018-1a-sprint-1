@@ -1,0 +1,160 @@
+<html layout:decorate="~{/layouts/main}">
+
+<th:block layout:fragment="head-title">
+    <title th:text="#{index.header}"/>
+</th:block>
+
+<!-- CONTENT HEADER -->
+<div layout:fragment="content-header">
+    <section class="content-header">
+        <!-- PAGE TITLE -->
+        <h1>
+            <span th:text="#{document.header.theme}"/>
+            <small><span th:text="#{document.title}"/></small>
+        </h1>
+        <!-- BREADCRUMB -->
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> <span
+                    th:text="#{index.breadcrumb-1}"/></a></li>
+            <li><a href="#"><span th:text="#{index.breadcrumb-2}"/></a></li>
+            <li class="active"><span th:text="#{index.breadcrumb-3}"/></li>
+        </ol>
+    </section>
+</div>
+
+
+
+<div layout:fragment="content">
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="box">
+            <!--<div class="box-header with-border">
+            <h3 class="box-title"><span th:text="#{document.body.title}"/></h3>
+
+				<!--
+                <div class="box-tools pull-right">
+
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+
+                </div>
+            
+            </div>-->
+			<div class="nav-tabs-custom">
+			<ul class="nav nav-tabs">
+              <li class="active"><a href="#theme" data-toggle="tab" aria-expanded="true">Tema</a></li>
+              <li class=""><a href="#proposal" data-toggle="tab" aria-expanded="false">Proposta</a></li>
+              <li class=""><a href="#monography" data-toggle="tab" aria-expanded="false">Monografia</a></li>
+            </ul>
+            <div class="tab-content">
+	            <div id="theme" class="tab-pane active">
+	            <h3 class="box-title">Theme</h3>
+	            <button class="btn btn-primary btn-block">Adicionar arquivos</button>
+	            </div>
+	            <div id="proposal" class="tab-pane">
+	            <div class="box-body">
+	                <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+	
+	                <thead>
+	                <tr role="row"><th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending">
+	
+	                <span th:text="#{document.name}"/></th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+	
+	                <span th:text="#{document.date}"/></th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
+	
+					<span th:text="#{document.action}"/></th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
+	                </thead>
+	
+	                <tbody>
+	
+	                <tr role="row" class="odd">
+	
+	                </tr>
+	
+	                </tbody>
+	
+	              </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
+	              <button class="btn btn-primary btn-block">Adicionar arquivos</button>
+	            </div>
+	            </div>
+	            <div id="monography" class="tab-pane">
+	            <h3 class="box-title">Monography</h3>
+	            <button class="btn btn-primary btn-block">Adicionar arquivos</button>
+	            </div>
+              </div>
+              </div>
+
+              	<div class="box box-success direct-chat direct-chat-success">
+            <div class="box-header with-border">
+              <h3 class="box-title"><span th:text="#{document.chat}"/></h3>
+            <div class="box-body">
+              <!-- Conversations are loaded here -->
+              <div class="direct-chat-messages">
+                <!-- Message. Default to the left -->
+                <div class="direct-chat-msg">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-left"><span th:text="#{document.chat.student}"/></span>
+
+                  </div>
+                  <!-- /.direct-chat-info -->
+                  <img class="direct-chat-img" src="/photos/no_image_available.png" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <div class="direct-chat-text">
+                    Is this template really for free? That's unbelievable!
+                  </div>
+                  <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+
+                <!-- Message to the right -->
+                <div class="direct-chat-msg right">
+                  <div class="direct-chat-info clearfix">
+                    <span class="direct-chat-name pull-right"><span th:text="#{document.chat.prof}"/></span>
+
+                  </div>
+                  <!-- /.direct-chat-info -->
+                  <img class="direct-chat-img" src="../photos/no_image_available.png" alt="Message User Image"><!-- /.direct-chat-img -->
+                  <div class="direct-chat-text">
+                    You better believe it!
+                  </div>
+                  <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+              </div>
+              <!--/.direct-chat-messages-->
+
+              <!-- /.direct-chat-pane -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <form action="#" method="post">
+                <div class="input-group">
+                  <input name="message" placeholder="Type Message ..." class="form-control" type="text">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-success btn-flat">Send</button>
+                      </span>
+                </div>
+              </form>
+            </div>
+            <!-- /.box-footer-->
+          </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button class="btn btn-danger" style="float:right">Finalizar etapa</button>
+            </div>
+            <!-- /.box-footer-->
+        </div>
+        <!-- /.box -->
+
+    </section>
+
+</div>

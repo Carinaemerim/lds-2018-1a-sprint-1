@@ -1,0 +1,211 @@
+<html layout:decorate="~{/layouts/main}">
+
+<head>
+<title th:text="#{dashboard.title}" />
+</head>
+
+<!-- CONTENT HEADER -->
+<div layout:fragment="content-header">
+	<section class="content-header">
+		<!-- PAGE TITLE -->
+		<h1>Dashboard
+					</h1>
+		<!-- BREADCRUMB -->
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> <span
+					th:text="#{index.breadcrumb-1}" /></a></li>
+			<li><a href="#"><span th:text="#{index.breadcrumb-2}" /></a></li>
+			<li class="active"><span th:text="#{index.breadcrumb-3}" /></li>
+		</ol>
+		
+	</section>
+</div>
+
+
+
+<div layout:fragment="content">
+
+	<!-- Main content -->
+	<section class="content">
+
+		<!-- Default box -->
+
+
+
+		<div class="row">
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-aqua">
+					<div class="inner">
+						<h3>Próxima Entrega</h3>
+						<p>Definir Orientador</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-android-alarm-clock"></i>
+					</div>
+					<a href="#" class="small-box-footer">More info <i
+						class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-green">
+					<div class="inner">
+						<h3>Notificações</h3>
+						<p>Rodrigo Noll Revisou sua proposta</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-android-notifications"></i>
+					</div>
+					<a href="#" class="small-box-footer">More info <i
+						class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-yellow">
+					<div class="inner">
+						<h3>Mensagens</h3>
+
+						<p>Nova Mensagem de Rodrigo Noll</p>
+
+					</div>
+					<div class="icon">
+						<i class="ion ion-chatboxes"></i>
+					</div>
+					<a href="#" class="small-box-footer">More info <i
+						class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<!-- ./col -->
+
+			<!-- ./col -->
+		</div>
+		
+		<div class="row">
+		
+			<div class="col-md-4">
+				<!-- Info Boxes Style 2 -->
+
+				<!-- /.info-box -->
+				<div class="info-box bg-red">
+					<span class="info-box-icon"><i
+						class="ion ion-ios-cloud-download-outline"></i></span>
+
+					<div class="info-box-content">
+						<span class="info-box-text">Arquivos</span> <span
+							class="info-box-number">0</span>
+
+						<div class="progress">
+							<div class="progress-bar" style="width: 70%"></div>
+						</div>
+
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+			</div>		
+		
+
+			<!-- Left col -->
+			<div class="col-md-4">
+				<!-- MAP & BOX PANE -->
+
+
+				<!-- TABLE: LATEST ORDERS -->
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">Tarefas Obrigatórias</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="table-responsive">
+							<table class="table no-margin">
+								<thead>
+									<tr>
+										<th>Prazo</th>
+										<th>Tarefa</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>08/03/2018</td>
+										<td><a href="#">Definir Orientador</a></td>
+										<td><span class="label label-success">Concluído</span></td>
+										<td>
+											<div class="sparkbar" data-color="#f39c12" data-height="20">
+												<canvas width="34" height="20"
+													style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>13/03/2018</td>
+										<td><a href="#">Registrar matrícula na cadeira de TCC</a></td>
+										<td><span class="label label-success">Concluído</span></td>
+										<td>
+											<div class="sparkbar" data-color="#f39c12" data-height="20">
+												<canvas width="34" height="20"
+													style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>18/06/2018</td>
+										<td><a href="#">Entrega da monografia</a></td>
+										<td><span class="label label-warning">Em Andamento</span></td>
+										<td>
+											<div class="sparkbar" data-color="#f56954" data-height="20">
+												<canvas width="34" height="20"
+													style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>02/07/2018 a 06/07/2018</td>
+										<td><a href="#">Realização das bancas</a></td>
+										<td><span class="label label-danger">Indisponível</span></td>
+										<td>
+											<div class="sparkbar" data-color="#00c0ef" data-height="20">
+												<canvas width="34" height="20"
+													style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>12/07/2018</td>
+										<td><a href="#">Envio da monografia corrigida</a></td>
+										<td><span class="label label-danger">Indisponível</span></td>
+										<td>
+											<div class="sparkbar" data-color="#f39c12" data-height="20">
+												<canvas width="34" height="20"
+													style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas>
+											</div>
+										</td>
+									</tr>
+									
+								</tbody>
+							</table>
+						</div>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.box-body -->
+
+					<!-- /.box-footer -->
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+
+			
+			<!-- /.col -->
+		</div>
+
+		<!-- /.box -->
+
+	</section>
+
+</div>
+</html>

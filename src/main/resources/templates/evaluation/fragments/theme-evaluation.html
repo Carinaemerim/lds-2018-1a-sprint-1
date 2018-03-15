@@ -2,7 +2,7 @@
 <div class="box box-primary">
     <form class="form-horizontal">
         <div class="box-header bg-gray">
-            <h3 class="box-title">Avaliação</h3>
+            <h3 class="box-title"><span th:text="#{evaluation}"/></h3>
         </div>
         <div class="box-body margin">
             <!-- radio -->
@@ -10,36 +10,39 @@
                 <div class="radio">
                     <label>
                         <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                        Aprovado
+                        <span th:text="#{evaluation.approved}"/>
                     </label>
                 </div>
                 <div class="radio">
                     <label>
                         <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        Reprovado
+                        <span th:text="#{evaluation.disapproved}"/>
                     </label>
                 </div>
                 <div class="radio">
                     <label>
                         <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-                        Refazer
+                        <span th:text="#{evaluation.remake}"/>
                     </label>
                 </div>
             </div>
             <!-- textarea -->
             <div class="form-group">
-                <label>Considerações</label>
-                <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                <label><span th:text="#{evaluation.considerations}"/></label>
+                <textarea class="form-control" rows="3" th:placeholder="#{evaluation.considerations}"></textarea>
             </div>
 
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
             <div class="pull-right">
-                <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Rascunho</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Submeter Avaliação</button>
+                <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> <span
+                        th:text="#{button.draft}"/></button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> <span
+                        th:text="#{button.save}"/></button>
             </div>
-            <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Descartar</button>
+            <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> <span th:text="#{button.discard}"/>
+            </button>
         </div>
         <!-- /.box-footer -->
     </form>

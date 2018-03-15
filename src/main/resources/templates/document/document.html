@@ -1,4 +1,5 @@
 <html layout:decorate="~{/layouts/main}">
+<?xml version="1.0" encoding="utf-8"?>
 
 <th:block layout:fragment="head-title">
     <title th:text="#{index.header}"/>
@@ -46,50 +47,59 @@
                     </button>
 
                 </div>
-            
+
             </div>-->
 			<div class="nav-tabs-custom">
 			<ul class="nav nav-tabs">
-              <li class="active"><a href="#theme" data-toggle="tab" aria-expanded="true">Tema</a></li>
-              <li class=""><a href="#proposal" data-toggle="tab" aria-expanded="false">Proposta</a></li>
-              <li class=""><a href="#monography" data-toggle="tab" aria-expanded="false">Monografia</a></li>
+              <li class="active"><a href="#theme" data-toggle="tab" aria-expanded="true" th:text="#{document.t}"></a></li>
+              <li class=""><a href="#proposal" data-toggle="tab" aria-expanded="false" th:text="#{document.p}"></a></li>
+              <li class=""><a href="#monografia" data-toggle="tab" aria-expanded="false" th:text="#{document.m}"></a></li>
             </ul>
-            <div class="tab-content">
-	            <div id="theme" class="tab-pane active">
-	            <h3 class="box-title">Theme</h3>
-	            <button class="btn btn-primary btn-block">Adicionar arquivos</button>
-	            </div>
-	            <div id="proposal" class="tab-pane">
-	            <div class="box-body">
-	                <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-	
+            <div class="box-body">
+                <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12">
+
+                <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+
 	                <thead>
 	                <tr role="row"><th class="sorting_desc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending">
-	
+
 	                <span th:text="#{document.name}"/></th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
-	
+
 	                <span th:text="#{document.date}"/></th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">
-	
+
 					<span th:text="#{document.action}"/></th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">
+
 	                </thead>
-	
+
 	                <tbody>
-	
+
 	                <tr role="row" class="odd">
-	
+	                <tr>
+                    <td><a href="pages/examples/invoice.html">Estudo sobre Java Primeira Versão</a></td>
+                    <td>02/03/2018</td>
+                    <td><input type="submit" value="Excluir"></td>
+					</tr>
+
+					<tr>
+                    <td><a href="pages/examples/invoice.html">Template Monografia</a></td>
+                    <td>12/02/2018</td>
+                    <td><input type="submit" value="Excluir"></td>
+					</tr>
+
 	                </tr>
-	
+
 	                </tbody>
-	
-	              </table></div></div><div class="row"><div class="col-sm-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div></div></div>
-	              <button class="btn btn-primary btn-block">Adicionar arquivos</button>
-	            </div>
-	            </div>
-	            <div id="monography" class="tab-pane">
-	            <h3 class="box-title">Monography</h3>
-	            <button class="btn btn-primary btn-block">Adicionar arquivos</button>
-	            </div>
+
+              	</table>
+
+              </div></div>
+
+
+
               </div>
+
+
+              <button class="btn btn-default btn-block">Adicionar arquivos</button>
               </div>
 
               	<div class="box box-success direct-chat direct-chat-success">
@@ -136,9 +146,9 @@
             <div class="box-footer">
               <form action="#" method="post">
                 <div class="input-group">
-                  <input name="message" placeholder="Type Message ..." class="form-control" type="text">
+                  <input name="message" placeholder="Escrever Mensagem ..." class="form-control" type="text">
                       <span class="input-group-btn">
-                        <button type="submit" class="btn btn-success btn-flat">Send</button>
+                        <button type="submit" class="btn btn-success btn-flat">Enviar</button>
                       </span>
                 </div>
               </form>

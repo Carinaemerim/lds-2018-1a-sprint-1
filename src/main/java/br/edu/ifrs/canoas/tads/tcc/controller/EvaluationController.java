@@ -19,16 +19,16 @@ public class EvaluationController {
 
 	@GetMapping("/theme")
 	public ModelAndView theme() {
-		return new ModelAndView("/evaluation/evaluate-theme");
+		return new ModelAndView("/evaluation/theme");
 	}
 
 	@GetMapping("/proposal")
 	public ModelAndView proposal() {
-		return new ModelAndView("/evaluation/evaluate-proposal");
+		return new ModelAndView("/evaluation/proposal");
 	}
 
-	@GetMapping("/monograph")
-	public ModelAndView monograph() {
-		return new ModelAndView("/evaluation/evaluate-monograph");
+	@GetMapping("/termpaper")
+	public ModelAndView termpaper() {
+		return new ModelAndView("/evaluation/termpaper");
 	}
 }

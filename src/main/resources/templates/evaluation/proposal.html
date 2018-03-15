@@ -14,10 +14,10 @@
         </h1>
         <!-- BREADCRUMB -->
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> <span
+            <li><a href="/"><i class="fa fa-dashboard"></i> <span
                     th:text="#{index.breadcrumb-1}"/></a></li>
-            <li><a href="#"><span th:text="#{index.breadcrumb-2}"/></a></li>
-            <li class="active"><span th:text="#{index.breadcrumb-3}"/></li>
+            <li><a href="/evaluation/list"><span th:text="#{evaluation.breadcrumb-1}"/></a></li>
+            <li class="active"><span th:text="#{evaluation.breadcrumb-2-2}"/></li>
         </ol>
     </section>
 </div>
@@ -35,7 +35,7 @@
 
             </div>
             <div class="col-md-8">
-                <div th:insert="/evaluation/fragments/detail-proposal">
+                <div th:insert="/evaluation/fragments/proposal">
                 </div>
                 <!-- /.box -->
             </div>
@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-xs-12">
 
-                <div th:insert="/evaluation/fragments/insert"></div>
+                <div th:insert="/evaluation/fragments/proposal-evaluation"></div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->

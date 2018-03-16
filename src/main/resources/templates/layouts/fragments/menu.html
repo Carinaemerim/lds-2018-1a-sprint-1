@@ -29,12 +29,13 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header" th:text="#{menu.menuItems}">MENU ITEMS</li>
-            <li><a href="/dashboard/index"><i class="fa fa-dashboard"></i> <span th:text="#{menu.panel}">Panel</span></a></li>
-            <li><a href="/document/document"><i class="fa fa-edit"></i> <span th:text="#{menu.tcc}">TCC</span></a></li>
-            <li><a href="/schedule/index"><i class="fa fa-calendar"></i> <span th:text="#{menu.schedule}">Schedule</span></a></li>
+            <li><a th:href="@{/dashboard/index}"><i class="fa fa-dashboard"></i> <span th:text="#{menu.panel}">Panel</span></a></li>
+            <li><a th:href="@{/catalog/}"><i class="fa fa-book"></i> <span th:text="#{menu.catalog}">Catalogo</span></a></li>
+            <li><a th:href="@{/document/document}"><i class="fa fa-edit"></i> <span th:text="#{menu.tcc}">TCC</span></a></li>
+            <li><a th:href="@{/schedule/index}"><i class="fa fa-calendar"></i> <span th:text="#{menu.schedule}">Schedule</span></a></li>
             <li class="header" th:text="#{menu.administration}">ADMINISTRATION</li>
-            <li><a href="/evaluation/list"><i class="fa fa-check-square-o"></i> <span th:text="#{menu.evaluation}">Evaluation</span></a></li>
-            <li><a href="/assessment-bank/list"><i class="fa fa-edit"></i><span th:text="#{menu.bank}">Assessment Bank</span></a></li>
+            <li><a th:href="@{/evaluation/list}"><i class="fa fa-check-square-o"></i> <span th:text="#{menu.evaluation}">Evaluation</span></a></li>
+            <li><a th:href="@{/assessment-bank/list}"><i class="fa fa-edit"></i><span th:text="#{menu.bank}">Assessment Bank</span></a></li>
 
         </ul>
     </section>

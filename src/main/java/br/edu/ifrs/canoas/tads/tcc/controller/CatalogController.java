@@ -1,6 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
-import br.edu.ifrs.canoas.tads.tcc.service.CatalogueService;
+import br.edu.ifrs.canoas.tads.tcc.service.CatalogService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,23 +11,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/catalogue")
-public class CatalogueController {
+@RequestMapping("/catalog")
+public class CatalogController {
 
-    private final CatalogueService catalogueService;
+    private final CatalogService catalogService;
 
     @GetMapping("/")
     public ModelAndView home(){
-        return new ModelAndView("/document/catalogue");
+        return new ModelAndView("/document/catalog");
     }
 
 
     @PostMapping("/search")
     public ModelAndView search(@RequestParam("criteria") String criteria){
-        ModelAndView mav = new ModelAndView("/document/catalogue :: search-results");
-        mav.addObject("termPapers", catalogueService.search(criteria));
+        ModelAndView mav = new ModelAndView("/document/catalog :: search-results");
+        mav.addObject("termPapers", catalogService.search(criteria));
         return mav;
     }
-
 
 }

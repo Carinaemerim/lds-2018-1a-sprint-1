@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CatalogueService {
+public class CatalogService {
 
     private final TermPaperRepository termPaperRepository;
 
     public Iterable<TermPaper> search(String criteria) {
         return termPaperRepository.findByThemeContainingIgnoreCase(criteria);
     }
+
 }

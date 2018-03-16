@@ -4,7 +4,11 @@ insert into file(id, content) values
 
 --AUTHENTICATION
 INSERT into user(id, username, password, name, email, experience, skill, active, picture_id) VALUES
-(1, 'user', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Master Yoda','yoda@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 0);
+(100, 'user', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Master Yoda','yoda@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 0);
+INSERT into user(id, username, password, name, email, experience, skill, active, picture_id) VALUES
+(101, 'orientador', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Darth Vader','yoda@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 0);
+
+
 
 --ROLES
 insert into role(id, role) values
@@ -13,5 +17,10 @@ insert into role(id, role) values
 
 -- USER_ROLES
 insert into user_roles (user_id, roles_id) values
-(1, 1),
+(100, 1),
+(101, 1);
 
+
+-- TERM_PAPER
+insert into TERM_PAPER (id, theme, title, advisor_id, author_id) values (100, 'Spring Boot', 'TCC sobre o melhor framework do mundo', 100, 101);
+insert into TERM_PAPER (id, theme, title, advisor_id, author_id) values (101, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 100, 100);

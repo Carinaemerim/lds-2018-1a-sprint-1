@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Wait
 @FluentConfiguration(webDriver="chrome")
-public class MyFluentTest extends FluentTest {
+public abstract class MyFluentTest extends FluentTest {
 
     @LocalServerPort
     protected int port;

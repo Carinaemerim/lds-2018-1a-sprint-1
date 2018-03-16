@@ -1,5 +1,5 @@
 <html layout:decorate="~{/layouts/main}">
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 
 <th:block layout:fragment="head-title">
 	<title th:text="#{index.header}" />
@@ -34,16 +34,6 @@
 					<div class="box-body">
 
 						<div class="form">
-							<label>Data:</label>
-
-							<div class="input-group date">
-								<div class="input-group-addon">
-									<i class="fa fa-calendar"></i>
-								</div>
-								<input type="text" class="form-control pull-right"
-									id="datepicker">
-							</div>
-<br>
 							<!-- text input -->
 							<div class="form-group">
 								<label>Nome:</label> <input type="text" class="form-control"
@@ -56,21 +46,49 @@
 								<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
 							</div>
 
+							<label>Data:</label>
+							<div class="input-group date">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<input type="text" class="form-control pull-right"
+									id="datepicker">
+							</div>
+
 							<!-- checkbox -->
 							<div class="form-group">
-								<div class="checkbox">
-									<label> <input type="checkbox"> Submissão de
-										Documento
-									</label>
-								</div>
+
+								<br> <label> Tipo de avaliação
+									<div class="radio">
+										<label> <input type="radio" name="optionsRadios"
+											id="optionsRadios1" value="option1" checked=""> Nao
+											avaliavel
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input type="radio" name="optionsRadios"
+											id="optionsRadios2" value="option2"> Parecer
+										</label>
+									</div>
+									<div class="radio">
+										<label> <input type="radio" name="optionsRadios"
+											id="optionsRadios3" value="option3"> Nota
+										</label>
+									</div>
+								</label>
+
 							</div>
-							<button type="button" class="btn btn-success">Salvar</button>
+
 						</div>
+
+						<br>
+						<button type="button" class="btn btn-success pull-right">Salvar</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+</div>
+</section>
 </div>
 
 <th:block layout:fragment="css-view">

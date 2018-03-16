@@ -1,4 +1,5 @@
 <html layout:decorate="~{/layouts/main}">
+<meta charset="utf-8"/>
 
 <th:block layout:fragment="head-title">
 	<title th:text="#{index.header}" />
@@ -28,8 +29,8 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h1 class="box-title">Cronograma </h1>
-							<div th:insert="/schedule/nav :: nav"></div>
+						<h1 class="box-title" th:text="#{schedule.title}"></h1>
+						<div th:insert="/schedule/nav :: nav"></div>
 
 					</div>
 					<div class="box-body">
@@ -45,48 +46,41 @@
 								<tr>
 									<td>04/03/2018</td>
 									<td>Entrega da proposta</td>
-									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar </span></a> 
-									<a href="/schedule/edit"><span class="glyphicon glyphicon-edit"></span>Editar</a> 
-									<a href="#"><span class="glyphicon glyphicon-remove"> </span>Remover </a></td>
+									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
+										</span></a> <a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"></span>Editar</a> <a href="#"><span
+											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>10/03/2018</td>
 									<td>Entrega do Tema</td>
-									<td><a href="#"><span
-											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
-										href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="/#"><span
+									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
+										</span></a> <a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="/#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>15/03/2018</td>
 									<td>Entrega da Introdução</td>
-									<td><a href="#"><span
-											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
-										href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="#"><span
+									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
+										</span></a> <a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>21/03/2018</td>
 									<td>Entrega das Fontes bibliograficas</td>
-									<td><a href="#"><span
-											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
-										href="/evaluation/evaluate-proposal"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="#"><span
+									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
+										</span></a> <a href="/evaluation/evaluate-proposal"><span
+											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>27/03/2018</td>
 									<td>Entrega do Estado da arte</td>
-									<td><a href="#"><span
-											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
-										href="/evaluation/evaluate-proposal"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="#"><span
+									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
+										</span></a> <a href="/evaluation/evaluate-proposal"><span
+											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 							</tbody>
@@ -111,9 +105,7 @@
 						</div>
 						<button type="button" class="btn btn-success">Novo
 							Cronograma</button>
-
 					</div>
-
 					<!-- /.box-body -->
 				</div>
 				<!-- /.box -->
@@ -121,10 +113,9 @@
 			<!-- /.col -->
 		</div>
 		<!-- /.row -->
-
 	</section>
-
 </div>
+
 <th:block layout:fragment="css-view">
 	<link rel="stylesheet" type="text/css"
 		href="/webjars/datatables/1.10.13/media/css/jquery.dataTables.min.css" />
@@ -138,5 +129,4 @@
 			$('#table-list-evaluate').DataTable()
 		});
 	</script>
-
 </html>

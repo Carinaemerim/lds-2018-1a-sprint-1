@@ -1,10 +1,89 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<html layout:decorate="~{/layouts/main}">
+<meta charset="utf-8"/>
 
-    </body>
+<th:block layout:fragment="head-title">
+	<title th:text="#{index.header}" />
+</th:block>
+<!-- CONTENT HEADER -->
+<div layout:fragment="content-header">
+	<section class="content-header">
+		<!-- PAGE TITLE -->
+		<h1>
+			<span th:text="#{index.header}" /> <small><span
+				th:text="#{index.title}" /></small>
+		</h1>
+		<!-- BREADCRUMB -->
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> <span
+					th:text="#{index.breadcrumb-1}" /></a></li>
+			<li><a href="#"><span th:text="#{index.breadcrumb-2}" /></a></li>
+			<li class="active"><span th:text="#{index.breadcrumb-3}" /></li>
+		</ol>
+	</section>
+</div>
+
+<div layout:fragment="content">
+	<!-- Main content -->
+	<section class="content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box">
+					<div class="box-header">
+						<h1 class="box-title" th:text="#{schedule.edit}"></h1>
+					</div>
+					<div class="box-body">
+
+						<div class="form">
+							<label>Data:</label>
+
+							<div class="input-group date">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<input type="text" class="form-control pull-right"
+									id="datepicker">
+							</div>
+<br>
+							<!-- text input -->
+							<div class="form-group">
+								<label>Nome:</label> <input type="text" class="form-control"
+									placeholder="Enter ...">
+							</div>
+
+							<!-- textarea -->
+							<div class="form-group">
+								<label>Descrição:</label>
+								<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+							</div>
+
+							<!-- checkbox -->
+							<div class="form-group">
+								<div class="checkbox">
+									<label> <input type="checkbox"> Submissão de
+										Documento
+									</label>
+								</div>
+							</div>
+							<button type="button" class="btn btn-success">Salvar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<th:block layout:fragment="css-view">
+	<link rel="stylesheet" type="text/css"
+		href="/webjars/datatables/1.10.13/media/css/jquery.dataTables.min.css" />
+</th:block>
+
+<th:block layout:fragment="js-view">
+	<script
+		src="/webjars/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#table-list-evaluate').DataTable()
+		});
+	</script>
 </html>

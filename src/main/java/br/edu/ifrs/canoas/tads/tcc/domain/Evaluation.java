@@ -1,8 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -11,4 +9,12 @@ import lombok.Data;
 public class Evaluation {
 
 	@Id @GeneratedValue private Long id;
+
+	private String considerations;
+
+	@OneToOne
+	private File file;
+
+	@Enumerated(EnumType.ORDINAL)
+	private DocumentType documentType;
 }

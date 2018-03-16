@@ -8,9 +8,9 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Advice {
+public class EvaluationBoard {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id @GeneratedValue private Long id;
+	
+	
 }

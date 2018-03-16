@@ -30,7 +30,7 @@ public class TermPaper {
                 "resultados e conclusão. Veja a seguir do que se trata cada uma dessas partes.";
     }
 
-    @OneToMany
+    @OneToMany(mappedBy="termPaper")
 	private List<Document> documents;
 
 }

@@ -14,7 +14,9 @@ public class CatalogService {
     private final TermPaperRepository termPaperRepository;
 
     public Iterable<TermPaper> search(String criteria) {
-        return criteria!=null?termPaperRepository.findByThemeContainingIgnoreCase(criteria):new ArrayList();
+        return criteria!=null?
+                termPaperRepository.findByThemeContainingIgnoreCase(criteria):
+                new ArrayList();
     }
 
 }

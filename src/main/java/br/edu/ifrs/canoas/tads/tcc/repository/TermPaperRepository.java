@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface TermPaperRepository extends JpaRepository <TermPaper, Long>{
 
-
     List<TermPaper> findByThemeContainingIgnoreCase(String theme);
 
 }

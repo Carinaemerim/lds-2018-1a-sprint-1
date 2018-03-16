@@ -14,17 +14,27 @@ public class FileService {
 
     private final FileRepository fileRepository;
 
-    public HttpEntity<byte[]> download(Long id) {
+    public HttpEntity<byte[]>  download(Long id) {
+
+        if (id == null)
+            return null;
+
         File file = fileRepository.getOne(id);
+        HttpEntity<byte[]> httpEntity = null;
 
-        byte[] documentBody = file.getContent();
+        if (file.getContent() != null
+                && file.getFilename() != null
+                && file.getContentType() != null){
 
-        HttpHeaders header = new HttpHeaders();
-        header.setContentType(MediaType.parseMediaType(file.getContentType()));
-        header.set(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=" + file.getFilename());
-        header.setContentLength(documentBody.length);
+            byte[] documentBody = file.getContent();
+            HttpHeaders header = new HttpHeaders();
+            header.setContentType(MediaType.parseMediaType(file.getContentType()));
+            header.set(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=" + file.getFilename());
+            header.setContentLength(documentBody.length);
+            httpEntity = new HttpEntity<byte[]>(documentBody, header);
+        }
 
-        return new HttpEntity<byte[]>(documentBody, header);
+        return httpEntity;
     }
 
 }

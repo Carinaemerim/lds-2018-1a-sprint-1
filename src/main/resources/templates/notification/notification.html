@@ -51,10 +51,10 @@
 			<div class="box-body">
 				<form id="notifications-form" method="post" role="form">
 					<fieldset>
-						Busca por texto: <input type="search" placeholder="pesquisa"
+						Busca por texto: <input type="search" placeholder="pesquisa" id="notifications-search"
 							class="form-control"><br> A partir de: <input
-							type="date" class="form-control"><br> Filtro: <select
-							name="uf" class="form-control">
+							type="date" class="form-control" id = "notifications-date"><br> Filtro: <select
+							name="uf" class="form-control" id="notifications-select">
 							<option>Selecione</option>
 							<option>Alertas</option>
 							<option>Problemas</option>
@@ -65,66 +65,44 @@
 					<br>
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
-				<br>
-				<br>
-				<table class="table">
-                <tbody><tr>
-                  <th style="width: 10px">#</th>
-                  <th>Notifications will be displayed here</th>
-                  <th>Progress</th>
-                  <th style="width: 40px">Label</th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Update software</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-red">55%</span></td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Clean database</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-yellow">70%</span></td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>Cron job running</td>
-                  <td>
-                    <div class="progress progress-xs progress-striped active">
-                      <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-light-blue">30%</span></td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>Fix and squish bugs</td>
-                  <td>
-                    <div class="progress progress-xs progress-striped active">
-                      <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-green">90%</span></td>
-                </tr>
-              </tbody></table>
-			</div>
-			<!-- /.box-body -->
-			<div class="box-footer">
+				<br> <br>
+				<ul style="list-style:none;">
+				    <li><strong>Just a template to ilustrate the idea</strong></li>
+					<li>
+						<div class="callout callout-danger">
+			                <h4>I am a danger callout!</h4>
 
+			                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul,
+		                  	like these sweet mornings of spring which I enjoy with my whole heart.</p>
+		                </div>
+					</li>
+					<li>
+						<div class="callout callout-info">
+			                <h4>I am an info callout!</h4>
 
+			                <p>Follow the steps to continue to payment.</p>
+			            </div>
+					</li>
+					<li>
+
+							<div class="callout callout-warning">
+				                <h4>I am a warning callout!</h4>
+
+				                <p>This is a yellow callout.</p>
+				            </div>
+					</li>
+					<li>
+						<div class="callout callout-success">
+			                <h4>I am a success callout!</h4>
+
+			                <p>This is a green callout.</p>
+			            </div>
+					</li>
+				</ul>
 			</div>
-			<!-- /.box-footer-->
 		</div>
-		<!-- /.box -->
 
-	</section>
-
+		<div class="box-footer"></div>
+		<!-- /.box-footer-->
 </div>
+<!-- /.box -->

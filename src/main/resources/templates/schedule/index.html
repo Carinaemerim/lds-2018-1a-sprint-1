@@ -28,26 +28,8 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">Cronograma</h3>
-
-						<!-- /.box-header -->
-						<div class="btn-group btn-lg">
-							<button type="button" class="btn btn-primary">Previous</button>
-							<div class="btn-group">
-								<button type="button" class="btn dropdown-toggle"
-									data-toggle="dropdown">
-									Periodo <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">2018/1</a></li>
-									<li><a href="#">2017/2</a></li>
-									<li><a href="#">2017/1</a></li>
-									<li><a href="#">2016/2</a></li>
-								</ul>
-							</div>
-							<button type="button" class="btn btn-primary">Next</button>
-
-						</div>
+						<h1 class="box-title">Cronograma </h1>
+							<div th:insert="/schedule/nav :: nav"></div>
 
 					</div>
 					<div class="box-body">
@@ -63,51 +45,48 @@
 								<tr>
 									<td>04/03/2018</td>
 									<td>Entrega da proposta</td>
-									<td><a href="/evaluation/evaluate-theme"><span
-											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
-										href="/evaluation/evaluate-proposal"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="/evaluation/evaluate-proposal"><span
-											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
+									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar </span></a> 
+									<a href="/schedule/edit"><span class="glyphicon glyphicon-edit"></span>Editar</a> 
+									<a href="#"><span class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>10/03/2018</td>
 									<td>Entrega do Tema</td>
-									<td><a href="/evaluation/evaluate-theme"><span
+									<td><a href="#"><span
 											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
-										href="/evaluation/evaluate-proposal"><span
+										href="/schedule/edit"><span
 											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="/evaluation/evaluate-proposal"><span
+										href="/#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>15/03/2018</td>
 									<td>Entrega da Introdução</td>
-									<td><a href="/evaluation/evaluate-theme"><span
+									<td><a href="#"><span
 											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
-										href="/evaluation/evaluate-proposal"><span
+										href="/schedule/edit"><span
 											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="/evaluation/evaluate-proposal"><span
+										href="#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>21/03/2018</td>
 									<td>Entrega das Fontes bibliograficas</td>
-									<td><a href="/evaluation/evaluate-theme"><span
+									<td><a href="#"><span
 											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
 										href="/evaluation/evaluate-proposal"><span
 											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="/evaluation/evaluate-proposal"><span
+										href="#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>27/03/2018</td>
 									<td>Entrega do Estado da arte</td>
-									<td><a href="/evaluation/evaluate-theme"><span
+									<td><a href="#"><span
 											class="glyphicon glyphicon-ok">Finalizar </span></a> <a
 										href="/evaluation/evaluate-proposal"><span
 											class="glyphicon glyphicon-edit"> </span>Editar </a> <a
-										href="/evaluation/evaluate-proposal"><span
+										href="#"><span
 											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
 								</tr>
 							</tbody>
@@ -160,5 +139,4 @@
 		});
 	</script>
 
-	</div>
 </html>

@@ -10,7 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class ScheduleController {
 
 	@GetMapping("/index")
-	public ModelAndView proposal() {
+	public ModelAndView home() {
 		return new ModelAndView("/schedule/index");
 	}
+	
+	@GetMapping("/edit")
+	public ModelAndView edit() {
+		return new ModelAndView("/schedule/edit");
+	}
+
 }

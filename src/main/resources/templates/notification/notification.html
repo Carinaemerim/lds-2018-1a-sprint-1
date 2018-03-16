@@ -51,9 +51,10 @@
 			<div class="box-body">
 				<form id="notifications-form" method="post" role="form">
 					<fieldset>
-						Busca por texto: <input type="search" placeholder="pesquisa" id="notifications-search"
-							class="form-control"><br> A partir de: <input
-							type="date" class="form-control" id = "notifications-date"><br> Filtro: <select
+						Busca por texto: <input type="search" placeholder="pesquisa"
+							id="notifications-search" class="form-control"><br>
+						A partir de: <input type="date" class="form-control"
+							id="notifications-date"><br> Filtro: <select
 							name="uf" class="form-control" id="notifications-select">
 							<option>Selecione</option>
 							<option>Alertas</option>
@@ -63,42 +64,80 @@
 						</select>
 					</fieldset>
 					<br>
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary" style="margin-left: 45%; font-size: 18px;">Submit</button>
 				</form>
 				<br> <br>
-				<ul style="list-style:none;">
-				    <li><strong>Just a template to ilustrate the idea</strong></li>
-					<li>
-						<div class="callout callout-danger">
-			                <h4>I am a danger callout!</h4>
 
-			                <p>There is a problem that we need to fix. A wonderful serenity has taken possession of my entire soul,
-		                  	like these sweet mornings of spring which I enjoy with my whole heart.</p>
-		                </div>
-					</li>
-					<li>
-						<div class="callout callout-info">
-			                <h4>I am an info callout!</h4>
+				<div>
 
-			                <p>Follow the steps to continue to payment.</p>
-			            </div>
-					</li>
-					<li>
+					<title>Alert with action button - Bootsnipp.com</title>
+					<meta name="viewport" content="width=device-width, initial-scale=1">
+					<link
+						href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+						rel="stylesheet" id="bootstrap-css">
+					<style type="text/css">
+				</style>
+					<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+					<style></style>
+					<script
+						src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+					<script type="text/javascript">
+						window.alert = function() {
+						};
+						var defaultCSS = document
+								.getElementById('bootstrap-css');
+						function changeCSS(css) {
+							if (css)
+								$('head > link')
+										.filter(':first')
+										.replaceWith(
+												'<link rel="stylesheet" href="'+ css +'" type="text/css" />');
+							else
+								$('head > link').filter(':first').replaceWith(
+										defaultCSS);
+						}
+						$(document).ready(
+								function() {
+									var iframe_height = parseInt($('html')
+											.height());
+									window.parent.postMessage(iframe_height,
+											'https://bootsnipp.com');
+								});
+					</script>
 
-							<div class="callout callout-warning">
-				                <h4>I am a warning callout!</h4>
+					<br>
 
-				                <p>This is a yellow callout.</p>
-				            </div>
-					</li>
-					<li>
-						<div class="callout callout-success">
-			                <h4>I am a success callout!</h4>
+					<div class="container">
+						<ul style = "list-style:none">
+							<li>
+								<div class="alert alert-info">
+									<a href="#" class="btn btn-xs btn-primary pull-right">do an
+										action</a> <strong>Info:</strong> you should do an action.
+								</div>
+							</li>
+							<li>
 
-			                <p>This is a green callout.</p>
-			            </div>
-					</li>
-				</ul>
+								<div class="alert alert-warning">
+									<a href="#" class="btn btn-xs btn-warning pull-right">do an
+										action</a> <strong>Warning:</strong> you should do an action.
+								</div>
+							</li>
+							<li>
+								<div class="alert alert-danger">
+									<a href="#" class="btn btn-xs btn-danger pull-right">don't do
+										an action</a> <strong>Danger:</strong> you shouldn't do an action!
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<script type="text/javascript">
+
+				</script>
+
+
+				</div>
+
 			</div>
 		</div>
 

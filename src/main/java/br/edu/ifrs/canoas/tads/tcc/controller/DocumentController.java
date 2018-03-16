@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/document")
 @Controller
-public class documentController {
+public class DocumentController {
 
 	@GetMapping("/document")
 	public ModelAndView document() {

@@ -1,5 +1,5 @@
 <html layout:decorate="~{/layouts/main}">
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 
 <th:block layout:fragment="head-title">
 	<title th:text="#{index.header}" />
@@ -30,14 +30,14 @@
 				<div class="box">
 					<div class="box-header">
 						<h1 class="box-title" th:text="#{schedule.title}"></h1>
-						<div th:insert="/schedule/nav :: nav"></div>
+						<div th:insert="/fragments/nav :: nav"></div>
 
 					</div>
 					<div class="box-body">
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Data Limite</th>
+									<th class="col-sm-2">Data Limite</th>
 									<th>Tarefa</th>
 									<th class="col-sm-2">Opções</th>
 								</tr>
@@ -46,65 +46,50 @@
 								<tr>
 									<td>04/03/2018</td>
 									<td>Entrega da proposta</td>
-									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
-										</span></a> <a href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"></span>Editar</a> <a href="#"><span
-											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
+									<td><a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
+									<a href="#"><span class="glyphicon glyphicon-remove">
+										</span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>10/03/2018</td>
 									<td>Entrega do Tema</td>
-									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
-										</span></a> <a href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="/#"><span
-											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
+									<td><a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
+									<a href="#"><span class="glyphicon glyphicon-remove">
+										</span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>15/03/2018</td>
 									<td>Entrega da Introdução</td>
-									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
-										</span></a> <a href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="#"><span
-											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
+									<td><a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
+									<a href="#"><span class="glyphicon glyphicon-remove">
+										</span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>21/03/2018</td>
 									<td>Entrega das Fontes bibliograficas</td>
-									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
-										</span></a> <a href="/evaluation/evaluate-proposal"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="#"><span
-											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
+									<td><a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
+									<a href="#"><span class="glyphicon glyphicon-remove">
+										</span>Remover </a></td>
 								</tr>
 								<tr>
 									<td>27/03/2018</td>
 									<td>Entrega do Estado da arte</td>
-									<td><a href="#"><span class="glyphicon glyphicon-ok">Finalizar
-										</span></a> <a href="/evaluation/evaluate-proposal"><span
-											class="glyphicon glyphicon-edit"> </span>Editar </a> <a href="#"><span
-											class="glyphicon glyphicon-remove"> </span>Remover </a></td>
+									<td><a href="/schedule/edit"><span
+											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
+									<a href="#"><span class="glyphicon glyphicon-remove">
+										</span>Remover </a></td>
 								</tr>
 							</tbody>
 							<tfoot></tfoot>
 						</table>
 						<br>
-						<div class="panel panel-default">
-							<div class="panel-heading">Adicionar nova tarefa</div>
-							<div class="panel-body">
-								<div class="col-sm-2">
-									<input type="date" class="form-control" name="bday">
-								</div>
-								<div class="col-sm-9">
-									<input id="new-event" type="text" class="form-control"
-										placeholder="Event Title">
-								</div>
-								<div class="col-sm-1">
-									<button id="add-new-event" type="button"
-										class="btn btn-primary btn-flat">Add</button>
-								</div>
-							</div>
-						</div>
-						<button type="button" class="btn btn-success">Novo
-							Cronograma</button>
+							<button type="button" class="btn btn-primary">Novo Periodo</button>
+							<button id="add-new-event" type="button" class="btn btn-primary pull-right">Add</button>
+							
 					</div>
 					<!-- /.box-body -->
 				</div>

@@ -1,0 +1,116 @@
+<html layout:decorate="~{/layouts/main}">
+
+<th:block layout:fragment="head-title">
+    <title th:text="#{index.header}"/>
+</th:block>
+
+<!-- CONTENT HEADER -->
+<div layout:fragment="content-header">
+    <section class="content-header">
+        <!-- PAGE TITLE -->
+        <h1>
+            <span th:text="#{catalog.header}"/>
+            <small><span th:text="#{catalog.description}"/></small>
+        </h1>
+        <!-- BREADCRUMB -->
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> <span
+                    th:text="#{breadcrumb}"/></a></li>
+            <li class="active"><span th:text="#{catalog.header}"/></li>
+        </ol>
+    </section>
+</div>
+
+
+
+<div layout:fragment="content">
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title"><span th:text="#{catalog.search}"/></h3>
+            </div>
+
+            <div class="box-body">
+
+                <form id="form-search" name="form-search" onsubmit="return false;">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" id="criteria" name="criteria">
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-info btn-flat" onclick="javascript:asyncSearch('/catalog/search/');return false;">Go!</button>
+                        </span>
+                        </div>
+                    </div>
+                </form>
+
+
+
+                <div class="form-group" th:fragment="search-results" id="search-results">
+                    <th:block th:each="termPaper, iter : ${termPapers}">
+
+                        <div class="panel box box-primary">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" th:href="'#collapse'+ ${iter.index}" aria-expanded="false" class="collapsed">
+                                        <span th:text="${termPaper.title}"></span>
+                                    </a>
+                                </h4>
+                            </div>
+
+
+                            <div th:id="'collapse'+ ${iter.index}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                <div class="box-body">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <blockquote class="pull-right">
+                                                <small><span th:text="${termPaper.abstract}"></span></small>
+                                            </blockquote>
+                                            <dl class="dl-horizontal">
+                                                <dt>Autor</dt>
+                                                <dd><span th:text="${termPaper.author.name}"></span></dd>
+                                                <dt>Orientador</dt>
+                                                <dd><span th:text="${termPaper.advisor.name}"></span></dd>
+                                                <dt>Curso</dt>
+                                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                                                <dt>Ano</dt>
+                                                <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
+                                                    sit amet risus.
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="media-right" th:if="${termPaper.document != null}">
+                                            <p class="pull-right">
+                                                <a th:href="@{|/file/${termPaper.document.id}|}"
+                                                   class="btn btn-success btn-sm ad-click-event">
+                                                    <span th:text="#{download.label}"></span>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </th:block>
+
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+
+        </div>
+        <!-- /.box -->
+
+    </section>
+
+</div>
+
+
+<th:block layout:fragment="js-view">
+    <script src="/js/myScripts.js"></script>
+</th:block>

@@ -8,9 +8,8 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Advisor {
+public class TimeTable {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	
+	@Id @GeneratedValue private Long id;
 }

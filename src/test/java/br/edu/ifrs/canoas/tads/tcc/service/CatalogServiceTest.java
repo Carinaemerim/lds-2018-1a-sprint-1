@@ -19,7 +19,7 @@ public class CatalogServiceTest {
     private final String CRITERIA = "BOOT";
 
     @Test
-    public void given_existingDBData_when_searchingByBOOT_then_returnSpringBootPaper() throws Exception {
+    public void shouldReturnPaperByCriteria() throws Exception {
         //given
         //Existing theme 'Spring Boot'
 
@@ -33,7 +33,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void given_existingDBData_when_searchingWithNull_then_returnEmptyList() throws Exception {
+    public void shouldNotReturnPaperByNullCriteria() throws Exception {
         //given
         //Existing theme 'Spring Boot'
 
@@ -45,7 +45,7 @@ public class CatalogServiceTest {
     }
 
     @Test
-    public void given_existingDBData_when_searchingEmptyString_then_returnAllData() throws Exception {
+    public void shouldReturnAllDataWithEmptyCriteria() throws Exception {
         //given
         //Existing theme 'Spring Boot'
 

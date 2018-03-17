@@ -21,22 +21,26 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository repository;
 
-    private final String USER_NAME = "User Name";
+    private final String TEST_STRING = "Test String";
 
     @Test
     public void when_FindByThemeContaining_then_ReturnTermPaper(){
 
         // given
         User user = new User();
-        user.setUsername(USER_NAME);
+        user.setUsername(TEST_STRING);
+        user.setName(TEST_STRING);
+        user.setExperience(TEST_STRING);
+        user.setSkill(TEST_STRING);
+        user.setEmail("email@email.com");
         entityManager.persist(user);
         entityManager.flush();
 
         // when
-        Optional<User> found = repository.findByUsername(USER_NAME);
+        Optional<User> found = repository.findByUsername(TEST_STRING);
 
         // then
-        assertThat(found.get().getUsername()).isEqualTo(USER_NAME);
+        assertThat(found.get().getUsername()).isEqualTo(TEST_STRING);
     }
 
     @Test
@@ -45,7 +49,7 @@ public class UserRepositoryTest {
         // given
 
         // when
-        Optional<User> found = repository.findByUsername(USER_NAME);
+        Optional<User> found = repository.findByUsername(TEST_STRING);
 
         // then
         assertThat(found).isEmpty();

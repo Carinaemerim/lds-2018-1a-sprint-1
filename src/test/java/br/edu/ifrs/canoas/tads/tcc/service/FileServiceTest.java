@@ -22,7 +22,7 @@ public class FileServiceTest {
     private final Long ID = 0L;
 
     @Test
-    public void given_existingDBData_when_searchingByBOOT_then_returnSpringBootPaper() throws Exception {
+    public void shouldConvertFileToHttpEntity() throws Exception {
         //given
         //Existing theme 'Spring Boot'
 
@@ -35,7 +35,7 @@ public class FileServiceTest {
     }
 
     @Test
-    public void given_existingDBData_when_searchingWithNull_then_returnEmptyList() throws Exception {
+    public void shouldReturnEmptyList() throws Exception {
         //given
         //Existing theme 'SpringBoot'
 

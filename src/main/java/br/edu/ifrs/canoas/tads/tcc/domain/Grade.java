@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,5 +23,15 @@ public class Grade extends Evaluation {
 	private Double subjectDomain;
 	private Double developmentInLogicalSequence;
 	private Double vocabulary;
+
+	@Transient
+	private Double finalGrade;
+
+	public Double getFinalGrade() {
+		return (this.literatureReview + this.objective + this.methodology + this.theoreticalApproach
+				+ this.experiencedSolution + this.conclusion + this.presentation + this.closingExpectedTime
+				+ this.adequacyOfPresentation + this.subjectDomain + this.developmentInLogicalSequence
+				+ this.vocabulary) / 12.0;
+	}
 
 }

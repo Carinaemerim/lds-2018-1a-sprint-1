@@ -27,7 +27,7 @@ public class DocumentController {
 	private final TermPaperService termPaperService;
 	private final UserService userService;
 
-	@GetMapping("/document")
+	@GetMapping("/")
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/document");
 		mav.addObject("advisors", userService.getAdvisors());
@@ -35,16 +35,29 @@ public class DocumentController {
 		return mav;
 	}
 
-	@PostMapping("/theme/save-draft")
-	public ModelAndView themeSaveDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper, BindingResult bindingResult,
+	@PostMapping(path="/theme/submit")
+	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper, BindingResult bindingResult,
 			RedirectAttributes redirectAttr) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("/document/document");
 		}
 		termPaper.setAuthor(activeUser.getUser());
-		ModelAndView mav = new ModelAndView("redirect:/document/document");
-		mav.addObject("termPaper", termPaperService.saveDraft(termPaper));
+		ModelAndView mav = new ModelAndView("redirect:/document/");
+		mav.addObject("termPaper", termPaperService.saveThemeDraft(termPaper));
 		redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
+		return mav;
+	}
+
+	@PostMapping(path="/theme/submit", params="action=evaluation" )
+	public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper, BindingResult bindingResult,
+			RedirectAttributes redirectAttr) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView("/document/document");
+		}
+		termPaper.setAuthor(activeUser.getUser());
+		ModelAndView mav = new ModelAndView("redirect:/document/");
+		mav.addObject("termPaper", termPaperService.submitThemeForEvaluation(termPaper));
+		redirectAttr.addFlashAttribute("message", messages.get("theme.submited-for-evaluation"));
 		return mav;
 	}
 }

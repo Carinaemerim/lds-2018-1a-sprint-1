@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.edu.ifrs.canoas.tads.tcc.domain.Document;
+import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
 import br.edu.ifrs.canoas.tads.tcc.repository.TermPaperRepository;
@@ -15,7 +17,16 @@ public class TermPaperService {
 
 	private final TermPaperRepository termPaperRepository;
 
-	public TermPaper saveDraft(TermPaper termPaper) {
+	private final DocumentService documentService;
+
+	public TermPaper getOne(TermPaper termPaper) {
+		if (termPaper == null || termPaper.getId() == null)
+			return null;
+		Optional<TermPaper> optionalTermPaper = termPaperRepository.findById(termPaper.getId());
+		return optionalTermPaper.isPresent() ? optionalTermPaper.get() : null;
+	}
+
+	public TermPaper saveThemeDraft(TermPaper termPaper) {
 		TermPaper fetchedTermPaper = this.getOne(termPaper);
 		if (fetchedTermPaper == null || fetchedTermPaper.getId() == null)
 			fetchedTermPaper = new TermPaper();
@@ -27,15 +38,19 @@ public class TermPaperService {
 		return termPaperRepository.save(termPaper);
 	}
 
-	public TermPaper getOne(TermPaper termPaper) {
-		if (termPaper == null || termPaper.getId() == null)
-			return null;
-		Optional<TermPaper> optionalTermPaper = termPaperRepository.findById(termPaper.getId());
-		return optionalTermPaper.isPresent() ? optionalTermPaper.get() : null;
+	public TermPaper submitThemeForEvaluation(TermPaper termPaper) {
+		termPaper = this.saveThemeDraft(termPaper);
+		Document fetchedDocument = documentService.getFinalThemeDocumentByTermPaper(termPaper);
+		if (fetchedDocument == null)
+			fetchedDocument = new Document();
+		fetchedDocument.setDocumentType(DocumentType.THEME);
+		fetchedDocument.setIsFinal(true);
+		fetchedDocument.setTermPaper(termPaper);
+		fetchedDocument = documentService.save(fetchedDocument);
+		return getOne(termPaper);
 	}
 
 	public TermPaper getLastOneByUser(User user) {
 		return termPaperRepository.findLastByAuthorId(user.getId());
 	}
-
 }

@@ -1,6 +1,6 @@
 <div class="box-body">
 	<form role="form" id="form-theme-advisor" action="#"
-		class="form-horizontal" th:action="@{/document/theme/save-draft}"
+		class="form-horizontal" th:action="@{/document/theme/submit}"
 		th:object="${termPaper}" method="post">
 		<div class="box-body">
 			<input type="hidden" id="id" th:field="*{id}">
@@ -59,7 +59,7 @@
 			<button type="submit" class="btn btn-primary"
 				th:text="#{theme.save-draft}">Save draft</button>
 			<button type="submit" class="btn btn-danger pull-right"
-				th:text="#{theme.submit}">Submit</button>
+				name="action" value="evaluation" th:text="#{theme.submit}">Submit for evaluation</button>
 		</div>
 	</form>
 </div>

@@ -40,7 +40,9 @@ public class DocumentController {
 	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
 			BindingResult bindingResult, RedirectAttributes redirectAttr) {
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView("/document/document");
+			ModelAndView mav = new ModelAndView("/document/document");
+			mav.addObject("advisors", userService.getAdvisors());
+			return mav;
 		}
 		termPaper.setAuthor(activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");
@@ -56,7 +58,9 @@ public class DocumentController {
 			bindingResult.addError(new FieldError("termPaper", "advisor", messages.get("field.not-null")));
 		}
 		if (bindingResult.hasErrors()) {
-			return new ModelAndView("/document/document");
+			ModelAndView mav = new ModelAndView("/document/document");
+			mav.addObject("advisors", userService.getAdvisors());
+			return mav;
 		}
 		termPaper.setAuthor(activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");

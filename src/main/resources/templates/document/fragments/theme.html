@@ -30,7 +30,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="advisor"
-					th:text="#{theme.advisor}">Teacher Advisor</label>
+					th:text="#{theme.advisor}">Advisor</label>
 				<div class="col-sm-10"
 					th:classappend="${#fields.hasErrors('advisor')}? 'has-error'">
 					<select class="form-control" id="advisor" th:field="*{advisor}">
@@ -58,8 +58,35 @@
 		<div class="box-footer">
 			<button type="submit" class="btn btn-primary"
 				th:text="#{theme.save-draft}">Save draft</button>
-			<button type="submit" class="btn btn-danger pull-right"
-				name="action" value="evaluation" th:text="#{theme.submit}">Submit for evaluation</button>
+			<button type="button" class="btn btn-danger pull-right"
+				data-toggle="modal" data-target="#themeSubmitConfirmationModal"
+				name="action" th:text="#{theme.submit}">Submit for
+				evaluation</button>
+		</div>
+		<div class="modal fade" id="themeSubmitConfirmationModal"
+			tabindex="-1" role="dialog"
+			aria-labelledby="themeSubmitConfirmationModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h3 class="modal-title" th:text="#{theme.submit-confirmation.title}">Are
+							you sure?</h3>
+					</div>
+					<div class="modal-body">
+						<h4 th:text="#{theme.submit-confirmation.message}">After sending it will no longer be possible to change the
+							information until the selected advisor evaluates your theme.</h4>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{no}">No</button>
+						<button type="submit" class="btn btn-primary" name="action"
+							value="evaluation" th:text="#{yes}">Yes</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</form>
 </div>

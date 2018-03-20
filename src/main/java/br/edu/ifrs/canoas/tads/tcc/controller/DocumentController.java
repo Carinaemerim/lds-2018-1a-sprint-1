@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +36,9 @@ public class DocumentController {
 		return mav;
 	}
 
-	@PostMapping(path="/theme/submit")
-	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper, BindingResult bindingResult,
-			RedirectAttributes redirectAttr) {
+	@PostMapping(path = "/theme/submit")
+	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
+			BindingResult bindingResult, RedirectAttributes redirectAttr) {
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("/document/document");
 		}
@@ -48,9 +49,12 @@ public class DocumentController {
 		return mav;
 	}
 
-	@PostMapping(path="/theme/submit", params="action=evaluation" )
-	public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper, BindingResult bindingResult,
-			RedirectAttributes redirectAttr) {
+	@PostMapping(path = "/theme/submit", params = "action=evaluation")
+	public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
+			@Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+		if (termPaper.getAdvisor() == null) {
+			bindingResult.addError(new FieldError("termPaper", "advisor", messages.get("field.not-null")));
+		}
 		if (bindingResult.hasErrors()) {
 			return new ModelAndView("/document/document");
 		}

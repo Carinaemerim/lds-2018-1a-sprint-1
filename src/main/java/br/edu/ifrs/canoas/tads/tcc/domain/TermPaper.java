@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,9 +18,9 @@ public class TermPaper {
 	@NotBlank
 	private String description;
 	@ManyToOne
-	private User author;
+	private Student author;
     @ManyToOne
-    private User advisor;
+    private Professor advisor;
 
     /* Gerar a partir do abstract da monografia*/
     @Transient
@@ -36,9 +35,5 @@ public class TermPaper {
 
     @OneToMany(mappedBy="termPaper")
 	private List<Document> documents;
-
-    public TermPaper(){
-        documents = new ArrayList<>();
-    }
 
 }

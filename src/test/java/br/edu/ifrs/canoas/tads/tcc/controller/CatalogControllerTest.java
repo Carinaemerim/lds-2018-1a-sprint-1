@@ -40,8 +40,8 @@ public class CatalogControllerTest extends BaseControllerTest{
     public void save_user_profile() throws Exception{
         TermPaper tp = new TermPaper();
         tp.setDocuments(Arrays.asList(new Document()));
-        tp.setAdvisor(user);
-        tp.setAuthor(user);
+        tp.setAdvisor(professor);
+        tp.setAuthor(student);
 
         given(this.service.search("criteria")).willReturn(Arrays.asList(tp));
 

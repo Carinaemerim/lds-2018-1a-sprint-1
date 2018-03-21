@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,6 +11,8 @@ import java.util.Set;
  */
 @Entity
 @Data
+@Inheritance
+@DiscriminatorColumn(name="user_type")
 public class User {
 
 	@Id @GeneratedValue private Long id;
@@ -21,16 +22,8 @@ public class User {
     private String name;
     private String email;
 
-	private String lattes;
-    private String experience;
-    private String skill;
 
 	@ManyToMany(fetch = FetchType.EAGER) private Set<Role> roles;
     @OneToOne @JsonIgnore private File picture;
-
-    @ManyToMany
-    private List<EvaluationBoard> board;
-	
-	
 
 }

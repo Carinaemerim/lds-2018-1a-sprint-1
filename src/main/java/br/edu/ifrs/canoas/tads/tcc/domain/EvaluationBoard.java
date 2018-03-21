@@ -14,6 +14,6 @@ public class EvaluationBoard {
 	@OneToOne
 	private Document document;
 	@ManyToMany
-	private List<User> professors;
+	private List<Professor> professors;
 
 }

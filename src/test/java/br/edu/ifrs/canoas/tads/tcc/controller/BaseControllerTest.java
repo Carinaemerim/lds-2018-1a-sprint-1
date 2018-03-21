@@ -2,7 +2,8 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 
 
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
-import br.edu.ifrs.canoas.tads.tcc.domain.User;
+import br.edu.ifrs.canoas.tads.tcc.domain.Professor;
+import br.edu.ifrs.canoas.tads.tcc.domain.Student;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -24,15 +25,21 @@ public abstract class BaseControllerTest {
     @Autowired
     MockMvc mvc;
 
-    User user;
+    Student student;
+    Professor professor;
     UserImpl userDetails;
 
     @Before
     public void setup() {
-        user = new User();
-        user.setId(USER_ID);
-        user.setName(USER_NAME);
-        userDetails = new UserImpl("user", "user",  AuthorityUtils.createAuthorityList("ROLE_USER"), user);
+        professor = new Professor();
+        professor.setId(USER_ID);
+        professor.setName(USER_NAME);
+
+        student = new Student();
+        student.setId(USER_ID);
+        student.setName(USER_NAME);
+
+        userDetails = new UserImpl("user", "user",  AuthorityUtils.createAuthorityList("ROLE_USER"), professor);
 
         Authentication authentication = Mockito.mock(Authentication.class);
         SecurityContext securityContext = Mockito.mock(SecurityContext.class);

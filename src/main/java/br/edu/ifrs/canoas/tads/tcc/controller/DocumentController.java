@@ -1,7 +1,12 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
-import javax.validation.Valid;
-
+import br.edu.ifrs.canoas.tads.tcc.config.Messages;
+import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
+import br.edu.ifrs.canoas.tads.tcc.domain.Student;
+import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
+import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
+import br.edu.ifrs.canoas.tads.tcc.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,12 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifrs.canoas.tads.tcc.config.Messages;
-import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
-import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
-import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
-import br.edu.ifrs.canoas.tads.tcc.service.UserService;
-import lombok.AllArgsConstructor;
+import javax.validation.Valid;
 
 @RequestMapping("/document")
 @Controller
@@ -48,7 +48,7 @@ public class DocumentController {
 			mav.addObject("advisors", userService.getAdvisors());
 			return mav;
 		}
-		termPaper.setAuthor(activeUser.getUser());
+		termPaper.setAuthor((Student)activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");
 		mav.addObject("termPaper", termPaperService.saveThemeDraft(termPaper));
 		redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
@@ -66,7 +66,7 @@ public class DocumentController {
 			mav.addObject("advisors", userService.getAdvisors());
 			return mav;
 		}
-		termPaper.setAuthor(activeUser.getUser());
+		termPaper.setAuthor((Student)activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");
 		mav.addObject("termPaper", termPaperService.submitThemeForEvaluation(termPaper));
 		redirectAttr.addFlashAttribute("message", messages.get("theme.submited-for-evaluation"));

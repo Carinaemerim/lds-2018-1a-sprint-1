@@ -49,6 +49,7 @@ public class UserControllerTest extends BaseControllerTest{
     @Test
     public void save_user_profile() throws Exception{
         given(this.messages.get("field.saved")).willReturn(FIELD_SAVED);
+        given(this.userService.save(professor)).willReturn(professor);
 
         this.mvc.perform(post("/user/save")
                 .with(user(userDetails))

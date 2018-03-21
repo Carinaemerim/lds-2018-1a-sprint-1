@@ -2,7 +2,7 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 
 import br.edu.ifrs.canoas.tads.tcc.config.Messages;
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
-import br.edu.ifrs.canoas.tads.tcc.domain.User;
+import br.edu.ifrs.canoas.tads.tcc.domain.Student;
 import br.edu.ifrs.canoas.tads.tcc.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("save")
-    public ModelAndView save(@Valid User user, BindingResult bindingResult,
+    public ModelAndView save(@Valid Student user, BindingResult bindingResult,
                              RedirectAttributes redirectAttr){
 
         if (bindingResult.hasErrors()) {

@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @Inheritance
 @DiscriminatorColumn(name="user_type")
-public class User {
+public abstract class User {
 
 	@Id @GeneratedValue private Long id;
 	private String username;

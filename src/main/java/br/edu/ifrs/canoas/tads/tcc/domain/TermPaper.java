@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -35,5 +36,9 @@ public class TermPaper {
 
     @OneToMany(mappedBy="termPaper")
 	private List<Document> documents;
+
+    public TermPaper(){
+        documents = new ArrayList<>();
+    }
 
 }

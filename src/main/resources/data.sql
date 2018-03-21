@@ -26,9 +26,9 @@ insert into TERM_PAPER (id, theme, title, advisor_id, author_id) values
 (100, 'Spring Boot', 'TCC sobre o melhor framework do mundo', 100, 101),
 (101, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 100, 101);
 
-insert into DOCUMENT (id, document_type, is_final, term_paper_id)	values
-(101,0,1,100),
-(102,0,1,101);
+insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id)	values
+(101,0,1,100, 0),
+(102,0,1,101, 0);
 
 
 insert into EVALUATION_BOARD (id, document_id) values

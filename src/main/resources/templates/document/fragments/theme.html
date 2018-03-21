@@ -73,15 +73,17 @@
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h3 class="modal-title" th:text="#{theme.submit-confirmation.title}">Are
-							you sure?</h3>
+						<h3 class="modal-title"
+							th:text="#{theme.submit-confirmation.title}">Are you sure?</h3>
 					</div>
 					<div class="modal-body">
-						<h4 th:text="#{theme.submit-confirmation.message}">After sending it will no longer be possible to change the
-							information until the selected advisor evaluates your theme.</h4>
+						<h4 th:text="#{theme.submit-confirmation.message}">After
+							sending it will no longer be possible to change the information
+							until the selected advisor evaluates your theme.</h4>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" th:text="#{no}">No</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							th:text="#{no}">No</button>
 						<button type="submit" class="btn btn-primary" name="action"
 							value="evaluation" th:text="#{yes}">Yes</button>
 					</div>

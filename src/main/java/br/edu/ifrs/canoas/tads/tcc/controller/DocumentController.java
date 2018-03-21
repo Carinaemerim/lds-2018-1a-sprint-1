@@ -32,7 +32,11 @@ public class DocumentController {
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/document");
 		mav.addObject("advisors", userService.getAdvisors());
-		mav.addObject("termPaper", termPaperService.getLastOneByUser(activeUser.getUser()));
+		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
+		if (termPaper == null) {
+			termPaper = new TermPaper();
+		}
+		mav.addObject("termPaper", termPaper);
 		return mav;
 	}
 

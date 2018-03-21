@@ -2,7 +2,9 @@ package br.edu.ifrs.canoas.tads.tcc.service;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
@@ -26,6 +28,7 @@ public class TermPaperService {
 		return optionalTermPaper.isPresent() ? optionalTermPaper.get() : null;
 	}
 
+	@Transactional
 	public TermPaper saveThemeDraft(TermPaper termPaper) {
 		TermPaper fetchedTermPaper = this.getOne(termPaper);
 		if (fetchedTermPaper == null || fetchedTermPaper.getId() == null)
@@ -38,6 +41,7 @@ public class TermPaperService {
 		return termPaperRepository.save(termPaper);
 	}
 
+	@Transactional
 	public TermPaper submitThemeForEvaluation(TermPaper termPaper) {
 		termPaper = this.saveThemeDraft(termPaper);
 		Document fetchedDocument = documentService.getFinalThemeDocumentByTermPaper(termPaper);
@@ -51,6 +55,6 @@ public class TermPaperService {
 	}
 
 	public TermPaper getLastOneByUser(User user) {
-		return termPaperRepository.findLastByAuthorId(user.getId());
+		return termPaperRepository.findFirstByAuthorId(user.getId(), Sort.by(Sort.Direction.DESC, "id"));
 	}
 }

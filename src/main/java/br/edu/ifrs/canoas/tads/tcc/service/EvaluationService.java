@@ -1,17 +1,17 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
-import br.edu.ifrs.canoas.tads.tcc.domain.*;
+import br.edu.ifrs.canoas.tads.tcc.domain.Document;
+import br.edu.ifrs.canoas.tads.tcc.domain.DocumentDTO;
+import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
+import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.repository.DocumentRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by cassiano on 3/21/18.
@@ -32,12 +32,9 @@ public class EvaluationService {
             mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 
 
-            Converter<TermPaper, String> conversor = new Converter<TermPaper, String>() {
-
-                public String convert(MappingContext<TermPaper, String> context) {
-                    final TermPaper tp = context.getSource();
-                    return tp.toString();
-                }
+            Converter<TermPaper, String> conversor = context -> {
+                final TermPaper tp = context.getSource();
+                return tp.toString();
             };
 
             mapper.addConverter(conversor);

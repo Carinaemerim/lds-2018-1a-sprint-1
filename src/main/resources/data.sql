@@ -24,7 +24,9 @@ insert into user_roles (user_id, roles_id) values
 -- TERM_PAPER
 insert into TERM_PAPER (id, theme, title, advisor_id, author_id, document_id) values (100, 'Spring Boot', 'TCC sobre o melhor framework do mundo', 100, 101, 0);
 insert into TERM_PAPER (id, theme, title, advisor_id, author_id) values (101, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 100, 100);
-insert into DOCUMENT (id, document_type, is_final, term_paper_id)
-	values (1,0,1,100);
-insert into DOCUMENT (id, document_type, is_final, term_paper_id)
-	values (2,0,1,101);
+insert into DOCUMENT (id, document_type, is_final, term_paper_id)	values (101,0,1,100);
+insert into DOCUMENT (id, document_type, is_final, term_paper_id) values (102,0,1,101);
+
+insert into EVALUATION_BOARD (id, document_id) values (101, 101), (102, 102);
+
+insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) values (101, 101);

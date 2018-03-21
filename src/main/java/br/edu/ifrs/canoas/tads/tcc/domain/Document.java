@@ -1,18 +1,9 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Transient;
-
 import lombok.Data;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,6 +24,9 @@ public class Document {
 	/** Logic to get final status from all evaluations */
 	@Transient
 	private EvaluationStatus status;
+
+	@OneToOne
+    private EvaluationBoard evaluationBoard;
 
 	/**
 	 * Uma ideia de como deve ser o calculo do status do documento <- nicolas

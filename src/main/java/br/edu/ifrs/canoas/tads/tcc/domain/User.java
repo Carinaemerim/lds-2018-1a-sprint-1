@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,6 +27,9 @@ public class User {
 
 	@ManyToMany(fetch = FetchType.EAGER) private Set<Role> roles;
     @OneToOne @JsonIgnore private File picture;
+
+    @ManyToMany
+    private List<EvaluationBoard> board;
 	
 	
 

@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class DocumentService {
 		if (termPaper == null)
 			return null;
 		return documentRepository.findLastByTermPaperIdAndIsFinalTrueAndDocumentType(termPaper.getId(), DocumentType.THEME);
+	}
+
+	public Iterable<Document> getIsFinalTrueAndDocumentType(DocumentType theme) {
+		return theme!=null?
+				documentRepository.findByIsFinalTrueAndDocumentType(theme):
+				new ArrayList();
 	}
 
 }

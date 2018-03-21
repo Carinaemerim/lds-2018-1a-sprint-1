@@ -17,6 +17,7 @@ import java.util.List;
 public interface DocumentRepository extends JpaRepository<Document, Long> {
 
 	Document findLastByTermPaperIdAndIsFinalTrueAndDocumentType(Long id, DocumentType theme);
+	List<Document> findByIsFinalTrueAndDocumentType(DocumentType theme);
 
 
 }

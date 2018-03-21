@@ -22,7 +22,7 @@ public class EvaluationController {
 	@GetMapping("/list")
 	public ModelAndView greetings(/*@RequestParam("academicyear") String academicYear*/) {
 		ModelAndView mav = new ModelAndView("/evaluation/list");
-
+		mav.addObject("termPaper", evaluationService.testMap());
 		return mav;
 	}
 

@@ -13,13 +13,18 @@ INSERT into user(id, username, password, name, email, experience, skill, active,
 --ROLES
 insert into role(id, role) values
 (1, 'ROLE_USER'),
-(2, 'ROLE_ADMIN');
+(2, 'ROLE_ADMIN'),
+(3, 'ROLE_STUDENT'),
+(4, 'ROLE_PROFESSOR');
 
 -- USER_ROLES
 insert into user_roles (user_id, roles_id) values
 (100, 1),
 (101, 1),
-(102, 1);
+(102, 1),
+(100, 3),
+(102, 3),
+(101, 4);
 
 
 -- TERM_PAPER

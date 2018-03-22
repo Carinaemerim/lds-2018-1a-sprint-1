@@ -15,16 +15,22 @@ public class LoginTest extends MyFluentTest {
 
     @Test
     public void checkLoginSucceed() {
+        //Given
         loginPage.go(port);
+        //When
         loginPage.fillAndSubmitForm("user", "user")
                 .awaitUntilFormDisappear();
+        //Then
         assertThat(window().title()).isEqualTo("Header");
     }
 
     @Test
     public void checkLoginFailed() {
+        //Given
         loginPage.go(port);
+        //When
         loginPage.fillAndSubmitForm("wrongUser", "wrongPass");
+        //Then
         assertThat($(".alert")).hasSize(1);
         loginPage.isAt();
     }

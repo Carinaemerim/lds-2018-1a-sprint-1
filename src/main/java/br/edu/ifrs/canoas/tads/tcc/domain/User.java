@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,18 +15,23 @@ import java.util.Set;
 @Data
 public class User {
 
-	@Id @GeneratedValue private Long id;
+	@Id @GeneratedValue
+	private Long id;
 	private String username;
 	private boolean active;
 	private String password;
+    private String name;
+    private String email;
+
 	private String lattes;
+    private String experience;
+    private String skill;
+
 	@ManyToMany(fetch = FetchType.EAGER) private Set<Role> roles;
-	@NotBlank private String name;
-    @NotBlank @javax.validation.constraints.Email private String email;
-	@NotBlank private String experience;
-	@NotBlank private String skill;
     @OneToOne @JsonIgnore private File picture;
-	
-	
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Message> messages;
+
+
 
 }

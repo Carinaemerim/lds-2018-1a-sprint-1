@@ -11,6 +11,7 @@
 				<table id="example2"
 					class="table table-bordered table-hover dataTable" role="grid"
 					aria-describedby="example2_info">
+
 					<thead>
 						<tr role="row">
 							<th class="sorting_desc" tabindex="0" aria-controls="example2"
@@ -30,30 +31,24 @@
 								rowspan="1" colspan="1"
 								aria-label="Engine version: activate to sort column ascending">
 					</thead>
+
 					<tbody>
-						<tr role="row" class="odd">
-						<tr>
-							<td><a href="pages/examples/invoice.html">Estudo sobre
-									Java Primeira Versão</a></td>
-							<td>02/03/2018</td>
-							<td><a href="#" class="btn btn-default"><i
-									class="fa fa-times"></i> Excluir</a></td>
+						<tr role="row">
+						<tr th:each = "monograph : ${monographs}">
+							<td th:text = "${monograph.title}"></td>
+							<td>Data de hoje</td>
+							<td>
+								<form id = "delete" action = "#" th:action ="@{/document/delete/{id}(id = ${monograph.id})}">
+									<button type = "submit" th:text = "Excluir"></button>
+								</form>
+							</td>
+
 						</tr>
-						<tr>
-							<td><a href="pages/examples/invoice.html">Template
-									Monografia</a></td>
-							<td>12/02/2018</td>
-							<td><a href="#" class="btn btn-default"><i
-									class="fa fa-times"></i> Excluir</a></td>
-						</tr>
+
 					</tbody>
 				</table>
 			</div>
 		</div>
-	</div>
-	<div class="btn btn-default btn-file btn-block">
-		<i class="fa fa-paperclip"></i> Adicionar arquivo <input
-			name="attachment" type="file">
 	</div>
 </div>
 <div class="box box-primary direct-chat direct-chat-primary">

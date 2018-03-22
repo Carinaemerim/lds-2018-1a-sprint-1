@@ -1,32 +1,43 @@
 <div>
-	<form role="form">
+	<form role="form" id="form-theme-advisor" action="#"
+		th:action="@{/document/theme/save-draft}" th:object="${termPaper}"
+		method="post">
 		<div class="box-body">
+			<input type="hidden" id="id" th:field="*{id}">
 			<div class="form-group">
-				<label for="title">Title</label> <input type="text"
-					class="form-control" id="title" placeholder="Enter paper title">
+				<label for="title" th:text="#{theme.title}">Title</label> <input
+					type="text" class="form-control" id="title"
+					placeholder="Enter paper title" th:placeholder="#{theme.ph.title}"
+					th:field="*{title}">
 			</div>
 			<div class="form-group">
-				<label for="theme">Theme</label> <input type="text"
-					class="form-control" id="theme" placeholder="Enter paper theme">
+				<label for="theme" th:text="#{theme.theme}">Theme</label> <input
+					type="text" class="form-control" id="theme"
+					placeholder="Enter paper theme" th:placeholder="#{theme.ph.theme}"
+					th:field="*{theme}">
 			</div>
 			<div class="form-group">
-				<label for="teacherAdvisor">Teacher Advisor</label> <select
-					class="form-control" id="teacherAdvisor">
-					<option>Select a teacher advisor</option>
-					<option>Rodrigo Noll (3)</option>
-					<option>Marcio Bigolin (1)</option>
-					<option>Leonardo Carvalho (3)</option>
+				<label for="teacherAdvisor" th:text="#{theme.advisor}">Teacher
+					Advisor</label> <select class="form-control" id="teacherAdvisor"
+					th:field="*{advisor}">
+					<option th:value="null" th:text="#{theme.ph.advisor}">Select
+						a teacher advisor</option>
+					<option th:each="advisor : ${advisors}" th:value="${advisor.id}"
+						th:text="${advisor.name}">Teacher Advisor</option>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="description">Description</label>
+				<label for="description" th:text="#{theme.description}">Description</label>
 				<textarea id="description" class="form-control" rows="3"
-					placeholder="Enter paper description"></textarea>
+					placeholder="Enter paper description"
+					th:placeholder="#{theme.ph.description}" th:field="*{description}"></textarea>
 			</div>
 		</div>
 		<div class="box-footer">
-			<button type="submit" class="btn btn-secondary">Save draft</button>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary"
+				th:text="#{theme.save-draft}">Save draft</button>
+			<button type="submit" class="btn btn-danger pull-right"
+				th:text="#{theme.submit}">Submit</button>
 		</div>
 	</form>
 </div>

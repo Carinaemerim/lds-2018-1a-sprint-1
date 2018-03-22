@@ -4,6 +4,7 @@ import br.edu.ifrs.canoas.tads.tcc.config.Messages;
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
 import br.edu.ifrs.canoas.tads.tcc.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,19 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/user/")
+@AllArgsConstructor
 public class UserController {
 	
 	private final Messages messages;
 	private final UserService userService;
-	
-    public UserController(Messages messages, UserService userService) {
-		this.messages = messages;
-		this.userService=userService;
-	}
 
 	@GetMapping("profile")
     public ModelAndView viewProfile(@AuthenticationPrincipal UserImpl activeUser){
@@ -34,19 +30,24 @@ public class UserController {
         mav.addObject("user", userService.getOne(activeUser.getUser()));
         return mav;
     }
-    
+
     @PostMapping("save")
     public ModelAndView save(@Valid User user, BindingResult bindingResult,
-                             RedirectAttributes redirectAttr, Locale locale){
-    	
-    		if (bindingResult.hasErrors()) {
+                             RedirectAttributes redirectAttr){
+
+        if (bindingResult.hasErrors()) {
             return new ModelAndView("/user/profile");
         }
-    		
-    		ModelAndView mav = new ModelAndView("redirect:/user/profile");
+
+        ModelAndView mav = new ModelAndView("redirect:/user/profile");
         mav.addObject("user", userService.save(user));
         redirectAttr.addFlashAttribute("message", messages.get("field.saved"));
-        
+
         return mav;
     }
+
+
+
+
+
 }

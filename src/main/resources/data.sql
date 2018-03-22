@@ -1,6 +1,6 @@
 -- EMPLOYEE PHOTOS
-insert into file(id, content) values
-(0,  FILE_READ('./src/main/resources/static/photos/face.jpg'));
+insert into file(id, content, content_type, filename) values
+(0,  FILE_READ('./src/main/resources/static/photos/face.jpg'), 'image/jpeg', 'face.jpg');
 
 --AUTHENTICATION
 INSERT into user(id, username, password, name, email, experience, skill, active, picture_id) VALUES
@@ -22,5 +22,8 @@ insert into user_roles (user_id, roles_id) values
 
 
 -- TERM_PAPER
-insert into TERM_PAPER (id, theme, title, advisor_id, author_id) values (100, 'Spring Boot', 'TCC sobre o melhor framework do mundo', 100, 101);
+insert into TERM_PAPER (id, theme, title, advisor_id, author_id, document_id) values (100, 'Spring Boot', 'TCC sobre o melhor framework do mundo', 100, 101, 0);
 insert into TERM_PAPER (id, theme, title, advisor_id, author_id) values (101, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 100, 100);
+
+-- DOCUMENT
+insert into DOCUMENT (id, document_Type, title,is_Final) values (200, DocumentType.MONOGRAPH, 'TCC sobre o melhor framework do mundo', 'false');

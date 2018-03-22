@@ -5,11 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TermPaperRepository extends JpaRepository <TermPaper, Long>{
+public interface TermPaperRepository extends JpaRepository<TermPaper, Long> {
 
+	List<TermPaper> findByThemeContainingIgnoreCase(String theme);
 
-    List<TermPaper> findByThemeContainingIgnoreCase(String theme);
+	TermPaper findLastByAuthorId(Long id);
 
 }
-
-

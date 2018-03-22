@@ -9,7 +9,7 @@
     <section class="content-header">
         <!-- PAGE TITLE -->
         <h1>
-            <span th:text="#{evaluation.header.proposal}"/>
+            <span th:text="#{evaluation.header.termpaper}"/>
             <small><span th:text="#{evaluation.title}"/></small>
         </h1>
         <!-- BREADCRUMB -->
@@ -28,14 +28,12 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-
             <div class="col-md-4">
                 <div th:insert="/evaluation/fragments/student-profile">
                 </div>
-
             </div>
             <div class="col-md-8">
-                <div th:insert="/evaluation/fragments/proposal">
+                <div  th:insert="/evaluation/fragments/document">
                 </div>
                 <!-- /.box -->
             </div>
@@ -44,17 +42,13 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-
-                <div th:insert="/evaluation/fragments/proposal-evaluation"></div>
-                <!-- /.box-body -->
+                <div th:insert="/evaluation/fragments/proposal-evaluation" style="background-color:white"></div>
             </div>
-            <!-- /.box -->
+            <!-- /.col -->
         </div>
-        <!-- /.col -->
-</div>
-<!-- /.row -->
+        <!-- /.row -->
 
-</section>
+    </section>
 
 </div>
 <th:block layout:fragment="css-view">

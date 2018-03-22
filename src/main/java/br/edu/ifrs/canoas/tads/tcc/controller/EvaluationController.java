@@ -46,13 +46,20 @@ public class EvaluationController {
         return mav;
     }
 
-    @GetMapping("/proposal")
-    public ModelAndView proposal() {
-        return new ModelAndView("/evaluation/proposal");
+    @GetMapping("/proposal/{id}")
+    public ModelAndView proposal(Model model, @PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("/evaluation/proposal");
+        mav.addObject("termPaper", termPaperService.getOneById(id));
+        //model.addAttribute("action", "record");
+        return mav;
     }
 
-    @GetMapping("/termpaper")
-    public ModelAndView termpaper() {
-        return new ModelAndView("/evaluation/termpaper");
+    @GetMapping("/termpaper/{id}")
+    public ModelAndView termpaper(Model model, @PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("/evaluation/termpaper");
+        mav.addObject("termPaper", termPaperService.getOneById(id));
+        //model.addAttribute("action", "record");
+        return mav;
     }
+
 }

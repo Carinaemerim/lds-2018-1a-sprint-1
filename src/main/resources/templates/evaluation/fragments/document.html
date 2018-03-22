@@ -1,0 +1,33 @@
+<!-- Detail -->
+<div class="box box-success">
+    <div class="box-header bg-green">
+        <h3 class="box-title text-bold" th:text="${termPaper.title}">Trabalho sobre algo que eu ainda não sei o que é: Internet para todos agora e sempre</h3>
+    </div>
+    <!-- /.box-header -->
+
+
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div th:replace="/evaluation/fragments/status"></div>
+            </div>
+            <div class="col-md-9">
+                <div>
+                    <p class="text-muted">Submetido em 13/03/2018 10:30</p>
+                    <h4 class="text-bold">Orientador: <span th:text="${termPaper.advisor.name}"></span></h4>
+                    <h4 class="text-bold">Período: 2018/1</h4>
+                    <a class="btn btn-app">
+                        <i class="fa fa-file-text"></i> <b>PDF</b>
+                    </a>
+                </div>
+                <!-- /.box -->
+            </div>
+
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.box-body -->
+</div>

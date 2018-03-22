@@ -13,7 +13,9 @@ import java.util.Set;
  */
 @Entity
 @Data
-public class User {
+@Inheritance
+@DiscriminatorColumn(name="user_type")
+public abstract class User {
 
 	@Id @GeneratedValue
 	private Long id;
@@ -23,15 +25,11 @@ public class User {
     private String name;
     private String email;
 
-	private String lattes;
-    private String experience;
-    private String skill;
 
 	@ManyToMany(fetch = FetchType.EAGER) private Set<Role> roles;
     @OneToOne @JsonIgnore private File picture;
     @OneToMany(fetch = FetchType.EAGER)
     private List<Message> messages;
-
 
 
 }

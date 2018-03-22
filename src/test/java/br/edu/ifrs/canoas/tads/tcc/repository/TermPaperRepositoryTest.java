@@ -28,6 +28,8 @@ public class TermPaperRepositoryTest {
         // given
         TermPaper paper = new TermPaper();
         paper.setTheme(THEME);
+        paper.setDescription(THEME);
+        paper.setTitle(THEME);
         entityManager.persist(paper);
         entityManager.flush();
 

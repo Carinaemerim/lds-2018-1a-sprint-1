@@ -29,7 +29,7 @@ public class UserControllerTest extends BaseControllerTest{
 
     @Test
     public void view_user_profile() throws Exception{
-        given(this.userService.getOne(user)).willReturn(user);
+        given(this.userService.getOne(professor)).willReturn(professor);
 
         this.mvc.perform(get("/user/profile")
                 .with(user(userDetails))
@@ -49,6 +49,7 @@ public class UserControllerTest extends BaseControllerTest{
     @Test
     public void save_user_profile() throws Exception{
         given(this.messages.get("field.saved")).willReturn(FIELD_SAVED);
+        given(this.userService.save(professor)).willReturn(professor);
 
         this.mvc.perform(post("/user/save")
                 .with(user(userDetails))
@@ -56,7 +57,7 @@ public class UserControllerTest extends BaseControllerTest{
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", USER_ID.toString())
                 .param("name", USER_NAME)
-                .sessionAttr("user", user)
+                .sessionAttr("user", professor)
         )
                 .andExpect(view().name("redirect:/user/profile"))
                 .andExpect(model().size(1))

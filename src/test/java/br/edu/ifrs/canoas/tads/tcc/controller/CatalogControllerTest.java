@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
+import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.service.CatalogService;
 import org.junit.Test;
@@ -38,8 +39,9 @@ public class CatalogControllerTest extends BaseControllerTest{
     @Test
     public void save_user_profile() throws Exception{
         TermPaper tp = new TermPaper();
-        tp.setAdvisor(user);
-        tp.setAuthor(user);
+        tp.setDocuments(Arrays.asList(new Document()));
+        tp.setAdvisor(professor);
+        tp.setAuthor(student);
 
         given(this.service.search("criteria")).willReturn(Arrays.asList(tp));
 

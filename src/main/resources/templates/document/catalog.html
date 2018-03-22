@@ -85,9 +85,9 @@
                                                 </dd>
                                             </dl>
                                         </div>
-                                        <div class="media-right" th:if="${termPaper.document != null}">
+                                        <div class="media-right" th:if="${termPaper?.documents[0]?.file != null}">
                                             <p class="pull-right">
-                                                <a th:href="@{|/file/${termPaper.document.id}|}" th:id="'file-'+ ${iter.index}"
+                                                <a th:href="@{|/file/${termPaper?.documents[0]?.file.id}|}" th:id="'file-'+ ${iter.index}"
                                                    class="btn btn-success btn-sm ad-click-event">
                                                     <span th:text="#{download.label}"></span>
                                                 </a>

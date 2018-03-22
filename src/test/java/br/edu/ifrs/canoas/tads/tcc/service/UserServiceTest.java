@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
+import br.edu.ifrs.canoas.tads.tcc.domain.Professor;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ public class UserServiceTest {
     @Test
     public void testSaveExistingUserIgnoringPassword(){
         // given
-        User user = new User();
+        User user = new Professor();
         user.setId(100L);
         user.setPassword(PASSWORD);
 
@@ -39,7 +40,7 @@ public class UserServiceTest {
     @Test
     public void testSaveNotExistingUser(){
         // given
-        User user = new User();
+        User user = new Professor();
         user.setId(1L);
         user.setPassword(PASSWORD);
 
@@ -53,7 +54,7 @@ public class UserServiceTest {
     @Test
     public void testSaveWithNullValue(){
         // given
-        User user = new User();
+        User user = new Professor();
         user.setId(1L);
         user.setPassword(PASSWORD);
 

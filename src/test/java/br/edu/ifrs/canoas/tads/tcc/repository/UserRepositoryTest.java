@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.repository;
 
+import br.edu.ifrs.canoas.tads.tcc.domain.Professor;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +28,7 @@ public class UserRepositoryTest {
     public void when_FindByThemeContaining_then_ReturnTermPaper(){
 
         // given
-        User user = new User();
+        Professor user = new Professor();
         user.setUsername(TEST_STRING);
         user.setName(TEST_STRING);
         user.setExperience(TEST_STRING);

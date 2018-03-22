@@ -1,43 +1,94 @@
-<div>
+<div class="box-body">
 	<form role="form" id="form-theme-advisor" action="#"
-		th:action="@{/document/theme/save-draft}" th:object="${termPaper}"
-		method="post">
+		class="form-horizontal" th:action="@{/document/theme/submit}"
+		th:object="${termPaper}" method="post">
 		<div class="box-body">
 			<input type="hidden" id="id" th:field="*{id}">
 			<div class="form-group">
-				<label for="title" th:text="#{theme.title}">Title</label> <input
-					type="text" class="form-control" id="title"
-					placeholder="Enter paper title" th:placeholder="#{theme.ph.title}"
-					th:field="*{title}">
+				<label class="col-sm-2 control-label" for="title"
+					th:text="#{theme.title}">Title</label>
+				<div class="col-sm-10"
+					th:classappend="${#fields.hasErrors('title')}? 'has-error'">
+					<input type="text" class="form-control" id="title"
+						placeholder="Enter paper title" th:placeholder="#{theme.ph.title}"
+						th:field="*{title}"> <span
+						th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+						th:class="help-block" />
+				</div>
 			</div>
 			<div class="form-group">
-				<label for="theme" th:text="#{theme.theme}">Theme</label> <input
-					type="text" class="form-control" id="theme"
-					placeholder="Enter paper theme" th:placeholder="#{theme.ph.theme}"
-					th:field="*{theme}">
+				<label class="col-sm-2 control-label" for="theme"
+					th:text="#{theme.theme}">Theme</label>
+				<div class="col-sm-10"
+					th:classappend="${#fields.hasErrors('theme')}? 'has-error'">
+					<input type="text" class="form-control" id="theme"
+						placeholder="Enter paper theme" th:placeholder="#{theme.ph.theme}"
+						th:field="*{theme}"> <span
+						th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"
+						th:class="help-block" />
+				</div>
 			</div>
 			<div class="form-group">
-				<label for="teacherAdvisor" th:text="#{theme.advisor}">Teacher
-					Advisor</label> <select class="form-control" id="teacherAdvisor"
-					th:field="*{advisor}">
-					<option th:value="null" th:text="#{theme.ph.advisor}">Select
-						a teacher advisor</option>
-					<option th:each="advisor : ${advisors}" th:value="${advisor.id}"
-						th:text="${advisor.name}">Teacher Advisor</option>
-				</select>
+				<label class="col-sm-2 control-label" for="advisor"
+					th:text="#{theme.advisor}">Advisor</label>
+				<div class="col-sm-10"
+					th:classappend="${#fields.hasErrors('advisor')}? 'has-error'">
+					<select class="form-control" id="advisor" th:field="*{advisor}">
+						<option th:value="null" th:text="#{theme.ph.advisor}">Select
+							a teacher advisor</option>
+						<option th:each="advisor : ${advisors}" th:value="${advisor.id}"
+							th:text="${advisor.name}">Teacher Advisor</option>
+					</select> <span th:if="${#fields.hasErrors('advisor')}"
+						th:errors="*{advisor}" th:class="help-block" />
+				</div>
 			</div>
 			<div class="form-group">
-				<label for="description" th:text="#{theme.description}">Description</label>
-				<textarea id="description" class="form-control" rows="3"
-					placeholder="Enter paper description"
-					th:placeholder="#{theme.ph.description}" th:field="*{description}"></textarea>
+				<label class="col-sm-2 control-label" for="description"
+					th:text="#{theme.description}">Description</label>
+				<div class="col-sm-10"
+					th:classappend="${#fields.hasErrors('description')}? 'has-error'">
+					<textarea id="description" class="form-control" rows="3"
+						placeholder="Enter paper description"
+						th:placeholder="#{theme.ph.description}" th:field="*{description}"></textarea>
+					<span th:if="${#fields.hasErrors('description')}"
+						th:errors="*{description}" th:class="help-block" />
+				</div>
 			</div>
 		</div>
 		<div class="box-footer">
 			<button type="submit" class="btn btn-primary"
 				th:text="#{theme.save-draft}">Save draft</button>
-			<button type="submit" class="btn btn-danger pull-right"
-				th:text="#{theme.submit}">Submit</button>
+			<button type="button" class="btn btn-danger pull-right"
+				data-toggle="modal" data-target="#themeSubmitConfirmationModal"
+				name="action" th:text="#{theme.submit}">Submit for
+				evaluation</button>
+		</div>
+		<div class="modal fade" id="themeSubmitConfirmationModal"
+			tabindex="-1" role="dialog"
+			aria-labelledby="themeSubmitConfirmationModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h3 class="modal-title"
+							th:text="#{theme.submit-confirmation.title}">Are you sure?</h3>
+					</div>
+					<div class="modal-body">
+						<h4 th:text="#{theme.submit-confirmation.message}">After
+							sending it will no longer be possible to change the information
+							until the selected advisor evaluates your theme.</h4>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							th:text="#{no}">No</button>
+						<button type="submit" class="btn btn-primary" name="action"
+							value="evaluation" th:text="#{yes}">Yes</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</form>
 </div>

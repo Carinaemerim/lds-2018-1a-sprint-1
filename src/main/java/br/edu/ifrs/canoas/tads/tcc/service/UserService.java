@@ -1,18 +1,20 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
+import br.edu.ifrs.canoas.tads.tcc.domain.Professor;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
+import br.edu.ifrs.canoas.tads.tcc.repository.ProfessorRepository;
 import br.edu.ifrs.canoas.tads.tcc.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UserService {
 
 	private final UserRepository userRepository;
+    private final ProfessorRepository professorRepository;
 
 	public User save(User user) {
 
@@ -23,8 +25,8 @@ public class UserService {
 
 		fetchedUser.setName(user.getName());
 		fetchedUser.setEmail(user.getEmail());
-		fetchedUser.setSkill(user.getSkill());
-		fetchedUser.setExperience(user.getExperience());
+//		fetchedUser.setSkill(user.getSkill());
+//		fetchedUser.setExperience(user.getExperience());
 
 		return userRepository.save(fetchedUser);
 	}
@@ -43,8 +45,8 @@ public class UserService {
 	 * modificar depois para trazer apenas professores/orientadores
 	 *
 	 */
-	public Iterable<User> getAdvisors() {
-		return userRepository.findAll();
+	public Iterable<Professor> getAdvisors() {
+		return professorRepository.findAll();
 	}
 
 }

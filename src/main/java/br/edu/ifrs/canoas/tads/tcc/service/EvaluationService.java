@@ -4,13 +4,17 @@ import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentDTO;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
+import br.edu.ifrs.canoas.tads.tcc.domain.User;
 import br.edu.ifrs.canoas.tads.tcc.repository.DocumentRepository;
+import br.edu.ifrs.canoas.tads.tcc.repository.TermPaperRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +25,8 @@ import java.util.List;
 public class EvaluationService {
 
     DocumentRepository documentRepository;
+    TermPaperRepository termPaperRepository;
+    
 
     public String testMap() {
 
@@ -49,6 +55,14 @@ public class EvaluationService {
         }
 
         return null;
+    }
+    
+    public Iterable<TermPaper> listTermPaperEvaluation(User user){
+    	//return termPaperRepository.findByAllTermPaperForEvaluation();
+    		return null;
+//            return user!=null?
+//                    termPaperRepository.findByAllTermPaperForEvaluation():
+//                    new ArrayList();   	
     }
 
 }

@@ -16,6 +16,13 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.comparingLong;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toCollection;
 
 /**
  * Created by cassiano on 3/21/18.
@@ -58,9 +65,20 @@ public class EvaluationService {
     }
 
     public Iterable<TermPaper> getTermPaperEvaluation(User user) {
-        return user != null ?
+
+       /* return user != null ?
                 termPaperRepository.getTermPaperForEvaluation() :
-                new ArrayList();
+                new ArrayList();*/
+        final List<TermPaper> listWithDuplicates =  user != null ?
+                termPaperRepository.getTermPaperForEvaluation() : new ArrayList();
+
+
+        if(listWithDuplicates != null) {
+            List<TermPaper> listWithoutDuplicates =  listWithDuplicates.stream().collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingLong(TermPaper::getId))),
+                    ArrayList::new));
+            return  listWithoutDuplicates;
+        }
+        return listWithDuplicates;
     }
 
 }

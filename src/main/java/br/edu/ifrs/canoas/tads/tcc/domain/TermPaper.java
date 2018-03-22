@@ -36,4 +36,40 @@ public class TermPaper {
 	@OneToMany(mappedBy="termPaper")
 	private List<Document> documents;
 
+
+	@Transient
+	private Document themeDocument;
+
+	@Transient
+	private Document proposalDocument;
+
+	@Transient
+	private Document termPaperDocument;
+
+	public Document getThemeDocument(){
+		for(Document doc: documents){
+			if(doc.getDocumentType().equals(DocumentType.THEME) && doc.getIsFinal()){
+				return doc;
+			}
+		}
+		return null;
+	}
+
+	public Document getProposalDocument(){
+		for(Document doc: documents){
+			if(doc.getDocumentType().equals(DocumentType.PROPOSAL) && doc.getIsFinal()){
+				return doc;
+			}
+		}
+		return null;
+	}
+
+	public Document getTermPaperDocument(){
+		for(Document doc: documents){
+			if(doc.getDocumentType().equals(DocumentType.MONOGRAPH) && doc.getIsFinal()){
+				return doc;
+			}
+		}
+		return null;
+	}
 }

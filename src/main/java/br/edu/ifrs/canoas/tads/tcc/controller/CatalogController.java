@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
+import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.service.CatalogService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

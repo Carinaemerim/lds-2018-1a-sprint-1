@@ -15,7 +15,7 @@ public interface TermPaperRepository extends JpaRepository<TermPaper, Long> {
 	TermPaper findFirstByAuthorId(Long id, Sort sort);
 	
 	//@Query("FROM TermPaper t join Document d on (t.id = d.termPaper.id) join EvaluationBoard eb on eb.document.id = d.id join EvaluationBoardProfessors ebp on (ebp.evaluationBoard.id = eb.id)  and ebp.professors.id in (101)")
-	/*@Query(value="SELECT * FROM\n" + 
+	@Query(value="SELECT * FROM\n" +
 			"\n" + 
 			"     term_paper join document\n" + 
 			"\n" + 
@@ -29,8 +29,9 @@ public interface TermPaperRepository extends JpaRepository<TermPaper, Long> {
 			"\n" + 
 			"             on (evaluation_board_professors.evaluation_board_id = evaluation_board.id\n" + 
 			"\n" + 
-			"                and evaluation_board_professors.professors_id in (101) );", nativeQuery=true)*/
-	@Query("FROM TermPaper t join Document d on (t.id = d.termPaper.id) join EvaluationBoard eb on eb.document.id = d.id")// where eb.professors.id in (101)")
+			"                and evaluation_board_professors.professors_id in (101) );", nativeQuery=true)
+	//@Query("FROM TermPaper t join Document d on (t.id = d.termPaper.id) join EvaluationBoard eb on eb.document.id = d.id")// where eb.professors.id in (101)")
+	//@Query("FROM TermPaper t join Document d on (t.id = d.termPaper.id) join EvaluationBoard eb on eb.document.id = d.id join eb.professors p where p.id in (101)")
 	List<TermPaper> getTermPaperForEvaluation();
 	
 	

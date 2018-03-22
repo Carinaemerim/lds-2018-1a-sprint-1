@@ -2,6 +2,7 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
+import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
 import lombok.AllArgsConstructor;
 
@@ -26,7 +27,7 @@ public class EvaluationController {
 	@GetMapping("/list")
 	public ModelAndView greetings(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/evaluation/list");
-		mav.addObject("termPaper", evaluationService.listTermPaperEvaluation(activeUser.getUser()));
+		mav.addObject("termPapers", evaluationService.getTermPaperEvaluation(activeUser.getUser()));
 		return mav;
 	}
 

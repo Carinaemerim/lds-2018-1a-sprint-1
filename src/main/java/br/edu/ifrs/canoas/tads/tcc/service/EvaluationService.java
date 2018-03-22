@@ -26,7 +26,7 @@ public class EvaluationService {
 
     DocumentRepository documentRepository;
     TermPaperRepository termPaperRepository;
-    
+
 
     public String testMap() {
 
@@ -44,7 +44,7 @@ public class EvaluationService {
             };
 
             mapper.addConverter(conversor);
-            for(Document doc: documents){
+            for (Document doc : documents) {
                 DocumentDTO dtoDocument = mapper.map(doc, DocumentDTO.class);
                 System.out.println(dtoDocument.toString());
             }
@@ -56,13 +56,11 @@ public class EvaluationService {
 
         return null;
     }
-    
-    public Iterable<TermPaper> listTermPaperEvaluation(User user){
-    	//return termPaperRepository.findByAllTermPaperForEvaluation();
-    		return null;
-//            return user!=null?
-//                    termPaperRepository.findByAllTermPaperForEvaluation():
-//                    new ArrayList();   	
+
+    public Iterable<TermPaper> getTermPaperEvaluation(User user) {
+        return user != null ?
+                termPaperRepository.getTermPaperForEvaluation() :
+                new ArrayList();
     }
 
 }

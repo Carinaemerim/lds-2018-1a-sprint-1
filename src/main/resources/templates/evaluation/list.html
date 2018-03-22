@@ -45,14 +45,16 @@
                                 <th>Nota Final</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>Alonsinho da Costa</td>
-                                <td>Trabalho sobre algo que eu ainda não sei o que é: Internet
+                            <tbody th:remove="all-but-first">
+                            <tr th:each="termpaper : ${termPapers}">
+                                <td th:text="${termpaper.author.name}">Red chair</td>
+                                <td th:text="${termpaper.title}">Red chair</td>
+                                <td><a href="/evaluation/theme"><span
+                                        class="label label-success">Aprovado</span></a></td>
+                                <td><a href="/evaluation/proposal"><span class="label label-success">Aprovado</span></a>
                                 </td>
-                                <td><a href="/evaluation/theme"><span class="label label-success">Aprovado</span></a></td>
-                                <td><a href="/evaluation/proposal"><span class="label label-success">Aprovado</span></a></td>
-                                <td><a href="/evaluation/termpaper"><span class="label label-success">Aprovado</span></a></td>
+                                <td><a href="/evaluation/termpaper"><span
+                                        class="label label-success">Aprovado</span></a></td>
                                 <td> 9.0</td>
                             </tr>
                             <tr>
@@ -62,7 +64,7 @@
                                 <td><span class="label bg-red">Reprovado</span></td>
                                 <td><span class="label bg-blue">Em andamento</span></td>
                                 <td><span class="label bg-gray">N/A</span></td>
-                                <td> -  </td>
+                                <td> -</td>
                             </tr>
                             <tr>
                                 <td>Alonsinho da Costa</td>
@@ -80,7 +82,7 @@
                                 <td><span class="label bg-red">Reprovado</span></td>
                                 <td><span class="label bg-gray">N/A</span></td>
                                 <td><span class="label bg-gray">N/A</span></td>
-                                <td> - </td>
+                                <td> -</td>
                             </tr>
                             <tr>
                                 <td>Silva Sauro</td>

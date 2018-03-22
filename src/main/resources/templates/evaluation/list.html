@@ -51,7 +51,7 @@
                                 <td th:text="${termPaper.title}">Título do Trabalho</td>
                                 <td>
                                     <a href="/evaluation/theme">
-                                        <span  th:text="${termPaper.themeDocument != null}  ? ${termPaper.themeDocument.id}:'-'" class="label label-success">Aprovado</span>
+                                        <span  th:text="${termPaper.themeDocument != null}  ? ${termPaper.themeDocument.status}:'-'" class="label label-success">Aprovado</span>
                                     </a>
                                 </td>
                                 <td><a href="/evaluation/proposal">

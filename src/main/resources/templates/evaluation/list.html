@@ -50,15 +50,15 @@
                                 <td th:text="${termPaper.author.name}">Aluno</td>
                                 <td th:text="${termPaper.title}">Título do Trabalho</td>
                                 <td>
-                                    <a href="/evaluation/theme">
+                                    <a th:href="@{|theme/${termPaper.id}|}" href="/evaluation/theme">
                                         <span  th:text="${termPaper.themeDocument != null}  ? ${termPaper.themeDocument.status}:'-'" class="label label-success">Aprovado</span>
                                     </a>
                                 </td>
-                                <td><a href="/evaluation/proposal">
+                                <td><a th:href="@{|proposal/${termPaper.id}|}" href="/evaluation/proposal">
                                     <span  th:text="${termPaper.proposalDocument != null}  ? ${termPaper.proposalDocument.id}:'-'" class="label label-success">Aprovado</span>
                                 </a>
                                 </td>
-                                <td><a href="/evaluation/termpaper">
+                                <td><a th:href="@{|termpaper/${termPaper.id}|}" href="/evaluation/termpaper">
                                     <span  th:text="${termPaper.termPaperDocument != null} ? ${termPaper.termPaperDocument.id}: '-' " class="label label-success">Aprovado</span>
                                 </a></td>
                                 <td> <span  th:text="${termPaper.termPaperDocument != null} ? ${termPaper.termPaperDocument.status}: '-' ">0.0</span></td>

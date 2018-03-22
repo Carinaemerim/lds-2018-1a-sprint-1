@@ -17,44 +17,48 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class TermPaperService {
 
-	private final TermPaperRepository termPaperRepository;
+    private final TermPaperRepository termPaperRepository;
 
-	private final DocumentService documentService;
+    private final DocumentService documentService;
 
-	public TermPaper getOne(TermPaper termPaper) {
-		if (termPaper == null || termPaper.getId() == null)
-			return null;
-		Optional<TermPaper> optionalTermPaper = termPaperRepository.findById(termPaper.getId());
-		return optionalTermPaper.isPresent() ? optionalTermPaper.get() : null;
-	}
+    public TermPaper getOneById(Long id) {
+        return termPaperRepository .getOne(id);
+    }
 
-	@Transactional
-	public TermPaper saveThemeDraft(TermPaper termPaper) {
-		TermPaper fetchedTermPaper = this.getOne(termPaper);
-		if (fetchedTermPaper == null || fetchedTermPaper.getId() == null)
-			fetchedTermPaper = new TermPaper();
-		fetchedTermPaper.setAdvisor(termPaper.getAdvisor());
-		fetchedTermPaper.setAuthor(termPaper.getAuthor());
-		fetchedTermPaper.setDescription(termPaper.getDescription());
-		fetchedTermPaper.setTheme(termPaper.getTheme());
-		fetchedTermPaper.setTitle(termPaper.getTitle());
-		return termPaperRepository.save(termPaper);
-	}
+    public TermPaper getOne(TermPaper termPaper) {
+        if (termPaper == null || termPaper.getId() == null)
+            return null;
+        Optional<TermPaper> optionalTermPaper = termPaperRepository.findById(termPaper.getId());
+        return optionalTermPaper.isPresent() ? optionalTermPaper.get() : null;
+    }
 
-	@Transactional
-	public TermPaper submitThemeForEvaluation(TermPaper termPaper) {
-		termPaper = this.saveThemeDraft(termPaper);
-		Document fetchedDocument = documentService.getFinalThemeDocumentByTermPaper(termPaper);
-		if (fetchedDocument == null)
-			fetchedDocument = new Document();
-		fetchedDocument.setDocumentType(DocumentType.THEME);
-		fetchedDocument.setIsFinal(true);
-		fetchedDocument.setTermPaper(termPaper);
-		fetchedDocument = documentService.save(fetchedDocument);
-		return getOne(termPaper);
-	}
+    @Transactional
+    public TermPaper saveThemeDraft(TermPaper termPaper) {
+        TermPaper fetchedTermPaper = this.getOne(termPaper);
+        if (fetchedTermPaper == null || fetchedTermPaper.getId() == null)
+            fetchedTermPaper = new TermPaper();
+        fetchedTermPaper.setAdvisor(termPaper.getAdvisor());
+        fetchedTermPaper.setAuthor(termPaper.getAuthor());
+        fetchedTermPaper.setDescription(termPaper.getDescription());
+        fetchedTermPaper.setTheme(termPaper.getTheme());
+        fetchedTermPaper.setTitle(termPaper.getTitle());
+        return termPaperRepository.save(termPaper);
+    }
 
-	public TermPaper getLastOneByUser(User user) {
-		return termPaperRepository.findFirstByAuthorId(user.getId(), Sort.by(Sort.Direction.DESC, "id"));
-	}
+    @Transactional
+    public TermPaper submitThemeForEvaluation(TermPaper termPaper) {
+        termPaper = this.saveThemeDraft(termPaper);
+        Document fetchedDocument = documentService.getFinalThemeDocumentByTermPaper(termPaper);
+        if (fetchedDocument == null)
+            fetchedDocument = new Document();
+        fetchedDocument.setDocumentType(DocumentType.THEME);
+        fetchedDocument.setIsFinal(true);
+        fetchedDocument.setTermPaper(termPaper);
+        fetchedDocument = documentService.save(fetchedDocument);
+        return getOne(termPaper);
+    }
+
+    public TermPaper getLastOneByUser(User user) {
+        return termPaperRepository.findFirstByAuthorId(user.getId(), Sort.by(Sort.Direction.DESC, "id"));
+    }
 }

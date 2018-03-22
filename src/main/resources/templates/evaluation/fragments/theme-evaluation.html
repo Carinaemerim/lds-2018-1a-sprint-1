@@ -1,6 +1,6 @@
 <!-- form start -->
 <div class="box box-primary">
-    <form class="form-horizontal">
+    <form class="form-horizontal" method="post">
         <div class="box-header bg-gray">
             <h3 class="box-title"><span th:text="#{evaluation}"/></h3>
         </div>
@@ -29,7 +29,9 @@
             <!-- textarea -->
             <div class="form-group">
                 <label><span th:text="#{evaluation.considerations}"/></label>
-                <textarea class="form-control" rows="3" th:placeholder="#{evaluation.considerations}"></textarea>
+                <textarea class="form-control" rows="3" th:placeholder="#{evaluation.considerations}">
+
+                </textarea>
             </div>
 
         </div>

@@ -1,7 +1,7 @@
 <!-- Detail -->
 <div class="box box-success">
     <div class="box-header bg-green">
-        <h3 class="box-title text-bold">Trabalho sobre algo que eu ainda não sei o que é: Internet para todos agora e sempre</h3>
+        <h3 class="box-title text-bold"  th:text="${termPaper.title}">Trabalho sobre algo que eu ainda não sei o que é: Internet para todos agora e sempre</h3>
     </div>
     <!-- /.box-header -->
 
@@ -15,7 +15,7 @@
                     <svg height="120" width="120">
                         <circle cx="60" cy="60" r="50" stroke="gray" stroke-width="2" fill="green"/>
                         <text x="50%" y="50%" alignment-baseline="middle" fill="white" text-anchor="middle"
-                              font-weight="bold" transform="rotate(-30 60,60)">[ APROVADO ]
+                              font-weight="bold" transform="rotate(-30 60,60)" th:text="${'[' +termPaper.themeDocument.status + ']'}"> APROVADO
                         </text>
                     </svg>
                 </div>
@@ -24,13 +24,9 @@
             <div class="col-md-9">
                 <div>
                     <p class="text-bold">Descrição</p>
-                    <p class="text-justify">
+                    <p class="text-justify" th:text="${termPaper.description}" >
                         The present work aims to highlight why the Internet is important to leverage the business in
-                        Brazil, whether for small and large businesses. Formal and informal entrepreneurs are
-                        benefiting, either in the form of e-commerce b2b, b2c, c2c, b2g, etc, or just to have a
-                        relationship with the customer, or also demonstration of products and services and so on.
-                        Starting from a literature review, this research was stitched with the ideas and thoughts of
-                        authors such as TURCHI Sandra, GITOMER Jeffrey.
+                        Brazil, whether for small and large businesses.
                     </p>
                 </div>
                 <!-- /.box -->

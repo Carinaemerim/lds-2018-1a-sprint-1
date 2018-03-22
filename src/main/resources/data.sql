@@ -46,11 +46,11 @@ insert into user_roles (user_id, roles_id) values
 insert into DOCUMENT (id, document_Type, title,is_Final) values (200, 2, 'TAC sobre o melhor framework do mundo', 'false');
 insert into DOCUMENT (id, document_Type, title,is_Final) values (400, 2, 'TAC sobre engenharia de software', 'false');
 
-insert into TERM_PAPER (id, theme, title, advisor_id, author_id) values
-(1000, 'Spring Boot', 'TCC sobre o melhor framework do mundo', 101, 100),
-(1001, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 101, 102),
-(1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103),
-(1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 101, 104);
+insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description) values
+(1000, 'Spring Boot', 'TCC sobre o melhor framework do mundo', 101, 100, 'Uma breve descrição do trabalho TCC sobre o melhor framework do mundo'),
+(1001, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 101, 102, 'Uma breve descrição do trabalho TCC sobre o impacto de scrum no mundo'),
+(1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103, 'Uma breve descrição do trabalho Scrum é a vida Jedi'),
+(1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico');
 
 
 

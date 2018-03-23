@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
+
 /**
  * Created by elvis on 03/14/18.
  */
@@ -13,12 +15,24 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
+	private final ScheduleService scheduleService;
+	
+	public DashboardController(ScheduleService scheduleService) {
+		super();
+		this.scheduleService = scheduleService;
+	}
+
+
+
 	@GetMapping("/index")
 	public ModelAndView greetings() {
-		return new ModelAndView("/dashboard/index");
+		ModelAndView mav = new ModelAndView("/dashboard/index");
+		
+		mav.addObject("tasks",scheduleService.listAll());
+		return mav;
+		
 		
 	}
 	
-		
 
 }

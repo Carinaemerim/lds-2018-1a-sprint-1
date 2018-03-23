@@ -231,30 +231,11 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>08/03/2018</td>
-										<td><a href="#">Definir Orientador</a></td>
-										<td><span class="label label-success"
-											th:text="#{dashboard.status.done}"></span></td>
-									</tr>
-
-									<tr>
-										<td>08/03/2018</td>
-										<td><a href="#">Entregar Proposta de TCC</a></td>
-										<td><span class="label label-success"
-											th:text="#{dashboard.status.done}"></span></td>
-									</tr>
-									<tr>
-										<td>18/06/2018</td>
-										<td><a href="#">Entrega da monografia</a></td>
-										<td><span class="label label-warning">Em Andamento</span></td>
-									</tr>
-									<tr>
-										<td>12/07/2018</td>
-										<td><a href="#">Envio da monografia corrigida</a></td>
-										<td><span class="label label-danger"
-											th:text="#{dashboard.status.unavailable}"></span></td>
-									</tr>
+								
+								<tr th:each="task: ${tasks}">
+									<td th:text="${task.deadline}"></td>
+									<td th:text="${task.title}"></td>
+								</tr>		
 
 								</tbody>
 							</table>

@@ -5,33 +5,19 @@
 		</h3>
 		<div class="box-body">
 			<!-- Conversations are loaded here -->
-			<div class="direct-chat-messages">
+			<div class="direct-chat-messages" th:each="message: ${messages}">
 				<!-- Message. Default to the left -->
-				<div class="direct-chat-msg">
+				<div th:class="${message.sender.id = user.id} ? direct-chat-msg right : direct-chat-msg">
 					<div class="direct-chat-info clearfix">
 						<span class="direct-chat-name pull-left"><span
-							th:text="#{document.chat.student}" /></span>
+							th:text="${message.sender.username}" /></span>
 					</div>
 					<!-- /.direct-chat-info -->
 					<img class="direct-chat-img" src="/photos/no_image_available.png"
 						alt="Message User Image">
 					<!-- /.direct-chat-img -->
-					<div class="direct-chat-text">Não esquece de enviar tuas
+					<div class="direct-chat-text" th:text="${message.content}">Não esquece de enviar tuas
 						atualizações...</div>
-					<!-- /.direct-chat-text -->
-				</div>
-				<!-- /.direct-chat-msg -->
-				<!-- Message to the right -->
-				<div class="direct-chat-msg right">
-					<div class="direct-chat-info clearfix">
-						<span class="direct-chat-name pull-right"><span
-							th:text="#{document.chat.prof}" /></span>
-					</div>
-					<!-- /.direct-chat-info -->
-					<img class="direct-chat-img" src="../photos/no_image_available.png"
-						alt="Message User Image">
-					<!-- /.direct-chat-img -->
-					<div class="direct-chat-text">Mandei um anexo!</div>
 					<!-- /.direct-chat-text -->
 				</div>
 				<!-- /.direct-chat-msg -->

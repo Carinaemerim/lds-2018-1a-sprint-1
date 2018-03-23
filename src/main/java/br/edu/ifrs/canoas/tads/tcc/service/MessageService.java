@@ -43,7 +43,7 @@ public class MessageService {
 		return messageRepository.findAllBySenderAndDateOrderByDateDesc(sender, date);
 	}
 
-	public List<Message> findAllBySenderOrByReceiverOrderByDate(User sender){
-		return messageRepository.findAllBySenderOrByReceiverOrderByDate(sender);
+	public List<Message> findAllBySenderOrderByDate(User sender){
+		return messageRepository.findAllBySenderOrderByDate(sender);
 	}
 }

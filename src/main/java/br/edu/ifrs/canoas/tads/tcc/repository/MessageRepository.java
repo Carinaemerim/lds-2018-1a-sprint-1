@@ -12,7 +12,7 @@ public interface MessageRepository extends JpaRepository<Message, Long>{
 
 	List<Message> findAllByReceiver(User receiver);
 	
-	List<Message> findAllBySenderOrByReceiverOrderByDate(User sender);
+	List<Message> findAllBySenderOrderByDate(User sender);
 
 	List<Message> findAllBySender(User sender);
 

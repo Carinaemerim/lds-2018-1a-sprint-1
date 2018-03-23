@@ -48,8 +48,10 @@ public class DocumentController {
 	@GetMapping("/")
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/document");
+		
+		mav.addObject("messages", messageService.findAllBySenderOrderByDate(activeUser.getUser()));
 		mav.addObject("advisors", userService.getAdvisors());
-
+		mav.addObject("user", activeUser.getUser());
 		mav.addObject("termPaper", termPaperService.getLastOneByUser(activeUser.getUser()));
 		mav.addObject("monographs", documentService.search(DocumentType.MONOGRAPH));
 

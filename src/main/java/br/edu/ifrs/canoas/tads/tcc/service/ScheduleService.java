@@ -1,24 +1,38 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
+import java.util.Calendar;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Task;
-import br.edu.ifrs.canoas.tads.tcc.repository.ScheduleRepository;
+import br.edu.ifrs.canoas.tads.tcc.repository.TaskRepository;
 
 @Service
 public class ScheduleService {
 	
-	public final ScheduleRepository scheduleRepository;
+	public final TaskRepository scheduleRepository;
 
-	public ScheduleService(ScheduleRepository scheduleRepository) {
+	public ScheduleService(TaskRepository scheduleRepository) {
 		super();
 		this.scheduleRepository = scheduleRepository;
 	}
 
+	public String getPeriod() {
+		int ano = Calendar.getInstance().get(Calendar.YEAR);
+		String period = "" + ano;
+		if(Calendar.getInstance().get(Calendar.MONTH) < 7){
+			period = period + "/01";
+		}
+		else {
+			period = period + "/02";
+		}
+		return period;
+	}
+	
 	public Iterable<Task> listAll() {
-		return scheduleRepository.findAll();
+		return scheduleRepository.findByPeriod(getPeriod());
 	}
 	
 	public boolean delete(Long id){

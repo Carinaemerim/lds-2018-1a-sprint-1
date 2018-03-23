@@ -28,8 +28,13 @@ public abstract class User {
 
 	@ManyToMany(fetch = FetchType.EAGER) private Set<Role> roles;
     @OneToOne @JsonIgnore private File picture;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Message> messages;
+
+
+    @OneToMany(mappedBy = "sender")
+    private List<Message> messagesSent;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Message> messagesReceived;
 
 
 }

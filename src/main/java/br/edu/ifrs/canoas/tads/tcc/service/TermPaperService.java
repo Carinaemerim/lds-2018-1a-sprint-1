@@ -24,6 +24,10 @@ public class TermPaperService {
     public TermPaper getOneById(Long id) {
         return termPaperRepository .getOne(id);
     }
+    
+    public TermPaper getOneByAuthor(User author) {
+        return termPaperRepository .getOneByAuthor(author);
+    }
 
     public TermPaper getOne(TermPaper termPaper) {
         if (termPaper == null || termPaper.getId() == null)

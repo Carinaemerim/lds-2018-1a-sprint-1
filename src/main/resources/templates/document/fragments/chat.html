@@ -5,9 +5,9 @@
 		</h3>
 		<div class="box-body">
 			<!-- Conversations are loaded here -->
-			<div class="direct-chat-messages" th:each="message: ${messages}">
+			<div class="direct-chat-messages">
 				<!-- Message. Default to the left -->
-				<div th:class="${message.sender.id = user.id} ? direct-chat-msg right : direct-chat-msg">
+				<div th:each="message: ${messages}" th:class="${message.sender.id == user.id} ? 'direct-chat-msg right' : 'direct-chat-msg'">
 					<div class="direct-chat-info clearfix">
 						<span class="direct-chat-name pull-left"><span
 							th:text="${message.sender.username}" /></span>
@@ -27,11 +27,12 @@
 		</div>
 		<!-- /.box-body -->
 		<div class="box-footer">
-			<form action="#" method="post">
+			<form action="#" method="post"th:action="@{/chat/send}" th:object="${message}">
 				<div class="input-group">
 					<div>
+						<input type="hidden" id="id" th:field="*{id}">
 						<input name="message" placeholder="Escrever Mensagem ..."
-							class="form-control" type="text"> <label
+							class="form-control" type="text" th:field="*{content}"> <label
 							for="exampleInputFile" class="fa fa-paperclip"
 							style="position: absolute; margin: 7px 0 0 -25px; z-index: 9999999; font-size: 20px"></label>
 						<input id="exampleInputFile" type="file" style="display: none">

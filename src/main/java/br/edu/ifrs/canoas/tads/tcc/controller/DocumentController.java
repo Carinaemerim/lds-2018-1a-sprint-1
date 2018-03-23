@@ -24,6 +24,7 @@ import br.edu.ifrs.canoas.tads.tcc.config.Messages;
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
+import br.edu.ifrs.canoas.tads.tcc.domain.Message;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.repository.DocumentRepository;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
@@ -31,6 +32,8 @@ import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
 import br.edu.ifrs.canoas.tads.tcc.service.UserService;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -49,7 +52,8 @@ public class DocumentController {
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/document");
 		
-		mav.addObject("messages", messageService.findAllBySenderOrderByDate(activeUser.getUser()));
+		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
+		mav.addObject("message", new Message());
 		mav.addObject("advisors", userService.getAdvisors());
 		mav.addObject("user", activeUser.getUser());
 		mav.addObject("termPaper", termPaperService.getLastOneByUser(activeUser.getUser()));

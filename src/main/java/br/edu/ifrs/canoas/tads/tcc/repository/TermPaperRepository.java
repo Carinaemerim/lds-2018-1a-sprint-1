@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.tads.tcc.repository;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
+import br.edu.ifrs.canoas.tads.tcc.domain.User;
 import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,6 +35,6 @@ public interface TermPaperRepository extends JpaRepository<TermPaper, Long> {
 	//@Query("FROM TermPaper t join Document d on (t.id = d.termPaper.id) join EvaluationBoard eb on eb.document.id = d.id join eb.professors p where p.id in (101)")
 	List<TermPaper> getTermPaperForEvaluation();
 	
-	
+	TermPaper getOneByAuthor(User author);
 	
 }

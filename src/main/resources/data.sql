@@ -64,6 +64,8 @@ insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id)	value
 (105,1,1,1001, 0),
 (106,0,1,1003, 0);
 
+insert into MESSAGE (id, viewed, date, viewed, received) values (100, true, sysdate, 101, 100);
+
 
 insert into EVALUATION_BOARD (id, document_id) values
 (101, 101),

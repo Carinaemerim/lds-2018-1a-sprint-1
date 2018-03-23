@@ -27,6 +27,7 @@ import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.repository.DocumentRepository;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
+import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
 import br.edu.ifrs.canoas.tads.tcc.service.UserService;
 import lombok.AllArgsConstructor;
@@ -42,6 +43,7 @@ public class DocumentController {
 	private final TermPaperService termPaperService;
 	private final UserService userService;
 	private final DocumentService documentService;
+	private final MessageService messageService;
 
 	@GetMapping("/")
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser) {

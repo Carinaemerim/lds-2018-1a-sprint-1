@@ -5,9 +5,9 @@
 		</h3>
 		<div class="box-body">
 			<!-- Conversations are loaded here -->
-			<div class="direct-chat-messages" th:each="message: ${messages}">
+			<div class="direct-chat-messages">
 				<!-- Message. Default to the left -->
-				<div th:class="${message.sender.id = user.id} ? direct-chat-msg right : direct-chat-msg">
+				<div th:each="message: ${messages}" th:class="${message.sender.id == user.id} ? 'direct-chat-msg right' : 'direct-chat-msg'">
 					<div class="direct-chat-info clearfix">
 						<span class="direct-chat-name pull-left"><span
 							th:text="${message.sender.username}" /></span>

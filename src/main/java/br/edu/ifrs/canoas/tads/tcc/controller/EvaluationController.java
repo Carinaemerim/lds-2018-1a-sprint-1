@@ -2,6 +2,8 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
+import br.edu.ifrs.canoas.tads.tcc.domain.Evaluation;
+import br.edu.ifrs.canoas.tads.tcc.domain.Grade;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
@@ -54,10 +56,22 @@ public class EvaluationController {
         return mav;
     }
 
-    @GetMapping("/termpaper/{id}")
-    public ModelAndView termpaper(Model model, @PathVariable Long id) {
+    @GetMapping("/termpaper/{id}/{documentId}")
+    public ModelAndView termpaper(Model model, @PathVariable Long id, @PathVariable Long documentId) {
         ModelAndView mav = new ModelAndView("/evaluation/termpaper");
         mav.addObject("termPaper", termPaperService.getOneById(id));
+        mav.addObject("document", documentService.getOneById(documentId));
+
+        /*Evaluation evaluation = evaluationService.getOneEvaluationById(501L);
+        if (evaluation == null) {
+            evaluation = new Grade();
+        }
+        mav.addObject("evaluation", evaluation);*/
+        Evaluation grade = evaluationService.getOneGradeById(501L);
+        if (grade == null) {
+            grade = new Grade();
+        }
+        mav.addObject("grade", grade);
         //model.addAttribute("action", "record");
         return mav;
     }

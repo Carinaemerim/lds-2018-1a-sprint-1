@@ -40,12 +40,12 @@ public class Document {
      */
     public EvaluationStatus getStatus() {
         if (this.evaluations == null)
-            return null;
+            return status.NA;
         else {
             Double sumGrades;
             switch (this.documentType) {
                 case THEME:
-                        return status.APPROVED;
+                        return status.DISAPPROVED;
                 case PROPOSAL:
                     break;
                 case MONOGRAPH:

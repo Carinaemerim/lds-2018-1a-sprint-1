@@ -1,6 +1,7 @@
 <!-- form start -->
 
-<form class="form-horizontal">
+<form class="form-horizontal"  th:action="@{/evaluation/termpaper/submit}"
+th:object="${evaluation}">
     <div class="row">
         <div class="col-md-6">
             <div class="box">
@@ -12,6 +13,7 @@
                         <div class="form-group">
                             <label for="inputw1" class="col-md-9">
                                 <span th:text="#{evaluation.written.item-1}"/>
+                                <span th:text="${grade.literatureReview}"/>
                             </label>
                             <div class="col-md-3">
                                 <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputw1"

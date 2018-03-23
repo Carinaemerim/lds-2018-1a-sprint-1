@@ -25,6 +25,10 @@ public class DocumentService {
 
     private final DocumentRepository documentRepository;
 
+	public Document getOneById(Long id) {
+		return documentRepository.getOne(id);
+	}
+
     public Document getOne(Document document) {
     	if (document == null || document.getId() == null)
     		return null;

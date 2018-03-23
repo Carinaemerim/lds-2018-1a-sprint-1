@@ -49,16 +49,25 @@
                             <tr th:each="termPaper : ${termPapers}">
                                 <td th:text="${termPaper.author.name}">Aluno</td>
                                 <td th:text="${termPaper.title}">Título do Trabalho</td>
-                                <td>
-                                    <a th:href="@{|theme/${termPaper.id}|}" href="/evaluation/theme">
+                                <td  th:switch="${termPaper.themeDocument.status?.name()}">
+                                    <a th:case="'APPROVED'" th:href="@{|theme/${termPaper.id}|}" href="/evaluation/theme">
                                         <span  th:text="${termPaper.themeDocument != null}  ? ${termPaper.themeDocument.status}:'-'" class="label label-success">Aprovado</span>
+                                    </a>
+                                    <a th:case="'DISAPPROVED'" th:href="@{|theme/${termPaper.id}|}" href="/evaluation/theme">
+                                        <span  th:text="${termPaper.themeDocument != null}  ? ${termPaper.themeDocument.status}:'-'" class="label label-danger">Aprovado</span>
+                                    </a>
+                                    <a th:case="'REDO'" th:href="@{|theme/${termPaper.id}|}" href="/evaluation/theme">
+                                        <span  th:text="${termPaper.themeDocument != null}  ? ${termPaper.themeDocument.status}:'-'" class="label label-warning">Aprovado</span>
+                                    </a>
+                                    <a th:case="*" th:href="@{|theme/${termPaper.id}|}" href="/evaluation/theme">
+                                        <span  th:text="${termPaper.themeDocument != null}  ? ${termPaper.themeDocument.status}:'-'" class="label label-gray">Aprovado</span>
                                     </a>
                                 </td>
                                 <td><a th:href="@{|proposal/${termPaper.id}|}" href="/evaluation/proposal">
                                     <span  th:text="${termPaper.proposalDocument != null}  ? ${termPaper.proposalDocument.id}:'-'" class="label label-success">Aprovado</span>
                                 </a>
                                 </td>
-                                <td><a th:href="@{|termpaper/${termPaper.id}|}" href="/evaluation/termpaper">
+                                <td><a th:if="${termPaper.termPaperDocument != null}"  th:href="@{|termpaper/${termPaper.id}/${termPaper.termPaperDocument.id}|}" href="#">
                                     <span  th:text="${termPaper.termPaperDocument != null} ? ${termPaper.termPaperDocument.id}: '-' " class="label label-success">Aprovado</span>
                                 </a></td>
                                 <td> <span  th:text="${termPaper.termPaperDocument != null} ? ${termPaper.termPaperDocument.status}: '-' ">0.0</span></td>

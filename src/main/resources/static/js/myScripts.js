@@ -11,3 +11,18 @@ function asyncSearch(url){
         }
     });
 }
+
+function sendMessage(url){
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#chat-form").serialize(),
+        success : function(data) {
+        	$('#chat-input').text(null);
+            $('#chat-results').replaceWith(data);
+        },
+        error: function(result) {
+            alert('error');
+        }
+    });
+}

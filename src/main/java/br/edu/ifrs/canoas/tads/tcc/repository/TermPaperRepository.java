@@ -2,7 +2,6 @@ package br.edu.ifrs.canoas.tads.tcc.repository;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
-import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

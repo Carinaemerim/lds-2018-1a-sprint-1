@@ -15,25 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.ifrs.canoas.tads.tcc.config.Messages;
-import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
-import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.Message;
-import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
-import br.edu.ifrs.canoas.tads.tcc.repository.DocumentRepository;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
-import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
-import br.edu.ifrs.canoas.tads.tcc.service.UserService;
-import lombok.AllArgsConstructor;
-
-import java.util.List;
 
 import javax.validation.Valid;
 

@@ -64,6 +64,8 @@ insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id)	value
 (105,1,1,1001, 0),
 (106,0,1,1003, 0);
 
+insert into MESSAGE (id, viewed, date, viewed, received) values (100, true, sysdate, 101, 100);
+
 
 insert into EVALUATION_BOARD (id, document_id) values
 (101, 101),
@@ -87,5 +89,12 @@ insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) val
 INSERT INTO  EVALUATION (ID ,DTYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS) VALUES (500, 0, 101, 'Consideracoes do tema estao aqui. bom tema!', 1);
 INSERT INTO  EVALUATION (ID ,DTYPE, DOCUMENT_ID , CONSIDERATIONS ,ADEQUACY_OF_PRESENTATION ,CLOSING_EXPECTED_TIME ,CONCLUSION ,DEVELOPMENT_IN_LOGICAL_SEQUENCE ,EXPERIENCED_SOLUTION ,LITERATURE_REVIEW ,METHODOLOGY ,OBJECTIVE ,PRESENTATION ,SUBJECT_DOMAIN ,THEORETICAL_APPROACH ,VOCABULARY )
   VALUES (501, 2, 104,'condisedariosn do tcc ok foi bom',7,8,7,8,7,8,9,6,5,4,3,7);
+  
+--Schedule
+INSERT INTO  TASK (ID ,TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('22/03/18','dd/MM/yy'), 1);
+INSERT INTO  TASK (ID ,TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (200, 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('22/03/18','dd/MM/yy'), 2);
+INSERT INTO  TASK (ID ,TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (300, 'Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/18','dd/MM/yy'), 3);
+
+
 
 

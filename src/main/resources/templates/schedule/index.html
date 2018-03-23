@@ -42,53 +42,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>04/03/2018</td>
-									<td>Entrega da proposta</td>
+								<tr th:each="task: ${tasks}">
+									<td th:text="${task.deadline}">04/03/2018</td>
+									<td th:text="${task.title}">Entrega da proposta</td>
 									<td>
 									<a href="/schedule/edit"><span class="glyphicon glyphicon-edit"></span>Editar</a> 
 									<br>
 									<a href="#"><span class="glyphicon glyphicon-remove"></span>Remover </a>
 									</td>
-								</tr>
-								<tr>
-									<td>10/03/2018</td>
-									<td>Entrega do Tema</td>
-									<td><a href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
-									<a href="#"><span class="glyphicon glyphicon-remove">
-										</span>Remover </a></td>
-								</tr>
-								<tr>
-									<td>15/03/2018</td>
-									<td>Entrega da Introdução</td>
-									<td><a href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
-									<a href="#"><span class="glyphicon glyphicon-remove">
-										</span>Remover </a></td>
-								</tr>
-								<tr>
-									<td>21/03/2018</td>
-									<td>Entrega das Fontes bibliograficas</td>
-									<td><a href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
-									<a href="#"><span class="glyphicon glyphicon-remove">
-										</span>Remover </a></td>
-								</tr>
-								<tr>
-									<td>27/03/2018</td>
-									<td>Entrega do Estado da arte</td>
-									<td><a href="/schedule/edit"><span
-											class="glyphicon glyphicon-edit"></span>Editar</a> <br>
-									<a href="#"><span class="glyphicon glyphicon-remove">
-										</span>Remover </a></td>
-								</tr>
+								</tr>								
 							</tbody>
 							<tfoot></tfoot>
 						</table>
 						<br>
 							<button type="button" class="btn btn-primary">Novo Periodo</button>
-							<a href="/schedule/edit"><button id="add-new-event" type="button" class="btn btn-primary pull-right">Add</button></a>
+							<a href="#" th:href="@{/add}"><button id="add-new-event" type="button" class="btn btn-primary pull-right">Add</button></a>
 							
 					</div>
 					<!-- /.box-body -->

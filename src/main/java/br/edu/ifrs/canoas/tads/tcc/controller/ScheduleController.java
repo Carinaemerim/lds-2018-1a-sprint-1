@@ -2,9 +2,13 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,14 +34,27 @@ public class ScheduleController {
 	}
 	
 	@GetMapping("/add")
-	public ModelAndView newTask(Model model) {
+	public String newTask(Model model) {
 		model.addAttribute("task", new Task());
-		return new ModelAndView("/schedule/edit");
+		return "/schedule/edit";
 	}
 	
-	@GetMapping("/edit")
-	public ModelAndView edit() {
-		return new ModelAndView("/schedule/edit");
+	@PostMapping("/edit")
+	public String save(@Valid Task task) {
+		Task newtask = scheduleService.save(task);
+		return "redirect:/schedule/index";
 	}
+	
+	//@GetMapping("/edit")
+	//public ModelAndView edit() {
+	//	return new ModelAndView("/schedule/edit");
+	//}
+	
+	@GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Long id) {
+        ModelAndView mav = new ModelAndView("redirect:/schedule/index");
+        scheduleService.delete(id);
+        return mav;
+    }
 
 }

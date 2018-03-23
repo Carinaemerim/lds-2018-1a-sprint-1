@@ -52,8 +52,8 @@ public class DocumentController {
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/document");
 		
-		List<Message> messages = messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser());
-		mav.addObject("messages", messages);
+		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
+		mav.addObject("message", new Message());
 		mav.addObject("advisors", userService.getAdvisors());
 		mav.addObject("user", activeUser.getUser());
 		mav.addObject("termPaper", termPaperService.getLastOneByUser(activeUser.getUser()));

@@ -46,4 +46,8 @@ public class MessageService {
 	public List<Message> findAllBySenderOrReceiverOrderByDate(User sender){
 		return messageRepository.findAllBySenderOrReceiverOrderByDate(sender, sender);
 	}
+	
+	public Message save(Message message) {
+		return messageRepository.save(message);
+	}
 }

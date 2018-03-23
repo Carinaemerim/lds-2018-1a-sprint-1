@@ -25,8 +25,14 @@ public class ScheduleController {
 
 	@GetMapping("/index")
 	public ModelAndView home(Model model) {
-		model.addAttribute("Schedule", new ArrayList<Task>());
+		model.addAttribute("tasks", scheduleService.listAll());
 		return new ModelAndView("/schedule/index");
+	}
+	
+	@GetMapping("/add")
+	public ModelAndView newTask(Model model) {
+		model.addAttribute("task", new Task());
+		return new ModelAndView("/schedule/edit");
 	}
 	
 	@GetMapping("/edit")

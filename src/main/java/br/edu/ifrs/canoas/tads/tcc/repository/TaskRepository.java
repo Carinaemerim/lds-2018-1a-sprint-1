@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import br.edu.ifrs.canoas.tads.tcc.domain.Task;
 
 @Repository
-public interface ScheduleRepository extends CrudRepository<Task, Long>{
+public interface TaskRepository extends CrudRepository<Task, Long>{
+
+	Iterable<Task> findByPeriod(String period);
 
 }

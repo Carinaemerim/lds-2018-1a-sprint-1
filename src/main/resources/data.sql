@@ -89,9 +89,9 @@ INSERT INTO  EVALUATION (ID ,DTYPE, DOCUMENT_ID , CONSIDERATIONS ,ADEQUACY_OF_PR
   VALUES (501, 2, 104,'condisedariosn do tcc ok foi bom',7,8,7,8,7,8,9,6,5,4,3,7);
   
 --Schedule
-INSERT INTO  TASK (ID ,TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('22/03/18','dd/MM/yy'), 1);
-INSERT INTO  TASK (ID ,TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (200, 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('22/03/18','dd/MM/yy'), 2);
-INSERT INTO  TASK (ID ,TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (300, 'Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/18','dd/MM/yy'), 3);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('22/03/18','dd/MM/yy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (200, '2018/01', 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('22/03/18','dd/MM/yy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (300, '2018/02','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/18','dd/MM/yy'), 3);
 
 
 

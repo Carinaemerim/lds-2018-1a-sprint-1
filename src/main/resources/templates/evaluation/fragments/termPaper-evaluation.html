@@ -1,7 +1,7 @@
 <!-- form start -->
 
 <form class="form-horizontal"  th:action="@{/evaluation/termpaper/submit}"
-th:object="${evaluation}">
+th:object="${grade}">
     <div class="row">
         <div class="col-md-6">
             <div class="box">
@@ -13,11 +13,11 @@ th:object="${evaluation}">
                         <div class="form-group">
                             <label for="inputw1" class="col-md-9">
                                 <span th:text="#{evaluation.written.item-1}"/>
-                                <span th:text="${grade.literatureReview}"/>
                             </label>
                             <div class="col-md-3">
                                 <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputw1"
-                                       th:placeholder="#{evaluation.placeholder.grade.zero}">
+                                       th:placeholder="#{evaluation.placeholder.grade.zero}"
+                                       th:field="*{literatureReview}">
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,8 @@ th:object="${evaluation}">
                             </label>
                             <div class="col-md-3">
                                 <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputw2"
-                                       th:placeholder="#{evaluation.placeholder.grade.zero}">
+                                       th:placeholder="#{evaluation.placeholder.grade.zero}"
+                                       th:field="*{objective}">
                             </div>
                         </div>
                     </div>
@@ -39,7 +40,8 @@ th:object="${evaluation}">
                             </label>
                             <div class="col-md-3">
                                 <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputw3"
-                                       th:placeholder="#{evaluation.placeholder.grade.zero}">
+                                       th:placeholder="#{evaluation.placeholder.grade.zero}"
+                                       th:field="*{methodology}">
                             </div>
                         </div>
                     </div>
@@ -50,7 +52,8 @@ th:object="${evaluation}">
                             </label>
                             <div class="col-md-3">
                                 <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputw4"
-                                       th:placeholder="#{evaluation.placeholder.grade.zero}">
+                                       th:placeholder="#{evaluation.placeholder.grade.zero}"
+                                       th:field="*{theoreticalApproach}">
                             </div>
                         </div>
                     </div>
@@ -61,7 +64,8 @@ th:object="${evaluation}">
                             </label>
                             <div class="col-md-3">
                                 <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputw5"
-                                       th:placeholder="#{evaluation.placeholder.grade.zero}">
+                                       th:placeholder="#{evaluation.placeholder.grade.zero}"
+                                       th:field="*{experiencedSolution}">
                             </div>
                         </div>
                     </div>
@@ -72,7 +76,8 @@ th:object="${evaluation}">
                             </label>
                             <div class="col-md-3">
                                 <input type="number" step="0.1" min="0" max="10" class="form-control" id="inputw6"
-                                       th:placeholder="#{evaluation.placeholder.grade.zero}">
+                                       th:placeholder="#{evaluation.placeholder.grade.zero}"
+                                       th:field="*{conclusion}">
                             </div>
                         </div>
                     </div>
@@ -179,7 +184,8 @@ th:object="${evaluation}">
                     <textarea class="form-control" rows="3" th:placeholder="#{evaluation.considerations}"></textarea>
                 </div>
                 <div class="form-group">
-                    <h2 class="text-right text-bold">Total Final: <span class="text-light-blue">8.5</span></h2>
+                    <h2 class="text-right text-bold">Total Final:
+                        <span th:text="*{#numbers.formatDecimal(finalGrade, 1, 1)}">8.5</span></h2>
                 </div>
             </div>
         </div>

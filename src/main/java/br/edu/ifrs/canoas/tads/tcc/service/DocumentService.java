@@ -26,6 +26,7 @@ public class DocumentService {
     private final DocumentRepository documentRepository;
 
 	public Document getOneById(Long id) {
+
 		return documentRepository.getOne(id);
 	}
 

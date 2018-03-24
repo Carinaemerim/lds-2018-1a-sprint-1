@@ -14,6 +14,6 @@ import java.util.Optional;
 @Repository
 public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
 
-
+    Evaluation findLastByDocumentIdAndAppraiserId(Long documentId, Long professorId);
 
 }

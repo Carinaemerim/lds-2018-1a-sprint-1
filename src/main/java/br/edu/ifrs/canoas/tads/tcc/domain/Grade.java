@@ -17,6 +17,7 @@ public class Grade extends Evaluation {
 	private Double theoreticalApproach;
 	private Double experiencedSolution;
 	private Double conclusion;
+
 	private Double presentation;
 	private Double closingExpectedTime;
 	private Double adequacyOfPresentation;

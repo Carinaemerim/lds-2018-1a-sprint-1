@@ -16,4 +16,6 @@ public abstract class Evaluation {
 	private String considerations;
 	@ManyToOne
 	private Document document;
+	@OneToOne
+	private Professor appraiser;
 }

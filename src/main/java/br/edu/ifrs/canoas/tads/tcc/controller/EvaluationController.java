@@ -58,19 +58,14 @@ public class EvaluationController {
     }
 
     @GetMapping("/termpaper/{id}")
-    public ModelAndView termpaper(Model model, @PathVariable Long id, @PathVariable Long documentId) {
+    public ModelAndView termpaper(Model model, @PathVariable Long id, @AuthenticationPrincipal UserImpl activeUser) {
         ModelAndView mav = new ModelAndView("/evaluation/termpaper");
         TermPaper termPaper = termPaperService.getOneById(id);
         mav.addObject("termPaper", termPaper);
         mav.addObject("document", documentService.getOneById(termPaper.getTermPaperDocument().getId()));
 
-        /*Evaluation evaluation = evaluationService.getOneEvaluationById(501L);
-        if (evaluation == null) {
-            evaluation = new Grade();
-        }
-        mav.addObject("evaluation", evaluation);*/
         Document document = termPaper.getTermPaperDocument();
-        Grade grade = evaluationService.getOneGradeById(document.getId());
+        Evaluation grade = evaluationService.getOneEvaluation(document, activeUser.getUser());
         if (grade == null) {
             grade = new Grade();
         }

@@ -41,6 +41,14 @@ public class EvaluationService {
         return gradeRepository.getOne(id);
     }
 
+    public Grade getOneGrade(Document document, User professor) {
+        return gradeRepository.findLastByDocumentIdAndAppraiserId(document.getId(), professor.getId());
+    }
+
+    public Evaluation getOneEvaluation(Document document, User professor) {
+        return evaluationRepository.findLastByDocumentIdAndAppraiserId(document.getId(), 101L   ); // professor.getId()
+    }
+
     public Evaluation getOne(Evaluation evaluation) {
         if (evaluation == null || evaluation.getId() == null)
             return null;

@@ -55,40 +55,7 @@ public class EvaluationService {
         return optionalGrade.isPresent() ? optionalGrade.get() : null;
     }
 
-    public Document getOne(Document document) {
-        if (document == null || document.getId() == null)
-            return null;
-        Optional<Document> optionalDocument = documentRepository.findById(document.getId());
-        return optionalDocument.isPresent() ? optionalDocument.get() : null;
-    }
-    public String testMap() {
 
-        // Testando o DTO
-        List<Document> documents = documentRepository.findByIsFinalTrueAndDocumentType(DocumentType.THEME);
-        if (documents != null) {
-
-            ModelMapper mapper = new ModelMapper();
-            mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-
-
-            Converter<TermPaper, String> conversor = context -> {
-                final TermPaper tp = context.getSource();
-                return tp.toString();
-            };
-
-            mapper.addConverter(conversor);
-            for (Document doc : documents) {
-                DocumentDTO dtoDocument = mapper.map(doc, DocumentDTO.class);
-                System.out.println(dtoDocument.toString());
-            }
-
-
-        } else {
-            System.out.println("\nVazio");
-        }
-
-        return null;
-    }
 
     public Iterable<TermPaper> getTermPaperEvaluation(User user) {
 
@@ -106,5 +73,6 @@ public class EvaluationService {
         }
         return listWithDuplicates;
     }
+
 
 }

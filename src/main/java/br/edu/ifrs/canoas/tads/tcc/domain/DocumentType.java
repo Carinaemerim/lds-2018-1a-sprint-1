@@ -8,6 +8,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum DocumentType {
 
-	THEME, PROPOSAL, MONOGRAPH, TERMPAPER;
+	THEME, PROPOSAL, TERMPAPER;
 
 }

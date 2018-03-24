@@ -1,16 +1,13 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import lombok.Data;
 
 @Entity
 @Inheritance
 @Data
+@DiscriminatorColumn(name="evaluation_type")
 public abstract class Evaluation {
 
 	@Id

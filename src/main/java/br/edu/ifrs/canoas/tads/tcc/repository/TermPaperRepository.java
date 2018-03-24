@@ -15,7 +15,7 @@ public interface TermPaperRepository extends JpaRepository<TermPaper, Long> {
 	TermPaper findFirstByAuthorId(Long id, Sort sort);
 	
 	//@Query("FROM TermPaper t join Document d on (t.id = d.termPaper.id) join EvaluationBoard eb on eb.document.id = d.id join EvaluationBoardProfessors ebp on (ebp.evaluationBoard.id = eb.id)  and ebp.professors.id in (101)")
-	@Query(value="SELECT * FROM\n" +
+	@Query(value="SELECT term_paper.* FROM\n" +
 			"\n" + 
 			"     term_paper join document\n" + 
 			"\n" + 

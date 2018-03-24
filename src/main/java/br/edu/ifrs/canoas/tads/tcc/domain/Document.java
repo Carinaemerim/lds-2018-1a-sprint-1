@@ -24,8 +24,7 @@ public class Document {
     /**
      * Logic to get final status from all evaluations
      */
-    @Transient
-    private EvaluationStatus status;
+
 
     private String title;
 
@@ -38,37 +37,67 @@ public class Document {
      *
      * @return EvaluationStatus
      */
+    @Transient
     public EvaluationStatus getStatus() {
-        if (this.evaluations == null)
-            return status.NA;
-        else {
-            Double sumGrades;
-            switch (this.documentType) {
-                case THEME:
-                        return status.DISAPPROVED;
-                case PROPOSAL:
-                    break;
-                case MONOGRAPH:
-
-                    break;
-                case TERMPAPER:
-                    sumGrades = 0.0;
-                    for (Evaluation eval : this.evaluations) {
-                        if (eval instanceof Grade) {
-                            sumGrades += ((Grade) eval).getFinalGrade();
+        if (evaluations == null || evaluations.size() == 0) {
+            return EvaluationStatus.EVALUATE;
+        } else {
+            if (this.documentType.equals(DocumentType.TERMPAPER)) {
+                Double sumGrades = 0.0;
+                for (Evaluation eval : evaluations) {
+                    if (eval instanceof Grade) {
+                        sumGrades += ((Grade) eval).getFinalGrade();
+                    }
+                }
+                if ((sumGrades / evaluations.size()) >= 6) {
+                    return EvaluationStatus.APPROVED;
+                } else {
+                    return EvaluationStatus.DISAPPROVED;
+                }
+            } else {
+                EvaluationStatus status = EvaluationStatus.APPROVED;
+                for (Evaluation eval : evaluations) {
+                    if (eval instanceof Advice) {
+                        if (((Advice) eval).getStatus().equals(EvaluationStatus.DISAPPROVED)) {
+                            return EvaluationStatus.DISAPPROVED;
+                        } else if (((Advice) eval).getStatus().equals(EvaluationStatus.REDO)) {
+                            status = EvaluationStatus.REDO;
                         }
                     }
-                    if ((sumGrades / this.evaluations.size()) >= 6) {
-                        return EvaluationStatus.APPROVED;
-                    } else {
-                        return EvaluationStatus.DISAPPROVED;
-                    }
-
+                }
+                return status;
             }
         }
-
-        return null;
     }
 
+    @Transient
+    public String getColorStatus() {
+        EvaluationStatus status = getStatus();
+        if(status == null)
+            return "btn-primary";
+        switch (status) {
+            case APPROVED:
+                return "btn-success";
+            case DISAPPROVED:
+                return "btn-danger";
+            case REDO:
+                return "btn-warning";
+            default:
+                return "btn-primary";
+        }
+    }
 
+    @Transient
+    public Double getFinalGrade() {
+        if (this.documentType.equals(DocumentType.TERMPAPER)) {
+            Double sumGrades = 0.0;
+            for (Evaluation eval : evaluations) {
+                if (eval instanceof Grade) {
+                    sumGrades += ((Grade) eval).getFinalGrade();
+                }
+            }
+           return sumGrades / evaluations.size();
+        }
+        return null;
+    }
 }

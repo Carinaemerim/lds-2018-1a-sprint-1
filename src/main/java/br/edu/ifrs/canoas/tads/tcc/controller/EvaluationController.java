@@ -1,10 +1,7 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
-import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
-import br.edu.ifrs.canoas.tads.tcc.domain.Evaluation;
-import br.edu.ifrs.canoas.tads.tcc.domain.Grade;
-import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
+import br.edu.ifrs.canoas.tads.tcc.domain.*;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
@@ -19,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by cassiano on 3/11/18.
@@ -35,7 +34,9 @@ public class EvaluationController {
     @GetMapping("/list")
     public ModelAndView greetings(@AuthenticationPrincipal UserImpl activeUser) {
         ModelAndView mav = new ModelAndView("/evaluation/list");
-        mav.addObject("termPapers", evaluationService.getTermPaperEvaluation(activeUser.getUser()));
+        Iterable<TermPaper> termPapers = evaluationService.getTermPaperEvaluation(activeUser.getUser());
+        mav.addObject("termPapers", termPapers);
+        //model.addAttribute("statusColorTheme", get)
         return mav;
     }
 
@@ -56,18 +57,20 @@ public class EvaluationController {
         return mav;
     }
 
-    @GetMapping("/termpaper/{id}/{documentId}")
+    @GetMapping("/termpaper/{id}")
     public ModelAndView termpaper(Model model, @PathVariable Long id, @PathVariable Long documentId) {
         ModelAndView mav = new ModelAndView("/evaluation/termpaper");
-        mav.addObject("termPaper", termPaperService.getOneById(id));
-        mav.addObject("document", documentService.getOneById(documentId));
+        TermPaper termPaper = termPaperService.getOneById(id);
+        mav.addObject("termPaper", termPaper);
+        mav.addObject("document", documentService.getOneById(termPaper.getTermPaperDocument().getId()));
 
         /*Evaluation evaluation = evaluationService.getOneEvaluationById(501L);
         if (evaluation == null) {
             evaluation = new Grade();
         }
         mav.addObject("evaluation", evaluation);*/
-        Evaluation grade = evaluationService.getOneGradeById(501L);
+        Document document = termPaper.getTermPaperDocument();
+        Grade grade = evaluationService.getOneGradeById(document.getId());
         if (grade == null) {
             grade = new Grade();
         }

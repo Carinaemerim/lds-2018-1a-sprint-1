@@ -45,7 +45,7 @@ public class DocumentController {
 		mav.addObject("advisors", userService.getAdvisors());
 		mav.addObject("user", activeUser.getUser());
 		mav.addObject("termPaper", termPaperService.getLastOneByUser(activeUser.getUser()));
-		mav.addObject("monographs", documentService.search(DocumentType.MONOGRAPH));
+		mav.addObject("monographs", documentService.search(DocumentType.TERMPAPER));
 
 		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
 		if (termPaper == null) {

@@ -34,7 +34,7 @@ public class TermPaper {
                 "resultados e conclusão. Veja a seguir do que se trata cada uma dessas partes.";
     }
 
-    @OneToMany(mappedBy = "termPaper")
+    @OneToMany(mappedBy = "termPaper", fetch = FetchType.EAGER)
     private List<Document> documents;
 
 
@@ -70,7 +70,7 @@ public class TermPaper {
     public Document getTermPaperDocument() {
         if (documents != null)
             for (Document doc : documents) {
-                if (doc.getDocumentType().equals(DocumentType.MONOGRAPH) && doc.getIsFinal()) {
+                if (doc.getDocumentType().equals(DocumentType.TERMPAPER) && doc.getIsFinal()) {
                     return doc;
                 }
             }

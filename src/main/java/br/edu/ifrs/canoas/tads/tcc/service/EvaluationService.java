@@ -66,13 +66,8 @@ public class EvaluationService {
 
 
     public Iterable<TermPaper> getTermPaperEvaluation(User user) {
-
-       /* return user != null ?
-                termPaperRepository.getTermPaperForEvaluation() :
-                new ArrayList();*/
         final List<TermPaper> listWithDuplicates =  user != null ?
-                termPaperRepository.getTermPaperForEvaluation() : new ArrayList();
-
+                termPaperRepository.getTermPaperForEvaluation(user.getId()) : new ArrayList();
 
         if(listWithDuplicates != null) {
             List<TermPaper> listWithoutDuplicates =  listWithDuplicates.stream().collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingLong(TermPaper::getId))),

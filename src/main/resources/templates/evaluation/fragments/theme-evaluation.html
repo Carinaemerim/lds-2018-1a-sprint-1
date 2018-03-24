@@ -1,35 +1,27 @@
 <!-- form start -->
 <div class="box box-primary">
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post"  action="#"
+          id="form-theme-evaluation"  th:action="@{/document/theme/submit}"
+          th:object="${advice}">
         <div class="box-header bg-gray">
             <h3 class="box-title"><span th:text="#{evaluation}"/></h3>
         </div>
         <div class="box-body margin">
             <!-- radio -->
+            <input type="hidden" id="id" th:field="*{id}">
             <div class="form-group">
-                <div class="radio">
+                <div th:each="st : ${allEvaluationStatus}" class="radio">
                     <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                        <span th:text="#{evaluation.approved}"/>
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                        <span th:text="#{evaluation.disapproved}"/>
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-                        <span th:text="#{evaluation.remake}"/>
+                        <input type="radio" th:field="*{status}" th:value="${st}" />
+                        <label th:for="${#ids.prev('status')}" th:text="#{${'evaluation.status.'+st}}">Status</label>
                     </label>
                 </div>
             </div>
             <!-- textarea -->
             <div class="form-group">
                 <label><span th:text="#{evaluation.considerations}"/></label>
-                <textarea class="form-control" rows="3" th:placeholder="#{evaluation.considerations}">
+                <textarea class="form-control" rows="3"
+                          th:placeholder="#{evaluation.considerations}" th:text="*{considerations}">
 
                 </textarea>
             </div>
@@ -47,6 +39,33 @@
             </button>
         </div>
         <!-- /.box-footer -->
+        <div class="modal fade" id="themeEvaluationSubmitConfirmationModal"
+            role="dialog"
+             aria-labelledby="themeEvaluationSubmitConfirmationModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title"
+                            th:text="#{theme.submit-confirmation.title}">Are you sure?</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4 th:text="#{theme.submit-confirmation.message}">After
+                            sending it will no longer be possible to change the information
+                            until the selected advisor evaluates your theme.</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"
+                                th:text="#{no}">No</button>
+                        <button type="submit" class="btn btn-primary" name="action"
+                                value="evaluation" th:text="#{yes}">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 
 </div>

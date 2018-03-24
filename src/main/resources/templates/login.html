@@ -13,12 +13,11 @@ div {
 <body class="hold-transition login-page">
 	<div class="login-box">
 
-
-
 		<!-- /.login-logo -->
 		<div class="login-box-body">
             <img th:src="@{/img/canoasLogo.jpg}" style="width: 80%"/>
 			<p class="login-box-msg" th:text="#{login.info}"></p>
+			<p class="login-box-msg" th:text="#{login.info.advisor}"></p>
 
 			<form name="f" th:action="@{/login}" method="post" id="login-form"
 				class="form-signin">

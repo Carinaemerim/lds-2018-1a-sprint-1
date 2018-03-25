@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
+import br.edu.ifrs.canoas.tads.tcc.config.Messages;
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.*;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
@@ -11,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,6 +32,7 @@ public class EvaluationController {
     private final EvaluationService evaluationService;
     private final DocumentService documentService;
     private final TermPaperService termPaperService;
+    private final Messages messages;
 
     @ModelAttribute("allEvaluationStatus")
     public List<EvaluationStatus> populateEvaluationStatus() {
@@ -100,32 +103,39 @@ public class EvaluationController {
     }
 
     @PostMapping(path = "/theme/submit")
-    public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid Advice advice,
-                                           BindingResult bindingResult, RedirectAttributes redirectAttr) {
-        if (bindingResult.hasErrors()) {
-           /* ModelAndView mav = new ModelAndView("/evaluation/theme");
-            return mav;*/
-           System.out.println(bindingResult.toString());
-        }
+    public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, Advice advice,
+                                       RedirectAttributes redirectAttr) {
+
+
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
-        advice.setAppraiser((Professor)activeUser.getUser());
+        advice.setAppraiser((Professor) activeUser.getUser());
         mav.addObject("advice", evaluationService.saveThemeEvaluationDraft(advice));
-        //redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
+        redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
         return mav;
     }
 
     @PostMapping(path = "/theme/submit", params = "action=evaluation")
     public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
-                                                     @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+                                                 @Valid Advice advice, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+
+        if (bindingResult.hasErrors()) {
+            ModelAndView mav = new ModelAndView("/evaluation/theme/");
+            bindingResult.addError(new FieldError("advice", "considerations", messages.get("field.not-null")));
+            return mav;
+            //System.out.println(bindingResult.toString());
+        }
 
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
+        advice.setAppraiser((Professor) activeUser.getUser());
+        mav.addObject("advice", evaluationService.saveThemeEvaluationFinal(advice));
+        redirectAttr.addFlashAttribute("message", messages.get("field.saved"));
 
         return mav;
     }
 
     @PostMapping(path = "/proposal/submit", params = "action=evaluation")
     public ModelAndView submitProposalForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
-                                                 @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+                                                    @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
 
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
 
@@ -134,7 +144,7 @@ public class EvaluationController {
 
     @PostMapping(path = "/proposal/submit")
     public ModelAndView saveProposalPaperDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
-                                           BindingResult bindingResult, RedirectAttributes redirectAttr) {
+                                               BindingResult bindingResult, RedirectAttributes redirectAttr) {
 
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
 
@@ -143,24 +153,22 @@ public class EvaluationController {
 
     @PostMapping(path = "/termpaper/submit")
     public ModelAndView saveTermPaperDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
-                                       BindingResult bindingResult, RedirectAttributes redirectAttr) {
+                                           BindingResult bindingResult, RedirectAttributes redirectAttr) {
 
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
 
         return mav;
     }
-
 
 
     @PostMapping(path = "/termpaper/submit", params = "action=evaluation")
     public ModelAndView submitTermPaperForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
-                                                 @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+                                                     @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
 
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
 
         return mav;
     }
-
 
 
 }

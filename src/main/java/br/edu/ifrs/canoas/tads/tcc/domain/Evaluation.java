@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import lombok.Data;
 
@@ -14,9 +15,14 @@ public abstract class Evaluation {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@NotBlank
 	private String considerations;
+
 	@OneToOne
 	private Document document;
+
 	@OneToOne
 	private Professor appraiser;
+
+	private Boolean isFinal;
 }

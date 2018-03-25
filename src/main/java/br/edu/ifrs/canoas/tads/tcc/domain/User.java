@@ -30,11 +30,13 @@ public abstract class User {
     @OneToOne @JsonIgnore private File picture;
 
 
+/*
     @OneToMany(mappedBy = "sender")
     private List<Message> messagesSent;
 
     @OneToMany(mappedBy = "receiver")
     private List<Message> messagesReceived;
+*/
 
 
 }

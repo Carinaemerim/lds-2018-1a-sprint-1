@@ -63,6 +63,12 @@ public class EvaluationService {
         return optionalGrade.isPresent() ? optionalGrade.get() : null;
     }
 
+    public Advice getOne(Advice advice) {
+        if (advice == null || advice.getId() == null)
+            return null;
+        Optional<Advice> optionalAdivce = adviceRepository.findById(advice.getId());
+        return optionalAdivce.isPresent() ? optionalAdivce.get() : null;
+    }
 
 
     public Iterable<TermPaper> getTermPaperEvaluation(User user) {
@@ -87,5 +93,20 @@ public class EvaluationService {
         fetchedAdvice.setConsiderations(advice.getConsiderations());
         fetchedAdvice.setStatus(advice.getStatus());
         return adviceRepository.save(advice);
+    }
+
+
+    @Transactional
+    public Advice saveThemeEvaluationFinal(Advice advice) {
+        Advice fetchedAdvice = (Advice)this.getOne(advice);
+        if (fetchedAdvice == null || fetchedAdvice.getId() == null)
+            fetchedAdvice = new Advice();
+        fetchedAdvice.setConsiderations(advice.getConsiderations());
+        fetchedAdvice.setStatus(advice.getStatus());
+        fetchedAdvice.setIsFinal(true);
+        fetchedAdvice.setAppraiser(advice.getAppraiser());
+        fetchedAdvice.setDocument(advice.getDocument());
+       // fetchedAdvice = adviceRepository.save(fetchedAdvice);
+        return getOne(adviceRepository.save(fetchedAdvice));
     }
 }

@@ -99,6 +99,42 @@ public class EvaluationController {
         return mav;
     }
 
+    @PostMapping(path = "/theme/submit")
+    public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
+                                           BindingResult bindingResult, RedirectAttributes redirectAttr) {
+
+        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
+
+        return mav;
+    }
+
+    @PostMapping(path = "/theme/submit", params = "action=evaluation")
+    public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
+                                                     @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+
+        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
+
+        return mav;
+    }
+
+    @PostMapping(path = "/proposal/submit", params = "action=evaluation")
+    public ModelAndView submitProposalForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
+                                                 @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+
+        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
+
+        return mav;
+    }
+
+    @PostMapping(path = "/proposal/submit")
+    public ModelAndView saveProposalPaperDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
+                                           BindingResult bindingResult, RedirectAttributes redirectAttr) {
+
+        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
+
+        return mav;
+    }
+
     @PostMapping(path = "/termpaper/submit")
     public ModelAndView saveTermPaperDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
                                        BindingResult bindingResult, RedirectAttributes redirectAttr) {
@@ -107,6 +143,8 @@ public class EvaluationController {
 
         return mav;
     }
+
+
 
     @PostMapping(path = "/termpaper/submit", params = "action=evaluation")
     public ModelAndView submitTermPaperForEvaluation(@AuthenticationPrincipal UserImpl activeUser,

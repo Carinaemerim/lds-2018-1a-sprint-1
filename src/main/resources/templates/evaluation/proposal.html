@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div  th:insert="/evaluation/fragments/document">
+                <div  th:insert="/evaluation/fragments/proposal-detail">
                 </div>
                 <!-- /.box -->
             </div>
@@ -54,6 +54,8 @@
 <th:block layout:fragment="css-view">
     <link rel="stylesheet" type="text/css"
           href="/webjars/datatables/1.10.13/media/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/myStyle.css"/>
 </th:block>
 
 <th:block layout:fragment="js-view">

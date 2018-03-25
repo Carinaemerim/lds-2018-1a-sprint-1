@@ -88,6 +88,23 @@ public class Document {
     }
 
     @Transient
+    public String getColorFillSvg() {
+        EvaluationStatus status = getStatus();
+        if(status == null)
+            return "fill-primary";
+        switch (status) {
+            case APPROVED:
+                return "fill-success";
+            case DISAPPROVED:
+                return "fill-danger";
+            case REDO:
+                return "fill-warning";
+            default:
+                return "fill-primary";
+        }
+    }
+
+    @Transient
     public Double getFinalGrade() {
         if (this.documentType.equals(DocumentType.TERMPAPER)) {
             Double sumGrades = 0.0;

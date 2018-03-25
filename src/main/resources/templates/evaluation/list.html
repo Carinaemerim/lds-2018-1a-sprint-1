@@ -50,55 +50,31 @@
                                 <td th:text="${termPaper.author.name}">Aluno</td>
                                 <td th:text="${termPaper.title}">Título do Trabalho</td>
                                 <td>
-                                    <a th:if="${termPaper.themeDocument != null}"  th:href="@{|theme/${termPaper.id}|}" href="#">
-                                        <span  th:text="#{${'evaluation.status.'+termPaper.themeDocument.status}}" th:classappend="${termPaper?.themeDocument?.colorStatus}" class="btn btn-block btn-flat">Avaliar</span>
+                                    <a th:if="${termPaper.themeDocument != null}" th:href="@{|theme/${termPaper.id}|}"
+                                       href="#">
+                                        <span th:text="#{${'evaluation.status.'+termPaper.themeDocument.status}}"
+                                              th:classappend="${termPaper?.themeDocument?.colorStatus}"
+                                              class="btn btn-block btn-flat">Avaliar</span>
                                     </a>
                                 </td>
-                                <td><a th:if="${termPaper.proposalDocument != null}" th:href="@{|proposal/${termPaper.id}|}" href="#">
-                                    <span   th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"  th:classappend="${termPaper?.proposalDocument?.colorStatus}" class="btn btn-block btn-flat">Avaliar</span>
+                                <td><a th:if="${termPaper.proposalDocument != null}"
+                                       th:href="@{|proposal/${termPaper.id}|}" href="#">
+                                    <span th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"
+                                          th:classappend="${termPaper?.proposalDocument?.colorStatus}"
+                                          class="btn btn-block btn-flat">Avaliar</span>
                                 </a>
                                 </td>
-                                <td><a th:if="${termPaper.termPaperDocument != null}"  th:href="@{|termpaper/${termPaper.id}|}" href="#">
-                                    <span  th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}" th:classappend="${termPaper?.termPaperDocument?.colorStatus}" class="btn btn-block btn-flat">Avaliar</span>
+                                <td><a th:if="${termPaper.termPaperDocument != null}"
+                                       th:href="@{|termpaper/${termPaper.id}|}" href="#">
+                                    <span th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}"
+                                          th:classappend="${termPaper?.termPaperDocument?.colorStatus}"
+                                          class="btn btn-block btn-flat">Avaliar</span>
                                 </a></td>
-                                <td class="text-center"> <h4  th:if="${termPaper.termPaperDocument != null}" th:text="${#numbers.formatDecimal(termPaper?.termPaperDocument?.finalGrade, 1, 1)}"> </h4></td>
-                            </tr>
-                            <tr>
-                                <td>Silva Sauro</td>
-                                <td>Quanto tempo até surtar?
+                                <td class="text-center"><h4 th:if="${termPaper.termPaperDocument != null}"
+                                                            th:text="${#numbers.formatDecimal(termPaper?.termPaperDocument?.finalGrade, 1, 1)}"></h4>
                                 </td>
-                                <td><span class="label bg-red">Reprovado</span></td>
-                                <td><span class="label bg-blue">Em andamento</span></td>
-                                <td><span class="label bg-gray">N/A</span></td>
-                                <td> -</td>
                             </tr>
-                            <tr>
-                                <td>Alonsinho da Costa</td>
-                                <td>Trabalho sobre algo que eu ainda não sei o que é: Internet
-                                </td>
-                                <td><span class="label label-success">Aprovado</span></td>
-                                <td><span class="label label-success">Aprovado</span></td>
-                                <td><span class="label label-success">Aprovado</span></td>
-                                <td> 9.0</td>
-                            </tr>
-                            <tr>
-                                <td>Silva Sauro</td>
-                                <td>Quanto tempo até surtar?
-                                </td>
-                                <td><span class="label bg-red">Reprovado</span></td>
-                                <td><span class="label bg-gray">N/A</span></td>
-                                <td><span class="label bg-gray">N/A</span></td>
-                                <td> -</td>
-                            </tr>
-                            <tr>
-                                <td>Silva Sauro</td>
-                                <td>Quanto tempo até surtar?
-                                </td>
-                                <td><span class="label bg-orange">Refazer</span></td>
-                                <td><span class="label bg-gray">N/A</span></td>
-                                <td><span class="label bg-gray">N/A</span></td>
-                                <td> -</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>

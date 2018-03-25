@@ -1,0 +1,23 @@
+.fill-success {
+    fill: #00a65a
+}
+
+.fill-danger {
+    fill: #dd4b39;
+}
+
+.fill-warning {
+    fill: #f39c12;
+}
+
+.fill-primary {
+    fill: #3c8dbc;
+}
+
+.fill-info {
+    fill: #00c0ef;
+}
+
+.fill-default {
+    fill: #d2d6de;
+}

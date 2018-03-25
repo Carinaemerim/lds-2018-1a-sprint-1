@@ -1,21 +1,14 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
-import java.sql.Date;
-import java.util.ArrayList;
-
-import javax.validation.Valid;
-
+import br.edu.ifrs.canoas.tads.tcc.domain.Task;
+import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import br.edu.ifrs.canoas.tads.tcc.domain.Task;
-import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
 
 @RequestMapping("/schedule")
 @Controller
@@ -51,7 +44,7 @@ public class ScheduleController {
 	}
 	
 	@PostMapping("/edit")
-	public String save(@Valid Task task) {
+	public String save(Task task) {
 		task.setPeriod(scheduleService.getPeriod());
 		task.setTitle("teste");
 		task.setDescription("fdddv fdg dfgfdgdgfgfdg");

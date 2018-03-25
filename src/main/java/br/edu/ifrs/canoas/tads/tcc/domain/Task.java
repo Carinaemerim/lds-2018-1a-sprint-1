@@ -1,18 +1,12 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
-import java.time.LocalDate;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Data

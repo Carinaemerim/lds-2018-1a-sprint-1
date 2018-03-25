@@ -9,6 +9,5 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Advice extends Evaluation {
-
 	private EvaluationStatus status;
 }

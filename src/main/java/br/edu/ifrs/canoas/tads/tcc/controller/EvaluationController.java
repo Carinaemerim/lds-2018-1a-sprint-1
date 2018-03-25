@@ -52,13 +52,14 @@ public class EvaluationController {
         TermPaper termPaper = termPaperService.getOneById(id);
         mav.addObject("termPaper", termPaper);
         Document document = termPaper.getThemeDocument();
-        mav.addObject("document", document);
+        //mav.addObject("document", document);
 
         Evaluation advice = evaluationService.getOneEvaluation(document, activeUser.getUser());
         if (advice == null) {
             advice = new Advice();
+            advice.setDocument(document);
         }
-        System.out.println(advice.toString());
+
         mav.addObject("advice", advice);
         //model.addAttribute("action", "record");
         return mav;
@@ -76,7 +77,6 @@ public class EvaluationController {
         if (advice == null) {
             advice = new Advice();
         }
-        System.out.println(advice.toString());
         mav.addObject("advice", advice);
         return mav;
     }
@@ -94,17 +94,23 @@ public class EvaluationController {
             grade = new Grade();
         }
         mav.addObject("grade", grade);
-        System.out.println(grade.toString());
+
         //model.addAttribute("action", "record");
         return mav;
     }
 
     @PostMapping(path = "/theme/submit")
-    public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
+    public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid Advice advice,
                                            BindingResult bindingResult, RedirectAttributes redirectAttr) {
-
+        if (bindingResult.hasErrors()) {
+           /* ModelAndView mav = new ModelAndView("/evaluation/theme");
+            return mav;*/
+           System.out.println(bindingResult.toString());
+        }
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
-
+        advice.setAppraiser((Professor)activeUser.getUser());
+        mav.addObject("advice", evaluationService.saveThemeEvaluationDraft(advice));
+        //redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
         return mav;
     }
 

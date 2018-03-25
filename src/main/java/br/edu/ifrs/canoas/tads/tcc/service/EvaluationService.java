@@ -1,15 +1,13 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.*;
-import br.edu.ifrs.canoas.tads.tcc.repository.DocumentRepository;
-import br.edu.ifrs.canoas.tads.tcc.repository.EvaluationRepository;
-import br.edu.ifrs.canoas.tads.tcc.repository.GradeRepository;
-import br.edu.ifrs.canoas.tads.tcc.repository.TermPaperRepository;
+import br.edu.ifrs.canoas.tads.tcc.repository.*;
 import lombok.AllArgsConstructor;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -34,6 +32,8 @@ public class EvaluationService {
     TermPaperRepository termPaperRepository;
     EvaluationRepository evaluationRepository;
     GradeRepository gradeRepository;
+    AdviceRepository adviceRepository;
+
     public Evaluation getOneEvaluationById(Long id) {
         return evaluationRepository.getOne(id);
     }
@@ -78,4 +78,14 @@ public class EvaluationService {
     }
 
 
+
+    @Transactional
+    public Advice saveThemeEvaluationDraft(Advice advice) {
+        Advice fetchedAdvice = (Advice)this.getOne(advice);
+        if (fetchedAdvice == null || fetchedAdvice.getId() == null)
+            fetchedAdvice = new Advice();
+        fetchedAdvice.setConsiderations(advice.getConsiderations());
+        fetchedAdvice.setStatus(advice.getStatus());
+        return adviceRepository.save(advice);
+    }
 }

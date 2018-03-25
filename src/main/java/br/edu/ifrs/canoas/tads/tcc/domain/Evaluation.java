@@ -8,13 +8,14 @@ import lombok.Data;
 @Inheritance
 @Data
 @DiscriminatorColumn(name="evaluation_type")
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"document_id" , "appraiser_id"})})
 public abstract class Evaluation {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String considerations;
-	@ManyToOne
+	@OneToOne
 	private Document document;
 	@OneToOne
 	private Professor appraiser;

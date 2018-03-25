@@ -19,6 +19,7 @@ public class Document {
     private Boolean isFinal;
     @OneToOne
     private File file;
+
     @OneToMany(mappedBy = "document")
     private List<Evaluation> evaluations;
     /**

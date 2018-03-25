@@ -1,13 +1,12 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -29,8 +28,10 @@ public class Task{ //implements Alert{
 	@NotBlank
 	private String description;
 	@NotNull
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate deadline;
-	private int typeEvaluation;
+    @Enumerated(EnumType.ORDINAL)
+    private TypeEvaluation typeEvaluation;
 
 }
+

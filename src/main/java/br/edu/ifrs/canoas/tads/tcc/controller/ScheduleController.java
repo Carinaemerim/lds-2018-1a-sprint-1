@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.validation.Valid;
@@ -35,6 +36,14 @@ public class ScheduleController {
 		return mav;
 	}
 	
+	/*@GetMapping("/add")
+	public String newTask() {
+		ModelAndView mav = new ModelAndView("/schedule/edit");
+		mav.addObject("task", scheduleService.save(new Task()));
+		return "redirect:/schedule/index";
+	}*/
+
+	
 	@GetMapping("/add")
 	public String newTask(Model model) {
 		model.addAttribute("task", new Task());
@@ -43,7 +52,11 @@ public class ScheduleController {
 	
 	@PostMapping("/edit")
 	public String save(@Valid Task task) {
-		Task newtask = scheduleService.save(task);
+		task.setPeriod(scheduleService.getPeriod());
+		task.setTitle("teste");
+		task.setDescription("fdddv fdg dfgfdgdgfgfdg");
+		//task.setDeadline(new Date());
+		scheduleService.save(task);
 		return "redirect:/schedule/index";
 	}
 	

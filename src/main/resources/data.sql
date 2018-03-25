@@ -100,9 +100,9 @@ INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STAT
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID ) VALUES (505, 'Advice', 107, 'Não está de acordo com o documento do PPC. Tema Inadequado!', 1, 101);
 
 --Schedule
-INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('22/03/18','dd/MM/yy'), 1);
-INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (200, '2018/01', 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('22/03/18','dd/MM/yy'), 2);
-INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (300, '2018/02','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/18','dd/MM/yy'), 3);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (200, '2018/01', 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (300, '2018/02','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 3);
 
 --INSERT INTO MESSAGE(ID, CONTENT, DATE, VIEWED, RECEIVER_ID, SENDER_ID) VALUES (1, 'Commita tuas atualizações', '2018-03-21', true, 100, 101);
 --INSERT INTO MESSAGE(ID, CONTENT, DATE, VIEWED, RECEIVER_ID, SENDER_ID) VALUES (2, 'blz', '2018-03-22', true, 101, 100);

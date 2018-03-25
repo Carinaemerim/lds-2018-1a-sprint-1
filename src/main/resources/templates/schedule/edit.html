@@ -34,6 +34,7 @@
 					<div class="box-body">
 						<form id="form_1" method="post" action="" th:action="@{/schedule/edit}" th:object="${task}">
 							<div class="form">
+							<div th:insert="/fragments/nav :: nav"></div>
 								<!-- text input -->
 								<div class="form-group">
 									<label>Titulo:</label> <input type="text" class="form-control" th:field="*{title}" />

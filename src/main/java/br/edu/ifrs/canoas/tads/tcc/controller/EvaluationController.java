@@ -105,8 +105,6 @@ public class EvaluationController {
     @PostMapping(path = "/theme/submit")
     public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, Advice advice,
                                        RedirectAttributes redirectAttr) {
-
-
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");
         advice.setAppraiser((Professor) activeUser.getUser());
         mav.addObject("advice", evaluationService.saveThemeEvaluationDraft(advice));
@@ -119,10 +117,10 @@ public class EvaluationController {
                                                  @Valid Advice advice, BindingResult bindingResult, RedirectAttributes redirectAttr) {
 
         if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView("/evaluation/theme/");
-            bindingResult.addError(new FieldError("advice", "considerations", messages.get("field.not-null")));
+            System.out.println(bindingResult.toString());
+           ModelAndView mav = new ModelAndView("/evaluation/theme/1001");
+            //bindingResult.addError(new FieldError("advice", "considerations", messages.get("field.not-null")));
             return mav;
-            //System.out.println(bindingResult.toString());
         }
 
         ModelAndView mav = new ModelAndView("redirect:/evaluation/");

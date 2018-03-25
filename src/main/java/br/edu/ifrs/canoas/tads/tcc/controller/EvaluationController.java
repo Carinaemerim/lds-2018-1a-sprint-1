@@ -7,12 +7,10 @@ import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
 import lombok.AllArgsConstructor;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -114,12 +112,17 @@ public class EvaluationController {
 
     @PostMapping(path = "/theme/submit", params = "action=evaluation")
     public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
-                                                 @Valid Advice advice, BindingResult bindingResult, RedirectAttributes redirectAttr) {
+                                                 @RequestParam(value = "documentId", required = false) Long documentId,
+                                                 //                                             @RequestParam(value = "termPaperId", required = false) Long termPaperId,
+                                                 @Valid Advice advice, BindingResult bindingResult,
+                                                 RedirectAttributes redirectAttr) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.toString());
-           ModelAndView mav = new ModelAndView("/evaluation/theme/1001");
-            //bindingResult.addError(new FieldError("advice", "considerations", messages.get("field.not-null")));
+            ModelAndView mav = new ModelAndView("/evaluation/theme");
+            Document document = documentService.getOneById(documentId);
+            mav.addObject("termPaper", document.getTermPaper());
+            advice.setDocument(document);
+            mav.addObject("advice", advice);
             return mav;
         }
 

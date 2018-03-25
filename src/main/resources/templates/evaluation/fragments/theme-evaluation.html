@@ -9,7 +9,8 @@
         <div class="box-body margin">
             <!-- radio -->
             <input type="hidden" id="id" th:field="*{id}"/>
-            <input type="hidden" id="document_id" th:field="*{document.id}"/>
+            <input type="hidden" id="termPaperId" name="termPaperId" th:value="${termPaper.id}"/>
+            <input type="hidden" id="documentId"  name="documentId"  th:value="*{document.id}"/>
             <div class="form-group">
                 <div th:each="st : ${allEvaluationStatus}" class="radio">
                     <label>
@@ -21,7 +22,7 @@
                 </div>
             </div>
             <!-- textarea -->
-            <div class="form-group">
+            <div class="form-group"  th:classappend="${#fields.hasErrors('considerations')}? 'has-error'">
                 <label for="considerations" class="control-label">
                     <span th:text="#{evaluation.considerations}"/>
                 </label>
@@ -33,6 +34,7 @@
                 <span
                         th:if="${#fields.hasErrors('considerations')}" th:errors="*{considerations}"
                         th:class="help-block"/>
+
             </div>
 
         </div>

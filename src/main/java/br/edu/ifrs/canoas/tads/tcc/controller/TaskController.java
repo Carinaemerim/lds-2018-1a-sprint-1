@@ -12,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/schedule")
 @Controller
-public class ScheduleController {
+public class TaskController {
 	
 	private final ScheduleService scheduleService;
 
-	public ScheduleController(ScheduleService scheduleService) {
+	public TaskController(ScheduleService scheduleService) {
 		super();
 		this.scheduleService = scheduleService;
 	}
@@ -25,17 +25,9 @@ public class ScheduleController {
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("/schedule/index");
 		mav.addObject("tasks", scheduleService.listAll());
-		mav.addObject("curr_period", scheduleService.getPeriod());
+		mav.addObject("currPeriod", scheduleService.getPeriod());
 		return mav;
 	}
-	
-	/*@GetMapping("/add")
-	public String newTask() {
-		ModelAndView mav = new ModelAndView("/schedule/edit");
-		mav.addObject("task", scheduleService.save(new Task()));
-		return "redirect:/schedule/index";
-	}*/
-
 	
 	@GetMapping("/add")
 	public String newTask(Model model) {
@@ -45,10 +37,7 @@ public class ScheduleController {
 	
 	@PostMapping("/edit")
 	public String save(Task task) {
-		task.setPeriod(scheduleService.getPeriod());
-		task.setTitle("teste");
-		task.setDescription("fdddv fdg dfgfdgdgfgfdg");
-		//task.setDeadline(new Date());
+		task.setPeriod(scheduleService.getPeriod());		
 		scheduleService.save(task);
 		return "redirect:/schedule/index";
 	}

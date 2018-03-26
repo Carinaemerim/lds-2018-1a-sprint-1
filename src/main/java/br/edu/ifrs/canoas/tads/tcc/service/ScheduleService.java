@@ -47,5 +47,10 @@ public class ScheduleService {
 	public Task save(Task task) {
 		return scheduleRepository.save(task);
 	}
+
+	public Object findOne(Long id) {
+		
+		return scheduleRepository.findById(id);
+	}
 	
 }

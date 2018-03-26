@@ -6,9 +6,9 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum TypeEvaluation {
-    NOTAPPLICABLE(1,"Não avaliativo"),
-    REPORT(2,"Nota"),
-    EVALUATION(3,"Parecer");
+    NOTAPPLICABLE(0, "Não avaliativo"),
+    EVALUATION(1,"Nota"),
+    REPORT(2,"Parecer");
 
     private int id;
     private String description;

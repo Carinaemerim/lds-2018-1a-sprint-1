@@ -32,6 +32,7 @@ public class TaskController {
 	@GetMapping("/add")
 	public String newTask(Model model) {
 		model.addAttribute("task", new Task());
+		model.addAttribute("currPeriod", scheduleService.getPeriod());
 		return "/schedule/edit";
 	}
 	
@@ -42,10 +43,11 @@ public class TaskController {
 		return "redirect:/schedule/index";
 	}
 	
-	//@GetMapping("/edit")
-	//public ModelAndView edit() {
-	//	return new ModelAndView("/schedule/edit");
-	//}
+	@GetMapping("/edit/{id}")
+	public String edit(Model model, @PathVariable("id") Long id) {  
+		model.addAttribute(scheduleService.findOne(id));	
+		return "redirect:/schedule/index";
+    }
 	
 	@GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {

@@ -46,7 +46,7 @@
 									<td th:text="${task.deadline}"></td>
 									<td th:text="${task.title}"></td>
 									<td>
-									<a href="@{/schedule/edit/${task.id}}"><span class="glyphicon glyphicon-edit"></span>Editar</a> 
+									<a th:href="@{/schedule/edit/{id}(id=${task.id})}"> <span class="badge glyphicon glyphicon-edit" th:text="Editar" />
 									<br>
 									<a th:href="@{/schedule/delete/{id}(id=${task.id})}"> <span class="badge" th:text="delete" />
 									</td>

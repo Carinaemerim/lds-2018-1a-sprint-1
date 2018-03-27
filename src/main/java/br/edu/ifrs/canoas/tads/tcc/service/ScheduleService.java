@@ -45,12 +45,14 @@ public class ScheduleService {
     }
 
 	public Task save(Task task) {
+		if(task.getId() == null)
+			scheduleRepository.save(task);
 		return scheduleRepository.save(task);
 	}
 
-	public Object findOne(Long id) {
-		
-		return scheduleRepository.findById(id);
+	public Task getId(Long id) {
+		return scheduleRepository.getOne(id);
 	}
+
 	
 }

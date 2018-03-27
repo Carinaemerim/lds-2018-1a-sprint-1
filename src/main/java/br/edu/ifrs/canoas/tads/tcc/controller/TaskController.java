@@ -44,9 +44,10 @@ public class TaskController {
 	}
 	
 	@GetMapping("/edit/{id}")
-	public String edit(Model model, @PathVariable("id") Long id) {  
-		model.addAttribute(scheduleService.findOne(id));	
-		return "redirect:/schedule/index";
+	public ModelAndView edit(@PathVariable("id") Long id) {  
+		ModelAndView mav = new ModelAndView("/schedule/edit");
+		mav.addObject("task", scheduleService.getId(id));	
+		return mav;
     }
 	
 	@GetMapping("/delete/{id}")

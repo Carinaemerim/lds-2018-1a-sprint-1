@@ -41,7 +41,8 @@
                         <div class="input-group input-group-sm">
                             <input type="text" class="form-control" id="criteria" name="criteria">
                             <span class="input-group-btn">
-                            <button type="button" id="search-button" name="search-button" class="btn btn-info btn-flat" onclick="javascript:asyncSearch('/catalog/search/');return false;">Go!</button>
+                            <button type="button" id="search-button" name="search-button" class="btn btn-info btn-flat"
+                            onclick="javascript:asyncRequest('/catalog/search/', '#form-search', '#search-results');return false;">Go!</button>
                         </span>
                         </div>
                     </div>

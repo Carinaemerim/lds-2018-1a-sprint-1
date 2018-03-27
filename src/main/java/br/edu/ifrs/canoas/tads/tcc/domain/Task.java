@@ -27,5 +27,7 @@ public class Task{ //implements Alert{
     @Enumerated(EnumType.ORDINAL)
     private TypeEvaluation typeEvaluation;
 
+    
+
 }
 

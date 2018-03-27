@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EvaluationBoardRepository extends JpaRepository<EvaluationBoard, Long> {
 
+    EvaluationBoard findFirstByDocumentId(Long documentId);
+
 }

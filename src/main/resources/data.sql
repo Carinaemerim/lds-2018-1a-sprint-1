@@ -58,7 +58,7 @@ insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description) va
 
 
 
-insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id)	values
+insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id )	values
 (98,0,0,1000, 0),
 (99,0,0,1000, 0),
 (101,0,1,1000, 0),

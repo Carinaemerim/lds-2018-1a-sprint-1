@@ -1,7 +1,9 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
+import br.edu.ifrs.canoas.tads.tcc.repository.EvaluationBoardRepository;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationBoardService;
+import ch.qos.logback.core.CoreConstants;
 import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,9 +25,9 @@ public class Document {
     private Boolean isFinal;
     @OneToOne
     private File file;
-
     @OneToMany(mappedBy = "document")
     private List<Evaluation> evaluations;
+
     /**
      * Logic to get final status from all evaluations
      */
@@ -131,7 +133,9 @@ public class Document {
 
     private Boolean isAllEvaluated(DocumentType type) {
 
-        //TODO colocar quantidade avaliadores da banca
+        //TODO calcular quantidade avaliadores da banca,
+        // se o nº de avaliadores for maior que o nº de avaliações retornar falso
+
         for (Evaluation eval : evaluations) {
             if (type.equals(type)) {
                 if (eval instanceof Grade) {
@@ -152,7 +156,6 @@ public class Document {
 
     @Transient
     public String getColorStatus() {
-
 
         EvaluationStatus status = getStatusByUser();
         if (status == null)

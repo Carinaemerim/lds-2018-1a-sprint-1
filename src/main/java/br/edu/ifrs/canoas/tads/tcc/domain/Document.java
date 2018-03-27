@@ -1,6 +1,10 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
+import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
+import br.edu.ifrs.canoas.tads.tcc.service.EvaluationBoardService;
 import lombok.Data;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -40,6 +44,8 @@ public class Document {
      */
     @Transient
     public EvaluationStatus getStatus() {
+
+
         if (evaluations == null || evaluations.size() == 0) {
             return EvaluationStatus.EVALUATE;
         } else {
@@ -72,10 +78,87 @@ public class Document {
     }
 
     @Transient
+    public EvaluationStatus getStatusByUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long currentPrincipalId = ((UserImpl) authentication.getPrincipal()).getUser().getId();
+
+
+        if (evaluations == null || evaluations.size() == 0) {
+            return EvaluationStatus.EVALUATE;
+        } else {
+            if (this.documentType.equals(DocumentType.TERMPAPER)) {
+                for (Evaluation eval : evaluations) {
+                    if (eval instanceof Grade) {
+                        if (((((Grade) eval).getAppraiser()).getId()).equals(currentPrincipalId)) {
+                            if (((Grade) eval).getIsFinal() == null || (!((Grade) eval).getIsFinal()))
+                                return EvaluationStatus.EVALUATE;
+                            else {
+                                if (isAllEvaluated(documentType)) {
+                                    return getStatus();
+                                } else
+                                    return EvaluationStatus.IN_PROGRESS;
+
+                            }
+                        }
+                    }
+                }
+
+            } else {
+                for (Evaluation eval : evaluations) {
+                    if (eval instanceof Advice) {
+                        if (documentType.equals(DocumentType.THEME)) {
+                            return getStatus();
+                        }
+                        if (((((Advice) eval).getAppraiser()).getId()).equals(currentPrincipalId)) {
+
+                            if (((Advice) eval).getIsFinal() == null || (!((Advice) eval).getIsFinal()))
+                                return EvaluationStatus.EVALUATE;
+                            else {
+                                if (isAllEvaluated(documentType))
+                                    return getStatus();
+                                else
+                                    return EvaluationStatus.IN_PROGRESS;
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return EvaluationStatus.EVALUATE;
+    }
+
+    private Boolean isAllEvaluated(DocumentType type) {
+
+        //TODO colocar quantidade avaliadores da banca
+        for (Evaluation eval : evaluations) {
+            if (type.equals(type)) {
+                if (eval instanceof Grade) {
+                    if (((Grade) eval).getIsFinal() == null || (!((Grade) eval).getIsFinal())) {
+                        return false;
+                    }
+                }
+                if (eval instanceof Advice) {
+                    if (((Advice) eval).getIsFinal() == null || (!((Advice) eval).getIsFinal())) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    @Transient
     public String getColorStatus() {
-        EvaluationStatus status = getStatus();
-        if(status == null)
+
+
+        EvaluationStatus status = getStatusByUser();
+        if (status == null)
             return "btn-primary";
+
+
         switch (status) {
             case APPROVED:
                 return "btn-success";
@@ -83,6 +166,8 @@ public class Document {
                 return "btn-danger";
             case REDO:
                 return "btn-warning";
+            case IN_PROGRESS:
+                return "bg-navy";
             default:
                 return "btn-primary";
         }
@@ -91,7 +176,7 @@ public class Document {
     @Transient
     public String getColorFillSvg() {
         EvaluationStatus status = getStatus();
-        if(status == null)
+        if (status == null)
             return "fill-primary";
         switch (status) {
             case APPROVED:
@@ -100,6 +185,8 @@ public class Document {
                 return "fill-danger";
             case REDO:
                 return "fill-warning";
+            case IN_PROGRESS:
+                return "fill-primary";
             default:
                 return "fill-primary";
         }
@@ -114,8 +201,10 @@ public class Document {
                     sumGrades += ((Grade) eval).getFinalGrade();
                 }
             }
-           return sumGrades / evaluations.size();
+            return sumGrades / evaluations.size();
         }
-        return null;
+        return 0.0; //TODO Colcoar null
     }
+
+
 }

@@ -52,21 +52,21 @@
                                 <td>
                                     <a th:if="${termPaper.themeDocument != null}" th:href="@{|theme/${termPaper.id}|}"
                                        href="#">
-                                        <span th:text="#{${'evaluation.status.'+termPaper.themeDocument.status}}"
+                                        <span th:text="#{${'evaluation.status.'+termPaper.themeDocument.statusByUser}}"
                                               th:classappend="${termPaper?.themeDocument?.colorStatus}"
                                               class="btn btn-block btn-flat">Avaliar</span>
                                     </a>
                                 </td>
                                 <td><a th:if="${termPaper.proposalDocument != null}"
                                        th:href="@{|proposal/${termPaper.id}|}" href="#">
-                                    <span th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"
+                                    <span th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.statusByUser}}"
                                           th:classappend="${termPaper?.proposalDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>
                                 </a>
                                 </td>
                                 <td><a th:if="${termPaper.termPaperDocument != null}"
                                        th:href="@{|termpaper/${termPaper.id}|}" href="#">
-                                    <span th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}"
+                                    <span th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.statusByUser}}"
                                           th:classappend="${termPaper?.termPaperDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>
                                 </a></td>

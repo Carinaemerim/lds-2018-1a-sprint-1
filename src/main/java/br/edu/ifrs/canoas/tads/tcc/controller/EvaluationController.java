@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 import br.edu.ifrs.canoas.tads.tcc.config.Messages;
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.*;
+import br.edu.ifrs.canoas.tads.tcc.repository.UserRepository;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
@@ -19,6 +20,8 @@ import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
+import static br.edu.ifrs.canoas.tads.tcc.domain.DocumentType.*;
+
 /**
  * Created by cassiano on 3/11/18.
  */
@@ -30,6 +33,7 @@ public class EvaluationController {
     private final EvaluationService evaluationService;
     private final DocumentService documentService;
     private final TermPaperService termPaperService;
+    private final UserRepository userRepository;
     private final Messages messages;
 
     @ModelAttribute("allEvaluationStatus")
@@ -55,10 +59,12 @@ public class EvaluationController {
         Document document = termPaper.getThemeDocument();
         //mav.addObject("document", document);
 
-        Evaluation advice = evaluationService.getOneEvaluation(document, activeUser.getUser());
+        //Evaluation advice = evaluationService.getOneEvaluation(document, activeUser.getUser());
+        Evaluation advice = evaluationService.getOneEvaluation(document, userRepository.getOne((termPaper.getAdvisor().getId())));
         if (advice == null) {
             advice = new Advice();
             advice.setDocument(document);
+            System.out.println("advice is null no get");
         }
 
         mav.addObject("advice", advice);
@@ -78,6 +84,7 @@ public class EvaluationController {
         if (advice == null) {
             advice = new Advice();
         }
+        advice.setDocument(document);
         mav.addObject("advice", advice);
         return mav;
     }
@@ -100,73 +107,44 @@ public class EvaluationController {
         return mav;
     }
 
-    @PostMapping(path = "/theme/submit")
-    public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, Advice advice,
-                                       RedirectAttributes redirectAttr) {
-        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
-        advice.setAppraiser((Professor) activeUser.getUser());
-        mav.addObject("advice", evaluationService.saveThemeEvaluationDraft(advice));
-        redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
-        return mav;
-    }
-
-    @PostMapping(path = "/theme/submit", params = "action=evaluation")
+    @PostMapping(path = "/advice/submit")
     public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
                                                  @RequestParam(value = "documentId", required = false) Long documentId,
-                                                 //                                             @RequestParam(value = "termPaperId", required = false) Long termPaperId,
+                                                 // @RequestParam(value = "termPaperId", required = false) Long termPaperId,
+                                                 @RequestParam(value = "action", required = false) String action,
                                                  @Valid Advice advice, BindingResult bindingResult,
                                                  RedirectAttributes redirectAttr) {
 
+        Boolean isFinal = false;
+        Document document = documentService.getOneById(documentId);
+        ModelAndView mav;
+        if (action.equals("evaluation"))
+            isFinal = true;
         if (bindingResult.hasErrors()) {
-            ModelAndView mav = new ModelAndView("/evaluation/theme");
-            Document document = documentService.getOneById(documentId);
+            switch (document.getDocumentType()) {
+                case THEME:
+                    mav = new ModelAndView("/evaluation/theme");
+                    break;
+                case PROPOSAL:
+                    mav = new ModelAndView("/evaluation/proposal");
+                    break;
+                default:
+                    mav = new ModelAndView("redirect:/evaluation/");
+                    return mav;
+            }
             mav.addObject("termPaper", document.getTermPaper());
             advice.setDocument(document);
             mav.addObject("advice", advice);
+            mav.addObject("document", document);
             return mav;
         }
 
-        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
+        mav = new ModelAndView("redirect:/evaluation/");
         advice.setAppraiser((Professor) activeUser.getUser());
-        mav.addObject("advice", evaluationService.saveThemeEvaluationFinal(advice));
-        redirectAttr.addFlashAttribute("message", messages.get("field.saved"));
+        advice.setDocument(document);
+        mav.addObject("advice", evaluationService.saveThemeEvaluationFinal(advice, isFinal));
 
-        return mav;
-    }
-
-    @PostMapping(path = "/proposal/submit", params = "action=evaluation")
-    public ModelAndView submitProposalForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
-                                                    @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
-
-        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
-
-        return mav;
-    }
-
-    @PostMapping(path = "/proposal/submit")
-    public ModelAndView saveProposalPaperDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
-                                               BindingResult bindingResult, RedirectAttributes redirectAttr) {
-
-        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
-
-        return mav;
-    }
-
-    @PostMapping(path = "/termpaper/submit")
-    public ModelAndView saveTermPaperDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
-                                           BindingResult bindingResult, RedirectAttributes redirectAttr) {
-
-        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
-
-        return mav;
-    }
-
-
-    @PostMapping(path = "/termpaper/submit", params = "action=evaluation")
-    public ModelAndView submitTermPaperForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
-                                                     @Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
-
-        ModelAndView mav = new ModelAndView("redirect:/evaluation/");
+        redirectAttr.addFlashAttribute("message", (isFinal) ? messages.get("field.saved") : messages.get("field.draft-saved"));
 
         return mav;
     }

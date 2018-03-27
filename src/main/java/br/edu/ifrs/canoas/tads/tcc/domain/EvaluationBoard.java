@@ -16,4 +16,5 @@ public class EvaluationBoard {
 	@ManyToMany
 	private List<Professor> professors;
 
+
 }

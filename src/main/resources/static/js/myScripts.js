@@ -1,28 +1,19 @@
-function asyncSearch(url){
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: $("#form-search").serialize(),
-        success : function(data) {
-            $('#search-results').replaceWith(data);
-        },
-        error: function(result) {
-            alert('error');
-        }
+function sendMessage(url, formId, replacementId){
+    asyncRequest(url, formId, replacementId, function(data){
+    	$(replacementId).replaceWith(data);
+    	$(formId)[0].reset();
     });
 }
 
-function sendMessage(url){
-    $.ajax({
+function asyncRequest(url, formId, replacementId,
+		onSuccess = function(data){$(replacementId).replaceWith(data);}){
+	$.ajax({
         type: "POST",
         url: url,
-        data: $("#chat-form").serialize(),
-        success : function(data) {
-        	$('#chat-input').text(null);
-            $('#chat-results').replaceWith(data);
-        },
+        data: $(formId).serialize(),
+        success : onSuccess,
         error: function(result) {
-            alert('error');
+            alert('error: '+result);
         }
     });
 }

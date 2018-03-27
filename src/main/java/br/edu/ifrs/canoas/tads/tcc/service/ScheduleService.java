@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import javax.validation.Valid;
@@ -7,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Task;
+import br.edu.ifrs.canoas.tads.tcc.domain.TaskStatus;
 import br.edu.ifrs.canoas.tads.tcc.repository.TaskRepository;
 
 @Service
@@ -54,5 +56,15 @@ public class ScheduleService {
 		return scheduleRepository.getOne(id);
 	}
 
+	
+	public TaskStatus getTaskStatus(Long id) {
+		TaskStatus taskStatus = null;
+		
+		if(this.getId(id).getDeadline().compareTo(LocalDate.now()) <= 0){
+			return taskStatus.IN_PROGRESS;
+		}
+		
+		return taskStatus.EXPIRED;
+	}
 	
 }

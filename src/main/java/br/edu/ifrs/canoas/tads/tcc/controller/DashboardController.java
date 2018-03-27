@@ -25,10 +25,11 @@ public class DashboardController {
 
 
 	@GetMapping("/index")
-	public ModelAndView greetings() {
+	public ModelAndView greetings() {//Long id
 		ModelAndView mav = new ModelAndView("/dashboard/index");
 		
 		mav.addObject("tasks",scheduleService.listAll());
+		//mav.addObject("status",scheduleService.getTaskStatus(id));
 		return mav;
 		
 		

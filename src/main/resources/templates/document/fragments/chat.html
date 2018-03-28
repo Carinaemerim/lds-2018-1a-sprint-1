@@ -7,16 +7,16 @@
 			<!-- Conversations are loaded here -->
 			<div class="direct-chat-messages" th:fragment="chat-results" name="chat-results" id="chat-results">
 				<!-- Message. Default to the left -->
-				<div th:each="message: ${messages}" th:class="${message.sender.id == user.id} ? 'direct-chat-msg right' : 'direct-chat-msg'">
+				<div th:each="messageItem: ${messages}" th:class="${messageItem.sender.id == user.id} ? 'direct-chat-msg right' : 'direct-chat-msg'">
 					<div class="direct-chat-info clearfix">
 						<span class="direct-chat-name pull-left"><span
-							th:text="${message.sender.username}" /></span>
+							th:text="${messageItem.sender.username}" /></span>
 					</div>
 					<!-- /.direct-chat-info -->
 					<img class="direct-chat-img" src="/photos/no_image_available.png"
 						alt="Message User Image">
 					<!-- /.direct-chat-img -->
-					<div class="direct-chat-text" th:text="${message.content}">Não esquece de enviar tuas
+					<div class="direct-chat-text" th:text="${messageItem.content}">Não esquece de enviar tuas
 						atualizações...</div>
 					<!-- /.direct-chat-text -->
 				</div>
@@ -27,7 +27,7 @@
 		</div>
 		<!-- /.box-body -->
 		<div class="box-footer">
-			<form action="#" method="post"th:action="@{/chat/send}" th:object="${message}" id="chat-form">
+			<form action="#" method="post"th:action="@{/chat/send}" th:object="${messageChat}" id="chat-form">
 				<div class="input-group">
 					<div>
 						<input type="hidden" id="id" th:field="*{id}">

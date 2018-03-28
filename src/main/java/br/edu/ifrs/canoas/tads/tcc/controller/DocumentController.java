@@ -39,9 +39,9 @@ public class DocumentController {
 	@GetMapping("/")
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/document");
-		
+
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
-		mav.addObject("message", new Message());
+		mav.addObject("messageChat", new Message());
 		mav.addObject("advisors", userService.getAdvisors());
 		mav.addObject("user", activeUser.getUser());
 		mav.addObject("termPaper", termPaperService.getLastOneByUser(activeUser.getUser()));

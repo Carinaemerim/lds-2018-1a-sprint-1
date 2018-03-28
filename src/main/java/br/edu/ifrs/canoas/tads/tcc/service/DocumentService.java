@@ -1,15 +1,10 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
 import java.util.ArrayList;
-
-import org.springframework.stereotype.Service;
-
-import br.edu.ifrs.canoas.tads.tcc.domain.Document;
-import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
-import br.edu.ifrs.canoas.tads.tcc.repository.DocumentRepository;
-import lombok.AllArgsConstructor;
 import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+
 import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;

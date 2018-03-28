@@ -3,6 +3,7 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 import br.edu.ifrs.canoas.tads.tcc.config.Messages;
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.*;
+import br.edu.ifrs.canoas.tads.tcc.repository.AcademicYearRepository;
 import br.edu.ifrs.canoas.tads.tcc.repository.UserRepository;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
@@ -34,6 +35,7 @@ public class EvaluationController {
     private final DocumentService documentService;
     private final TermPaperService termPaperService;
     private final UserRepository userRepository;
+    private final AcademicYearRepository academicYearRepository;
     private final Messages messages;
 
     @ModelAttribute("allEvaluationStatus")
@@ -41,10 +43,17 @@ public class EvaluationController {
         return Arrays.asList(EvaluationStatus.ALL);
     }
 
-    @GetMapping("/")
-    public ModelAndView home(@AuthenticationPrincipal UserImpl activeUser) {
+    @GetMapping({ "/"})
+    public ModelAndView home(@AuthenticationPrincipal UserImpl activeUser,
+                             @RequestParam(value = "academicYear", required = false) AcademicYear academicYear) {
         ModelAndView mav = new ModelAndView("/evaluation/list");
-        Iterable<TermPaper> termPapers = evaluationService.getTermPaperEvaluation(activeUser.getUser());
+
+        if(academicYear == null) {
+            int size = (academicYearRepository.findAllByOrderByIdAsc()).size();
+            academicYear = (academicYearRepository.findAllByOrderByIdAsc()).get(size -1);
+            mav.addObject("academicYear", academicYear);
+        }
+        Iterable<TermPaper> termPapers = evaluationService.getTermPaperEvaluation(activeUser.getUser(), academicYear.getId());
         mav.addObject("termPapers", termPapers);
 
         return mav;

@@ -46,9 +46,9 @@ public class EvaluationService {
         return optionalGrade.isPresent() ? optionalGrade.get() : null;
     }
 
-    public Iterable<TermPaper> getTermPaperEvaluation(User user) {
+    public Iterable<TermPaper> getTermPaperEvaluation(User user, Long academicYear) {
         final List<TermPaper> listWithDuplicates =  user != null ?
-                termPaperRepository.getTermPaperForEvaluation(user.getId()) : new ArrayList();
+                termPaperRepository.getTermPaperForEvaluation(user.getId(), academicYear) : new ArrayList();
 
         if(listWithDuplicates != null) {
             List<TermPaper> listWithoutDuplicates =  listWithDuplicates.stream().collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingLong(TermPaper::getId))),

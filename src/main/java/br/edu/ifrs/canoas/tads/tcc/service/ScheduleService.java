@@ -14,27 +14,32 @@ import br.edu.ifrs.canoas.tads.tcc.repository.TaskRepository;
 @Service
 public class ScheduleService {
 	
+	private String period;
 	public final TaskRepository scheduleRepository;
 
 	public ScheduleService(TaskRepository scheduleRepository) {
 		super();
 		this.scheduleRepository = scheduleRepository;
+		period = null;
 	}
 
 	public String getPeriod() {
-		int ano = Calendar.getInstance().get(Calendar.YEAR);
-		String period = "" + ano;
-		if(Calendar.getInstance().get(Calendar.MONTH) < 7){
-			period = period + "/01";
+		if(this.period == null) {
+			int ano = Calendar.getInstance().get(Calendar.YEAR);
+			String period = String.valueOf(ano);
+			if(Calendar.getInstance().get(Calendar.MONTH) < 7){
+				period = period + "/01";
+			}
+			else {
+				period = period + "/02";
+			}
+			this.period = period;
 		}
-		else {
-			period = period + "/02";
-		}
-		return period;
+		return this.period;
 	}
 	
 	public Iterable<Task> listAll() {
-		return scheduleRepository.findByPeriod(getPeriod());
+		return scheduleRepository.findByPeriod(period);
 	}
 	
 	public boolean delete(Long id){
@@ -65,6 +70,40 @@ public class ScheduleService {
 		}
 		
 		return taskStatus.EXPIRED;
+	}
+
+	public String next() {
+		if(period == null) {
+			return "";
+		}
+		String[] values = period.split("/");
+		int year = Integer.parseInt(values[0]);
+		int semester = Integer.parseInt(values[1]);
+		if(semester == 2) {
+			year++;
+			semester--;
+		} else {
+			semester++;
+		}
+		period = year+ "/0" + semester;	
+		return period;
+	}
+
+	public String previous() {
+		if(period == null) {
+			return "";
+		}
+		String[] values = period.split("/");
+		int year = Integer.parseInt(values[0]);
+		int semester = Integer.parseInt(values[1]);
+		if(semester == 1) {
+			year--;
+			semester++;
+		} else {
+			semester--;
+		}
+		period = year+ "/0" + semester;	
+		return period;
 	}
 	
 }

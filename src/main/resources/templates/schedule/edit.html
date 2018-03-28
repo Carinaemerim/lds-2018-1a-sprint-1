@@ -39,6 +39,7 @@
 							<div class="form">
 							<div th:insert="/fragments/nav :: nav"></div>
 								<!-- text input -->
+								<input type="hidden" id="id" th:field="*{id}">
 								<div class="form-group">
 									<label>Titulo:</label> <input type="text" class="form-control" th:field="*{title}" />
 								</div>

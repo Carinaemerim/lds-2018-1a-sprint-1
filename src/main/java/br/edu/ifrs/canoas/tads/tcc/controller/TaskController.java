@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/schedule")
+//@hascode
 @Controller
 public class TaskController {
 	
@@ -24,8 +25,8 @@ public class TaskController {
 	@GetMapping("/index")
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("/schedule/index");
-		mav.addObject("tasks", scheduleService.listAll());
 		mav.addObject("currPeriod", scheduleService.getPeriod());
+		mav.addObject("tasks", scheduleService.listAll());
 		return mav;
 	}
 	
@@ -46,6 +47,7 @@ public class TaskController {
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {  
 		ModelAndView mav = new ModelAndView("/schedule/edit");
+		mav.addObject("currPeriod", scheduleService.getPeriod());
 		mav.addObject("task", scheduleService.getId(id));	
 		return mav;
     }
@@ -56,5 +58,22 @@ public class TaskController {
         scheduleService.delete(id);
         return mav;
     }
+	
+	@GetMapping("/next")
+	public ModelAndView next() {
+		ModelAndView mav = new ModelAndView("/schedule/index");
+		mav.addObject("currPeriod", scheduleService.next());
+		mav.addObject("tasks", scheduleService.listAll());
+		return mav;
+	}
+	
+	@GetMapping("/previous")
+	public ModelAndView previous() {
+		ModelAndView mav = new ModelAndView("/schedule/index");
+		mav.addObject("currPeriod", scheduleService.previous());
+		mav.addObject("tasks", scheduleService.listAll());
+		return mav;
+	}
+
 
 }

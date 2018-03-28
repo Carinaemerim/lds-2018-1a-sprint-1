@@ -5,9 +5,9 @@
 <body>
 	<div class="navbar" th:fragment="nav">
 		<div class="btn-group pull-right pull-right">
-			<button class="btn glyphicon glyphicon-menu-left"></button>
-			<button class="btn btn-default" th:text="${currPeriod}" ></button>
-			<button class="btn glyphicon glyphicon-menu-right"></button>
+			<a href="#" th:href="@{/schedule/previous}"><button class="btn glyphicon glyphicon-menu-left" ></button></a>
+			<a><span class="btn btn-default" th:text="${currPeriod}" ></span></a>
+			<a href="#" th:href="@{/schedule/next}"><button class="btn glyphicon glyphicon-menu-right"></button></a>
 		</div>
 	</div>
 </body>

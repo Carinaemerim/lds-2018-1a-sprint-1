@@ -41,8 +41,8 @@
             <!-- /.col -->
         </div>
         <div class="row">
-            <div class="col-xs-12">
-                    <div th:insert="/evaluation/fragments/grade-evaluation" style="background-color:white"></div>
+            <div class="col-xs-12" th:remove="${document.bank}  ? none :  all">
+                <div th:insert="/evaluation/fragments/grade-evaluation" style="background-color:white"></div>
             </div>
             <!-- /.col -->
         </div>

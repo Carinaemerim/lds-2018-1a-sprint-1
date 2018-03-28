@@ -9,11 +9,11 @@
         <div class="box-body margin">
             <!-- radio -->
             <input type="hidden" id="id" th:field="*{id}"/>
-            <input type="hidden" id="documentId"  name="documentId"  th:value="*{document.id}"/>
+            <input type="hidden" id="documentId" name="documentId" th:value="*{document.id}"/>
             <div class="form-group" th:classappend="${#fields.hasErrors('status')}? 'has-error'">
                 <div th:each="st : ${allEvaluationStatus}" class="radio">
                     <label>
-                        <input type="radio" th:field="*{status}"  class="" th:value="${st}" th:disabled="*{isFinal}"/>
+                        <input type="radio" th:field="*{status}" class="" th:value="${st}" th:disabled="*{isFinal}"/>
                         <label th:for="${#ids.prev('status')}" th:text="#{${'evaluation.status.'+st}}">Status</label>
                     </label>
                 </div>
@@ -21,37 +21,37 @@
                       th:class="help-block"/>
             </div>
             <!-- textarea -->
-            <div class="form-group "  th:classappend="${#fields.hasErrors('considerations')}? 'has-error'">
+            <div class="form-group " th:classappend="${#fields.hasErrors('considerations')}? 'has-error'">
                 <label for="considerations" class="control-label">
                     <span th:text="#{evaluation.considerations}"/>
                 </label>
                 <textarea class="form-control" rows="3" id="considerations" name="considerations"
                           th:placeholder="#{evaluation.considerations}" th:text="*{considerations}"
                           th:disabled="*{isFinal}">
-
                 </textarea>
                 <span
                         th:if="${#fields.hasErrors('considerations')}" th:errors="*{considerations}"
                         th:class="help-block"/>
-
             </div>
 
         </div>
         <!-- /.box-body -->
-        <div class="box-footer" th:remove="*{isFinal} ? all">
-            <div class="pull-right">
-                <button name="action" type="submit" value="draft" class="btn btn-default">
-                    <i class="fa fa-pencil"></i> <span th:text="#{button.draft}"/>
-                </button>
-                <button class="btn btn-primary" type="button"
-                        data-toggle="modal" data-target="#adviceEvaluationSubmitConfirmationModal"
-                        name="action">
-                    <i class="fa fa-check"></i> <span th:text="#{button.save}"/>
+        <div th:remove="*{document.bank}  ? none :  all">
+            <div class="box-footer" th:remove="*{isFinal} ? all">
+                <div class="pull-right">
+                    <button name="action" type="submit" value="draft" class="btn btn-default">
+                        <i class="fa fa-pencil"></i> <span th:text="#{button.draft}"/>
+                    </button>
+                    <button class="btn btn-primary" type="button"
+                            data-toggle="modal" data-target="#adviceEvaluationSubmitConfirmationModal"
+                            name="action">
+                        <i class="fa fa-check"></i> <span th:text="#{button.save}"/>
+                    </button>
+                </div>
+                <button type="reset" class="btn btn-default">
+                    <i class="fa fa-times"></i> <span th:text="#{button.discard}"/>
                 </button>
             </div>
-            <button type="reset" class="btn btn-default">
-                <i class="fa fa-times"></i> <span th:text="#{button.discard}"/>
-            </button>
         </div>
         <!-- /.box-footer -->
         <div class="modal fade" id="adviceEvaluationSubmitConfirmationModal"

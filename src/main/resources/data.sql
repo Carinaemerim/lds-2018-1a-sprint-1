@@ -12,7 +12,8 @@ INSERT into user(id, username, password, name, email, experience, skill, active,
 (105, 'orientador2', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Darth Slave Vader','darth1@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 0, 'Professor'),
 (106, 'orientador3', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Darth Vader 3','yodadv3@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 0, 'Professor'),
 (107, 'orientador4', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Darth Vader 4','yodadv4@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 0, 'Professor'),
-(108, 'user5', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Zezinho Fulano de Tal','yodouser@stars.wars','Slave Unidentified Jedi, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation','Sensing Death And Force-aided Acrobatics.',  TRUE, 0, 'Student');
+(108, 'user5', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Zezinho Fulano de Tal','yodouser@stars.wars','Slave Unidentified Jedi, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation','Sensing Death And Force-aided Acrobatics.',  TRUE, 0, 'Student'),
+(109, 'user6', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Luizinho vai Sambá','yodouser109@stars.wars','Slave Unidentified Jedi, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation','Sensing Death And Force-aided Acrobatics.',  TRUE, 0, 'Student');
 
 --ROLES
 insert into role(id, role) values
@@ -32,11 +33,13 @@ insert into user_roles (user_id, roles_id) values
 (106, 1),
 (107, 1),
 (108, 1),
+(109, 1),
 (100, 3),
 (102, 3),
 (103, 3),
 (104, 3),
 (108, 3),
+(109, 3),
 (101, 4),
 (105, 4),
 (106, 4),
@@ -54,7 +57,8 @@ insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description) va
 (1001, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 101, 102, 'Uma breve descrição do trabalho TCC sobre o impacto de scrum no mundo'),
 (1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103, 'Uma breve descrição do trabalho Scrum é a vida Jedi'),
 (1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico'),
-(1004, 'Engenharia de Software', 'Sistemas ERP: características, custos e tendências', 101, 108,'Uma breve descrição do trabalho Sistemas ERP: características, custos e tendências');
+(1004, 'Engenharia de Software', 'Sistemas ERP: características, custos e tendências', 101, 108,'Uma breve descrição do trabalho Sistemas ERP: características, custos e tendências'),
+(1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico');
 
 
 
@@ -67,7 +71,10 @@ insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id )	valu
 (104,2,1,1000, 0),
 (105,1,1,1001, 0),
 (106,0,1,1003, 0),
-(107,0,1,1004, 0);
+(107,0,1,1004, 0),
+(108,0,1,1005, 0),
+(109,1,1,1005, 0),
+(110,2,1,1005, 0);
 
 
 insert into EVALUATION_BOARD (id, document_id) values
@@ -77,7 +84,10 @@ insert into EVALUATION_BOARD (id, document_id) values
 (104, 104),
 (105, 105),
 (106, 106),
-(107, 107);
+(107, 107),
+(108, 108),
+(109, 109),
+(110, 110);
 
 insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) values
 (101, 101),
@@ -90,7 +100,10 @@ insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) val
 (106, 101),
 (107, 101),
 (104, 105),
-(103, 105);
+(103, 105),
+(108, 101),
+(109, 101),
+(110, 101);
 
 
 --Evaluation
@@ -103,6 +116,19 @@ INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STAT
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID ) VALUES (505, 'Advice', 107, 'Não está de acordo com o documento do PPC. Tema Inadequado!', 1, 101);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS ,ADEQUACY_OF_PRESENTATION ,CLOSING_EXPECTED_TIME ,CONCLUSION ,DEVELOPMENT_IN_LOGICAL_SEQUENCE ,EXPERIENCED_SOLUTION ,LITERATURE_REVIEW ,METHODOLOGY ,OBJECTIVE ,PRESENTATION ,SUBJECT_DOMAIN ,THEORETICAL_APPROACH ,VOCABULARY, APPRAISER_ID  )
   VALUES (506, 'Grade', 104,'condisedariosn do tcc ok foi bom orientador 2',0,0,0,0,0,0,0,0,0,9,9,7, 105);
+
+
+-- SET EVALUATION_BOARD_ID IN Document
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 101  WHERE ID=  101;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 102  WHERE ID=  102;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 103  WHERE ID=  103;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 104  WHERE ID=  104;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 105  WHERE ID=  105;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 106  WHERE ID=  106;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 107  WHERE ID=  107;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 108  WHERE ID=  108;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 109  WHERE ID=  109;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 110  WHERE ID=  110;
 
 --Schedule
 INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 1);

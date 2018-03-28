@@ -41,8 +41,8 @@
             <!-- /.col -->
         </div>
         <div class="row">
-            <div class="col-xs-12">
-                    <div th:insert="/evaluation/fragments/advice-evaluation"></div>
+            <div class="col-xs-12" th:remove="${document.bank}  ? none :  all">
+                <div th:insert="/evaluation/fragments/advice-evaluation"></div>
             </div>
             <!-- /.col -->
         </div>
@@ -54,8 +54,8 @@
 <th:block layout:fragment="css-view">
     <link rel="stylesheet" type="text/css"
           href="/webjars/datatables/1.10.13/media/css/jquery.dataTables.min.css"/>
-        <link rel="stylesheet" type="text/css"
-              href="/css/myStyle.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/myStyle.css"/>
 </th:block>
 
 <th:block layout:fragment="js-view">

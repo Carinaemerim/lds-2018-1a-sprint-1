@@ -24,6 +24,7 @@ public class EvaluationService {
     TermPaperRepository termPaperRepository;
     EvaluationRepository evaluationRepository;
     AdviceRepository adviceRepository;
+    GradeRepository gradeRepository;
 
 
     public Evaluation getOneEvaluation(Document document, User professor) {
@@ -34,8 +35,15 @@ public class EvaluationService {
     public Advice getOne(Advice advice) {
         if (advice == null || advice.getId() == null)
             return null;
-        Optional<Advice> optionalAdivce = adviceRepository.findById(advice.getId());
-        return optionalAdivce.isPresent() ? optionalAdivce.get() : null;
+        Optional<Advice> optionalAdvice = adviceRepository.findById(advice.getId());
+        return optionalAdvice.isPresent() ? optionalAdvice.get() : null;
+    }
+
+    public Grade getOne(Grade grade) {
+        if (grade == null || grade.getId() == null)
+            return null;
+        Optional<Grade> optionalGrade = gradeRepository.findById(grade.getId());
+        return optionalGrade.isPresent() ? optionalGrade.get() : null;
     }
 
     public Iterable<TermPaper> getTermPaperEvaluation(User user) {
@@ -61,7 +69,34 @@ public class EvaluationService {
         fetchedAdvice.setIsFinal(isFinal);
         fetchedAdvice.setAppraiser(advice.getAppraiser());
         fetchedAdvice.setDocument(advice.getDocument());
-       // fetchedAdvice = adviceRepository.save(fetchedAdvice);
+        // fetchedAdvice = adviceRepository.save(fetchedAdvice);
         return getOne(adviceRepository.save(fetchedAdvice));
+    }
+
+    @Transactional
+    public Grade saveTermPaperEvaluationFinal(Grade grade, Boolean isFinal) {
+        Grade fetchedGrade = (Grade)this.getOne(grade);
+        if (fetchedGrade == null || fetchedGrade.getId() == null)
+            fetchedGrade = new Grade();
+        fetchedGrade.setConsiderations(grade.getConsiderations());
+        //fetchedGrade.setStatus(grade.getStatus());
+        fetchedGrade.setIsFinal(isFinal);
+        fetchedGrade.setAppraiser(grade.getAppraiser());
+        fetchedGrade.setDocument(grade.getDocument());
+
+        fetchedGrade.setVocabulary(grade.getVocabulary());
+        fetchedGrade.setDevelopmentInLogicalSequence(grade.getDevelopmentInLogicalSequence());
+        fetchedGrade.setSubjectDomain(grade.getSubjectDomain());
+        fetchedGrade.setAdequacyOfPresentation(grade.getAdequacyOfPresentation());
+        fetchedGrade.setClosingExpectedTime(grade.getClosingExpectedTime());
+        fetchedGrade.setPresentation(grade.getPresentation());
+        fetchedGrade.setConclusion(grade.getConclusion());
+        fetchedGrade.setExperiencedSolution(grade.getExperiencedSolution());
+        fetchedGrade.setTheoreticalApproach(grade.getTheoreticalApproach());
+        fetchedGrade.setMethodology(grade.getMethodology());
+        fetchedGrade.setObjective(grade.getObjective());
+        fetchedGrade.setLiteratureReview(grade.getLiteratureReview());
+
+        return getOne(gradeRepository.save(fetchedGrade));
     }
 }

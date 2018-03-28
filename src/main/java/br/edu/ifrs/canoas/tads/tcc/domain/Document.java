@@ -78,127 +78,98 @@ public class Document {
 
     @Transient
     public Boolean getBank() {
-
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long currentPrincipalId = ((UserImpl) authentication.getPrincipal()).getUser().getId();
-
+        Long currentPrincipalId =getCurrentUserId();
         for (Professor professor : evaluationBoard.getProfessors())
             if ((professor.getId()).equals(currentPrincipalId))
                 return true;
-
         return false;
     }
 
     @Transient
     public EvaluationStatus getStatusByUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long currentPrincipalId = ((UserImpl) authentication.getPrincipal()).getUser().getId();
 
-
-        if (evaluations == null || evaluations.size() == 0) {
-            return EvaluationStatus.EVALUATE;
+        // are you on the bench??
+        if (getBank()) {
+            if (evaluations == null || evaluations.size() == 0)
+                return EvaluationStatus.EVALUATE;
+            else {
+                if (getAlreadyEvaluated()) {
+                    if (isAllEvaluated()) {
+                        return getStatus();
+                    } else {
+                        return EvaluationStatus.IN_PROGRESS;
+                    }
+                } else {
+                    return EvaluationStatus.EVALUATE;
+                }
+            }
         } else {
-            if (this.documentType.equals(DocumentType.TERMPAPER)) {
-                for (Evaluation eval : evaluations) {
-                    if (eval instanceof Grade) {
-                        if (((((Grade) eval).getAppraiser()).getId()).equals(currentPrincipalId)) {
-                            //System.out.println("Acho o professor");
-                            if (((Grade) eval).getIsFinal() == null || (!((Grade) eval).getIsFinal()))
-                                return EvaluationStatus.EVALUATE;
-                            else {
-                                if (isAllEvaluated()) {
-                                    return getStatus();
-                                } else {
-                                    // System.out.println("Ele não acho a avaliação do professor");
-                                    return EvaluationStatus.IN_PROGRESS;
-                                }
+            if (evaluations == null || evaluations.size() == 0) {
+                return EvaluationStatus.IN_PROGRESS;
+            } else {
+                if (isAllEvaluated())
+                    return getStatus();
+                else
+                    return EvaluationStatus.IN_PROGRESS;
+            }
+        }
+    }
 
-                            }
-                        }
+    private Boolean getAlreadyEvaluated() {
+
+        Long currentPrincipalId = getCurrentUserId();
+
+        for (Evaluation eval : evaluations) {
+            if (documentType.equals(DocumentType.TERMPAPER)) {
+                if (((((Grade) eval).getAppraiser()).getId()).equals(currentPrincipalId)) {
+                    if (((Grade) eval).getIsFinal() != null && (((Grade) eval).getIsFinal())) {
+                        return true;
                     }
                 }
-
             } else {
-                for (Evaluation eval : evaluations) {
-                    if (eval instanceof Advice) {
-                        if (documentType.equals(DocumentType.THEME)) {
-                            return getStatus();
-                        }
-                        if (((((Advice) eval).getAppraiser()).getId()).equals(currentPrincipalId)) {
-
-                            if (((Advice) eval).getIsFinal() == null || (!((Advice) eval).getIsFinal()))
-                                return EvaluationStatus.EVALUATE;
-                            else {
-                                if (isAllEvaluated())
-                                    return getStatus();
-                                else
-                                    return EvaluationStatus.IN_PROGRESS;
-
-                            }
-                        }
+                if (((((Advice) eval).getAppraiser()).getId()).equals(currentPrincipalId)) {
+                    if (((Advice) eval).getIsFinal() != null && (((Advice) eval).getIsFinal())) {
+                        return true;
                     }
                 }
             }
         }
+        return false;
 
-        if (getBank()) {
-            //System.out.println("É professor");
-            return EvaluationStatus.EVALUATE;
-        } else
-            return getStatus();
+    }
+
+    private Long getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return ((UserImpl) authentication.getPrincipal()).getUser().getId();
     }
 
 
     private Boolean isAllEvaluated() {
-
-        //TODO calcular quantidade avaliadores da banca,
-        // se o nº de avaliadores for maior que o nº de avaliações retornar falso
-        //System.out.println( "PROF" + (evaluationBoard.getProfessors()).size() );
-
         int counter = 0;
-        for (Evaluation eval : evaluations) {
-            if (documentType.equals(DocumentType.PROPOSAL)) {
-                if (eval instanceof Advice)
-                    if (eval.getIsFinal() != null && eval.getIsFinal())
-                        counter++;
-            }
-            if (documentType.equals(DocumentType.TERMPAPER)) {
-                if (eval instanceof Grade) {
-                    if (eval.getIsFinal() != null && eval.getIsFinal())
-                        counter++;
+        switch (documentType) {
+            case THEME:
+            case PROPOSAL:
+                for (Evaluation eval : evaluations) {
+                    if (eval instanceof Advice) {
+                        if (eval.getIsFinal() != null && eval.getIsFinal())
+                            counter++;
+                    }
                 }
-            }
-            if (documentType.equals(DocumentType.THEME)) {
-                if (eval instanceof Advice) {
-                    if (eval.getIsFinal() != null && eval.getIsFinal())
-                        counter++;
+                break;
+            case TERMPAPER:
+                for (Evaluation eval : evaluations) {
+                    if (eval instanceof Grade) {
+                        if (eval.getIsFinal() != null && eval.getIsFinal())
+                            counter++;
+                    }
                 }
-            }
+                break;
         }
         if (counter < (evaluationBoard.getProfessors()).size()) {
             return false;
         } else {
             return true;
         }
-
-       /* for (Evaluation eval : evaluations) {
-            if (type.equals(DocumentType.TERMPAPER)) {
-                if (eval instanceof Grade) {
-                    if (((Grade) eval).getIsFinal() == null || (!((Grade) eval).getIsFinal())) {
-                        return false;
-                    }
-                }
-
-            }
-            if (type.equals(DocumentType.PROPOSAL)) {
-                if (eval instanceof Advice) {
-                    if (((Advice) eval).getIsFinal() == null || (!((Advice) eval).getIsFinal())) {
-                        return false;
-                    }
-                }
-            }*/
-
 
     }
 
@@ -208,8 +179,6 @@ public class Document {
         EvaluationStatus status = getStatusByUser();
         if (status == null)
             return "btn-primary";
-
-
         switch (status) {
             case APPROVED:
                 return "btn-success";

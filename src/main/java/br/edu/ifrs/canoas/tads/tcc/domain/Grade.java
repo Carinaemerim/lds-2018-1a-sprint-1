@@ -29,10 +29,11 @@ public class Grade extends Evaluation {
 	private Double finalGrade;
 
 	public Double getFinalGrade() {
-		return (this.literatureReview + this.objective + this.methodology + this.theoreticalApproach
-				+ this.experiencedSolution + this.conclusion + this.presentation + this.closingExpectedTime
-				+ this.adequacyOfPresentation + this.subjectDomain + this.developmentInLogicalSequence
-				+ this.vocabulary) / 12.0;
+
+		return (getLiteratureReview() + getObjective() + getMethodology() + getTheoreticalApproach()
+				+ getExperiencedSolution() + getConclusion() + getPresentation() + getClosingExpectedTime()
+				+ getAdequacyOfPresentation() + getSubjectDomain() + getDevelopmentInLogicalSequence()
+				+ getVocabulary()) / 12.0;
 	}
 
 

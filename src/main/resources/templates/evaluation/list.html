@@ -71,7 +71,7 @@
                                           class="btn btn-block btn-flat">Avaliar</span>
                                 </a></td>
                                 <td class="text-center"><h4 th:if="${termPaper.termPaperDocument != null}"
-                                                            th:text="${#numbers.formatDecimal(termPaper?.termPaperDocument?.finalGrade, 1, 1)}"></h4>
+                                                            th:text="${termPaper?.termPaperDocument?.finalGrade} != null ? ${#numbers.formatDecimal(termPaper?.termPaperDocument?.finalGrade, 1, 1)}"></h4>
                                 </td>
                             </tr>
 

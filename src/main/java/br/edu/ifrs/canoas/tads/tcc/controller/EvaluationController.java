@@ -93,15 +93,15 @@ public class EvaluationController {
         ModelAndView mav = new ModelAndView("/evaluation/termpaper");
         TermPaper termPaper = termPaperService.getOneById(id);
         mav.addObject("termPaper", termPaper);
-        mav.addObject("document", documentService.getOneById(termPaper.getTermPaperDocument().getId()));
-
         Document document = termPaper.getTermPaperDocument();
+        mav.addObject("document", document);
+
         Evaluation grade = evaluationService.getOneEvaluation(document, activeUser.getUser());
         if (grade == null) {
             grade = new Grade();
         }
         mav.addObject("grade", grade);
-
+        grade.setDocument(document);
         //model.addAttribute("action", "record");
         return mav;
     }

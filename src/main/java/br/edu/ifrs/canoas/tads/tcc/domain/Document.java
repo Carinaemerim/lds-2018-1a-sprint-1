@@ -42,7 +42,7 @@ public class Document {
      * @return EvaluationStatus
      */
     @Transient
-    public EvaluationStatus getStatus() {
+    public EvaluationStatus getStatusGeneral() {
 
 
         if (evaluations == null || evaluations.size() == 0) {
@@ -88,7 +88,7 @@ public class Document {
     }
 
     @Transient
-    public EvaluationStatus getStatusByUser() {
+    public EvaluationStatus getStatus() {
 
         // are you on the bench??
         if (getBank()) {
@@ -97,7 +97,7 @@ public class Document {
             else {
                 if (getAlreadyEvaluated()) {
                     if (isAllEvaluated()) {
-                        return getStatus();
+                        return getStatusGeneral();
                     } else {
                         return EvaluationStatus.IN_PROGRESS;
                     }
@@ -110,7 +110,7 @@ public class Document {
                 return EvaluationStatus.IN_PROGRESS;
             } else {
                 if (isAllEvaluated())
-                    return getStatus();
+                    return getStatusGeneral();
                 else
                     return EvaluationStatus.IN_PROGRESS;
             }
@@ -180,7 +180,7 @@ public class Document {
     @Transient
     public String getColorStatus() {
 
-        EvaluationStatus status = getStatusByUser();
+        EvaluationStatus status = getStatus();
         if (status == null)
             return "btn-primary";
         switch (status) {

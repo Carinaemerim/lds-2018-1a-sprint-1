@@ -2,6 +2,8 @@ package br.edu.ifrs.canoas.tads.tcc.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,19 +13,44 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class Grade extends Evaluation {
 
+	@Min(0)
+	@Max(10)
 	private Double literatureReview;
+	@Min(0)
+	@Max(10)
 	private Double objective;
+	@Min(0)
+	@Max(10)
 	private Double methodology;
+	@Min(0)
+	@Max(10)
 	private Double theoreticalApproach;
+	@Min(0)
+	@Max(10)
 	private Double experiencedSolution;
+	@Min(0)
+	@Max(10)
 	private Double conclusion;
 
+	@Min(0)
+	@Max(10)
 	private Double presentation;
+	@Min(0)
+	@Max(10)
 	private Double closingExpectedTime;
+	@Min(0)
+	@Max(10)
 	private Double adequacyOfPresentation;
+	@Min(0)
+	@Max(10)
 	private Double subjectDomain;
+	@Min(0)
+	@Max(10)
 	private Double developmentInLogicalSequence;
+	@Min(0)
+	@Max(10)
 	private Double vocabulary;
+
 
 	@Transient
 	private Double finalGrade;

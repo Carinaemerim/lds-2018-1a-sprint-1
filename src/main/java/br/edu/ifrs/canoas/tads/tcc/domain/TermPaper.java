@@ -1,6 +1,8 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -8,75 +10,82 @@ import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(of = { "id", "title", "theme" })
+@ToString(of = { "id", "title", "theme" })
 public class TermPaper {
-    @Id
-    @GeneratedValue
-    private Long id;
-    @NotBlank
-    private String title;
-    @NotBlank
-    private String theme;
-    @NotBlank
-    private String description;
-    @ManyToOne
-    private Student author;
-    @ManyToOne
-    private Professor advisor;
+	@Id
+	@GeneratedValue
+	private Long id;
+	@NotBlank
+	private String title;
+	@NotBlank
+	private String theme;
+	@NotBlank
+	private String description;
+	@ManyToOne
+	private Student author;
+	@ManyToOne
+	private Professor advisor;
 
-    @ManyToOne
-    private AcademicYear academicYear;
+	@ManyToOne
+	private AcademicYear academicYear;
 
-    /* Gerar a partir do abstract da monografia*/
-    @Transient
-    public String getAbstract() {
-        return "Assim como o título, o resumo e o abstract do seu trabalho é a porta de entrada para o leitor, " +
-                "além de dar uma visão geral do seu trabalho, deve despertar o interesse do mesmo. Como o resumo e " +
-                "abstract possue uma quantidade de texto limitada, muitas pessoas tem dificuldade em elaborar um texto " +
-                "conciso e interessante. Desta forma, vamos apresentar uma técnica para facilitar a elaboração " +
-                "do resumo e o abstract que consiste em dividi-los em cinco partes: contexto, objetivo, método, " +
-                "resultados e conclusão. Veja a seguir do que se trata cada uma dessas partes.";
-    }
+	/* Gerar a partir do abstract da monografia */
+	@Transient
+	public String getAbstract() {
+		return "Assim como o título, o resumo e o abstract do seu trabalho é a porta de entrada para o leitor, "
+				+ "além de dar uma visão geral do seu trabalho, deve despertar o interesse do mesmo. Como o resumo e "
+				+ "abstract possue uma quantidade de texto limitada, muitas pessoas tem dificuldade em elaborar um texto "
+				+ "conciso e interessante. Desta forma, vamos apresentar uma técnica para facilitar a elaboração "
+				+ "do resumo e o abstract que consiste em dividi-los em cinco partes: contexto, objetivo, método, "
+				+ "resultados e conclusão. Veja a seguir do que se trata cada uma dessas partes.";
+	}
 
-    @OneToMany(mappedBy = "termPaper", fetch = FetchType.EAGER)
-    private List<Document> documents;
+	@OneToMany(mappedBy = "termPaper", fetch = FetchType.EAGER)
+	private List<Document> documents;
 
+	/*
+	 * @Transient private Document themeDocument;
+	 *
+	 * @Transient private Document proposalDocument;
+	 *
+	 * @Transient private Document termPaperDocument;
+	 *
+	 * @Transient private Boolean themeWaitingEvaluation;
+	 */
+	@Transient
+	public Boolean getThemeWaitingEvaluation() {
+		return this.getThemeDocument() != null && this.getThemeDocument().getStatus() == EvaluationStatus.EVALUATE;
+	}
 
-    @Transient
-    private Document themeDocument;
+	@Transient
+	public Document getThemeDocument() {
+		if (documents != null)
+			for (Document doc : documents) {
+				if (doc.getDocumentType().equals(DocumentType.THEME) && doc.getIsFinal()) {
+					return doc;
+				}
+			}
+		return null;
+	}
 
-    @Transient
-    private Document proposalDocument;
+	public Document getProposalDocument() {
+		if (documents != null)
+			for (Document doc : documents) {
+				if (doc.getDocumentType().equals(DocumentType.PROPOSAL) && doc.getIsFinal()) {
+					return doc;
+				}
+			}
+		return null;
+	}
 
-    @Transient
-    private Document termPaperDocument;
-
-    public Document getThemeDocument() {
-        if (documents != null)
-            for (Document doc : documents) {
-                if (doc.getDocumentType().equals(DocumentType.THEME) && doc.getIsFinal()) {
-                    return doc;
-                }
-            }
-        return null;
-    }
-
-    public Document getProposalDocument() {
-        if (documents != null)
-            for (Document doc : documents) {
-                if (doc.getDocumentType().equals(DocumentType.PROPOSAL) && doc.getIsFinal()) {
-                    return doc;
-                }
-            }
-        return null;
-    }
-
-    public Document getTermPaperDocument() {
-        if (documents != null)
-            for (Document doc : documents) {
-                if (doc.getDocumentType().equals(DocumentType.TERMPAPER) && doc.getIsFinal()) {
-                    return doc;
-                }
-            }
-        return null;
-    }
+	public Document getTermPaperDocument() {
+		if (documents != null)
+			for (Document doc : documents) {
+				if (doc.getDocumentType().equals(DocumentType.TERMPAPER) && doc.getIsFinal()) {
+					return doc;
+				}
+			}
+		return null;
+	}
 }

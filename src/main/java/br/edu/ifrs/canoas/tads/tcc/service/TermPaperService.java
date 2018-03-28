@@ -44,7 +44,7 @@ public class TermPaperService {
         fetchedTermPaper.setDescription(termPaper.getDescription());
         fetchedTermPaper.setTheme(termPaper.getTheme());
         fetchedTermPaper.setTitle(termPaper.getTitle());
-        return termPaperRepository.save(termPaper);
+        return termPaperRepository.save(fetchedTermPaper);
     }
 
     public TermPaper submitThemeForEvaluation(TermPaper termPaper) {
@@ -52,6 +52,7 @@ public class TermPaperService {
         Document fetchedDocument = documentService.getFinalThemeDocumentByTermPaper(termPaper);
         if (fetchedDocument == null)
             fetchedDocument = new Document();
+        fetchedDocument.setTitle(termPaper.getTitle());
         fetchedDocument.setDocumentType(DocumentType.THEME);
         fetchedDocument.setIsFinal(true);
         fetchedDocument.setTermPaper(termPaper);

@@ -33,7 +33,7 @@
 					th:text="#{theme.advisor}">Advisor</label>
 				<div class="col-sm-10"
 					th:classappend="${#fields.hasErrors('advisor')}? 'has-error'">
-					<select class="form-control" id="advisor" th:field="*{advisor}">
+					<select class="form-control" id="advisor" th:field="*{advisor}" th:disabled="${termPaper.themeWaitingEvaluation}">
 						<option th:value="null" th:text="#{theme.ph.advisor}">Select
 							a teacher advisor</option>
 						<option th:each="advisor : ${advisors}" th:value="${advisor.id}"

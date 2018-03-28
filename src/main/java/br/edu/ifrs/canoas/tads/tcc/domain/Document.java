@@ -37,14 +37,11 @@ public class Document {
     private EvaluationBoard evaluationBoard;
 
     /**
-     * Uma ideia de como deve ser o calculo do status do documento <- nicolas
+     * Uma ideia de como deve ser o calculo do status geral do documento
      *
      * @return EvaluationStatus
      */
-    @Transient
-    public EvaluationStatus getStatusGeneral() {
-
-
+    private EvaluationStatus getStatusGeneral() {
         if (evaluations == null || evaluations.size() == 0) {
             return EvaluationStatus.EVALUATE;
         } else {

@@ -46,23 +46,36 @@ insert into user_roles (user_id, roles_id) values
 (107, 4);
 
 
--- TERM_PAPER
+-- Course
+
+insert into COURSE (ID, TITLE) values
+(300,'Análise e Desenvolvimento de Sistemas'),
+(301,'Automação Industrial'),
+(302,'Logística'),
+(303,'Licenciatura em Matemática');
+
+
+insert into ACADEMIC_YEAR (ID, TITLE) values
+(500,'2017/02'),
+(501,'2018/01');
 
 -- DOCUMENT
 insert into DOCUMENT (id, document_Type, title,is_Final) values (200, 2, 'TAC sobre o melhor framework do mundo', 'false');
 insert into DOCUMENT (id, document_Type, title,is_Final) values (400, 2, 'TAC sobre engenharia de software', 'false');
 
-insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description) values
-(1000, 'Spring Boot', 'O Louco TCC sobre o melhor framework do mundo', 101, 100, 'Uma breve descrição do trabalho TCC sobre o melhor framework do mundo'),
-(1001, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 101, 102, 'Uma breve descrição do trabalho TCC sobre o impacto de scrum no mundo'),
-(1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103, 'Uma breve descrição do trabalho Scrum é a vida Jedi'),
-(1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico'),
-(1004, 'Engenharia de Software', 'Sistemas ERP: características, custos e tendências', 101, 108,'Uma breve descrição do trabalho Sistemas ERP: características, custos e tendências'),
-(1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico');
+insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description, ACADEMIC_YEAR_ID ) values
+(999, 'Antigo Spring Boot', 'O ANTIGO Louco TCC sobre o melhor framework do mundo', 101, 100, 'Uma breve descrição do trabalho TCC sobre o melhor framework do mundo', 500),
+(1000, 'Spring Boot', 'O Louco TCC sobre o melhor framework do mundo', 101, 100, 'Uma breve descrição do trabalho TCC sobre o melhor framework do mundo', 501),
+(1001, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 101, 102, 'Uma breve descrição do trabalho TCC sobre o impacto de scrum no mundo', 501),
+(1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103, 'Uma breve descrição do trabalho Scrum é a vida Jedi', 501),
+(1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 501),
+(1004, 'Engenharia de Software', 'Sistemas ERP: características, custos e tendências', 101, 108,'Uma breve descrição do trabalho Sistemas ERP: características, custos e tendências', 501),
+(1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico', 501);
 
 
 
 insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id )	values
+(97,0,1,999, 0),
 (98,0,0,1000, 0),
 (99,0,0,1000, 0),
 (101,0,1,1000, 0),
@@ -78,6 +91,7 @@ insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id )	valu
 
 
 insert into EVALUATION_BOARD (id, document_id) values
+(99, 97),
 (101, 101),
 (102, 102),
 (103, 103),
@@ -90,6 +104,7 @@ insert into EVALUATION_BOARD (id, document_id) values
 (110, 110);
 
 insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) values
+(99, 101),
 (101, 101),
 (102, 101),
 (103, 101),
@@ -106,6 +121,7 @@ insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) val
 
 
 --Evaluation
+INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (499, 'Advice', 97, 'Consideracoes do tema estao aqui. bom tema!', 1, 101, TRUE);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (500, 'Advice', 101, 'Consideracoes do tema estao aqui. bom tema!', 0, 101, TRUE);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID ) VALUES (501, 'Advice', 105, 'Consideracoes do Proposta estao aqui. Melhor tentar novamente!', 2, 101);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (502, 'Advice', 103, 'Consideracoes do Proposta estao aqui. Parabéns!!', 0, 101, TRUE);
@@ -121,6 +137,7 @@ INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STAT
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (508, 'Advice', 108, 'Consideracoes do Proposta estao aqui. Parabéns Bommmm hein!!', 0, 101, TRUE);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (509, 'Advice', 109, 'Consideracoes do Proposta estao aqui. Satisfatório!!', 0, 101, TRUE);
 -- SET EVALUATION_BOARD_ID IN Document
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 99  WHERE ID=  97;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 101  WHERE ID=  101;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 102  WHERE ID=  102;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 103  WHERE ID=  103;

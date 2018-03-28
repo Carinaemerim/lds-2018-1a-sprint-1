@@ -23,6 +23,9 @@ public class TermPaper {
     @ManyToOne
     private Professor advisor;
 
+    @ManyToOne
+    private AcademicYear academicYear;
+
     /* Gerar a partir do abstract da monografia*/
     @Transient
     public String getAbstract() {

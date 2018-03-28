@@ -78,7 +78,9 @@ public class Document {
 
     @Transient
     public Boolean getBank() {
-        Long currentPrincipalId =getCurrentUserId();
+        Long currentPrincipalId = getCurrentUserId();
+        if(evaluationBoard == null)
+            return false;
         for (Professor professor : evaluationBoard.getProfessors())
             if ((professor.getId()).equals(currentPrincipalId))
                 return true;
@@ -145,6 +147,8 @@ public class Document {
 
 
     private Boolean isAllEvaluated() {
+        if(evaluationBoard == null)
+            return false;
         int counter = 0;
         switch (documentType) {
             case THEME:
@@ -206,7 +210,7 @@ public class Document {
             case REDO:
                 return "fill-warning";
             case IN_PROGRESS:
-                return "fill-primary";
+                return "fill-navy";
             default:
                 return "fill-primary";
         }

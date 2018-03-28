@@ -25,11 +25,6 @@ public class Document {
     @OneToMany(mappedBy = "document")
     private List<Evaluation> evaluations;
 
-    /**
-     * Logic to get final status from all evaluations
-     */
-
-
     private String title;
 
 
@@ -76,7 +71,7 @@ public class Document {
     @Transient
     public Boolean getBank() {
         Long currentPrincipalId = getCurrentUserId();
-        if(evaluationBoard == null)
+        if (evaluationBoard == null)
             return false;
         for (Professor professor : evaluationBoard.getProfessors())
             if ((professor.getId()).equals(currentPrincipalId))
@@ -144,7 +139,7 @@ public class Document {
 
 
     private Boolean isAllEvaluated() {
-        if(evaluationBoard == null)
+        if (evaluationBoard == null)
             return false;
         int counter = 0;
         switch (documentType) {
@@ -215,22 +210,20 @@ public class Document {
 
     @Transient
     public Double getCalculatedGradeByProfessor() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long currentPrincipalId = ((UserImpl) authentication.getPrincipal()).getUser().getId();
+
+        Long currentPrincipalId = getCurrentUserId();
         Double sumGrades = 0.0;
         if (this.documentType.equals(DocumentType.TERMPAPER)) {
-
-            if (this.documentType.equals(DocumentType.TERMPAPER)) {
-                if (evaluations.size() > 0)
+            if (evaluations != null) {
+                if (evaluations.size() > 0) {
                     for (Evaluation eval : evaluations) {
                         if (eval instanceof Grade) {
                             if (((((Grade) eval).getAppraiser()).getId()).equals(currentPrincipalId))
                                 sumGrades += ((Grade) eval).getFinalGrade();
                         }
                     }
-
+                }
             }
-            return sumGrades; //TODO Colcoar null
         }
         return sumGrades;
     }
@@ -239,6 +232,12 @@ public class Document {
     @Transient
     public Double getFinalGrade() {
 
+        if (evaluations == null || evaluations.size() == 0)
+            return null;
+
+        if (!(isAllEvaluated()))
+            return null;
+
         Double sumGrades = 0.0;
         for (Evaluation eval : evaluations) {
             if (eval instanceof Grade) {
@@ -246,10 +245,9 @@ public class Document {
                     sumGrades += ((Grade) eval).getFinalGrade();
             }
         }
-        if (evaluations.size() != 0)
-            return sumGrades / evaluations.size();
 
-        return null;
+        return sumGrades / evaluations.size();
+
     }
 
 }

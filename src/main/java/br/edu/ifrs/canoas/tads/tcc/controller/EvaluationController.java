@@ -46,7 +46,7 @@ public class EvaluationController {
         ModelAndView mav = new ModelAndView("/evaluation/list");
         Iterable<TermPaper> termPapers = evaluationService.getTermPaperEvaluation(activeUser.getUser());
         mav.addObject("termPapers", termPapers);
-        //model.addAttribute("statusColorTheme", get)
+
         return mav;
     }
 
@@ -57,7 +57,7 @@ public class EvaluationController {
         TermPaper termPaper = termPaperService.getOneById(id);
         mav.addObject("termPaper", termPaper);
         Document document = termPaper.getThemeDocument();
-        //mav.addObject("document", document);
+        mav.addObject("document", document);
 
         //Evaluation advice = evaluationService.getOneEvaluation(document, activeUser.getUser());
         Evaluation advice = evaluationService.getOneEvaluation(document, userRepository.getOne((termPaper.getAdvisor().getId())));
@@ -68,7 +68,6 @@ public class EvaluationController {
         }
 
         mav.addObject("advice", advice);
-        //model.addAttribute("action", "record");
         return mav;
     }
 
@@ -148,6 +147,50 @@ public class EvaluationController {
 
         return mav;
     }
+
+
+    @PostMapping(path = "/grade/submit")
+    public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
+                                                 @RequestParam(value = "documentId", required = false) Long documentId,
+                                                 // @RequestParam(value = "termPaperId", required = false) Long termPaperId,
+                                                 @RequestParam(value = "action", required = false) String action,
+                                                 @Valid Grade grade, BindingResult bindingResult,
+                                                 RedirectAttributes redirectAttr) {
+
+        Boolean isFinal = false;
+        Document document = documentService.getOneById(documentId);
+        ModelAndView mav;
+        if (action.equals("evaluation"))
+            isFinal = true;
+        if (bindingResult.hasErrors()) {
+            switch (document.getDocumentType()) {
+                case TERMPAPER:
+                    mav = new ModelAndView("/evaluation/termpaper");
+                    break;
+                default:
+                    mav = new ModelAndView("redirect:/evaluation/");
+                    return mav;
+            }
+            mav.addObject("termPaper", document.getTermPaper());
+            grade.setDocument(document);
+            mav.addObject("advice", grade);
+            mav.addObject("document", document);
+            return mav;
+        }
+
+        mav = new ModelAndView("redirect:/evaluation/");
+        grade.setAppraiser((Professor) activeUser.getUser());
+        grade.setDocument(document);
+        mav.addObject("advice", evaluationService.saveTermPaperEvaluationFinal(grade, isFinal));
+
+        redirectAttr.addFlashAttribute("message", (isFinal) ? messages.get("field.saved") : messages.get("field.draft-saved"));
+
+        return mav;
+    }
+
+
+
+
 
 
 }

@@ -1,7 +1,7 @@
 <html layout:decorate="~{/layouts/main}">
 
 <head>
-    <title th:text="#{item.header}"/>
+    <title th:text="#{evaluation.header}"/>
 </head>
 
 <!-- CONTENT HEADER -->
@@ -49,12 +49,12 @@
                         <table id="table-list-evaluate" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Aluno</th>
-                                <th>Título do Trabalho</th>
-                                <th>Tema</th>
-                                <th>Proposta</th>
-                                <th>Monografia</th>
-                                <th>Nota Final</th>
+                                <th th:text="#{evaluation.student}">Aluno</th>
+                                <th th:text="#{evaluation.title.tcc}">Título do Trabalho</th>
+                                <th th:text="#{evaluation.theme}">Tema</th>
+                                <th th:text="#{evaluation.proposal}">Proposta</th>
+                                <th th:text="#{evaluation.header}">tcc</th>
+                                <th th:text="#{evaluation.final.grade}">Nota Final</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">

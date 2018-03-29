@@ -86,10 +86,8 @@ public class EvaluationController {
 				userRepository.getOne((termPaper.getAdvisor().getId())));
 		if (advice == null) {
 			advice = new Advice();
-			advice.setDocument(document);
-			System.out.println("advice is null no get");
 		}
-
+		advice.setDocument(document);
 		mav.addObject("advice", advice);
 		return mav;
 	}
@@ -125,7 +123,6 @@ public class EvaluationController {
 		}
 		mav.addObject("grade", grade);
 		grade.setDocument(document);
-		// model.addAttribute("action", "record");
 		return mav;
 	}
 

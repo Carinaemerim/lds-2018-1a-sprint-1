@@ -25,15 +25,24 @@
                 <!-- /.widget-user -->
             </div>
             <div class="col-md-9">
-                <div>
-                    <p class="text-muted">Submetido em 13/03/2018 10:30</p>
-                    <h4 class="text-bold">Orientador: <span th:text="${termPaper.advisor.name}"></span></h4>
-                    <h4 class="text-bold">Período: 2018/1</h4>
-                    <a class="btn btn-app">
-                        <i class="fa fa-file-text"></i> <b>PDF</b>
-                    </a>
+                <div class="box-body">
+                    <dl class="dl-horizontal">
+                        <!--dt  th:text="#{document.date}">Submetido em: </dt>
+                            <dd th:text="${document.date}">Análise e Desenvolvimento de Sistemas.</dd-->
+                        <dt th:text="#{evaluation.advisor} + ': '">Orientador</dt>
+                        <dd th:text="${termPaper.advisor.name}">Nome do Orientador</dd>
+                        <dt th:text="#{evaluation.academic-year} + ': '">Período</dt>
+                        <dd th:text="${termPaper.academicYear.title}">2018/01</dd>
+                    </dl>
                 </div>
-                <!-- /.box -->
+                <div class="box-body">
+                    <div th:if="${document?.file != null}">
+                        <a class="btn btn-app" style="width:100%;" th:href="@{|/file/${document?.file.id}|}"
+                           th:id="'file-'+ ${document?.file.id}">
+                            <i class="fa fa-file-text"></i> <b th:text="#{download.label}">PDF</b>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <!-- /.col -->

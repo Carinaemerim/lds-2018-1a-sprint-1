@@ -4,6 +4,7 @@ import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import lombok.Data;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
@@ -56,7 +57,7 @@ public class Document {
                 EvaluationStatus status = EvaluationStatus.APPROVED;
                 for (Evaluation eval : evaluations) {
                     if (eval instanceof Advice) {
-                        if (((Advice) eval).getStatus().equals(EvaluationStatus.DISAPPROVED)) {
+                    	if (((Advice) eval).getStatus().equals(EvaluationStatus.DISAPPROVED)) {
                             return EvaluationStatus.DISAPPROVED;
                         } else if (((Advice) eval).getStatus().equals(EvaluationStatus.REDO)) {
                             status = EvaluationStatus.REDO;
@@ -109,6 +110,18 @@ public class Document {
         }
     }
 
+    @Transient
+    public String getAllConsiderations() {
+    	StringBuilder builder = new StringBuilder();
+    	if (!CollectionUtils.isEmpty(evaluations)) {
+    		 for (Evaluation eval : evaluations) {
+    			 builder.append(eval.getConsiderations());
+    			 builder.append("\n");
+    		 }
+    	}
+    	return builder.toString();
+    }
+
     private Boolean getAlreadyEvaluated() {
 
         Long currentPrincipalId = getCurrentUserId();
@@ -147,7 +160,7 @@ public class Document {
             case PROPOSAL:
                 for (Evaluation eval : evaluations) {
                     if (eval instanceof Advice) {
-                        if (eval.getIsFinal() != null && eval.getIsFinal())
+                        if (eval.getIsFinal() != null && eval.getIsFinal() && ((Advice) eval).getStatus() != null)
                             counter++;
                     }
                 }

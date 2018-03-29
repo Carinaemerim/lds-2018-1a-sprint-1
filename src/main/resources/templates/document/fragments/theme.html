@@ -23,7 +23,7 @@
 					th:classappend="${#fields.hasErrors('theme')}? 'has-error'">
 					<input type="text" class="form-control" id="theme"
 						placeholder="Enter paper theme" th:placeholder="#{theme.ph.theme}"
-						th:field="*{theme}"> <span
+						th:field="*{theme}" th:readonly="${termPaper.themeSubmitted}"> <span
 						th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"
 						th:class="help-block" />
 				</div>
@@ -33,7 +33,8 @@
 					th:text="#{theme.advisor}">Advisor</label>
 				<div class="col-sm-10"
 					th:classappend="${#fields.hasErrors('advisor')}? 'has-error'">
-					<select class="form-control" id="advisor" th:field="*{advisor}" th:disabled="${termPaper.themeWaitingEvaluation}">
+					<select class="form-control" id="advisor" th:field="*{advisor}"
+						th:disabled="${termPaper.themeSubmitted}">
 						<option th:value="null" th:text="#{theme.ph.advisor}">Select
 							a teacher advisor</option>
 						<option th:each="advisor : ${advisors}" th:value="${advisor.id}"
@@ -52,6 +53,29 @@
 						th:placeholder="#{theme.ph.description}" th:field="*{description}"></textarea>
 					<span th:if="${#fields.hasErrors('description')}"
 						th:errors="*{description}" th:class="help-block" />
+				</div>
+			</div>
+			<div class="form-group" th:if="${termPaper.themeDocument != null}">
+				<label class="col-sm-2 control-label text-bold" for="status"
+					th:text="#{theme.ph.status}">Status</label>
+				<div class="col-sm-2">
+					<svg height="120" width="120" id="status">
+	                        <circle cx="60" cy="60" r="50" stroke="gray"
+							stroke-width="2"
+							th:classappend="${termPaper?.themeDocument?.colorFillSvg}" />
+	                        <text x="50%" y="50%"
+							alignment-baseline="middle" fill="white" text-anchor="middle"
+							font-weight="bold" transform="rotate(-30 60,60)"
+							th:text="#{${'theme.status.' + termPaper.themeDocument.status}}"> NA
+	                        </text>
+	                    </svg>
+				</div>
+				<label class="col-sm-2 control-label" for="advisorConsiderations"
+					th:text="#{theme.ph.advisorConsiderations}">Advisor
+					Considerations</label>
+				<div class="col-sm-6">
+					<textarea id="advisorConsiderations" class="form-control" rows="3"
+						disabled th:field="*{themeDocument.allConsiderations}"></textarea>
 				</div>
 			</div>
 		</div>

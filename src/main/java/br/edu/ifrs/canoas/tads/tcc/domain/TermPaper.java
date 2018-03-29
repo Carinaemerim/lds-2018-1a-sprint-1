@@ -54,8 +54,9 @@ public class TermPaper {
 	 * @Transient private Boolean themeWaitingEvaluation;
 	 */
 	@Transient
-	public Boolean getThemeWaitingEvaluation() {
-		return this.getThemeDocument() != null && this.getThemeDocument().getStatus() == EvaluationStatus.EVALUATE;
+	public Boolean getThemeSubmitted() {
+		return this.getThemeDocument() != null && this.getThemeDocument().getStatus() != EvaluationStatus.DISAPPROVED
+				&& this.getThemeDocument().getStatus() != EvaluationStatus.REDO;
 	}
 
 	@Transient

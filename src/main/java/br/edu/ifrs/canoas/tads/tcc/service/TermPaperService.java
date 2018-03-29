@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
@@ -39,10 +41,12 @@ public class TermPaperService {
         TermPaper fetchedTermPaper = this.getOne(termPaper);
         if (fetchedTermPaper == null || fetchedTermPaper.getId() == null)
             fetchedTermPaper = new TermPaper();
-        fetchedTermPaper.setAdvisor(termPaper.getAdvisor());
+        if (!fetchedTermPaper.getThemeSubmitted()) {
+        	fetchedTermPaper.setAdvisor(termPaper.getAdvisor());
+        	fetchedTermPaper.setTheme(termPaper.getTheme());
+        }
         fetchedTermPaper.setAuthor(termPaper.getAuthor());
         fetchedTermPaper.setDescription(termPaper.getDescription());
-        fetchedTermPaper.setTheme(termPaper.getTheme());
         fetchedTermPaper.setTitle(termPaper.getTitle());
         return termPaperRepository.save(fetchedTermPaper);
     }

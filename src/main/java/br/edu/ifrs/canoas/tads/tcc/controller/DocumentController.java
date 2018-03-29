@@ -68,26 +68,25 @@ public class DocumentController {
 			mav.addObject("advisors", userService.getAdvisors());
 			return mav;
 		}
-		termPaper.setAuthor((Student)activeUser.getUser());
+		termPaper.setAuthor((Student) activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");
 		mav.addObject("termPaper", termPaperService.saveThemeDraft(termPaper));
 		redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
 		return mav;
 	}
 
-
 	@GetMapping("/delete/{id}")
 	public ModelAndView deleteOne(@PathVariable Long id) {
 		documentService.deleteOne(id);
-		return new ModelAndView("redirect:" +"/document/");
-
+		return new ModelAndView("redirect:" + "/document/");
 
 	}
 
 	@PostMapping(path = "/theme/submit", params = "action=evaluation")
 	public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
 			@Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
-		if (termPaper.getAdvisor() == null) {
+		TermPaper fetchedTermPaper = termPaperService.getOne(termPaper);
+		if (termPaper.getAdvisor() == null && (fetchedTermPaper == null || !fetchedTermPaper.getThemeSubmitted())) {
 			bindingResult.addError(new FieldError("termPaper", "advisor", messages.get("field.not-null")));
 		}
 		if (bindingResult.hasErrors()) {
@@ -95,7 +94,7 @@ public class DocumentController {
 			mav.addObject("advisors", userService.getAdvisors());
 			return mav;
 		}
-		termPaper.setAuthor((Student)activeUser.getUser());
+		termPaper.setAuthor((Student) activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");
 		mav.addObject("termPaper", termPaperService.submitThemeForEvaluation(termPaper));
 		redirectAttr.addFlashAttribute("message", messages.get("theme.submited-for-evaluation"));
@@ -108,6 +107,5 @@ public class DocumentController {
 		MultipartFile multipartFile = multipartRequest.getFile("file");
 		return "redirect:upload-success";
 	}
-
 
 }

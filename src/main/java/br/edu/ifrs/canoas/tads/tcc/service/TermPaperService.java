@@ -4,13 +4,12 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
+import br.edu.ifrs.canoas.tads.tcc.repository.AcademicYearRepository;
 import br.edu.ifrs.canoas.tads.tcc.repository.TermPaperRepository;
 import lombok.AllArgsConstructor;
 
@@ -19,6 +18,8 @@ import lombok.AllArgsConstructor;
 public class TermPaperService {
 
     private final TermPaperRepository termPaperRepository;
+
+    private final AcademicYearRepository academicYearRepository;
 
     private final DocumentService documentService;
 
@@ -39,8 +40,10 @@ public class TermPaperService {
 
     public TermPaper saveThemeDraft(TermPaper termPaper) {
         TermPaper fetchedTermPaper = this.getOne(termPaper);
-        if (fetchedTermPaper == null || fetchedTermPaper.getId() == null)
-            fetchedTermPaper = new TermPaper();
+        if (fetchedTermPaper == null || fetchedTermPaper.getId() == null) {
+        	fetchedTermPaper = new TermPaper();
+        	fetchedTermPaper.setAcademicYear(academicYearRepository.findFirstByOrderByIdDesc());
+        }
         if (!fetchedTermPaper.getThemeSubmitted()) {
         	fetchedTermPaper.setAdvisor(termPaper.getAdvisor());
         	fetchedTermPaper.setTheme(termPaper.getTheme());

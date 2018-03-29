@@ -34,8 +34,9 @@ public class DocumentService {
 
 	public Document save(Document document) {
 		Document fetchedDocument = this.getOne(document);
-		if (fetchedDocument == null || fetchedDocument.getId() == null)
+		if (fetchedDocument == null || fetchedDocument.getId() == null) {
 			fetchedDocument = new Document();
+		}
 		fetchedDocument.setDocumentType(document.getDocumentType());
 		fetchedDocument.setEvaluations(document.getEvaluations());
 		fetchedDocument.setFile(document.getFile());

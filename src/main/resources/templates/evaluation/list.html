@@ -60,7 +60,7 @@
                             <tbody th:remove="all-but-first">
                             <tr th:each="termPaper : ${termPapers}">
                                 <td th:text="${termPaper.author.name}">Aluno</td>
-                                <td th:text="${termPaper.title}">Título do Trabalho</td>
+                                <td th:text="${#strings.abbreviate(termPaper.title,70)}">Título do Trabalho</td>
                                 <td>
                                     <a th:if="${termPaper.themeDocument != null}" th:href="@{|theme/${termPaper.id}|}"
                                        href="#">

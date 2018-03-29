@@ -1,7 +1,8 @@
 <!-- Detail -->
 <div class="box">
     <div class="box-header bg-gray">
-        <h3 class="box-title text-bold"  th:text="${termPaper.title}">Trabalho sobre algo que eu ainda não sei o que é: Internet para todos agora e sempre</h3>
+        <h3 class="box-title text-bold" th:text="${termPaper.title}">Trabalho sobre algo que eu ainda não sei o que é:
+            Internet para todos agora e sempre</h3>
     </div>
     <!-- /.box-header -->
 
@@ -17,7 +18,8 @@
                         <circle cx="60" cy="60" r="50" stroke="gray" stroke-width="2"
                                 th:classappend="${termPaper?.themeDocument?.colorFillSvg}"/>
                         <text x="50%" y="50%" alignment-baseline="middle" fill="white" text-anchor="middle"
-                              font-weight="bold" transform="rotate(-30 60,60)" th:text="#{${'evaluation.status.' + termPaper.themeDocument.status}}"> NA
+                              font-weight="bold" transform="rotate(-30 60,60)"
+                              th:text="#{${'evaluation.status.' + termPaper.themeDocument.status}}"> NA
                         </text>
                     </svg>
                 </div>
@@ -25,8 +27,10 @@
             </div>
             <div class="col-md-9">
                 <div>
+                    <p class="text-bold inline"  th:text="#{theme.theme} + ':  '">Tema</p>
+                    <span th:text="${termPaper.theme}">Nome do Tema</span>
                     <p class="text-bold" th:text="#{theme.description}">Descrição</p>
-                    <p class="text-justify" th:text="${termPaper.description}" >
+                    <p class="text-justify" th:text="${termPaper.description}">
                         The present work aims to highlight why the Internet is important to leverage the business in
                         Brazil, whether for small and large businesses.
                     </p>

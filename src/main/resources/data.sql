@@ -68,7 +68,7 @@ insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description, AC
 (1000, 'Spring Boot', 'O Louco TCC sobre o melhor framework do mundo', 101, 100, 'Uma breve descrição do trabalho TCC sobre o melhor framework do mundo', 501),
 (1001, 'Engenharia de Software', 'TCC sobre o impacto de scrum no mundo', 101, 102, 'Uma breve descrição do trabalho TCC sobre o impacto de scrum no mundo', 501),
 (1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103, 'Uma breve descrição do trabalho Scrum é a vida Jedi', 501),
-(1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 501),
+(1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico mais promissor que você ja viu', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 501),
 (1004, 'Engenharia de Software', 'Sistemas ERP: características, custos e tendências', 101, 108,'Uma breve descrição do trabalho Sistemas ERP: características, custos e tendências', 501),
 (1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico', 501);
 

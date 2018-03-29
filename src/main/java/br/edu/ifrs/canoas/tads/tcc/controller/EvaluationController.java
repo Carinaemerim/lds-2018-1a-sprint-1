@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -189,8 +191,8 @@ public class EvaluationController {
             @RequestParam(value = "documentId", required = false) Long documentId,
             // @RequestParam(value = "termPaperId", required = false) Long termPaperId,
             @RequestParam(value = "action", required = false) String action,
-            @RequestParam(value = "mFile", required = false) String mFile, @Valid Grade grade,
-            BindingResult bindingResult, RedirectAttributes redirectAttr) {
+            @RequestParam(value = "mFile", required = false) MultipartFile mFile, @Valid Grade grade,
+            BindingResult bindingResult, RedirectAttributes redirectAttr) throws IOException {
 
         Boolean isFinal = false;
         Document document = documentService.getOneById(documentId);
@@ -226,7 +228,7 @@ public class EvaluationController {
         }
         grade.setAppraiser((Professor) activeUser.getUser());
         grade.setDocument(document);
-        mav.addObject("grade", evaluationService.saveTermPaperEvaluationFinal(grade, isFinal));
+        mav.addObject("grade", evaluationService.saveTermPaperEvaluationFinal(grade, isFinal, mFile));
 
         redirectAttr.addFlashAttribute("message",
                 (isFinal) ? messages.get("field.saved") : messages.get("field.draft-saved"));

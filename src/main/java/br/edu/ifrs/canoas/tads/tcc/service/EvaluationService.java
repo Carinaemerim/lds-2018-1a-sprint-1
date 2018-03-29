@@ -5,6 +5,9 @@ import br.edu.ifrs.canoas.tads.tcc.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +28,7 @@ public class EvaluationService {
     EvaluationRepository evaluationRepository;
     AdviceRepository adviceRepository;
     GradeRepository gradeRepository;
+    FileRepository fileRepository;
 
 
     public Evaluation getOneEvaluation(Document document, User professor) {
@@ -74,10 +78,21 @@ public class EvaluationService {
     }
 
     @Transactional
-    public Grade saveTermPaperEvaluationFinal(Grade grade, Boolean isFinal) {
+    public Grade    saveTermPaperEvaluationFinal(Grade grade, Boolean isFinal,  MultipartFile mFile) throws IOException {
         Grade fetchedGrade = (Grade)this.getOne(grade);
         if (fetchedGrade == null || fetchedGrade.getId() == null)
             fetchedGrade = new Grade();
+
+        if(mFile!=null) {
+            File file = new File();
+            file.setContent(mFile.getBytes());
+            file.setFilename(mFile.getOriginalFilename());
+            file.setContentType(mFile.getContentType());
+            fileRepository.save(file);
+            fetchedGrade.setFile(file);
+        }
+
+
         fetchedGrade.setConsiderations(grade.getConsiderations());
         //fetchedGrade.setStatus(grade.getStatus());
         fetchedGrade.setIsFinal(isFinal);

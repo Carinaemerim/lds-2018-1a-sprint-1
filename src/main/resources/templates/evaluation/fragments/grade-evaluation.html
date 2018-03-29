@@ -1,7 +1,7 @@
 <!-- form start -->
 
 <form class="form-horizontal" th:action="@{/evaluation/grade/submit}" action="#"
-      th:object="${grade}"  id="form-termpaper-advisor" method="post">
+      th:object="${grade}"  id="form-termpaper-advisor" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-6">
             <div class="box">
@@ -212,8 +212,8 @@
                 </div>
                 <div class="form-control-group" >
                     <div class="form-group">
-                        <label th:text="#{evaluation.file}" for="file">Arquivo</label> <input
-                            type="file" id="mFile" name="mFile" /> <a
+                        <label th:text="#{evaluation.file}" for="mFile">Arquivo</label> <input
+                            type="file" name="mFile" /> <a
                             th:href="@{|/grade/download/${grade.file?.id}|}"> <span
                             th:if="#{evaluation.file} != null"
                             th:text="${grade.file?.filename}"></span></a>

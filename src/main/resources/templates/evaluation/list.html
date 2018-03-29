@@ -1,8 +1,9 @@
 <html layout:decorate="~{/layouts/main}">
 
-<head>
+
+<th:block layout:fragment="head-title">
     <title th:text="#{evaluation.header}"/>
-</head>
+</th:block>
 
 <!-- CONTENT HEADER -->
 <div layout:fragment="content-header">
@@ -53,7 +54,7 @@
                                 <th th:text="#{evaluation.title.tcc}">Título do Trabalho</th>
                                 <th th:text="#{evaluation.theme}">Tema</th>
                                 <th th:text="#{evaluation.proposal}">Proposta</th>
-                                <th th:text="#{evaluation.header}">tcc</th>
+                                <th th:text="#{evaluation.tcc}">tcc</th>
                                 <th th:text="#{evaluation.final.grade}">Nota Final</th>
                             </tr>
                             </thead>

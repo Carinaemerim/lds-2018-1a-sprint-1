@@ -25,4 +25,7 @@ public abstract class Evaluation {
 	private Professor appraiser;
 
 	private Boolean isFinal;
+
+	@OneToOne
+	private File file;
 }

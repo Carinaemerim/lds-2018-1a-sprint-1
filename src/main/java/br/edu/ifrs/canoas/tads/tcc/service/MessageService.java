@@ -27,9 +27,9 @@ public class MessageService {
 	}
 
 
-	public List<Message> queryFirst10ByViewed(Boolean viewed, Date date){
+	public List<Message> queryFirst10ByViewedAndReceiverOrderByDateDesc(Boolean viewed, User user){
 
-		return messageRepository.queryFirst10ByViewedAndDateOrderByDateDesc(viewed, date);
+		return messageRepository.queryFirst10ByViewedAndReceiverOrderByDateDesc(viewed, user);
 	}
 
 
@@ -46,7 +46,7 @@ public class MessageService {
 	public List<Message> findAllBySenderOrReceiverOrderByDate(User sender){
 		return messageRepository.findAllBySenderOrReceiverOrderByDate(sender, sender);
 	}
-	
+
 	public Message save(Message message) {
 		return messageRepository.save(message);
 	}

@@ -11,12 +11,12 @@ import br.edu.ifrs.canoas.tads.tcc.domain.User;
 public interface MessageRepository extends JpaRepository<Message, Long>{
 
 	List<Message> findAllByReceiver(User receiver);
-	
+
 	List<Message> findAllBySenderOrReceiverOrderByDate(User sender, User receiver);
 
 	List<Message> findAllBySender(User sender);
 
-	List<Message> queryFirst10ByViewedAndDateOrderByDateDesc(Boolean viewed, Date date);
+	List<Message> queryFirst10ByViewedAndReceiverOrderByDateDesc(Boolean viewed, User receiver);
 
 	List<Message> findAllByReceiverAndDateOrderByDateDesc(User receiver, Date date);
 

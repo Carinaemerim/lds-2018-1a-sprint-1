@@ -28,4 +28,6 @@ public class Message {
 
 	private String content;
 
+	private boolean notification;
+
 }

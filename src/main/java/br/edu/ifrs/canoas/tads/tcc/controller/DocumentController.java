@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +26,7 @@ import br.edu.ifrs.canoas.tads.tcc.domain.Message;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RequestMapping("/document")
@@ -97,5 +101,13 @@ public class DocumentController {
 		redirectAttr.addFlashAttribute("message", messages.get("theme.submited-for-evaluation"));
 		return mav;
 	}
+	
+	@RequestMapping(value = "Upload", method = RequestMethod.POST)
+	public String upload(HttpServletRequest request) {
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile multipartFile = multipartRequest.getFile("file");
+		return "redirect:upload-success";
+	}
+
 
 }

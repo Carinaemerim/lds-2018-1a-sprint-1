@@ -27,11 +27,24 @@
         <fluentlenium.version>3.4.1</fluentlenium.version>
         <spock.version>1.0-groovy-2.4</spock.version>
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>3.5.3</selenium.version>
+        <selenium.version>3.5.3</selenium.version><commons-fileupload.version>1.2.1</commons-fileupload.version>
+  		<commons-io.version>1.4</commons-io.version>
+
+
 	</properties>
 
 	<dependencies>
-	
+		<dependency>
+		  <groupId>commons-fileupload</groupId>
+		  <artifactId>commons-fileupload</artifactId>
+		  <version>${commons-fileupload.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>commons-io</groupId>
+		  <artifactId>commons-io</artifactId>
+		  <version>${commons-io.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -312,6 +325,8 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+
+
 
 
 </project>

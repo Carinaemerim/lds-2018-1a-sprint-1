@@ -12,56 +12,31 @@
 			<ul class="nav navbar-nav">
 
 				<!-- Notifications: style can be found in dropdown.less -->
-				<li class="dropdown notifications-menu"><a href="#"
+				<li class="dropdown messages-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
-						class="fa fa-bell-o"></i> <span class="label label-warning" th:text="#{notification.number}"></span>
+						class="fa fa-bell-o"></i> <span class="label label-warning"
+						th:text="#{notification.number}"></span>
 				</a>
 					<ul class="dropdown-menu">
 						<li class="header" th:text="#{notification.info}"></li>
 						<li>
 							<!-- inner menu: contains the actual data -->
-							<ul class="menu">
-								<li><a href="#"> <i class="fa fa-warning text-red"></i>
-										Proposta recusada.
-								</a></li>
-								<li><a href="#"> <i class="fa fa-warning text-yellow"></i>
-										Seu prazo está acabando!
-								</a></li>
-
-							</ul>
-						</li>
+							<ul class="menu" th:each="message : ${notifications}">
+								<li>
+										<div class="pull-left">
+											<img src="${message.sender.picture?.pictureBase64}"
+												class="img-circle" alt="User Image">
+										</div>
+										<h4 th:text="${message.sender.name}">
+											Rodrigo Noll <small><i class="fa fa-clock-o"></i> 5
+												mins</small>
+										</h4>
+										<p th:text="${message.content}">Não esquece de enviar tuas
+											atualizações</p>
+								</li>
+							</ul></li>
 						<li class="footer"><a href="/notification/notification" th:text="#{notification.footer1}"></a></li>
 					</ul></li>
-
-					<li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">1</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header"></li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <img src="/photos/no_image_available.png" class="img-circle" alt="User Image">
-                      </div>
-                      <h4>
-                        Rodrigo Noll
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <p>Não esquece de enviar tuas atualizações</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="/document/document" th:text="#{notification.footer}"></a></li>
-
-            </ul>
-          </li>
-
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <img
 						class="user-image"

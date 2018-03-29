@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 @Entity
 @Data
 public class Message {
@@ -30,4 +33,5 @@ public class Message {
 
 	private boolean notification;
 
+	private CommonsMultipartFile file;
 }

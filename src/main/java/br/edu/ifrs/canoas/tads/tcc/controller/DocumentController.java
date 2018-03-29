@@ -101,7 +101,7 @@ public class DocumentController {
 		redirectAttr.addFlashAttribute("message", messages.get("theme.submited-for-evaluation"));
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "Upload", method = RequestMethod.POST)
 	public String upload(HttpServletRequest request) {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;

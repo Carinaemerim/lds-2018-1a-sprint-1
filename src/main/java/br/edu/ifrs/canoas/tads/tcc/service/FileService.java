@@ -37,4 +37,9 @@ public class FileService {
         return httpEntity;
     }
 
+    public void save(File file) {
+
+    	fileRepository.save(file);
+    }
+
 }

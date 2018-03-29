@@ -27,18 +27,18 @@
 		</div>
 		<!-- /.box-body -->
 		<div class="box-footer">
-			<form action="#" method="post"th:action="@{/chat/send}" th:object="${messageChat}" id="chat-form">
+			<form action="#" method="post" th:action="@{/chat/send}" th:object="${messageChat}" id="chat-form" enctype="multipart/form-data">
 				<div class="input-group">
 					<div>
 						<input type="hidden" id="id" th:field="*{id}">
 						<input name="message" placeholder="Escrever Mensagem ..."
 							class="form-control" type="text" th:field="*{content}"
 							id="chat-input"> <label
-							for="exampleInputFile" class="fa fa-paperclip"
+							for="file" class="fa fa-paperclip"
 							type="submit" name="submit" value="Upload"
 							style="position: absolute; margin: 7px 0 0 -25px; z-index: 9999999; font-size: 20px"></label>
-						<input id="exampleInputFile" type="file" style="display: none">
-									
+						<input id="file" type="file" th:field="*{file}" style="display: none">
+
 					</div>
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-primary btn-flat" onclick="javascript:sendMessage('/chat/send/', '#chat-form', '#chat-results');return false;">

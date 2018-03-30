@@ -3,9 +3,11 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
+import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,22 +53,43 @@ public class EvaluationController {
     private final UserRepository userRepository;
     private final AcademicYearRepository academicYearRepository;
     private final Messages messages;
+    private final ScheduleService scheduleService;
 
     @ModelAttribute("allEvaluationStatus")
     public List<EvaluationStatus> populateEvaluationStatus() {
         return Arrays.asList(EvaluationStatus.ALL);
     }
 
-    @GetMapping({"/"})
+    @GetMapping(value = {"/", "/{period}"})
     public ModelAndView home(@AuthenticationPrincipal UserImpl activeUser,
-                             @RequestParam(value = "academicYear", required = false) AcademicYear academicYear) {
+                             @RequestParam(value = "academicYear", required = false) AcademicYear academicYear,
+                             @PathVariable Optional<String> period) {
         ModelAndView mav = new ModelAndView("/evaluation/list");
+        System.out.println();
+        String searchPeriod = "";
+        if (period.isPresent()) {
+            searchPeriod = period.get();
+        }
 
         if (academicYear == null) {
-            int size = (academicYearRepository.findAllByOrderByIdAsc()).size();
-            academicYear = (academicYearRepository.findAllByOrderByIdAsc()).get(size - 1);
-            mav.addObject("academicYear", academicYear);
+            academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
+            System.out.println("Academic: " + academicYear);
         }
+        AcademicYear oldAcademicYear = academicYear;
+        switch (searchPeriod) {
+            case "previous":
+                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.previous(academicYear.getTitle())));
+                break;
+            case "next":
+                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.next(academicYear.getTitle())));
+                break;
+            default:
+                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
+                mav.addObject("academicYear", academicYear);
+        }
+        if (academicYear == null)
+            academicYear = oldAcademicYear;
+        mav.addObject("academicYear", academicYear);
         Iterable<TermPaper> termPapers = evaluationService.getTermPaperEvaluation(activeUser.getUser(),
                 academicYear.getId());
         mav.addObject("termPapers", termPapers);
@@ -202,7 +225,7 @@ public class EvaluationController {
 
 
         ModelAndView mav;
-        if(action.equals("delFile")){
+        if (action.equals("delFile")) {
             delFile = true;
         }
         if (action.equals("evaluation"))

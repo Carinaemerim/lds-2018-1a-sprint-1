@@ -103,5 +103,34 @@ public class ScheduleService {
 		period = year+ "/0" + semester;	
 		return period;
 	}
+
+	public String next(String generalPeriod) {
+
+		String[] values = generalPeriod.split("/");
+		int year = Integer.parseInt(values[0]);
+		int semester = Integer.parseInt(values[1]);
+		if(semester == 2) {
+			year++;
+			semester--;
+		} else {
+			semester++;
+		}
+		return year+ "/0" + semester;
+
+	}
+
+	public String previous(String generalPeriod) {
+
+		String[] values = generalPeriod.split("/");
+		int year = Integer.parseInt(values[0]);
+		int semester = Integer.parseInt(values[1]);
+		if(semester == 1) {
+			year--;
+			semester++;
+		} else {
+			semester--;
+		}
+		return year+ "/0" + semester;
+	}
 	
 }

@@ -35,13 +35,7 @@
                         <h3 class="box-title" th:text="#{evaluation.listing}">Listagem de trabalhos para avaliação</h3>
                         </div>
                         <div class="col-md-4">
-                            <div class="navbar" th:fragment="nav">
-                                <div class="btn-group pull-right pull-right">
-                                    <a href="#" th:href="@{/evaluation/}"><button  value="previous"  class="btn glyphicon glyphicon-menu-left" ></button></a>
-                                    <a><span class="btn btn-default" th:text="${academicYear.title}" >2015/02</span></a>
-                                    <a href="#" th:href="@{/evaluation/}"><button  value="next" class="btn glyphicon glyphicon-menu-right"></button></a>
-                                </div>
-                            </div>
+                            <div th:insert="/evaluation/fragments/nav :: nav"></div>
                         </div>
 
                     </div>

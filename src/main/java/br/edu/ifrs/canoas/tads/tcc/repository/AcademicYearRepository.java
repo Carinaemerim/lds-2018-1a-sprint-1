@@ -13,4 +13,6 @@ public interface AcademicYearRepository extends JpaRepository<AcademicYear, Long
     List<AcademicYear> findAllByOrderByIdAsc();
 
     AcademicYear findFirstByOrderByIdDesc();
+
+    AcademicYear findFirstByTitle(String title);
 }

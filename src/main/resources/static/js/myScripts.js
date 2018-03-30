@@ -10,10 +10,16 @@ function asyncRequest(url, formId, replacementId,
 	$.ajax({
         type: "POST",
         url: url,
-        data: $(formId).serialize(),
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: new FormData($(formId)[0]),
         success : onSuccess,
         error: function(result) {
             alert('error: '+result);
         }
     });
 }
+
+

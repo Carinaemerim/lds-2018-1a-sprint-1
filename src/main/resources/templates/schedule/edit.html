@@ -13,12 +13,14 @@
 	<section class="content-header">
 		<!-- PAGE TITLE -->
 		<h1>
-			<span th:text="#{schedule.header}" />
+			<span th:text="#{schedule.header}" /> 
+			<small><span th:text="#{schedule.title}"/></small>
 		</h1>
 		<!-- BREADCRUMB -->
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> <span
 					th:text="#{index.breadcrumb-1}" /></a></li>
+			<li><a href="@{/schedule/index}"><span th:text="#{schedule.breadcrumb}" /></a></li>
 			<li><a href="#"><span th:text="#{index.breadcrumb-2}" /></a></li>
 			<li class="active"><span th:text="#{index.breadcrumb-3}" /></li>
 		</ol>

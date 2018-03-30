@@ -10,13 +10,12 @@
 		<!-- PAGE TITLE -->
 		<h1>
 			<span th:text="#{schedule.header}" /> 
+			<small><span th:text="#{schedule.title}"/></small>
 		</h1>
 		<!-- BREADCRUMB -->
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> <span
-					th:text="#{index.breadcrumb-1}" /></a></li>
-			<li><a href="#"><span th:text="#{index.breadcrumb-2}" /></a></li>
-			<li class="active"><span th:text="#{index.breadcrumb-3}" /></li>
+			<li><a href="#"><i class="fa fa-dashboard"></i> <span th:text="#{index.breadcrumb-1}" /></a></li>
+			<li><a href="@{/schedule/index}"><span th:text="#{schedule.breadcrumb}" /></a></li>
 		</ol>
 	</section>
 </div>
@@ -28,12 +27,12 @@
 			<div class="col-xs-12">
 				<div class="box">
 					<div class="box-header">
-						<h1 class="box-title" th:text="#{schedule.title}"></h1>
+						<h1 class="box-title" th:text="#{schedule.list}"></h1>
 						<div th:insert="/fragments/nav :: nav"></div>
 
 					</div>
 					<div class="box-body">
-						<table class="table table-bordered table-striped">
+						<table id="table-list-tasks" class="table table-bordered table-striped">
 							<thead>
 								<tr>
 									<th class="col-sm-2">Data Limite</th>
@@ -54,7 +53,7 @@
 							<tfoot></tfoot>
 						</table>
 						<br>
-							<a href="#" th:href="@{/schedule/add}"><button id="add-new-event" type="button" class="btn btn-primary pull-right">Add</button></a>							
+							<a href="#" th:href="@{/schedule/add}"><button id="add-new-event" type="button" class="btn btn-primary pull-right">Nova Tarefa</button></a>							
 					</div>
 					<!-- /.box-body -->
 				</div>
@@ -76,7 +75,7 @@
 		src="/webjars/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#table-list-evaluate').DataTable()
+			$('#table-list-tasks').DataTable()
 		});
 	</script>
 	</th:block>

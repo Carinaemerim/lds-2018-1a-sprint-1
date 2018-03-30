@@ -150,9 +150,27 @@ UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 109  WHERE ID=  109;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 110  WHERE ID=  110;
 
 --Schedule
-INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('24/03/2018','dd/MM/yyyy'), 1);
 INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (200, '2018/01', 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 2);
-INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (300, '2018/02','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 0);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (300, '2018/01','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 0);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (110, '2018/01', 'task 1', 'Encontrar ´professor com interresse na area', PARSEDATETIME('24/03/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (220, '2018/01', 'task 2', 'documento para a coordenação', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (330, '2018/01','task 3', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 0);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (140, '2018/01', 'task 4', 'Encontrar ´professor com interresse na area', PARSEDATETIME('24/03/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (250, '2018/01', 'task 5', 'documento para a coordenação', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (360, '2018/01','task 6', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 0);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (170, '2018/01', 'ask 7', 'Encontrar ´professor com interresse na area', PARSEDATETIME('24/03/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (280, '2018/01', 'paginacao 1', 'documento para a coordenação', PARSEDATETIME('25/04/2018','dd/MM/yyyy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (390, '2018/01','paginacao 2', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('15/04/2018','dd/MM/yyyy'), 0);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (1100, '2018/01', 'paginacao 3', 'Encontrar ´professor com interresse na area', PARSEDATETIME('18/04/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (2110, '2018/01', 'paginacao 4', 'documento para a coordenação', PARSEDATETIME('06/04/2018','dd/MM/yyyy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (3120, '2018/01','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 0);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (1130, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('24/03/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (2140, '2018/01', 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (3150, '2018/01','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('22/03/2018','dd/MM/yyyy'), 0);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (101, '2018/02', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('30/03/2018','dd/MM/yyyy'), 1);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (202, '2018/02', 'Entregar proposta de TCC', 'documento para a coordenação', PARSEDATETIME('21/03/2018','dd/MM/yyyy'), 2);
+INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (303, '2018/02','Entregar Monografia', 'Formatar parte do trabalho de acordo com regras ABNT', PARSEDATETIME('09/03/2018','dd/MM/yyyy'), 1);
 
 --INSERT INTO MESSAGE(ID, CONTENT, DATE, VIEWED, RECEIVER_ID, SENDER_ID) VALUES (1, 'Commita tuas atualizações', '2018-03-21', true, 100, 101);
 --INSERT INTO MESSAGE(ID, CONTENT, DATE, VIEWED, RECEIVER_ID, SENDER_ID) VALUES (2, 'blz', '2018-03-22', true, 101, 100);

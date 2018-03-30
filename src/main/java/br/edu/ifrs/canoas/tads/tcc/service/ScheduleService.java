@@ -3,8 +3,6 @@ package br.edu.ifrs.canoas.tads.tcc.service;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Task;

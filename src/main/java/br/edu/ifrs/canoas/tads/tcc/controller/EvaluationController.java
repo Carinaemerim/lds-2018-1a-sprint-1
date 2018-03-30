@@ -156,6 +156,7 @@ public class EvaluationController {
             }
             mav.addObject("termPaper", document.getTermPaper());
             advice.setDocument(document);
+
             mav.addObject("advice", advice);
             mav.addObject("document", document);
             return mav;
@@ -195,14 +196,15 @@ public class EvaluationController {
             BindingResult bindingResult, RedirectAttributes redirectAttr) throws IOException {
 
         Boolean isFinal = false;
+        Boolean delFile = false;
         Document document = documentService.getOneById(documentId);
         Long termPaperId = document.getTermPaper().getId();
-        if ((mFile == null)) {
-            System.out.println("Nullll mFile");
-        } else {
-            System.out.println("mFile");
-        }
+
+
         ModelAndView mav;
+        if(action.equals("delFile")){
+            delFile = true;
+        }
         if (action.equals("evaluation"))
             isFinal = true;
         if (bindingResult.hasErrors()) {
@@ -228,7 +230,7 @@ public class EvaluationController {
         }
         grade.setAppraiser((Professor) activeUser.getUser());
         grade.setDocument(document);
-        mav.addObject("grade", evaluationService.saveTermPaperEvaluationFinal(grade, isFinal, mFile));
+        mav.addObject("grade", evaluationService.saveTermPaperEvaluationFinal(grade, isFinal, mFile, delFile));
 
         redirectAttr.addFlashAttribute("message",
                 (isFinal) ? messages.get("field.saved") : messages.get("field.draft-saved"));

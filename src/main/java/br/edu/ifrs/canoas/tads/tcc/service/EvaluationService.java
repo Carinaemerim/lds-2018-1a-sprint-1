@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.TreeSet;
+import java.util.*;
+
 import static java.util.Comparator.comparingLong;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
@@ -73,23 +72,40 @@ public class EvaluationService {
         fetchedAdvice.setIsFinal(isFinal);
         fetchedAdvice.setAppraiser(advice.getAppraiser());
         fetchedAdvice.setDocument(advice.getDocument());
-        // fetchedAdvice = adviceRepository.save(fetchedAdvice);
         return getOne(adviceRepository.save(fetchedAdvice));
     }
 
     @Transactional
-    public Grade    saveTermPaperEvaluationFinal(Grade grade, Boolean isFinal,  MultipartFile mFile) throws IOException {
+    public Grade saveTermPaperEvaluationFinal(Grade grade, Boolean isFinal,  MultipartFile mFile, Boolean delFile) throws IOException {
         Grade fetchedGrade = (Grade)this.getOne(grade);
+        File file;
         if (fetchedGrade == null || fetchedGrade.getId() == null)
             fetchedGrade = new Grade();
 
+        if(delFile){
+            if(fetchedGrade.getFile() != null){
+                File oldFile = fileRepository.getOne(fetchedGrade.getFile().getId());
+                evaluationRepository.setDeleteFile(fetchedGrade.getId());
+                fileRepository.delete(oldFile);
+            }
+            mFile = null;
+        }
+
         if(mFile!=null) {
-            File file = new File();
-            file.setContent(mFile.getBytes());
-            file.setFilename(mFile.getOriginalFilename());
-            file.setContentType(mFile.getContentType());
-            fileRepository.save(file);
-            fetchedGrade.setFile(file);
+            if(!mFile.isEmpty()) {
+
+                if (fetchedGrade.getFile() == null)
+                    file = new File();
+                else
+                    file = fileRepository.getOne(fetchedGrade.getFile().getId());
+
+                file.setContent(mFile.getBytes());
+                file.setFilename(mFile.getOriginalFilename());
+                file.setContentType(mFile.getContentType());
+                file.setCreatedOn(new Date());
+                fileRepository.save(file);
+                fetchedGrade.setFile(file);
+            }
         }
 
 

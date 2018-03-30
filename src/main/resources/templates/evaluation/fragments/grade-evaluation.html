@@ -1,7 +1,8 @@
 <!-- form start -->
 
 <form class="form-horizontal" th:action="@{/evaluation/grade/submit}" action="#"
-      th:object="${grade}"  id="form-termpaper-advisor" method="post" enctype="multipart/form-data">
+      th:object="${grade}" id="form-termpaper-advisor" method="post" enctype="multipart/form-data"
+      xmlns:div="http://www.w3.org/1999/html">
     <div class="row">
         <div class="col-md-6">
             <div class="box">
@@ -13,13 +14,16 @@
                     <input type="hidden" id="documentId" name="documentId" th:value="*{document.id}"/>
                     <div class="form-control-group">
                         <div class="form-group">
-                            <label for="literatureReview" class="col-md-9" th:text="#{evaluation.written.item-1}"></label>
-                            <div class="col-md-3" th:classappend="${#fields.hasErrors('literatureReview')}? 'has-error'">
-                                <input type="number" step="0.1" min="0" max="10" class="form-control" id="literatureReview"
+                            <label for="literatureReview" class="col-md-9"
+                                   th:text="#{evaluation.written.item-1}"></label>
+                            <div class="col-md-3"
+                                 th:classappend="${#fields.hasErrors('literatureReview')}? 'has-error'">
+                                <input type="number" step="0.1" min="0" max="10" class="form-control"
+                                       id="literatureReview"
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{literatureReview}" th:disabled="*{isFinal}">
                                 <span th:if="${#fields.hasErrors('literatureReview')}" th:errors="*{literatureReview}"
-                                      th:class="help-block" />
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -31,7 +35,7 @@
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{objective}" th:disabled="*{isFinal}">
                                 <span th:if="${#fields.hasErrors('objective')}" th:errors="*{objective}"
-                                      th:class="help-block" />
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -44,7 +48,7 @@
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{methodology}" th:disabled="*{isFinal}">
                                 <span th:if="${#fields.hasErrors('methodology')}" th:errors="*{methodology}"
-                                      th:class="help-block" />
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -52,12 +56,15 @@
                         <div class="form-group">
                             <label for="theoreticalApproach" class="col-md-9" th:text="#{evaluation.written.item-4}">
                             </label>
-                            <div class="col-md-3" th:classappend="${#fields.hasErrors('theoreticalApproach')}? 'has-error'">
-                                <input type="number" step="0.1" min="0" max="10" class="form-control" id="theoreticalApproach"
+                            <div class="col-md-3"
+                                 th:classappend="${#fields.hasErrors('theoreticalApproach')}? 'has-error'">
+                                <input type="number" step="0.1" min="0" max="10" class="form-control"
+                                       id="theoreticalApproach"
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{theoreticalApproach}" th:disabled="*{isFinal}">
-                                <span th:if="${#fields.hasErrors('theoreticalApproach')}" th:errors="*{theoreticalApproach}"
-                                      th:class="help-block" />
+                                <span th:if="${#fields.hasErrors('theoreticalApproach')}"
+                                      th:errors="*{theoreticalApproach}"
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -65,12 +72,15 @@
                         <div class="form-group">
                             <label for="experiencedSolution" class="col-md-9" th:text="#{evaluation.written.item-5}">
                             </label>
-                            <div class="col-md-3" th:classappend="${#fields.hasErrors('experiencedSolution')}? 'has-error'">
-                                <input type="number" step="0.1" min="0" max="10" class="form-control" id="experiencedSolution"
+                            <div class="col-md-3"
+                                 th:classappend="${#fields.hasErrors('experiencedSolution')}? 'has-error'">
+                                <input type="number" step="0.1" min="0" max="10" class="form-control"
+                                       id="experiencedSolution"
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{experiencedSolution}" th:disabled="*{isFinal}">
-                                <span th:if="${#fields.hasErrors('experiencedSolution')}" th:errors="*{experiencedSolution}"
-                                      th:class="help-block" />
+                                <span th:if="${#fields.hasErrors('experiencedSolution')}"
+                                      th:errors="*{experiencedSolution}"
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -83,7 +93,7 @@
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{conclusion}" th:disabled="*{isFinal}">
                                 <span th:if="${#fields.hasErrors('conclusion')}" th:errors="*{conclusion}"
-                                      th:class="help-block" />
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -111,33 +121,41 @@
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{presentation}" th:disabled="*{isFinal}">
                                 <span th:if="${#fields.hasErrors('presentation')}" th:errors="*{presentation}"
-                                      th:class="help-block" />
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
                     <div class="form-control-group">
                         <div class="form-group">
-                            <label for="closingExpectedTime" class="col-md-9" th:text="#{evaluation.presentation.item-2}">
+                            <label for="closingExpectedTime" class="col-md-9"
+                                   th:text="#{evaluation.presentation.item-2}">
                             </label>
-                            <div class="col-md-3" th:classappend="${#fields.hasErrors('closingExpectedTime')}? 'has-error'">
-                                <input type="number" step="0.1" min="0" max="10" class="form-control" id="closingExpectedTime"
+                            <div class="col-md-3"
+                                 th:classappend="${#fields.hasErrors('closingExpectedTime')}? 'has-error'">
+                                <input type="number" step="0.1" min="0" max="10" class="form-control"
+                                       id="closingExpectedTime"
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{closingExpectedTime}" th:disabled="*{isFinal}">
-                                <span th:if="${#fields.hasErrors('closingExpectedTime')}" th:errors="*{closingExpectedTime}"
-                                      th:class="help-block" />
+                                <span th:if="${#fields.hasErrors('closingExpectedTime')}"
+                                      th:errors="*{closingExpectedTime}"
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
                     <div class="form-control-group">
                         <div class="form-group">
-                            <label for="adequacyOfPresentation" class="col-md-9" th:text="#{evaluation.presentation.item-3}">
+                            <label for="adequacyOfPresentation" class="col-md-9"
+                                   th:text="#{evaluation.presentation.item-3}">
                             </label>
-                            <div class="col-md-3" th:classappend="${#fields.hasErrors('adequacyOfPresentation')}? 'has-error'">
-                                <input type="number" step="0.1" min="0" max="10" class="form-control" id="adequacyOfPresentation"
+                            <div class="col-md-3"
+                                 th:classappend="${#fields.hasErrors('adequacyOfPresentation')}? 'has-error'">
+                                <input type="number" step="0.1" min="0" max="10" class="form-control"
+                                       id="adequacyOfPresentation"
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{adequacyOfPresentation}" th:disabled="*{isFinal}">
-                                <span th:if="${#fields.hasErrors('adequacyOfPresentation')}" th:errors="*{adequacyOfPresentation}"
-                                      th:class="help-block" />
+                                <span th:if="${#fields.hasErrors('adequacyOfPresentation')}"
+                                      th:errors="*{adequacyOfPresentation}"
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -150,20 +168,24 @@
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{subjectDomain}" th:disabled="*{isFinal}">
                                 <span th:if="${#fields.hasErrors('subjectDomain')}" th:errors="*{subjectDomain}"
-                                      th:class="help-block" />
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
                     <div class="form-control-group">
                         <div class="form-group">
-                            <label for="developmentInLogicalSequence" class="col-md-9" th:text="#{evaluation.presentation.item-5}">
+                            <label for="developmentInLogicalSequence" class="col-md-9"
+                                   th:text="#{evaluation.presentation.item-5}">
                             </label>
-                            <div class="col-md-3" th:classappend="${#fields.hasErrors('developmentInLogicalSequence')}? 'has-error'">
-                                <input type="number" step="0.1" min="0" max="10" class="form-control" id="developmentInLogicalSequence"
+                            <div class="col-md-3"
+                                 th:classappend="${#fields.hasErrors('developmentInLogicalSequence')}? 'has-error'">
+                                <input type="number" step="0.1" min="0" max="10" class="form-control"
+                                       id="developmentInLogicalSequence"
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{developmentInLogicalSequence}" th:disabled="*{isFinal}">
-                                <span th:if="${#fields.hasErrors('developmentInLogicalSequence')}" th:errors="*{developmentInLogicalSequence}"
-                                      th:class="help-block" />
+                                <span th:if="${#fields.hasErrors('developmentInLogicalSequence')}"
+                                      th:errors="*{developmentInLogicalSequence}"
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -176,7 +198,7 @@
                                        th:placeholder="#{evaluation.placeholder.grade.zero}"
                                        th:field="*{vocabulary}" th:disabled="*{isFinal}">
                                 <span th:if="${#fields.hasErrors('vocabulary')}" th:errors="*{vocabulary}"
-                                      th:class="help-block" />
+                                      th:class="help-block"/>
                             </div>
                         </div>
                     </div>
@@ -210,17 +232,49 @@
                             th:if="${#fields.hasErrors('considerations')}" th:errors="*{considerations}"
                             th:class="help-block"/>
                 </div>
-                <div class="form-control-group" >
+                <div class="form-control-group">
                     <div class="form-group">
-                        <label th:text="#{evaluation.file}" for="mFile">Arquivo</label> <input
-                            type="file" name="mFile" /> <a
-                            th:href="@{|/grade/download/${grade.file?.id}|}"> <span
-                            th:if="#{evaluation.file} != null"
-                            th:text="${grade.file?.filename}"></span></a>
+                        <label th:text="#{evaluation.file}" for="mFile">Arquivo</label>
+                        <input type="file" name="mFile" id="mFile" th:disabled="*{isFinal}"/>
 
-                        <p class="help-block" th:if="#{evaluation.file} != null"  th:text="#{evaluation.file}"></p>
+                        <label></label>
+                        <div th:if="${grade.file} != null" class="row mt-2">
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="info-box">
+                                    <a th:href="@{|/file/${grade?.file?.id}|}">
+                                        <span class="info-box-icon bg-aqua"><i
+                                                class="fa fa-file-text-o"></i></span>
+                                    </a>
+                                    <div class="info-box-content">
+                                        <a th:href="@{|/file/${grade?.file?.id}|}">
+                                            <span class="info-box-text inline">
+                                                <p class="help-block"
+                                                   th:if="#{grade.file} != null"
+                                                   th:text="#{evaluation.file}">
+
+                                                </p>
+                                            <span class="info-box-number inline"> <span
+                                                    th:text="${grade.file?.filename}"></span></span>
+                                            </span>
+                                        </a>
+                                        <div th:remove="*{isFinal}  ? all" class="inline margin">
+                                            <button class="btn btn-flat btn-danger" name="action" type="submit"
+                                                    value="delFile">
+                                                <i class="fa fa-close"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
                         <span th:if="${#fields.hasErrors('file')}" th:errors="*{file}"
-                              th:class="help-block" />
+                              th:class="help-block"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -268,9 +322,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"
-                            th:text="#{no}">No</button>
+                            th:text="#{no}">No
+                    </button>
                     <button type="submit" class="btn btn-primary" name="action"
-                            value="evaluation" th:text="#{yes}">Yes</button>
+                            value="evaluation" th:text="#{yes}">Yes
+                    </button>
                 </div>
             </div>
         </div>

@@ -21,4 +21,10 @@ public class FileController {
     public HttpEntity<byte[]> download(@PathVariable Long id) {
         return fileService.download(id);
     }
+
+    @GetMapping("/delete/{id}")
+    @ResponseBody
+    public void delete(@PathVariable Long id) {
+         fileService.deleteById(id);
+    }
 }

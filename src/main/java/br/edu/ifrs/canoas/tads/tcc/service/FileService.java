@@ -42,4 +42,9 @@ public class FileService {
     	fileRepository.save(file);
     }
 
+    public void deleteById(Long file) {
+
+        fileRepository.deleteById(file);
+    }
+
 }

@@ -26,6 +26,6 @@ public abstract class Evaluation {
 
 	private Boolean isFinal;
 
-	@OneToOne
+	@OneToOne(orphanRemoval=true)
 	private File file;
 }

@@ -33,7 +33,11 @@
                         th:if="${#fields.hasErrors('considerations')}" th:errors="*{considerations}"
                         th:class="help-block"/>
             </div>
-
+            <div class="form-group">
+                <p class="text-right text-muted font-italic">
+                    <span th:text=" *{createdOn} != null ? *{#dates.format(createdOn, 'dd/MM/yyyy HH:mm')}">data</span>
+                </p>
+            </div>
         </div>
         <!-- /.box-body -->
         <div th:remove="*{document.bank}  ? none :  all">

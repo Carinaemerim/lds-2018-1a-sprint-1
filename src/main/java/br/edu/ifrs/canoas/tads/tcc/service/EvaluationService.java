@@ -72,6 +72,7 @@ public class EvaluationService {
         fetchedAdvice.setIsFinal(isFinal);
         fetchedAdvice.setAppraiser(advice.getAppraiser());
         fetchedAdvice.setDocument(advice.getDocument());
+        fetchedAdvice.setCreatedOn(new Date());
         return getOne(adviceRepository.save(fetchedAdvice));
     }
 
@@ -127,6 +128,7 @@ public class EvaluationService {
         fetchedGrade.setMethodology(grade.getMethodology());
         fetchedGrade.setObjective(grade.getObjective());
         fetchedGrade.setLiteratureReview(grade.getLiteratureReview());
+        fetchedGrade.setCreatedOn(new Date());
 
         return getOne(gradeRepository.save(fetchedGrade));
     }

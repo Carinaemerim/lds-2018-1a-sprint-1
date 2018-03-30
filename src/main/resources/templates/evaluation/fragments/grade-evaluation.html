@@ -282,6 +282,11 @@
                         <span th:text=" *{finalGrade} != null OR *{finalGrade} == false  ? *{#numbers.formatDecimal(finalGrade, 1, 1)} : '-'">8.5</span>
                     </h2>
                 </div>
+                <div class="form-group">
+                    <p class="text-right text-muted font-italic">
+                        <span th:text=" *{createdOn} != null ? *{#dates.format(createdOn, 'dd/MM/yyyy HH:mm')}">data</span>
+                    </p>
+                </div>
             </div>
         </div>
         <div th:remove="*{document.bank}  ? none :  all">

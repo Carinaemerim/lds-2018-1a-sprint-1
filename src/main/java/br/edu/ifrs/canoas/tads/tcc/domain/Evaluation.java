@@ -5,6 +5,8 @@ import javax.validation.constraints.*;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Inheritance
 @Data
@@ -26,6 +28,8 @@ public abstract class Evaluation {
 
 	private Boolean isFinal;
 
-	@OneToOne(orphanRemoval=true)
+	private Date createdOn;
+
+	@OneToOne
 	private File file;
 }

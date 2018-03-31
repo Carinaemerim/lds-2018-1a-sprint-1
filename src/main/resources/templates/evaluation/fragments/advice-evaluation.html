@@ -34,9 +34,13 @@
                         th:class="help-block"/>
             </div>
             <div class="form-group">
+                <h3 class="text-right text-muted font-italic">
+                    <span th:text=" *{createdOn} != null ? *{appraiser?.username}">Name</span>
+                </h3>
                 <p class="text-right text-muted font-italic">
                     <span th:text=" *{createdOn} != null ? *{#dates.format(createdOn, 'dd/MM/yyyy HH:mm')}">data</span>
                 </p>
+
             </div>
         </div>
         <!-- /.box-body -->

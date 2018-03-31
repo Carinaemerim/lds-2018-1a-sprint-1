@@ -27,19 +27,11 @@ import br.edu.ifrs.canoas.tads.tcc.service.UserService;
 public class DashboardController {
 
 	private final ScheduleService scheduleService;
-	private final TermPaperService termPaperService;
-	private final EvaluationService evaluationService;
-	private final UserService userService;
-	private final UserRepository userRepository;
 	
 	
-	public DashboardController(ScheduleService scheduleService, TermPaperService termPaperService, EvaluationService evaluationService, UserService userService, UserRepository userRepository) {
+	public DashboardController(ScheduleService scheduleService) {
 		super();
 		this.scheduleService = scheduleService;
-		this.termPaperService = termPaperService;
-		this.evaluationService = evaluationService;
-		this.userService = userService;
-		this.userRepository = userRepository;
 	}
 
 
@@ -47,34 +39,11 @@ public class DashboardController {
 	@GetMapping("/index")
 	public ModelAndView greetings(@AuthenticationPrincipal UserImpl activeUser) {//Long id
 		ModelAndView mav = new ModelAndView("/dashboard/index");
-//		mav.addObject("user", userService.getOne(activeUser.getUser()));
+		mav.addObject("currPeriod", scheduleService.getPeriod());
 		mav.addObject("tasks",scheduleService.listAll());
-		Evaluation academicYear;
-		//mav.addObject("status",scheduleService.getTaskStatus(id));
-        Iterable<TermPaper> termPapers = evaluationService.getTermPaperEvaluation(activeUser.getUser(), null);
-        mav.addObject("termPapers", termPapers);
 		return mav;
 	
 	}
-	
-    @GetMapping("/theme/{id}")
-    public ModelAndView theme(@PathVariable Long id, @AuthenticationPrincipal UserImpl activeUser) {
-        ModelAndView mav = new ModelAndView("/evaluation/theme");
-        TermPaper termPaper = termPaperService.getOneById(id);
-        mav.addObject("termPaper", termPaper);
-        Document document = termPaper.getThemeDocument();
-        mav.addObject("document", document);
-
-        Evaluation advice = evaluationService.getOneEvaluation(document,
-                userRepository.getOne((termPaper.getAdvisor().getId())));
-        if (advice == null) {
-            advice = new Advice();
-        }
-        advice.setDocument(document);
-        mav.addObject("advice", advice);
-        return mav;
-    }
-
-	
+		
 
 }

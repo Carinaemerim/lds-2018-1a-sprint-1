@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,7 @@ import lombok.AllArgsConstructor;
  */
 @Controller
 @AllArgsConstructor
+@Secured("ROLE_PROFESSOR")
 @RequestMapping("/evaluation")
 public class EvaluationController {
 

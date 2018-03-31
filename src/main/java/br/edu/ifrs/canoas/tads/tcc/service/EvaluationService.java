@@ -28,6 +28,8 @@ public class EvaluationService {
     AdviceRepository adviceRepository;
     GradeRepository gradeRepository;
     FileRepository fileRepository;
+    ScheduleService scheduleService;
+    AcademicYearRepository academicYearRepository;
 
 
     public Evaluation getOneEvaluation(Document document, User professor) {
@@ -131,5 +133,38 @@ public class EvaluationService {
         fetchedGrade.setCreatedOn(new Date());
 
         return getOne(gradeRepository.save(fetchedGrade));
+    }
+
+    public Boolean getNextPeriod(AcademicYear academicYear) {
+        String currentPeriod = academicYear.getTitle();
+        AcademicYear ac;
+        String next;
+        for(int i=0; i<10; i++) {
+            ac = (academicYearRepository.findFirstByTitle(scheduleService.next(currentPeriod)));
+            if(ac != null) {
+                System.out.println("NEXT: " + ac.toString());
+                return true;
+            }
+            next = scheduleService.next(currentPeriod);
+            currentPeriod = next;
+        }
+
+        System.out.println("NOT NEXT: ");
+        return false;
+    }
+    public Boolean getPreviousPeriod(AcademicYear academicYear) {
+        String currentPeriod = academicYear.getTitle();
+        AcademicYear ac;
+        String previous;
+        for(int i=0; i<10; i++) {
+            ac = (academicYearRepository.findFirstByTitle(scheduleService.previous(currentPeriod)));
+            if(ac != null) {
+                return true;
+            }
+            previous = scheduleService.previous(currentPeriod);
+            currentPeriod = previous;
+        }
+
+        return false;
     }
 }

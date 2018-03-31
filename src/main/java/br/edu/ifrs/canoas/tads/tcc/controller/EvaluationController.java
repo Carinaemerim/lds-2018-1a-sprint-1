@@ -89,6 +89,8 @@ public class EvaluationController {
         }
         if (academicYear == null)
             academicYear = oldAcademicYear;
+        mav.addObject("isNext", evaluationService.getNextPeriod(academicYear));
+        mav.addObject("isPrevious", evaluationService.getPreviousPeriod(academicYear));
         mav.addObject("academicYear", academicYear);
         Iterable<TermPaper> termPapers = evaluationService.getTermPaperEvaluation(activeUser.getUser(),
                 academicYear.getId());

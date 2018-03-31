@@ -159,12 +159,13 @@ public class EvaluationService {
         for(int i=0; i<10; i++) {
             ac = (academicYearRepository.findFirstByTitle(scheduleService.previous(currentPeriod)));
             if(ac != null) {
+                System.out.println("PREV: " + ac.toString());
                 return true;
             }
             previous = scheduleService.previous(currentPeriod);
             currentPeriod = previous;
         }
-
+        System.out.println("NOT PREV: ");
         return false;
     }
 }

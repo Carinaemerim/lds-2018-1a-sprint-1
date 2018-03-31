@@ -56,6 +56,8 @@ insert into COURSE (ID, TITLE) values
 
 
 insert into ACADEMIC_YEAR (ID, TITLE) values
+(498,'2016/02'),
+(499,'2017/01'),
 (500,'2017/02'),
 (501,'2018/01');
 

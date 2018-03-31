@@ -60,21 +60,34 @@ public class EvaluationController {
         return Arrays.asList(EvaluationStatus.ALL);
     }
 
-    @GetMapping(value = {"/", "/{period}"})
+    @GetMapping(value = {"/", "/{period}/{academicYearId}"})
     public ModelAndView home(@AuthenticationPrincipal UserImpl activeUser,
-                             @RequestParam(value = "academicYear", required = false) AcademicYear academicYear,
+                             @PathVariable Optional<Long> academicYearId,
                              @PathVariable Optional<String> period) {
         ModelAndView mav = new ModelAndView("/evaluation/list");
-        System.out.println();
+
+        AcademicYear academicYear;
         String searchPeriod = "";
-        if (period.isPresent()) {
+        Optional<AcademicYear> opAcademicYear;
+        Long searchAcademicYearId;
+        if (period.isPresent() && academicYearId.isPresent()) {
             searchPeriod = period.get();
+            searchAcademicYearId = academicYearId.get();
+            opAcademicYear = (academicYearRepository.findFirstByIdIs(searchAcademicYearId));
+            if(opAcademicYear.isPresent()) {
+                academicYear = opAcademicYear.get();
+                System.out.println("Acdmic acho na pesquisa ");
+            } else {
+                System.out.println("Não acho na pesquisa ");
+                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
+            }
+
+
+        } else {
+            System.out.println("Academic not presente ,pegou current ");
+            academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
         }
 
-        if (academicYear == null) {
-            academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
-            System.out.println("Academic: " + academicYear);
-        }
         AcademicYear oldAcademicYear = academicYear;
         switch (searchPeriod) {
             case "previous":
@@ -87,8 +100,8 @@ public class EvaluationController {
                 academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
                 mav.addObject("academicYear", academicYear);
         }
-        if (academicYear == null)
-            academicYear = oldAcademicYear;
+        /*if (academicYear == null)
+            academicYear = oldAcademicYear;*/
         mav.addObject("isNext", evaluationService.getNextPeriod(academicYear));
         mav.addObject("isPrevious", evaluationService.getPreviousPeriod(academicYear));
         mav.addObject("academicYear", academicYear);

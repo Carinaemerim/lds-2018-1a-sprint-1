@@ -57,7 +57,7 @@
                                 <td th:text="${termPaper.author.name}">Aluno</td>
                                 <td th:text="${#strings.abbreviate(termPaper.title,70)}">Título do Trabalho</td>
                                 <td>
-                                    <a th:if="${termPaper.themeDocument != null}" th:href="@{|theme/${termPaper.id}|}"
+                                    <a th:if="${termPaper.themeDocument != null}" th:href="@{|~/evaluation/theme/${termPaper.id}|}"
                                        href="#">
                                         <span th:text="#{${'evaluation.status.'+termPaper.themeDocument.status}}"
                                               th:classappend="${termPaper?.themeDocument?.colorStatus}"
@@ -65,14 +65,14 @@
                                     </a>
                                 </td>
                                 <td><a th:if="${termPaper.proposalDocument != null}"
-                                       th:href="@{|proposal/${termPaper.id}|}" href="#">
+                                       th:href="@{|~/evaluation/proposal/${termPaper.id}|}" href="#">
                                     <span th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"
                                           th:classappend="${termPaper?.proposalDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>
                                 </a>
                                 </td>
                                 <td><a th:if="${termPaper.termPaperDocument != null}"
-                                       th:href="@{|termpaper/${termPaper.id}|}" href="#">
+                                       th:href="@{|~/evaluation/termpaper/${termPaper.id}|}" href="#">
                                     <span th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}"
                                           th:classappend="${termPaper?.termPaperDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>

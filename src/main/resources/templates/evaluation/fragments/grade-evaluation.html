@@ -286,6 +286,7 @@
                     <p class="text-right text-muted font-italic">
                         <span th:text=" *{createdOn} != null ? *{#dates.format(createdOn, 'dd/MM/yyyy HH:mm')}">data</span>
                     </p>
+
                 </div>
             </div>
         </div>
@@ -301,10 +302,18 @@
                         <i class="fa fa-check"></i> <span th:text="#{button.save}"/>
                     </button>
                 </div>
+
                 <button type="reset" class="btn btn-default">
                     <i class="fa fa-times"></i> <span th:text="#{button.discard}"/>
                 </button>
             </div>
+        </div>
+        <div class="box-footer">
+            <a th:href="@{|~/evaluation/|}" href="#">
+                <button type="button" class="btn btn-danger">
+                    <i class="fa fa-arrow-left"></i> <span th:text="#{button.back}"/>
+                </button>
+            </a>
         </div>
     </div>
     <!-- /.box-body -->

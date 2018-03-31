@@ -1,11 +1,18 @@
 <div class="navbar" th:fragment="nav">
     <div class="btn-group pull-right pull-right">
-        <a  th:disabled="${#bools.isFalse(isPrevious)}" href="#" th:href="@{/evaluation/previous}">
-            <button th:disabled="${#bools.isFalse(isPrevious)}" class="btn glyphicon glyphicon-menu-left"></button>
+        <a  th:disabled="${#bools.isFalse(isPrevious)}" href="#" th:href="@{|/evaluation/previous/${academicYear?.id}|}">
+            <button th:disabled="${#bools.isFalse(isPrevious)}"
+                    th:value="${academicYear.title}"
+                    class="btn glyphicon glyphicon-menu-left"></button>
         </a>
         <a><span class="btn btn-default" th:text="${academicYear.title}"></span></a>
-        <a  th:disabled="${#bools.isFalse(isNext)}" href="#" th:href="@{/evaluation/next}">
-            <button th:disabled="${#bools.isFalse(isNext)}" class="btn glyphicon glyphicon-menu-right"></button>
+        <a  th:disabled="${#bools.isFalse(isNext)}" href="#" th:href="@{|/evaluation/next/${academicYear?.id}|}">
+            <button th:disabled="${#bools.isFalse(isNext)}"
+                    th:value="${academicYear.title}"
+                    class="btn glyphicon glyphicon-menu-right">
+            </button>
         </a>
     </div>
 </div>
+
+|/file/${document?.file.id}|

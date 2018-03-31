@@ -31,7 +31,7 @@
 
 
 		<div class="row">
-			<div class="col-lg-3 col-xs-6">
+			<div class="col-lg-4 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<!-- ./col -->
-			<div class="col-lg-3 col-xs-6">
+			<div class="col-lg-4 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
@@ -61,7 +61,7 @@
 				</div>
 			</div>
 			<!-- ./col -->
-			<div class="col-lg-3 col-xs-6">
+			<div class="col-lg-4 col-xs-6">
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
@@ -81,97 +81,39 @@
 
 			<!-- ./col -->
 		</div>
-
-		<div class="col-md-4">
-			<div class="box box-danger">
-				<div class="box-header with-border">
-					<h3 class="box-title">Arquivos</h3>
-				</div>
-				
-				<div class="nav-tabs-custom">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tema" data-toggle="tab"
-							aria-expanded="true">Tema</a></li>
-						<li class=""><a href="#proposta" data-toggle="tab"
-							aria-expanded="false">Proposta</a></li>
-						<li class=""><a href="#monografia" data-toggle="tab"
-							aria-expanded="false">Monografia</a></li>
-					</ul>
-					<div class="tab-content">
-
-						<div class="tab-pane active" id="tema">
-							<div class="box-body no-padding direct-chat-messages">
-								<ul class="users-list clearfix">
-
-									<li><span class="mailbox-attachment-icon"><i
-											class="fa fa-file-word-o"></i></span>
-
-										<div class="mailbox-attachment-info">
-											<a href="#" class="mailbox-attachment-name"><i
-												class="fa fa-paperclip"></i> tema.docx</a> <span
-												class="mailbox-attachment-size"> 1,245 KB <a href="#"
-												class="btn btn-default btn-xs pull-right"><i
-													class="fa fa-cloud-download"></i></a>
-											</span>
-										</div></li>
-								</ul>
-
-							</div>
-
-						</div>
-
-						<div class="tab-pane" id="proposta">
-
-							<div class="box-body no-padding direct-chat-messages">
-								<ul class="users-list clearfix">
-
-									<li><span class="mailbox-attachment-icon"><i
-											class="fa fa-file-word-o"></i></span>
-
-										<div class="mailbox-attachment-info">
-											<a href="#" class="mailbox-attachment-name"><i
-												class="fa fa-paperclip"></i> proposta.docx</a> <span
-												class="mailbox-attachment-size"> 1,245 KB <a href="#"
-												class="btn btn-default btn-xs pull-right"><i
-													class="fa fa-cloud-download"></i></a>
-											</span>
-										</div></li>
-								</ul>
-
-							</div>
-						</div>
-						<!-- /.tab-pane -->
-						<div class="tab-pane" id="monografia">
-							<div class="box-body no-padding direct-chat-messages">
-								<ul class="users-list clearfix">
-
-									<li><span class="mailbox-attachment-icon"><i
-											class="fa fa-file-word-o"></i></span>
-
-										<div class="mailbox-attachment-info">
-											<a href="#" class="mailbox-attachment-name"><i
-												class="fa fa-paperclip"></i> monografia.docx</a> <span
-												class="mailbox-attachment-size"> 1,245 KB <a href="#"
-												class="btn btn-default btn-xs pull-right"><i
-													class="fa fa-cloud-download"></i></a>
-											</span>
-										</div></li>
-								</ul>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</div>
-
 		<div class="row">
+			<div class="col-md-4">
+				<!-- Widget: user widget style 1 -->
+				<div class="box box-widget widget-user">
+					<!-- Add the bg color to the header using any of the bg-* classes -->
+					<div class="widget-user-header bg-aqua-active">
+						<h3 class="widget-user-username text-center"
+							th:text="${#authentication.principal.user.name}">Alonsinho
+							da Costa</h3>
+					</div>
+					<div class="widget-user-image">
+						<img src="/photos/face.png"
+							th:src="${#authentication.principal.user.picture?.pictureBase64}"
+							class="img-circle" alt="User Image">
+					</div>
+					<div class="box-footer">
+						<div class="row">
+							<p class="box-title text-center">Análise e Desenvolvimento
+								de Sistemas</p>
+							<p class="text-muted text-center">IFRS - Campus Canoas</p>
+						</div>
+						<!-- /.row -->
+					</div>
+				</div>
+				<!-- /.widget-user -->
+
+			</div>
 
 
-			<!-- Left col -->
+			
+
+
+
 			<div class="col-md-4">
 				<!-- MAP & BOX PANE -->
 
@@ -197,7 +139,10 @@
 									<tr th:each="task: ${tasks}">
 										<td th:text="${task.deadline}"></td>
 										<td th:text="${task.title}"></td>
-										<td th:text="${task.id}"></td>
+										<td><span
+											th:text="${#temporals.year(#temporals.createNow()) le #temporals.year(task.deadline)}? (${#temporals.year(#temporals.createNow()) < #temporals.year(task.deadline)} ? 'In Progress' : (${#temporals.month(#temporals.createNow()) le #temporals.month(task.deadline)} ? (${#temporals.month(#temporals.createNow()) lt #temporals.month(task.deadline)} ? 'In Progress' : (${#temporals.day(#temporals.createNow()) le #temporals.day(task.deadline)} ?  'In Progress': 'Expired' ) ) : 'Expired' )) : 'Expired'"
+											th:class="(${#temporals.year(#temporals.createNow()) le #temporals.year(task.deadline)}? (${#temporals.year(#temporals.createNow()) < #temporals.year(task.deadline)} ? 'label label-warning' : (${#temporals.month(#temporals.createNow()) le #temporals.month(task.deadline)} ? (${#temporals.month(#temporals.createNow()) lt #temporals.month(task.deadline)} ? 'label label-warning' : (${#temporals.day(#temporals.createNow()) le #temporals.day(task.deadline)} ?  'label label-warning': 'label label-danger' ) ) : 'label label-danger' )) : 'label label-danger')"></span>
+										</td>
 									</tr>
 
 
@@ -212,6 +157,95 @@
 				</div>
 				<!-- /.box -->
 			</div>
+			
+			
+			
+			<div class="col-md-4">
+				<div class="box box-danger">
+					<div class="box-header with-border">
+						<h3 class="box-title">Arquivos</h3>
+					</div>
+
+					<div class="nav-tabs-custom">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tema" data-toggle="tab"
+								aria-expanded="true">Tema</a></li>
+							<li class=""><a href="#proposta" data-toggle="tab"
+								aria-expanded="false">Proposta</a></li>
+							<li class=""><a href="#monografia" data-toggle="tab"
+								aria-expanded="false">Monografia</a></li>
+						</ul>
+						<div class="tab-content">
+
+							<div class="tab-pane active" id="tema">
+								<div class="box-body no-padding direct-chat-messages">
+									<ul class="users-list clearfix">
+
+										<li><span class="mailbox-attachment-icon"><i
+												class="fa fa-file-word-o"></i></span>
+
+											<div class="mailbox-attachment-info">
+												<a href="#" class="mailbox-attachment-name"><i
+													class="fa fa-paperclip"></i> tema.docx</a> <span
+													class="mailbox-attachment-size"> 1,245 KB <a
+													href="#" class="btn btn-default btn-xs pull-right"><i
+														class="fa fa-cloud-download"></i></a>
+												</span>
+											</div></li>
+									</ul>
+
+								</div>
+
+							</div>
+
+							<div class="tab-pane" id="proposta">
+
+								<div class="box-body no-padding direct-chat-messages">
+									<ul class="users-list clearfix">
+
+										<li><span class="mailbox-attachment-icon"><i
+												class="fa fa-file-word-o"></i></span>
+
+											<div class="mailbox-attachment-info">
+												<a href="#" class="mailbox-attachment-name"><i
+													class="fa fa-paperclip"></i> proposta.docx</a> <span
+													class="mailbox-attachment-size"> 1,245 KB <a
+													href="#" class="btn btn-default btn-xs pull-right"><i
+														class="fa fa-cloud-download"></i></a>
+												</span>
+											</div></li>
+									</ul>
+
+								</div>
+							</div>
+							<!-- /.tab-pane -->
+							<div class="tab-pane" id="monografia">
+								<div class="box-body no-padding direct-chat-messages">
+									<ul class="users-list clearfix">
+
+										<li><span class="mailbox-attachment-icon"><i
+												class="fa fa-file-word-o"></i></span>
+
+											<div class="mailbox-attachment-info">
+												<a href="#" class="mailbox-attachment-name"><i
+													class="fa fa-paperclip"></i> monografia.docx</a> <span
+													class="mailbox-attachment-size"> 1,245 KB <a
+													href="#" class="btn btn-default btn-xs pull-right"><i
+														class="fa fa-cloud-download"></i></a>
+												</span>
+											</div></li>
+									</ul>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
 			<!-- /.col -->
 
 
@@ -221,6 +255,9 @@
 		<!-- /.box -->
 
 	</section>
+	<!-- Main content -->
+
+	<section class="content"></section>
 
 </div>
 </html>

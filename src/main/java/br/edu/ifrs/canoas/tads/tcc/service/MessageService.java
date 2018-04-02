@@ -1,12 +1,17 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import br.edu.ifrs.canoas.tads.tcc.domain.File;
 import br.edu.ifrs.canoas.tads.tcc.domain.Message;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
+import br.edu.ifrs.canoas.tads.tcc.repository.FileRepository;
 import br.edu.ifrs.canoas.tads.tcc.repository.MessageRepository;
 import lombok.AllArgsConstructor;
 
@@ -15,6 +20,7 @@ import lombok.AllArgsConstructor;
 public class MessageService {
 
 	private final MessageRepository messageRepository;
+	private final FileService fileService;
 
 	public List<Message> findAllByReceiver(User receiver){
 
@@ -47,7 +53,13 @@ public class MessageService {
 		return messageRepository.findAllBySenderOrReceiverOrderByDate(sender, sender);
 	}
 
-	public Message save(Message message) {
+	public Message save(Message message, MultipartFile mFile) throws IOException{
+
+		if(mFile != null && mFile.getBytes().length > 0) {
+
+			fileService.saveMultipartFile(mFile);
+		}
+
 		return messageRepository.save(message);
 	}
 }

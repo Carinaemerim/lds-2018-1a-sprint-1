@@ -27,7 +27,7 @@
 		</div>
 		<!-- /.box-body -->
 		<div class="box-footer">
-			<form action="#" method="post" th:action="@{/chat/send}" th:object="${messageChat}" id="chat-form" enctype="multipart/form-data">
+			<form method="post" th:action="@{/chat/send}" th:object="${messageChat}" id="chat-form" enctype="multipart/form-data">
 				<div class="input-group">
 					<div>
 						<input type="hidden" id="id" th:field="*{id}">

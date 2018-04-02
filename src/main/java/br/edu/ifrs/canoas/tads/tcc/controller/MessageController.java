@@ -6,6 +6,9 @@ import br.edu.ifrs.canoas.tads.tcc.service.FileService;
 import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
 import lombok.AllArgsConstructor;
+
+import java.io.IOException;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,8 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor
 public class MessageController {
 	private final MessageService messageService;
-	private final TermPaperService termPaperService;
-	private final FileService fileService;
+
 
 	@PostMapping("/send")
 	public ModelAndView sendMessage(@AuthenticationPrincipal UserImpl activeUser,
@@ -30,18 +32,13 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView("/document/fragments/chat :: chat-results");
 		message.setSender(activeUser.getUser());
 		//message.setReceiver(termPaperService.getOneByAuthor(activeUser.getUser()).getAdvisor());
-		messageService.save(message);
-
-//		CommonsMultipartFile fileForm = message.getFile();
-//
-//		File file = new File();
-//		file.setFilename(fileForm.getOriginalFilename());
-//		file.setContent(fileForm.getBytes());
-//		file.setContentType(fileForm.getContentType());
-//		file.setCreatedOn(new Date());
-//		file.setDescription(fileForm.getStorageDescription());
-
-//		fileService.save(file);
+		try {
+			messageService.save(message, mFile);
+		}catch(IOException e){ //não sei exatamente o que fazer nesse caso, deixarei assim apenas para funcionar no momento
+			mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
+			mav.addObject("user", activeUser.getUser());
+			return  mav;
+		}
 
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
 		mav.addObject("user", activeUser.getUser());

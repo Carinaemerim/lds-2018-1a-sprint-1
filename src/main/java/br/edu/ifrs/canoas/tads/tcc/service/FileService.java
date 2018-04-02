@@ -3,10 +3,15 @@ package br.edu.ifrs.canoas.tads.tcc.service;
 import br.edu.ifrs.canoas.tads.tcc.domain.File;
 import br.edu.ifrs.canoas.tads.tcc.repository.FileRepository;
 import lombok.AllArgsConstructor;
+
+import java.io.IOException;
+import java.util.Date;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @AllArgsConstructor
@@ -40,6 +45,17 @@ public class FileService {
     public void save(File file) {
 
     	fileRepository.save(file);
+    }
+
+    public void saveMultipartFile(MultipartFile mFile) throws IOException {
+
+    	File file = new File();
+		file.setFilename(mFile.getOriginalFilename());
+		file.setContent(mFile.getBytes());
+		file.setContentType(mFile.getContentType());
+		file.setCreatedOn(new Date());
+
+		this.save(file);
     }
 
     public void deleteById(Long file) {

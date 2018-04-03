@@ -32,12 +32,16 @@ public class MessageController {
 		ModelAndView mav = new ModelAndView("/document/fragments/chat :: chat-results");
 		message.setSender(activeUser.getUser());
 		//message.setReceiver(termPaperService.getOneByAuthor(activeUser.getUser()).getAdvisor());
-		try {
-			messageService.save(message, mFile);
-		}catch(IOException e){ //não sei exatamente o que fazer nesse caso, deixarei assim apenas para funcionar no momento
-			mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
-			mav.addObject("user", activeUser.getUser());
-			return  mav;
+
+		if(mFile != null) {
+
+			try {
+				messageService.save(message, mFile);
+			}catch(IOException e){ //não sei exatamente o que fazer nesse caso, deixarei assim apenas para funcionar no momento
+				mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
+				mav.addObject("user", activeUser.getUser());
+				return  mav;
+			}
 		}
 
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));

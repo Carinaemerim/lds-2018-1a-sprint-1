@@ -1,18 +1,13 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
-import br.edu.ifrs.canoas.tads.tcc.config.Messages;
-import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
-import br.edu.ifrs.canoas.tads.tcc.domain.Student;
-import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
-import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
-import br.edu.ifrs.canoas.tads.tcc.service.UserService;
-import lombok.AllArgsConstructor;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,13 +17,17 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.edu.ifrs.canoas.tads.tcc.config.Messages;
+import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.Message;
+import br.edu.ifrs.canoas.tads.tcc.domain.Student;
+import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
+import br.edu.ifrs.canoas.tads.tcc.service.UserService;
+import lombok.AllArgsConstructor;
 
 @RequestMapping("/document")
 @Controller
@@ -49,7 +48,6 @@ public class DocumentController {
 		mav.addObject("messageChat", new Message());
 		mav.addObject("advisors", userService.getAdvisors());
 		mav.addObject("user", activeUser.getUser());
-		mav.addObject("termPaper", termPaperService.getLastOneByUser(activeUser.getUser()));
 		mav.addObject("monographs", documentService.search(DocumentType.TERMPAPER));
 
 		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
@@ -64,12 +62,14 @@ public class DocumentController {
 	@PostMapping(path = "/theme/submit")
 	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
 			BindingResult bindingResult, RedirectAttributes redirectAttr) {
-		if (bindingResult.hasErrors()) {
-			ModelAndView mav = new ModelAndView("/document/document");
-			mav.addObject("advisors", userService.getAdvisors());
-			return mav;
+		if (activeUser.getUser() instanceof Student) {
+			termPaper.setAuthor((Student) activeUser.getUser());
+		} else {
+			bindingResult.addError(new FieldError("termPaper", "author", messages.get("theme.formOnlyForStudent")));
 		}
-		termPaper.setAuthor((Student) activeUser.getUser());
+		if (bindingResult.hasErrors()) {
+			return this.document(activeUser).addObject("termPaper", termPaper);
+		}
 		ModelAndView mav = new ModelAndView("redirect:/document/");
 		mav.addObject("termPaper", termPaperService.saveThemeDraft(termPaper));
 		redirectAttr.addFlashAttribute("message", messages.get("field.draft-saved"));
@@ -90,10 +90,13 @@ public class DocumentController {
 		if (termPaper.getAdvisor() == null && (fetchedTermPaper == null || !fetchedTermPaper.getThemeSubmitted())) {
 			bindingResult.addError(new FieldError("termPaper", "advisor", messages.get("field.not-null")));
 		}
+		if (activeUser.getUser() instanceof Student) {
+			termPaper.setAuthor((Student) activeUser.getUser());
+		} else {
+			bindingResult.addError(new FieldError("termPaper", "author", messages.get("theme.formOnlyForStudent")));
+		}
 		if (bindingResult.hasErrors()) {
-			ModelAndView mav = new ModelAndView("/document/document");
-			mav.addObject("advisors", userService.getAdvisors());
-			return mav;
+			return this.document(activeUser).addObject("termPaper", termPaper);
 		}
 		termPaper.setAuthor((Student) activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");

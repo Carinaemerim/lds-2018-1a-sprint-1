@@ -2,6 +2,11 @@
 	<form role="form" id="form-theme-advisor" action="#"
 		class="form-horizontal" th:action="@{/document/theme/submit}"
 		th:object="${termPaper}" method="post">
+		<section class="content-header" th:if="${#fields.hasErrors('author')}">
+			<div class="callout callout-danger lead">
+				<p th:errors="*{author}"></p>
+			</div>
+		</section>
 		<div class="box-body">
 			<input type="hidden" id="id" th:field="*{id}">
 			<div class="form-group">
@@ -23,8 +28,8 @@
 					th:classappend="${#fields.hasErrors('theme')}? 'has-error'">
 					<input type="text" class="form-control" id="theme"
 						placeholder="Enter paper theme" th:placeholder="#{theme.ph.theme}"
-						th:field="*{theme}" th:readonly="${termPaper.themeSubmitted}"> <span
-						th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"
+						th:field="*{theme}" th:readonly="${termPaper.themeSubmitted}">
+					<span th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"
 						th:class="help-block" />
 				</div>
 			</div>
@@ -34,11 +39,13 @@
 				<div class="col-sm-10"
 					th:classappend="${#fields.hasErrors('advisor')}? 'has-error'">
 					<select class="form-control" id="advisor" th:field="*{advisor}"
+						data-toggle="tooltip" th:title="#{theme.advisorSelectionTooltip}"
 						th:disabled="${termPaper.themeSubmitted}">
 						<option th:value="null" th:text="#{theme.ph.advisor}">Select
 							a teacher advisor</option>
 						<option th:each="advisor : ${advisors}" th:value="${advisor.id}"
-							th:text="${advisor.name}">Teacher Advisor</option>
+							th:text="${advisor.name + ' (' + advisor.termPapers?.size() + ')'}">Professor
+							Advisor</option>
 					</select> <span th:if="${#fields.hasErrors('advisor')}"
 						th:errors="*{advisor}" th:class="help-block" />
 				</div>
@@ -83,9 +90,9 @@
 			<button type="submit" class="btn btn-primary"
 				th:text="#{theme.save-draft}">Save draft</button>
 			<button type="button" class="btn btn-danger pull-right"
-				data-toggle="modal" data-target="#themeSubmitConfirmationModal"
-				name="action" th:text="#{theme.submit}">Submit for
-				evaluation</button>
+				th:disabled="${termPaper.themeSubmitted}" data-toggle="modal"
+				data-target="#themeSubmitConfirmationModal" name="action"
+				th:text="#{theme.submit}">Submit for evaluation</button>
 		</div>
 		<div class="modal fade" id="themeSubmitConfirmationModal"
 			tabindex="-1" role="dialog"

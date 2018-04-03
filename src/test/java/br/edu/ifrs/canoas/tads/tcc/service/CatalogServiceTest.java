@@ -27,7 +27,7 @@ public class CatalogServiceTest {
         Iterable<TermPaper> papers = service.search(CRITERIA);
 
         //then
-        assertThat(papers).hasSize(1)
+        assertThat(papers).hasSize(2)
                 .extracting("theme").contains("Spring Boot");
 
     }
@@ -53,7 +53,7 @@ public class CatalogServiceTest {
         Iterable<TermPaper> papers = service.search("");
 
         //then
-        assertThat(papers).hasSize(2);
+        assertThat(papers).hasSize(7);
     }
 
 }

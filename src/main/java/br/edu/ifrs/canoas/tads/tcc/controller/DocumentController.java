@@ -59,14 +59,25 @@ public class DocumentController {
 		return mav;
 	}
 
-	@PostMapping(path = "/theme/submit")
-	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
-			BindingResult bindingResult, RedirectAttributes redirectAttr) {
+	@GetMapping("/delete/{id}")
+	public ModelAndView deleteOne(@PathVariable Long id) {
+		documentService.deleteOne(id);
+		return new ModelAndView("redirect:" + "/document/");
+
+	}
+
+	private void authorIsStudentValidation(UserImpl activeUser, TermPaper termPaper, BindingResult bindingResult) {
 		if (activeUser.getUser() instanceof Student) {
 			termPaper.setAuthor((Student) activeUser.getUser());
 		} else {
 			bindingResult.addError(new FieldError("termPaper", "author", messages.get("theme.formOnlyForStudent")));
 		}
+	}
+
+	@PostMapping(path = "/theme/submit")
+	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
+			BindingResult bindingResult, RedirectAttributes redirectAttr) {
+		authorIsStudentValidation(activeUser, termPaper, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return this.document(activeUser).addObject("termPaper", termPaper);
 		}
@@ -76,24 +87,13 @@ public class DocumentController {
 		return mav;
 	}
 
-	@GetMapping("/delete/{id}")
-	public ModelAndView deleteOne(@PathVariable Long id) {
-		documentService.deleteOne(id);
-		return new ModelAndView("redirect:" + "/document/");
-
-	}
-
 	@PostMapping(path = "/theme/submit", params = "action=evaluation")
 	public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
 			@Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr) {
 		TermPaper fetchedTermPaper = termPaperService.getOne(termPaper);
+		authorIsStudentValidation(activeUser, termPaper, bindingResult);
 		if (termPaper.getAdvisor() == null && (fetchedTermPaper == null || !fetchedTermPaper.getThemeSubmitted())) {
 			bindingResult.addError(new FieldError("termPaper", "advisor", messages.get("field.not-null")));
-		}
-		if (activeUser.getUser() instanceof Student) {
-			termPaper.setAuthor((Student) activeUser.getUser());
-		} else {
-			bindingResult.addError(new FieldError("termPaper", "author", messages.get("theme.formOnlyForStudent")));
 		}
 		if (bindingResult.hasErrors()) {
 			return this.document(activeUser).addObject("termPaper", termPaper);

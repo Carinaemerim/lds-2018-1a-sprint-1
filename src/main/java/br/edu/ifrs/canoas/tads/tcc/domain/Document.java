@@ -1,13 +1,26 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
-import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
-import lombok.Data;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.*;
-import java.util.List;
+import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
+import lombok.Data;
 
 @Entity
 @Data
@@ -16,6 +29,8 @@ public class Document {
     @Id
     @GeneratedValue
     private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdOn;
     @ManyToOne
     private TermPaper termPaper;
     @Enumerated(EnumType.ORDINAL)

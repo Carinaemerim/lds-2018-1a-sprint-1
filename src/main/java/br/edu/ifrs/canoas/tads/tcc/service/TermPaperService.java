@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifrs.canoas.tads.tcc.domain.Document;
-import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
 import br.edu.ifrs.canoas.tads.tcc.repository.AcademicYearRepository;
@@ -56,14 +54,7 @@ public class TermPaperService {
 
     public TermPaper submitThemeForEvaluation(TermPaper termPaper) {
         termPaper = this.saveThemeDraft(termPaper);
-        Document fetchedDocument = documentService.getFinalThemeDocumentByTermPaper(termPaper);
-        if (fetchedDocument == null)
-            fetchedDocument = new Document();
-        fetchedDocument.setTitle(termPaper.getTitle());
-        fetchedDocument.setDocumentType(DocumentType.THEME);
-        fetchedDocument.setIsFinal(true);
-        fetchedDocument.setTermPaper(termPaper);
-        fetchedDocument = documentService.save(fetchedDocument);
+        documentService.createOrUpdateThemeDocument(termPaper);
         return getOne(termPaper);
     }
 

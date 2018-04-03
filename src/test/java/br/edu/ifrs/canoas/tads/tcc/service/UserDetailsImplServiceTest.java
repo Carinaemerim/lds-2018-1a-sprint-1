@@ -29,7 +29,7 @@ public class UserDetailsImplServiceTest {
 
         //then
         assertThat(userDetails).extracting("user.name").contains("Master Yoda");
-        assertThat(userDetails.getAuthorities()).hasSize(1);
+        assertThat(userDetails.getAuthorities()).hasSize(2);
     }
 
     @Test

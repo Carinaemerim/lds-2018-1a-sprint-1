@@ -2,6 +2,8 @@ package br.edu.ifrs.canoas.tads.tcc.controller;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Task;
 import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
+
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/schedule")
-//@hascode
+
 @Controller
 public class TaskController {
 	
@@ -29,21 +31,21 @@ public class TaskController {
 		mav.addObject("tasks", scheduleService.listAll());
 		return mav;
 	}
-	
+	@Secured("ROLE_PROFESSOR")
 	@GetMapping("/add")
 	public String newTask(Model model) {
 		model.addAttribute("task", new Task());
 		model.addAttribute("currPeriod", scheduleService.getPeriod());
 		return "/schedule/edit";
 	}
-	
+	@Secured("ROLE_PROFESSOR")
 	@PostMapping("/edit")
 	public String save(Task task) {
 		task.setPeriod(scheduleService.getPeriod());		
 		scheduleService.save(task);
 		return "redirect:/schedule/index";
 	}
-	
+	@Secured("ROLE_PROFESSOR")
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {  
 		ModelAndView mav = new ModelAndView("/schedule/edit");
@@ -51,7 +53,7 @@ public class TaskController {
 		mav.addObject("task", scheduleService.getId(id));	
 		return mav;
     }
-	
+	@Secured("ROLE_PROFESSOR")
 	@GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("redirect:/schedule/index");

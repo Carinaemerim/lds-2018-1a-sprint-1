@@ -10,12 +10,12 @@ import br.edu.ifrs.canoas.tads.tcc.domain.TaskStatus;
 import br.edu.ifrs.canoas.tads.tcc.repository.TaskRepository;
 
 @Service
-public class ScheduleService {
+public class TaskService {
 	
 	private String period;
 	public final TaskRepository scheduleRepository;
 
-	public ScheduleService(TaskRepository scheduleRepository) {
+	public TaskService(TaskRepository scheduleRepository) {
 		super();
 		this.scheduleRepository = scheduleRepository;
 		period = null;

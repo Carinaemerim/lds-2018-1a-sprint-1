@@ -1,7 +1,7 @@
 package br.edu.ifrs.canoas.tads.tcc.controller;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.Task;
-import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
+import br.edu.ifrs.canoas.tads.tcc.service.TaskService;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -17,9 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TaskController {
 	
-	private final ScheduleService scheduleService;
+	private final TaskService scheduleService;
 
-	public TaskController(ScheduleService scheduleService) {
+	public TaskController(TaskService scheduleService) {
 		super();
 		this.scheduleService = scheduleService;
 	}

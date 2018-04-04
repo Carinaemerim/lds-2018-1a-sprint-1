@@ -15,7 +15,7 @@ import br.edu.ifrs.canoas.tads.tcc.domain.Evaluation;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.repository.UserRepository;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
-import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
+import br.edu.ifrs.canoas.tads.tcc.service.TaskService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
 import br.edu.ifrs.canoas.tads.tcc.service.UserService;
 
@@ -26,10 +26,10 @@ import br.edu.ifrs.canoas.tads.tcc.service.UserService;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-	private final ScheduleService scheduleService;
+	private final TaskService scheduleService;
 	
 	
-	public DashboardController(ScheduleService scheduleService) {
+	public DashboardController(TaskService scheduleService) {
 		super();
 		this.scheduleService = scheduleService;
 	}

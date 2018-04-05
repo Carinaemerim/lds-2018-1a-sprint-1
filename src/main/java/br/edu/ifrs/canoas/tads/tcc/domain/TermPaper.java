@@ -1,12 +1,20 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.List;
 
 @Entity
 @Data
@@ -17,10 +25,13 @@ public class TermPaper {
 	@GeneratedValue
 	private Long id;
 	@NotBlank
+	@Size(max=250)
 	private String title;
 	@NotBlank
+	@Size(max=50)
 	private String theme;
 	@NotBlank
+	@Size(max=500)
 	private String description;
 	@ManyToOne
 	private Student author;

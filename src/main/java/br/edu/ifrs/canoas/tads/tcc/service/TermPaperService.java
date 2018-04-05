@@ -3,16 +3,15 @@ package br.edu.ifrs.canoas.tads.tcc.service;
 import java.util.Calendar;
 import java.util.Optional;
 
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.canoas.tads.tcc.config.Messages;
+import br.edu.ifrs.canoas.tads.tcc.domain.AcademicYear;
 import br.edu.ifrs.canoas.tads.tcc.domain.Advice;
 import br.edu.ifrs.canoas.tads.tcc.domain.Document;
 import br.edu.ifrs.canoas.tads.tcc.domain.EvaluationStatus;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
-import br.edu.ifrs.canoas.tads.tcc.repository.AcademicYearRepository;
 import br.edu.ifrs.canoas.tads.tcc.repository.TermPaperRepository;
 import lombok.AllArgsConstructor;
 
@@ -24,7 +23,7 @@ public class TermPaperService {
 
 	private final TermPaperRepository termPaperRepository;
 
-	private final AcademicYearRepository academicYearRepository;
+	private final AcademicYearService academicYearService;
 
 	private final DocumentService documentService;
 
@@ -32,10 +31,6 @@ public class TermPaperService {
 
 	public TermPaper getOneById(Long id) {
 		return termPaperRepository.getOne(id);
-	}
-
-	public TermPaper getOneByAuthor(User author) {
-		return termPaperRepository.getOneByAuthor(author);
 	}
 
 	public TermPaper getOne(TermPaper termPaper) {
@@ -48,8 +43,12 @@ public class TermPaperService {
 	public TermPaper saveThemeDraft(TermPaper termPaper) {
 		TermPaper fetchedTermPaper = this.getOne(termPaper);
 		if (fetchedTermPaper == null || fetchedTermPaper.getId() == null) {
+			AcademicYear academicYear = academicYearService.getCurrentAcademicYear();
+			if (academicYear == null) {
+				throw new RuntimeException(messages.get("theme.academicYearNotDefined"));
+			}
 			fetchedTermPaper = new TermPaper();
-			fetchedTermPaper.setAcademicYear(academicYearRepository.findFirstByOrderByIdDesc());
+			fetchedTermPaper.setAcademicYear(academicYear);
 		}
 		if (!fetchedTermPaper.getThemeSubmitted()) {
 			fetchedTermPaper.setAdvisor(termPaper.getAdvisor());
@@ -68,8 +67,12 @@ public class TermPaperService {
 	}
 
 	public TermPaper getLastOneByUser(User user) {
+		AcademicYear academicYear = academicYearService.getCurrentAcademicYear();
+		if (academicYear == null) {
+			throw new RuntimeException(messages.get("theme.academicYearNotDefined"));
+		}
 		return verifyThemeWaitingDuration(
-				termPaperRepository.findFirstByAuthorId(user.getId(), Sort.by(Sort.Direction.DESC, "id")));
+				termPaperRepository.findFirstByAuthorIdAndAcademicYearOrderByIdDesc(user.getId(), academicYear));
 	}
 
 	private TermPaper verifyThemeWaitingDuration(TermPaper termPaper) {

@@ -44,7 +44,7 @@
 						<option th:value="null" th:text="#{theme.ph.advisor}">Select
 							a teacher advisor</option>
 						<option th:each="advisor : ${advisors}" th:value="${advisor.id}"
-							th:text="${advisor.name + ' (' + advisor.termPapers?.size() + ')'}">Professor
+							th:text="${advisor.name + ' (' + advisor.currentPeriodApprovedThemesNumber + ')'}">Professor
 							Advisor</option>
 					</select> <span th:if="${#fields.hasErrors('advisor')}"
 						th:errors="*{advisor}" th:class="help-block" />

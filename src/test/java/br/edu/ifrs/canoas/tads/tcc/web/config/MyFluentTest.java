@@ -32,12 +32,21 @@ public abstract class MyFluentTest extends FluentTest {
     @Page
     LoginPage loginPage;
 
-    public void login() {
+    public void loginUser() {
         loginPage.go(port);
         loginPage.fillAndSubmitForm("user", "user")
                 .awaitUntilFormDisappear();
         assertThat(window().title()).isEqualTo("Header");
     }
+
+    public void loginProfessor() {
+        loginPage.go(port);
+        loginPage.fillAndSubmitForm("orientador", "user")
+                .awaitUntilFormDisappear();
+        assertThat(window().title()).isEqualTo("Header");
+    }
+
+
 
 
 }

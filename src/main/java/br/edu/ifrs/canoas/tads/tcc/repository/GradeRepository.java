@@ -13,7 +13,5 @@ import java.util.Optional;
 @Repository
 public interface GradeRepository extends JpaRepository<Grade, Long> {
 
-    Grade findLastByDocumentIdAndAppraiserId(Long documentId, Long professorId);
-
 
 }

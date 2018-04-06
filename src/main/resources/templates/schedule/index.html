@@ -48,6 +48,7 @@
 										<td>						
 											<a th:href="@{/schedule/edit/{id}(id=${task.id})}"> <span class="badge glyphicon glyphicon-edit " th:text=" Editar" />
 											<a th:href="@{/schedule/delete/{id}(id=${task.id})}"> <span class="badge glyphicon glyphicon-trash  " th:text="delete" />
+								
 										</td>
 									</div>
 								</tr>								
@@ -68,6 +69,8 @@
 		<!-- /.row -->
 	</section>
 </div>
+
+
 
 <th:block layout:fragment="css-view">
 	<link rel="stylesheet" type="text/css"

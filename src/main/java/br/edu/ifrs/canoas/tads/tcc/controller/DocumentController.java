@@ -26,7 +26,7 @@ import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
 import br.edu.ifrs.canoas.tads.tcc.domain.Message;
 import br.edu.ifrs.canoas.tads.tcc.domain.Student;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
-import br.edu.ifrs.canoas.tads.tcc.repository.AcademicYearRepository;
+import br.edu.ifrs.canoas.tads.tcc.service.AcademicYearService;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
 import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
@@ -46,8 +46,7 @@ public class DocumentController {
 	private final UserService userService;
 	private final DocumentService documentService;
 	private final MessageService messageService;
-	private final AcademicYearRepository academicYearRepository;
-	private final TaskService taskService;
+	private final AcademicYearService academicYearService;
 	private final EvaluationService evaluationService;
 
 	@GetMapping(value = { "/", "/{period}/{academicYearId}" })
@@ -55,41 +54,12 @@ public class DocumentController {
 			@PathVariable Optional<Long> academicYearId, @PathVariable Optional<String> period) {
 		ModelAndView mav = new ModelAndView("/document/document");
 
-		AcademicYear academicYear;
-		String searchPeriod = "";
-		Optional<AcademicYear> opAcademicYear;
-		Long searchAcademicYearId;
-		if (period.isPresent() && academicYearId.isPresent()) {
-			searchPeriod = period.get();
-			searchAcademicYearId = academicYearId.get();
-			opAcademicYear = (academicYearRepository.findFirstByIdIs(searchAcademicYearId));
-			if (opAcademicYear.isPresent()) {
-				academicYear = opAcademicYear.get();
-			} else {
-				academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
-			}
-
-		} else {
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
-		}
-
-		switch (searchPeriod) {
-		case "previous":
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.previous(academicYear.getTitle())));
-			break;
-		case "next":
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.next(academicYear.getTitle())));
-			break;
-		default:
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
-			mav.addObject("academicYear", academicYear);
-		}
-
-
+		AcademicYear academicYear = academicYearService.getAcademicYearByIdOrPeriod(academicYearId, period);
 		mav.addObject("isCurrentPeriod", PeriodUtil.isCurrentPeriod(academicYear));
 		mav.addObject("isNext", evaluationService.getNextPeriod(academicYear));
 		mav.addObject("isPrevious", evaluationService.getPreviousPeriod(academicYear));
 		mav.addObject("academicYear", academicYear);
+
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
 		mav.addObject("messageChat", new Message());
 		mav.addObject("advisors", userService.getAdvisors());
@@ -97,9 +67,6 @@ public class DocumentController {
 		mav.addObject("monographs", documentService.search(DocumentType.TERMPAPER));
 
 		TermPaper termPaper = termPaperService.getOneByUserAndAcademicYear(activeUser.getUser(), academicYear);
-		if (termPaper == null) {
-			termPaper = new TermPaper();
-		}
 		mav.addObject("termPaper", termPaper);
 		return mav;
 	}
@@ -158,15 +125,15 @@ public class DocumentController {
 		MultipartFile multipartFile = multipartRequest.getFile("file");
 		return "redirect:upload-success";
 	}
-	
+
 	@GetMapping("/monograph")
 	public ModelAndView loadMonograph(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/fragments/monograph_proposal :: document-list");
-		
+
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
 		mav.addObject("messageChat", new Message());
 		mav.addObject("user", activeUser.getUser());
-		
+
 		mav.addObject("documents", documentService.search(DocumentType.TERMPAPER));
 
 		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
@@ -174,18 +141,18 @@ public class DocumentController {
 			termPaper = new TermPaper();
 		}
 		mav.addObject("termPaper", termPaper);
-		
+
 		return mav;
 	}
-	
+
 	@GetMapping("/proposal")
 	public ModelAndView loadProposal(@AuthenticationPrincipal UserImpl activeUser) {
 		ModelAndView mav = new ModelAndView("/document/fragments/monograph_proposal :: document-list");
-		
+
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
 		mav.addObject("messageChat", new Message());
 		mav.addObject("user", activeUser.getUser());
-		
+
 		mav.addObject("documents", documentService.search(DocumentType.PROPOSAL));
 
 		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
@@ -193,60 +160,14 @@ public class DocumentController {
 			termPaper = new TermPaper();
 		}
 		mav.addObject("termPaper", termPaper);
-		
+
 		return mav;
 	}
-	
-	@GetMapping(value= {"/theme", "/{period}/{academicYearId}"})
+
+	@GetMapping(value= {"/theme", "/theme/{period}/{academicYearId}"})
 	public ModelAndView loadTheme(@AuthenticationPrincipal UserImpl activeUser, @PathVariable Optional<Long> academicYearId, @PathVariable Optional<String> period) {
-		ModelAndView mav = new ModelAndView("/document/fragments/theme :: document-list");
-		
-		AcademicYear academicYear;
-		String searchPeriod = "";
-		Optional<AcademicYear> opAcademicYear;
-		Long searchAcademicYearId;
-		if (period.isPresent() && academicYearId.isPresent()) {
-			searchPeriod = period.get();
-			searchAcademicYearId = academicYearId.get();
-			opAcademicYear = (academicYearRepository.findFirstByIdIs(searchAcademicYearId));
-			if (opAcademicYear.isPresent()) {
-				academicYear = opAcademicYear.get();
-			} else {
-				academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
-			}
-
-		} else {
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
-		}
-
-		switch (searchPeriod) {
-		case "previous":
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.previous(academicYear.getTitle())));
-			break;
-		case "next":
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.next(academicYear.getTitle())));
-			break;
-		default:
-			academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
-			mav.addObject("academicYear", academicYear);
-		}
-
-
-		mav.addObject("isCurrentPeriod", PeriodUtil.isCurrentPeriod(academicYear));
-		mav.addObject("isNext", evaluationService.getNextPeriod(academicYear));
-		mav.addObject("isPrevious", evaluationService.getPreviousPeriod(academicYear));
-		mav.addObject("academicYear", academicYear);
-		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
-		mav.addObject("messageChat", new Message());
-		mav.addObject("advisors", userService.getAdvisors());
-		mav.addObject("user", activeUser.getUser());
-		mav.addObject("monographs", documentService.search(DocumentType.TERMPAPER));
-
-		TermPaper termPaper = termPaperService.getOneByUserAndAcademicYear(activeUser.getUser(), academicYear);
-		if (termPaper == null) {
-			termPaper = new TermPaper();
-		}
-		mav.addObject("termPaper", termPaper);
+		ModelAndView mav = this.document(activeUser, academicYearId, period);
+		mav.setViewName("/document/fragments/theme :: document-list");
 		return mav;
 	}
 }

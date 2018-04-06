@@ -79,8 +79,9 @@ public class TermPaperService {
 		if (academicYear == null) {
 			throw new RuntimeException(messages.get("theme.academicYearNotDefined"));
 		}
-		return verifyThemeWaitingDuration(
+		TermPaper termPaper = verifyThemeWaitingDuration(
 				termPaperRepository.findFirstByAuthorIdAndAcademicYearOrderByIdDesc(user.getId(), academicYear));
+		return (termPaper == null) ? new TermPaper() : termPaper;
 	}
 
 	private TermPaper verifyThemeWaitingDuration(TermPaper termPaper) {

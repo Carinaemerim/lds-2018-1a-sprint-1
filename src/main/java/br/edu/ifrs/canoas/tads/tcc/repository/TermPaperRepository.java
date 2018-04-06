@@ -1,12 +1,13 @@
 package br.edu.ifrs.canoas.tads.tcc.repository;
 
-import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
-import br.edu.ifrs.canoas.tads.tcc.domain.User;
+import java.util.List;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import br.edu.ifrs.canoas.tads.tcc.domain.AcademicYear;
+import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 
 public interface TermPaperRepository extends JpaRepository<TermPaper, Long> {
 
@@ -25,6 +26,6 @@ public interface TermPaperRepository extends JpaRepository<TermPaper, Long> {
             "where  term_paper.academic_year_id = (?2);", nativeQuery = true)
     List<TermPaper> getTermPaperForEvaluation(Long id, Long academicYear);
 
-    TermPaper getOneByAuthor(User author);
+	TermPaper findFirstByAuthorIdAndAcademicYearOrderByIdDesc(Long authorId, AcademicYear academicYear);
 
 }

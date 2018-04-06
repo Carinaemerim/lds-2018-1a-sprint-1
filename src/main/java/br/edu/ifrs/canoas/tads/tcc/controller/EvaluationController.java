@@ -55,7 +55,8 @@ public class EvaluationController {
     private final UserRepository userRepository;
     private final AcademicYearRepository academicYearRepository;
     private final Messages messages;
-    private final TaskService scheduleService;
+
+    private final TaskService taskService;
 
     @ModelAttribute("allEvaluationStatus")
     public List<EvaluationStatus> populateEvaluationStatus() {
@@ -81,25 +82,25 @@ public class EvaluationController {
                 System.out.println("Acdmic acho na pesquisa ");
             } else {
                 System.out.println("Não acho na pesquisa ");
-                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
+                academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
             }
 
 
         } else {
             System.out.println("Academic not presente ,pegou current ");
-            academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
+            academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
         }
 
         AcademicYear oldAcademicYear = academicYear;
         switch (searchPeriod) {
             case "previous":
-                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.previous(academicYear.getTitle())));
+                academicYear = (academicYearRepository.findFirstByTitle(taskService.previous(academicYear.getTitle())));
                 break;
             case "next":
-                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.next(academicYear.getTitle())));
+                academicYear = (academicYearRepository.findFirstByTitle(taskService.next(academicYear.getTitle())));
                 break;
             default:
-                academicYear = (academicYearRepository.findFirstByTitle(scheduleService.getPeriod()));
+                academicYear = (academicYearRepository.findFirstByTitle(taskService.getPeriod()));
                 mav.addObject("academicYear", academicYear);
         }
         /*if (academicYear == null)

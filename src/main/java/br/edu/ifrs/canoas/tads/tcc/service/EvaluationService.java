@@ -28,7 +28,7 @@ public class EvaluationService {
     AdviceRepository adviceRepository;
     GradeRepository gradeRepository;
     FileRepository fileRepository;
-    TaskService scheduleService;
+    TaskService taskService;
     AcademicYearRepository academicYearRepository;
 
 
@@ -140,12 +140,12 @@ public class EvaluationService {
         AcademicYear ac;
         String next;
         for(int i=0; i<10; i++) {
-            ac = (academicYearRepository.findFirstByTitle(scheduleService.next(currentPeriod)));
+            ac = (academicYearRepository.findFirstByTitle(taskService.next(currentPeriod)));
             if(ac != null) {
                 System.out.println("NEXT: " + ac.toString());
                 return true;
             }
-            next = scheduleService.next(currentPeriod);
+            next = taskService.next(currentPeriod);
             currentPeriod = next;
         }
 
@@ -157,12 +157,12 @@ public class EvaluationService {
         AcademicYear ac;
         String previous;
         for(int i=0; i<10; i++) {
-            ac = (academicYearRepository.findFirstByTitle(scheduleService.previous(currentPeriod)));
+            ac = (academicYearRepository.findFirstByTitle(taskService.previous(currentPeriod)));
             if(ac != null) {
                 System.out.println("PREV: " + ac.toString());
                 return true;
             }
-            previous = scheduleService.previous(currentPeriod);
+            previous = taskService.previous(currentPeriod);
             currentPeriod = previous;
         }
         System.out.println("NOT PREV: ");

@@ -1,9 +1,13 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
-import lombok.Data;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+
+import lombok.Data;
 
 @Entity
 @Data

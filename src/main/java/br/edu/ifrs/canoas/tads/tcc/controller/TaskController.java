@@ -38,7 +38,9 @@ public class TaskController {
 	@Secured("ROLE_PROFESSOR")
 	@GetMapping("/add")
 	public String newTask(Model model) {
-		model.addAttribute("task", new Task());
+		Task task = new Task();
+		task.setPeriod(scheduleService.getPeriod());
+		model.addAttribute("task", task);
 		model.addAttribute("currPeriod", scheduleService.getPeriod());
 		return "/schedule/edit";
 	}

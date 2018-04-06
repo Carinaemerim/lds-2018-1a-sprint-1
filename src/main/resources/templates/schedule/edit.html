@@ -62,10 +62,14 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-
+                                    
+ 									<input  type=hidden class="form-control"
+                                            th:field="*{period}" th:value="${currPeriod}" />
+                                            
                                     <input  type="text"   class="form-control pull-right"
                                             th:field="*{deadline}"
                                             placeholder="dd/mm/yyyy" />
+                                            
 									<label th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}">Title Error</label>
                                 </div>
 

@@ -22,4 +22,17 @@ function asyncRequest(url, formId, replacementId,
     });
 }
 
-
+function getAsync(url, replacementId,
+		onSuccess = function(data){$(replacementId).replaceWith(data);}){
+	$.ajax({
+		type: "GET",
+		url: url,
+		processData: false,
+        contentType: false,
+        cache: false,
+        success : onSuccess,
+        error: function(result) {
+            alert('error: '+result);
+        }
+	});
+}

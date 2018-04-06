@@ -112,4 +112,56 @@ public class DocumentController {
 		return "redirect:upload-success";
 	}
 
+	@GetMapping("/monograph")
+	public ModelAndView loadMonograph(@AuthenticationPrincipal UserImpl activeUser) {
+		ModelAndView mav = new ModelAndView("/document/fragments/monograph_proposal :: document-list");
+		
+		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
+		mav.addObject("messageChat", new Message());
+		mav.addObject("user", activeUser.getUser());
+		
+		mav.addObject("documents", documentService.search(DocumentType.TERMPAPER));
+
+		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
+		if (termPaper == null) {
+			termPaper = new TermPaper();
+		}
+		mav.addObject("termPaper", termPaper);
+		
+		return mav;
+	}
+	
+	@GetMapping("/proposal")
+	public ModelAndView loadProposal(@AuthenticationPrincipal UserImpl activeUser) {
+		ModelAndView mav = new ModelAndView("/document/fragments/monograph_proposal :: document-list");
+		
+		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
+		mav.addObject("messageChat", new Message());
+		mav.addObject("user", activeUser.getUser());
+		
+		mav.addObject("documents", documentService.search(DocumentType.PROPOSAL));
+
+		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
+		if (termPaper == null) {
+			termPaper = new TermPaper();
+		}
+		mav.addObject("termPaper", termPaper);
+		
+		return mav;
+	}
+	
+	@GetMapping("/theme")
+	public ModelAndView loadTheme(@AuthenticationPrincipal UserImpl activeUser) {
+		ModelAndView mav = new ModelAndView("/document/fragments/theme :: document-list");
+		
+		mav.addObject("theme", termPaperService.getLastOneByUser(activeUser.getUser()));
+
+		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
+		if (termPaper == null) {
+			termPaper = new TermPaper();
+		}
+		mav.addObject("termPaper", termPaper);
+		
+		return mav;
+	}
 }

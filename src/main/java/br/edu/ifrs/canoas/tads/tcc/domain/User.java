@@ -24,11 +24,11 @@ public abstract class User {
 	private String password;
     private String name;
     private String email;
-
+    @Column(name = "USER_TYPE", insertable = false, updatable = false)
+    private String userType;
 
 	@ManyToMany(fetch = FetchType.EAGER) private Set<Role> roles;
     @OneToOne @JsonIgnore private File picture;
-
 
 /*
     @OneToMany(mappedBy = "sender")

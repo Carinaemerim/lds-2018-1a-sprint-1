@@ -8,6 +8,7 @@ import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
 import lombok.AllArgsConstructor;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor
 public class MessageController {
 	private final MessageService messageService;
+	private final TermPaperService termPaperService;
 
 
 	@PostMapping("/send")
@@ -31,7 +33,13 @@ public class MessageController {
                                     @ModelAttribute("messageChat") Message message) {
 		ModelAndView mav = new ModelAndView("/document/fragments/chat :: chat-results");
 		message.setSender(activeUser.getUser());
-		//message.setReceiver(termPaperService.getOneByAuthor(activeUser.getUser()).getAdvisor());
+		message.setDate(new Date());
+		
+		if(activeUser.getUser().getUserType().equalsIgnoreCase("Student")) {
+			message.setReceiver(termPaperService.getLastOneByUser(activeUser.getUser()).getAdvisor());
+		}else {
+			//message.setReceiver(receiver);TODO map receiver
+		}
 
 		if(mFile != null) {
 

@@ -40,11 +40,14 @@
 			<div class="nav-tabs-custom">
 			<div class="tab-content">
 				<ul class="nav nav-tabs">
-	              <li class="active"><a href="#theme" data-toggle="tab" aria-expanded="true" th:text="#{document.t}"></a></li>
-	              <li class=""><a href="#proposal" data-toggle="tab" aria-expanded="false" th:text="#{document.p}"></a></li>
-	              <li class=""><a href="#monograph" data-toggle="tab" aria-expanded="false" th:text="#{document.m}"></a></li>
+	              <li class="active"><a data-toggle="tab" aria-expanded="true" th:text="#{document.t}" onclick="javascript:getAsync('/document/theme/', '#document-list');return false;"></a></li>
+	              <li class=""><a onclick="javascript:getAsync('/document/proposal/', '#document-list');return false;" data-toggle="tab" aria-expanded="false" th:text="#{document.p}"></a></li>
+	              <li class=""><a onclick="javascript:getAsync('/document/monograph/', '#document-list');return false;" data-toggle="tab" aria-expanded="false" th:text="#{document.m}"></a></li>
 	            </ul>
-	            <div id="theme" class="tab-pane active">
+	            <div th:fragment="document-list" name="document-list"
+	             th:replace="/document/fragments/theme">
+             	</div>
+	            <!--<div id="theme" class="tab-pane active">
 	            <div th:replace="/document/fragments/theme"></div>
 	        </div>
 	        <div id="proposal" class="tab-pane">
@@ -52,7 +55,7 @@
 	        </div>
 	        <div id="monograph" class="tab-pane">
 				<div th:replace = "/document/fragments/monograph"></div>
-	        </div>
+	        </div>  -->
 		 </div>
         </div>
         <!-- /.box -->
@@ -61,4 +64,7 @@
 <th:block layout:fragment="css-view">
     <link rel="stylesheet" type="text/css"
           href="/css/myStyle.css"/>
+</th:block>
+<th:block layout:fragment="js-view">
+    <script src="/js/myScripts.js"></script>
 </th:block>

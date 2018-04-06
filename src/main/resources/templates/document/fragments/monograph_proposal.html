@@ -1,0 +1,53 @@
+<div class="box-body" th:fragment="document-list" name="document-list" id="document-list">
+	<div id="example2_wrapper"
+		class="dataTables_wrapper form-inline dt-bootstrap">
+		<div class="row">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-6"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<table id="example2"
+					class="table table-bordered table-hover dataTable" role="grid"
+					aria-describedby="example2_info">
+
+					<thead>
+						<tr role="row">
+							<th class="sorting_desc" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Rendering engine: activate to sort column ascending"
+								aria-sort="descending"><span th:text="#{document.name}" /></th>
+							<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Browser: activate to sort column ascending"><span
+								th:text="#{document.date}" /></th>
+							<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Platform(s): activate to sort column ascending">
+								<span th:text="#{document.action}" />
+							</th>
+							<th class="sorting" tabindex="0" aria-controls="example2"
+								rowspan="1" colspan="1"
+								aria-label="Engine version: activate to sort column ascending">
+					</thead>
+
+					<tbody>
+						<tr role="row">
+						<tr th:each = "document : ${documents}">
+							<td th:text = "${document.title}"></td>
+							<td>Data de hoje</td>
+							<td>
+								<form id = "delete" action = "#" th:action ="@{/document/delete/{id}(id = ${document.id})}">
+									<button type = "submit" th:text = "Excluir"></button>
+								</form>
+							</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:fragment="chat-results" name="chat-results" th:replace="/document/fragments/chat"></div>
+</div>

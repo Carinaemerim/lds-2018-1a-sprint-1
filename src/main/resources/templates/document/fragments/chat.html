@@ -7,16 +7,16 @@
 			<!-- Conversations are loaded here -->
 			<div class="direct-chat-messages" th:fragment="chat-results" name="chat-results" id="chat-results">
 				<!-- Message. Default to the left -->
-				<div th:each="messageItem: ${messages}" th:class="${messageItem.sender.id == user.id} ? 'direct-chat-msg right' : 'direct-chat-msg'">
+				<div th:each="messageItem, iter : ${messages}" th:class="${messageItem.sender.id == user.id} ? 'direct-chat-msg right' : 'direct-chat-msg'">
 					<div class="direct-chat-info clearfix">
-						<span class="direct-chat-name pull-left"><span
+						<span class="direct-chat-name"><span
 							th:text="${messageItem.sender.username}" /></span>
 					</div>
 					<!-- /.direct-chat-info -->
 					<img class="direct-chat-img" src="/photos/no_image_available.png"
 						alt="Message User Image">
 					<!-- /.direct-chat-img -->
-					<div class="direct-chat-text" th:text="${messageItem.content}">Não esquece de enviar tuas
+					<div class="direct-chat-text" th:id="'message-'+ ${iter.index}" th:text="${messageItem.content}">Não esquece de enviar tuas
 						atualizações...</div>
 					<!-- /.direct-chat-text -->
 				</div>
@@ -41,7 +41,7 @@
 
 					</div>
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-primary btn-flat" onclick="javascript:sendMessage('/chat/send/', '#chat-form', '#chat-results');return false;">
+						<button type="button" class="btn btn-primary btn-flat" onclick="javascript:sendMessage('/chat/send/', '#chat-form', '#chat-results');return false;" id="send-button">
 							<i class="fa fa-envelope-o"></i> Enviar
 						</button>
 					</span>

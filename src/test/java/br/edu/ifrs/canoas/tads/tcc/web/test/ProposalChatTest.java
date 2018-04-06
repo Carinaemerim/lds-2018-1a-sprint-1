@@ -15,7 +15,7 @@ public class ProposalChatTest extends MyFluentTest{
 
     @Before
     public void login(){
-        super.login();
+        super.loginUser();
     }
     
     @Test

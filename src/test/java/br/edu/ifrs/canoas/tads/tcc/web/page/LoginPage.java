@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @PageUrl("http://localhost:{port}/")
 public class LoginPage extends FluentPage {
 
-    private static final String LOGIN_FORM = "#login-form";
+    private static final String LOGIN_FORM = "#loginUser-form";
 
     @FindBy(css = "#submit-button")
     private FluentWebElement submitButton;

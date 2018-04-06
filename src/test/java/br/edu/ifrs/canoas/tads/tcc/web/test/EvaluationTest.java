@@ -1,31 +1,31 @@
 package br.edu.ifrs.canoas.tads.tcc.web.test;
 
 import br.edu.ifrs.canoas.tads.tcc.web.config.MyFluentTest;
-import br.edu.ifrs.canoas.tads.tcc.web.page.CatalogPage;
+import br.edu.ifrs.canoas.tads.tcc.web.page.EvaluationPage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
-
-public class CatalogTest extends MyFluentTest {
+public class EvaluationTest extends MyFluentTest {
 
     @Page
-    CatalogPage catalogPage;
+    EvaluationPage evaluationPage;
 
     @Before
-    public void loginUser(){
-        super.loginUser();
+    public void loginProfessor(){
+        super.loginProfessor();
     }
 
     @Test
-    public void checkSearchForBoot() {
+    public void checkListForBoot() {
         //Given
-        catalogPage.go(port);
-        catalogPage.isAt();
+        evaluationPage.go(port);
+        evaluationPage.isAt();
+        evaluationPage.isAtTermPaperEvaluation();
+        evaluationPage.awaitUntilTermPaperAppear();
 
-        //When
+       /* //When
         catalogPage.fillAndSubmitForm("boot")
                 .awaitUntilResultsAppear();
         //and
@@ -37,7 +37,7 @@ public class CatalogTest extends MyFluentTest {
         //Then
         assertThat(window().title()).isEqualTo("Catálogo");
         assertThat(catalogPage.getFirstResultDetails().displayed()).isTrue();
-        assertThat(catalogPage.getFirstResultDetails().text()).containsIgnoringCase("Assim como o título, o resumo");
+        assertThat(catalogPage.getFirstResultDetails().text()).containsIgnoringCase("Assim como o título, o resumo");*/
     }
 
 }

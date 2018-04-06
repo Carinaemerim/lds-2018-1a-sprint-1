@@ -37,17 +37,29 @@
                     </button>
                 </div>
             </div>-->
-			<div class="nav-tabs-custom">
-			<div class="tab-content">
-				<ul class="nav nav-tabs">
-	              <li id="theme-tab" class="active"><a data-toggle="tab" aria-expanded="true" th:text="#{document.t}" onclick="javascript:getAsync('/document/theme/', '#document-list');return false;"></a></li>
-	              <li id="proposal-tab" class=""><a onclick="javascript:getAsync('/document/proposal/', '#document-list');return false;" data-toggle="tab" aria-expanded="false" th:text="#{document.p}"></a></li>
-	              <li id="monograph-tab" class=""><a onclick="javascript:getAsync('/document/monograph/', '#document-list');return false;" data-toggle="tab" aria-expanded="false" th:text="#{document.m}"></a></li>
-	            </ul>
-	            <div th:fragment="document-list" name="document-list"
-	             th:replace="/document/fragments/theme">
-             	</div>
-	            <!--<div id="theme" class="tab-pane active">
+			<div class="box-header document-period">
+				<div class="col-md-8"></div>
+				<div class="col-md-4">
+					<div th:insert="/document/fragments/nav :: nav"></div>
+				</div>
+			</div>
+			<div class="box-body">
+				<div class="nav-tabs-custom">
+					<div class="tab-content">
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" aria-expanded="true"
+								th:text="#{document.t}"
+								onclick="javascript:getAsync('/document/theme/', '#document-list');return false;"></a></li>
+							<li class=""><a
+								onclick="javascript:getAsync('/document/proposal/', '#document-list');return false;"
+								data-toggle="tab" aria-expanded="false" th:text="#{document.p}"></a></li>
+							<li class=""><a
+								onclick="javascript:getAsync('/document/monograph/', '#document-list');return false;"
+								data-toggle="tab" aria-expanded="false" th:text="#{document.m}"></a></li>
+						</ul>
+						<div th:fragment="document-list" name="document-list"
+							th:replace="/document/fragments/theme"></div>
+						<!--<div id="theme" class="tab-pane active">
 	            <div th:replace="/document/fragments/theme"></div>
 	        </div>
 	        <div id="proposal" class="tab-pane">
@@ -56,14 +68,15 @@
 	        <div id="monograph" class="tab-pane">
 				<div th:replace = "/document/fragments/monograph"></div>
 	        </div>  -->
-		 </div>
-        </div>
-        <!-- /.box -->
-    </section>
+					</div>
+				</div>
+			</div>
+			<!-- /.box -->
+	</section>
 </div>
 <th:block layout:fragment="css-view">
 	<link rel="stylesheet" type="text/css" href="/css/myStyle.css" />
 </th:block>
 <th:block layout:fragment="js-view">
-    <script src="/js/myScripts.js"></script>
+	<script src="/js/myScripts.js"></script>
 </th:block>

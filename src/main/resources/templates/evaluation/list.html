@@ -53,26 +53,28 @@
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">
-                            <tr th:each="termPaper : ${termPapers}">
+                            <tr th:each="termPaper, iter : ${termPapers}">
                                 <td th:text="${termPaper.author.name}">Aluno</td>
                                 <td th:text="${#strings.abbreviate(termPaper.title,70)}">Título do Trabalho</td>
                                 <td>
                                     <a th:if="${termPaper.themeDocument != null}" th:href="@{|~/evaluation/theme/${termPaper.id}|}"
-                                       href="#">
+                                       href="#" th:id="'theme-'+ ${iter.index}">
                                         <span th:text="#{${'evaluation.status.'+termPaper.themeDocument.status}}"
                                               th:classappend="${termPaper?.themeDocument?.colorStatus}"
                                               class="btn btn-block btn-flat">Avaliar</span>
                                     </a>
                                 </td>
                                 <td><a th:if="${termPaper.proposalDocument != null}"
-                                       th:href="@{|~/evaluation/proposal/${termPaper.id}|}" href="#">
+                                       th:href="@{|~/evaluation/proposal/${termPaper.id}|}" href="#"
+                                       th:id="'proposal-'+ ${iter.index}">
                                     <span th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"
                                           th:classappend="${termPaper?.proposalDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>
                                 </a>
                                 </td>
                                 <td><a th:if="${termPaper.termPaperDocument != null}"
-                                       th:href="@{|~/evaluation/termpaper/${termPaper.id}|}" href="#">
+                                       th:href="@{|~/evaluation/termpaper/${termPaper.id}|}" href="#"
+                                       th:id="'termPaper-'+ ${iter.index}">
                                     <span th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}"
                                           th:classappend="${termPaper?.termPaperDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>

@@ -75,6 +75,14 @@ public class TermPaperService {
 				termPaperRepository.findFirstByAuthorIdAndAcademicYearOrderByIdDesc(user.getId(), academicYear));
 	}
 
+	public TermPaper getOneByUserAndAcademicYear(User user, AcademicYear academicYear) {
+		if (academicYear == null) {
+			throw new RuntimeException(messages.get("theme.academicYearNotDefined"));
+		}
+		return verifyThemeWaitingDuration(
+				termPaperRepository.findFirstByAuthorIdAndAcademicYearOrderByIdDesc(user.getId(), academicYear));
+	}
+
 	private TermPaper verifyThemeWaitingDuration(TermPaper termPaper) {
 		// TODO RNG023 Nicolas
 		if (termPaper != null) {

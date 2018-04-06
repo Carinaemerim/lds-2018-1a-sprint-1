@@ -88,9 +88,9 @@
 		</div>
 		<div class="box-footer">
 			<button type="submit" class="btn btn-primary"
-				th:text="#{theme.save-draft}">Save draft</button>
+				th:text="#{theme.save-draft}" th:disabled="${!isCurrentPeriod}">Save draft</button>
 			<button type="button" class="btn btn-danger pull-right"
-				th:disabled="${termPaper.themeSubmitted}" data-toggle="modal"
+				th:disabled="${termPaper.themeSubmitted or !isCurrentPeriod}" data-toggle="modal"
 				data-target="#themeSubmitConfirmationModal" name="action"
 				th:text="#{theme.submit}">Submit for evaluation</button>
 		</div>

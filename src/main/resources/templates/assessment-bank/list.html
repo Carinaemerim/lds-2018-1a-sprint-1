@@ -43,11 +43,11 @@
                         <table id="table-list-assessment-bank" class="table table-bordered table-striped">
                             <thead>
                             <tr >
-                                <th>Aluno</th>
-                                <th>Título do Trabalho</th>
-                                <th>Proposta</th>
-                                <th>tcc</th>
-                                <th>Nota Final</th>
+                                <th th:text="#{assessment-bank.studentName}">Aluno</th>
+                                <th  th:text="#{assessment-bank.title.tcc}">Título do Trabalho</th>
+                                <th  th:text="#{assessment-bank.proposal}">Proposta</th>
+                                <th  th:text="#{assessment-bank.tcc}">tcc</th>
+                                <th>Avaliar</th>
                             </tr>
                             </thead>
                             <tbody th:remove="all-but-first">

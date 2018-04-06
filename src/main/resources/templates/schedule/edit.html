@@ -37,19 +37,22 @@
 						<h1 class="box-title" th:text="#{schedule.edit}"></h1>
 					</div>
 					<div class="box-body">
-						<form id="form_1" method="post" action="" th:action="@{/schedule/edit}" th:object="${task}">
+						<form id="form_1" method="post" action="#" th:action="@{/schedule/edit}" th:object="${task}">
 							<div class="form">
 							<div th:insert="/fragments/nav :: nav"></div>
 								<!-- text input -->
 								<input type="hidden" id="id" th:field="*{id}">
 								<div class="form-group">
 									<label>Titulo:</label> <input type="text" class="form-control" th:field="*{title}" />
+									<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</label>
+									
 								</div>
 
 								<!-- textarea -->
 								<div class="form-group">
 									<label>Descrição:</label>
 									<textarea class="form-control" rows="3" th:field="*{description}"></textarea>
+									<label th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Title Error</label>
 								</div>
 
 								<label>Data:</label>
@@ -63,7 +66,7 @@
                                     <input  type="text"   class="form-control pull-right"
                                             th:field="*{deadline}"
                                             placeholder="dd/mm/yyyy" />
-
+									<label th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}">Title Error</label>
                                 </div>
 
 
@@ -75,6 +78,7 @@
                                     <div th:each="tpEval : ${T(br.edu.ifrs.canoas.tads.tcc.domain.TypeEvaluation).values()}">
                                         <input type="radio" th:id="${{tpEval}}" th:value="${{tpEval}}" th:field="*{typeEvaluation}" />
                                         <label th:for="${{tpEval}}"><span th:text="${tpEval.description}"/> </label>
+                                        <label th:if="${#fields.hasErrors('typeEvaluation')}" th:errors="*{typeEvaluation}">Title Error</label>
                                     </div>
 
 								</div>

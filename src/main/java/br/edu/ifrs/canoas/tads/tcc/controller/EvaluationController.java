@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
+import br.edu.ifrs.canoas.tads.tcc.service.TaskService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -55,7 +55,7 @@ public class EvaluationController {
     private final UserRepository userRepository;
     private final AcademicYearRepository academicYearRepository;
     private final Messages messages;
-    private final ScheduleService scheduleService;
+    private final TaskService scheduleService;
 
     @ModelAttribute("allEvaluationStatus")
     public List<EvaluationStatus> populateEvaluationStatus() {

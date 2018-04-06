@@ -1,6 +1,5 @@
 package br.edu.ifrs.canoas.tads.tcc.domain;
 
-import br.edu.ifrs.canoas.tads.tcc.service.ScheduleService;
 import lombok.Data;
 
 import javax.persistence.*;

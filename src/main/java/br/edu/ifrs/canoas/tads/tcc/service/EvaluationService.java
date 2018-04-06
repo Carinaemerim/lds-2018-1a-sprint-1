@@ -28,7 +28,7 @@ public class EvaluationService {
     AdviceRepository adviceRepository;
     GradeRepository gradeRepository;
     FileRepository fileRepository;
-    ScheduleService scheduleService;
+    TaskService scheduleService;
     AcademicYearRepository academicYearRepository;
 
 

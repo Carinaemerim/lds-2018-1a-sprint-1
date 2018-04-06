@@ -10,7 +10,7 @@
         <!-- PAGE TITLE -->
         <h1>
             <span th:text="#{assessment-bank.header}"/>
-            <small><span th:text="#{assessment-bank.title}"/></small>
+           <!--  <small><span th:text="#{assessment-bank.listing}"/></small> -->
         </h1>
         <!-- BREADCRUMB -->
         <ol class="breadcrumb">
@@ -24,64 +24,83 @@
 
 <div layout:fragment="content">
 
-	<!-- Main content -->
-	<section class="content">
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">Listagem de trabalhos para seleção</h3>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<table id="table-list-assessment-bank"
-							class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>Aluno</th>
-									<th>Título do Trabalho</th>
-									<th>Proposta</th>
-									<th>Monografia</th>
-									<th>Selecionar</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="termPaper : ${termPapers}">
-									<td th:text="${termPaper.author.name}">Aluno</td>
-									<td th:text="${termPaper.author.name}">Título do Trabalho</td>
-									<td th:text="${termPaper.author.name}">??</td>
-									<td th:text="${termPaper.author.name}">??</td>
-									<td><a href="listprofessors"> <span
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="col-md-8">
+                        <h3 class="box-title" th:text="#{assessment-bank.listing}"></h3>
+                        </div>
+                        <!-- <div class="col-md-4">
+                            <div th:insert="/evaluation/fragments/nav :: nav"></div>
+                        </div> -->
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="table-list-assessment-bank" class="table table-bordered table-striped">
+                            <thead>
+                            <tr >
+                                <th th:text="#{assessment-bank.studentName}">Aluno</th>
+                                <th  th:text="#{assessment-bank.title.tcc}">Título do Trabalho</th>
+                                <th  th:text="#{assessment-bank.proposal}">Proposta</th>
+                                <th  th:text="#{assessment-bank.tcc}">tcc</th>
+                                <th>Avaliar</th>
+                            </tr>
+                            </thead>
+                            <tbody th:remove="all-but-first">
+                            <tr th:each="termPaper : ${termPapers}">
+                                <td th:text="${termPaper.author.name}">Aluno</td>
+                                <td th:text="${#strings.abbreviate(termPaper.title,70)}">Título do Trabalho</td>
+                                <td><a th:if="${termPaper.proposalDocument != null}"
+                                       th:href="@{|~/evaluation/proposal/${termPaper.id}|}" href="#">
+                                    <span th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"
+                                          th:classappend="${termPaper?.proposalDocument?.colorStatus}"
+                                          class="btn btn-block btn-flat">Avaliar</span>
+                                </a>
+                                </td>
+                                <td><a th:if="${termPaper.termPaperDocument != null}"
+                                       th:href="@{|~/evaluation/termpaper/${termPaper.id}|}" href="#">
+                                    <span th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}"
+                                          th:classappend="${termPaper?.termPaperDocument?.colorStatus}"
+                                          class="btn btn-block btn-flat">Avaliar</span>
+                                </a></td>
+                                <td class="text-center"><a href="listprofessors"> <span
 											class="btn btn-block btn-flat">Escolher Banca</span>
-									</a></td>
-								</tr>
+									</a>
+                                </td>
+                            </tr>
 
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
 
-							</tbody>
-
-							<tbody>
-								<tr>
-									<td>Aluno</td>
-									<td>Título do Trabalho</td>
-									<td>??</td>
-									<td>??</td>
-									<td><a href="listprofessors"> <span
-											class="btn btn-block btn-flat">Escolher Banca</span>
-									</a></td>
-								</tr>
-
-
-							</tbody>
-						</table>
-					</div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /.box -->
-			</div>
-			<!-- /.col -->
-		</div>
-		<!-- /.row -->
-
-	</section>
+    </section>
 
 </div>
+<th:block layout:fragment="css-view">
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/datatables/1.10.13/media/css/jquery.dataTables.min.css"/>
+</th:block>
+
+<th:block layout:fragment="js-view">
+    <script
+            src="/webjars/datatables/1.10.13/media/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table-list-evaluate').DataTable()
+        });
+    </script>
+
+</th:block>
+</html>
+					

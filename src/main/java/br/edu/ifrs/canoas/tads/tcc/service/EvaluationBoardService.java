@@ -20,4 +20,10 @@ public class EvaluationBoardService {
     public EvaluationBoard getOneByDocumentId(Long documentId) {
         return evaluationBoardRepository.findFirstByDocumentId(documentId);
     }
+
+	public EvaluationBoard save(EvaluationBoard evaluationBoard) {
+		evaluationBoardRepository.save(evaluationBoard);
+		return evaluationBoardRepository.save(evaluationBoard);
+		
+	}
 }

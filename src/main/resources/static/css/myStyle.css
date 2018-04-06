@@ -25,3 +25,7 @@
 .fill-navy {
     fill: #001f3f;
 }
+.box-header.document-period {
+	height: 40px;
+}
+

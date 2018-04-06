@@ -1,31 +1,31 @@
 <html layout:decorate="~{/layouts/main}">
 <?xml version="1.0" encoding="utf-8"?>
 <th:block layout:fragment="head-title">
-    <title th:text="#{index.header}"/>
+	<title th:text="#{index.header}" />
 </th:block>
 <!-- CONTENT HEADER -->
 <div layout:fragment="content-header">
-    <section class="content-header">
-        <!-- PAGE TITLE -->
-        <h1>
-            <span th:text="#{document.header.theme}"/>
-            <small><span th:text="#{document.title}"/></small>
-        </h1>
-        <!-- BREADCRUMB -->
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> <span
-                    th:text="#{index.breadcrumb-1}"/></a></li>
-            <li><a href="#"><span th:text="#{index.breadcrumb-2}"/></a></li>
-            <li class="active"><span th:text="#{index.breadcrumb-3}"/></li>
-        </ol>
-    </section>
+	<section class="content-header">
+		<!-- PAGE TITLE -->
+		<h1>
+			<span th:text="#{document.header.theme}" /> <small><span
+				th:text="#{document.title}" /></small>
+		</h1>
+		<!-- BREADCRUMB -->
+		<ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> <span
+					th:text="#{index.breadcrumb-1}" /></a></li>
+			<li><a href="#"><span th:text="#{index.breadcrumb-2}" /></a></li>
+			<li class="active"><span th:text="#{index.breadcrumb-3}" /></li>
+		</ol>
+	</section>
 </div>
 <div layout:fragment="content">
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="box">
-            <!--<div class="box-header with-border">
+	<!-- Main content -->
+	<section class="content">
+		<!-- Default box -->
+		<div class="box">
+			<!--<div class="box-header with-border">
             <h3 class="box-title"><span th:text="#{document.body.title}"/></h3>
 				<!--
                 <div class="box-tools pull-right">
@@ -62,8 +62,7 @@
     </section>
 </div>
 <th:block layout:fragment="css-view">
-    <link rel="stylesheet" type="text/css"
-          href="/css/myStyle.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/myStyle.css" />
 </th:block>
 <th:block layout:fragment="js-view">
     <script src="/js/myScripts.js"></script>

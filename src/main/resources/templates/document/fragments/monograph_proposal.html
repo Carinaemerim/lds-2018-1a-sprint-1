@@ -33,11 +33,11 @@
 
 					<tbody>
 						<tr role="row">
-						<tr th:each = "document : ${documents}">
-							<td th:text = "${document.title}"></td>
-							<td>Data de hoje</td>
+						<tr th:each = "file : ${files}">
+							<td><a th:href="@{|/file/${file.id}|}" th:text="${file.filename}"></a></td>
+							<td th:text="${file.createdOn}"></td>
 							<td>
-								<form id = "delete" action = "#" th:action ="@{/document/delete/{id}(id = ${document.id})}">
+								<form id = "delete" action = "#" th:action ="@{/file/delete/{id}(id = ${file.id})}">
 									<button type = "submit" th:text = "Excluir"></button>
 								</form>
 							</td>

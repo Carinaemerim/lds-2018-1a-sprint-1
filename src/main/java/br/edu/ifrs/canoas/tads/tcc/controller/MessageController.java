@@ -30,26 +30,14 @@ public class MessageController {
 	@PostMapping("/send")
 	public ModelAndView sendMessage(@AuthenticationPrincipal UserImpl activeUser,
                                     @RequestParam(value = "mFile", required = false) MultipartFile mFile,
-                                    @ModelAttribute("messageChat") Message message) {
+                                    @ModelAttribute("messageChat") Message message,
+                                    @RequestParam(value = "tabtype") String type) {
 		ModelAndView mav = new ModelAndView("/document/fragments/chat :: chat-results");
-		message.setSender(activeUser.getUser());
-		message.setDate(new Date());
-		
-		if(activeUser.getUser().getUserType().equalsIgnoreCase("Student")) {
-			message.setReceiver(termPaperService.getLastOneByUser(activeUser.getUser()).getAdvisor());
-		}else {
-			//message.setReceiver(receiver);TODO map receiver
-		}
 
-		if(mFile != null) {
+		try {
+			messageService.save(message, mFile, type, activeUser);
+		}catch(IOException e){ //não sei exatamente o que fazer nesse caso, deixarei assim apenas para funcionar no momento
 
-			try {
-				messageService.save(message, mFile);
-			}catch(IOException e){ //não sei exatamente o que fazer nesse caso, deixarei assim apenas para funcionar no momento
-				mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
-				mav.addObject("user", activeUser.getUser());
-				return  mav;
-			}
 		}
 
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));

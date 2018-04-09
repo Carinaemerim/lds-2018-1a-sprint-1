@@ -10,7 +10,7 @@
 				<div th:each="messageItem, iter : ${messages}" th:class="${messageItem.sender.id == user.id} ? 'direct-chat-msg right' : 'direct-chat-msg'">
 					<div class="direct-chat-info clearfix">
 						<span class="direct-chat-name"><span
-							th:text="${messageItem.sender.username}" /></span>
+							th:text="${messageItem.sender.name}" /></span>
 					</div>
 					<!-- /.direct-chat-info -->
 					<img class="direct-chat-img" src="/photos/no_image_available.png"
@@ -30,6 +30,7 @@
 			<form method="post" th:action="@{/chat/send}" th:object="${messageChat}" id="chat-form" enctype="multipart/form-data">
 				<div class="input-group">
 					<div>
+						<input type="hidden" name="tabtype" id="tabtype" th:value="${tabtype}">
 						<input type="hidden" id="id" th:field="*{id}">
 						<input name="message" placeholder="Escrever Mensagem ..."
 							class="form-control" type="text" th:field="*{content}"

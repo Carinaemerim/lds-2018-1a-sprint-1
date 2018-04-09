@@ -5,8 +5,12 @@ import org.springframework.util.Base64Utils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import java.util.Date;
 
 @Entity
@@ -22,6 +26,14 @@ public class File {
 	private byte[] content;
 	private String contentType;
 	private Date createdOn;
+	@Enumerated(EnumType.ORDINAL)
+	private FileType fileType;
+
+	@ManyToOne
+	private User sender;
+
+	@ManyToOne
+	private User receiver;
 
 	public String getPictureBase64() {
 		return (content == null ? "/photos/no_image_available.png"

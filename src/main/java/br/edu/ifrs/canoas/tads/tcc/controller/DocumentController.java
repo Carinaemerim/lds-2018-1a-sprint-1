@@ -23,12 +23,14 @@ import br.edu.ifrs.canoas.tads.tcc.config.Messages;
 import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.AcademicYear;
 import br.edu.ifrs.canoas.tads.tcc.domain.DocumentType;
+import br.edu.ifrs.canoas.tads.tcc.domain.FileType;
 import br.edu.ifrs.canoas.tads.tcc.domain.Message;
 import br.edu.ifrs.canoas.tads.tcc.domain.Student;
 import br.edu.ifrs.canoas.tads.tcc.domain.TermPaper;
 import br.edu.ifrs.canoas.tads.tcc.service.AcademicYearService;
 import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
+import br.edu.ifrs.canoas.tads.tcc.service.FileService;
 import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
 import br.edu.ifrs.canoas.tads.tcc.service.TaskService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
@@ -48,6 +50,7 @@ public class DocumentController {
 	private final MessageService messageService;
 	private final AcademicYearService academicYearService;
 	private final EvaluationService evaluationService;
+	private final FileService fileService;
 
 	@GetMapping(value = { "/", "/{period}/{academicYearId}" })
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser,
@@ -133,8 +136,9 @@ public class DocumentController {
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
 		mav.addObject("messageChat", new Message());
 		mav.addObject("user", activeUser.getUser());
+		mav.addObject("tabtype", "termpaper");
 
-		mav.addObject("documents", documentService.search(DocumentType.TERMPAPER));
+		mav.addObject("files", fileService.findByType(FileType.TERMPAPER));
 
 		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
 		if (termPaper == null) {
@@ -151,9 +155,10 @@ public class DocumentController {
 
 		mav.addObject("messages", messageService.findAllBySenderOrReceiverOrderByDate(activeUser.getUser()));
 		mav.addObject("messageChat", new Message());
+		mav.addObject("tabtype", "proposal");
 		mav.addObject("user", activeUser.getUser());
 
-		mav.addObject("documents", documentService.search(DocumentType.PROPOSAL));
+		mav.addObject("files", fileService.findByType(FileType.PROPOSAL));
 
 		TermPaper termPaper = termPaperService.getLastOneByUser(activeUser.getUser());
 		if (termPaper == null) {

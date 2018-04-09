@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import br.edu.ifrs.canoas.tads.tcc.config.auth.UserImpl;
 import br.edu.ifrs.canoas.tads.tcc.domain.File;
 import br.edu.ifrs.canoas.tads.tcc.domain.Message;
 import br.edu.ifrs.canoas.tads.tcc.domain.User;
@@ -21,6 +22,7 @@ public class MessageService {
 
 	private final MessageRepository messageRepository;
 	private final FileService fileService;
+	private final TermPaperService termPaperService;
 
 	public List<Message> findAllByReceiver(User receiver){
 
@@ -53,11 +55,23 @@ public class MessageService {
 		return messageRepository.findAllBySenderOrReceiverOrderByDate(sender, sender);
 	}
 
-	public Message save(Message message, MultipartFile mFile) throws IOException{
+	public Message save(Message message, MultipartFile mFile, String type, UserImpl activeUser) throws IOException{
+
+		message.setSender(activeUser.getUser());
+		message.setDate(new Date());
+
+		if(activeUser.getUser().getUserType().equalsIgnoreCase("Student")) {
+			message.setReceiver(termPaperService.getLastOneByUser(activeUser.getUser()).getAdvisor());
+		}else {
+			//message.setReceiver(receiver);TODO map receiver
+		}
 
 		if(mFile != null && mFile.getBytes().length > 0) {
 
-			fileService.saveMultipartFile(mFile);
+			if(message.getContent() == null || message.getContent().isEmpty()) {
+				message.setContent(activeUser.getUser().getName()+" enviou um arquivo!");
+			}
+			fileService.saveMultipartFileMessage(mFile, type);
 		}
 
 		return messageRepository.save(message);

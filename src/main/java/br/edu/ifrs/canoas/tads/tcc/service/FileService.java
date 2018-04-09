@@ -1,11 +1,13 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
 import br.edu.ifrs.canoas.tads.tcc.domain.File;
+import br.edu.ifrs.canoas.tads.tcc.domain.FileType;
 import br.edu.ifrs.canoas.tads.tcc.repository.FileRepository;
 import lombok.AllArgsConstructor;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -47,6 +49,11 @@ public class FileService {
     	fileRepository.save(file);
     }
 
+    public List<File> findByType(FileType type) {
+
+    	return fileRepository.findByFileType(type);
+    }
+
     public void saveMultipartFile(MultipartFile mFile) throws IOException {
 
     	File file = new File();
@@ -54,6 +61,29 @@ public class FileService {
 		file.setContent(mFile.getBytes());
 		file.setContentType(mFile.getContentType());
 		file.setCreatedOn(new Date());
+
+		this.save(file);
+    }
+
+    public void saveMultipartFileMessage(MultipartFile mFile, String type) throws IOException {
+
+
+
+    	File file = new File();
+		file.setFilename(mFile.getOriginalFilename());
+		file.setContent(mFile.getBytes());
+		file.setContentType(mFile.getContentType());
+		file.setCreatedOn(new Date());
+
+		if(type == null || type.isEmpty()) {
+			file.setFileType(FileType.OTHERS);
+		}
+		else if(type.matches("proposal")) {
+    		file.setFileType(FileType.PROPOSAL);
+    	}
+		else if(type.matches("termpaper")) {
+			file.setFileType(FileType.TERMPAPER);
+		}
 
 		this.save(file);
     }

@@ -75,11 +75,13 @@
                                 <td><a th:if="${termPaper.termPaperDocument != null}"
                                        th:href="@{|~/evaluation/termpaper/${termPaper.id}|}" href="#"
                                        th:id="'termPaper-'+ ${iter.index}">
-                                    <span th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}"
+                                    <span th:id="'grade-status-'+ ${iter.index}"
+                                            th:text="#{${'evaluation.status.'+termPaper?.termPaperDocument?.status}}"
                                           th:classappend="${termPaper?.termPaperDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>
                                 </a></td>
-                                <td class="text-center"><h4 th:if="${termPaper.termPaperDocument != null}"
+                                <td class="text-center"><h4 th:id="'grade-'+ ${iter.index}"
+                                                            th:if="${termPaper.termPaperDocument != null}"
                                                             th:text="${termPaper?.termPaperDocument?.finalGrade} != null ? ${#numbers.formatDecimal(termPaper?.termPaperDocument?.finalGrade, 1, 1)}"></h4>
                                 </td>
                             </tr>

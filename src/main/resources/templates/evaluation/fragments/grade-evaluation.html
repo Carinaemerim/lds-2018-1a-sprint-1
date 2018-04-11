@@ -279,15 +279,17 @@
                 </div>
                 <div class="form-group">
                     <h2 class="text-right text-bold">Total Final:
-                        <span th:text=" *{finalGrade} != null OR *{finalGrade} == false  ? *{#numbers.formatDecimal(finalGrade, 1, 1)} : '-'">8.5</span>
+                        <span id="final-grade-by-professor" th:text=" *{finalGrade} != null OR *{finalGrade} == false  ? *{#numbers.formatDecimal(finalGrade, 1, 1)} : '-'">8.5</span>
                     </h2>
                 </div>
                 <div class="form-group">
                     <h3 class="text-right text-muted font-italic">
-                        <span th:text=" *{createdOn} != null ? *{appraiser?.username}">Name</span>
+                        <span id="appraiser-name"
+                                th:text=" *{createdOn} != null ? *{appraiser?.username}">Name</span>
                     </h3>
                     <p class="text-right text-muted font-italic">
-                        <span th:text=" *{createdOn} != null ? *{#dates.format(createdOn, 'dd/MM/yyyy HH:mm')}">data</span>
+                        <span id="date-and-hour"
+                                th:text=" *{createdOn} != null ? *{#dates.format(createdOn, 'dd/MM/yyyy HH:mm')}">data</span>
                     </p>
 
                 </div>
@@ -296,12 +298,13 @@
         <div th:remove="*{document.bank}  ? none :  all">
             <div class="box-footer" th:remove="*{isFinal} ? all">
                 <div class="pull-right">
-                    <button name="action" type="submit" value="draft" class="btn btn-default">
+                    <button name="action" type="submit" value="draft" class="btn btn-default"
+                            id="buttonSubmitDraftEvaluation">
                         <i class="fa fa-pencil"></i> <span th:text="#{button.draft}"/>
                     </button>
                     <button class="btn btn-primary" type="button"
                             data-toggle="modal" data-target="#gradeEvaluationSubmitConfirmationModal"
-                            name="action">
+                            name="action" id="buttonSubmitEvaluation">
                         <i class="fa fa-check"></i> <span th:text="#{button.save}"/>
                     </button>
                 </div>
@@ -341,7 +344,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal"
                             th:text="#{no}">No
                     </button>
-                    <button type="submit" class="btn btn-primary" name="action"
+                    <button type="submit" id="yesSubmit" class="btn btn-primary" name="action"
                             value="evaluation" th:text="#{yes}">Yes
                     </button>
                 </div>

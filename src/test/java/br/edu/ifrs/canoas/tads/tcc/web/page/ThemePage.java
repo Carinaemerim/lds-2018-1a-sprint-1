@@ -1,65 +1,101 @@
 package br.edu.ifrs.canoas.tads.tcc.web.page;
 
-import lombok.Data;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import java.util.concurrent.TimeUnit;
+
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @PageUrl("http://localhost:{port}/document/")
 @Data
+@EqualsAndHashCode(callSuper = false)
+@ToString(callSuper = false)
 public class ThemePage extends FluentPage {
 
-    @FindBy(css = "#criteria")
-    private FluentWebElement criteria;
+	@FindBy(css = "#title")
+	private FluentWebElement titleInput;
 
-    @FindBy(css = "#search-button")
-    private FluentWebElement searchButton;
+	@FindBy(css = "#theme")
+	private FluentWebElement themeInput;
 
-    @FindBy(css = "#search-results")
-    private FluentWebElement searchResults;
+	@FindBy(css = "#advisor")
+	private FluentWebElement advisorSelect;
 
-    @FindBy(css = "#result-0")
-    private FluentWebElement firstResult;
+	@FindBy(css = "#description")
+	private FluentWebElement descriptionTextarea;
 
-    @FindBy(css = "#collapse-0")
-    private FluentWebElement firstResultDetails;
+	@FindBy(css = "#save-draft")
+	private FluentWebElement saveDraftButton;
 
-    @FindBy(css = "#file-0")
-    private FluentWebElement downloadFile;
+	@FindBy(css = "#submit-for-evaluation")
+	private FluentWebElement submitForEvaluationButton;
 
-    public void isAt() {
-        assertThat(window().title()).isEqualTo("Documento");
-    }
+	@FindBy(css = "#submit-yes")
+	private FluentWebElement submitYesButton;
 
-    public ThemePage fillAndSubmitForm(String... paramsOrdered) {
-        $("input").fill().with(paramsOrdered);
-        searchButton.click();
-        return this;
-    }
+	@FindBy(css = "#theme-err")
+	private FluentWebElement themeErr;
 
-    public ThemePage openResult() {
-        firstResult.click();
-        return this;
-    }
+	@FindBy(css = "#status-text")
+	private FluentWebElement statusText;
 
-    public ThemePage downloadFile() {
-        downloadFile.click();
-        return this;
-    }
+	@FindBy(css = "#advisor-considerations")
+	private FluentWebElement advisorConsiderations;
 
-    public ThemePage awaitUntilResultsAppear() {
-        await().atMost(5, TimeUnit.SECONDS).until(searchResults).present();
-        return this;
-    }
+	@FindBy(css = "#submit-confirmation-title")
+	private FluentWebElement modalTitle;
 
-    public ThemePage awaitUntilResultsOpen() {
-        await().atMost(5, TimeUnit.SECONDS).until(firstResultDetails).present();
-        return this;
-    }
+	@FindBy(css = "#submit-confirmation-text")
+	private FluentWebElement modalText;
 
+	public void isAt() {
+		assertThat(window().title()).isEqualTo("Gerenciamento de Documentos");
+	}
+
+	//TODO CdT005 nicolas.w
+	public ThemePage fillForm(String title, String theme, int advisorIdx, String description) {
+		titleInput.fill().with(title);
+		themeInput.fill().with(theme);
+		advisorSelect.fillSelect().withIndex(advisorIdx);
+		descriptionTextarea.fill().withText(description);
+		return this;
+	}
+
+	//TODO CdT005 nicolas.w
+	public ThemePage submitForEvaluation() {
+		submitForEvaluationButton.click();
+		return awaitUntilModalDialogAppear();
+	}
+
+	//TODO CdT005 nicolas.w
+	public ThemePage confirmSubmission() {
+		submitYesButton.click();
+		return this;
+	}
+
+	//TODO CdT005 nicolas.w
+	public ThemePage awaitUntilModalDialogAppear() {
+		await().atMost(5, TimeUnit.SECONDS).until(modalTitle).displayed();
+		await().atMost(5, TimeUnit.SECONDS).until(modalText).displayed();
+		return this;
+	}
+
+	//TODO CdT005 nicolas.w
+	public ThemePage awaitUntilErrorAppear() {
+		await().atMost(5, TimeUnit.SECONDS).until(el(".help-block")).present();
+		return this;
+	}
+
+	//TODO CdT005 nicolas.w
+	public ThemePage awaitUntilResultsAppear() {
+		await().atMost(5, TimeUnit.SECONDS).until(el(".callout-success.lead")).present();
+		return this;
+	}
 }

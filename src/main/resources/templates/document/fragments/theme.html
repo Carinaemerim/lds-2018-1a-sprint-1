@@ -1,4 +1,5 @@
-<div class="box-body" th:fragment="document-list" name="document-list" id="document-list">
+<div class="box-body" th:fragment="document-list" name="document-list"
+	id="document-list">
 	<form role="form" id="form-theme-advisor" action="#"
 		class="form-horizontal" th:action="@{/document/theme/submit}"
 		th:object="${termPaper}" method="post">
@@ -30,7 +31,7 @@
 						placeholder="Enter paper theme" th:placeholder="#{theme.ph.theme}"
 						th:field="*{theme}" th:readonly="${termPaper.themeSubmitted}">
 					<span th:if="${#fields.hasErrors('theme')}" th:errors="*{theme}"
-						th:class="help-block" />
+						id="theme-err" th:class="help-block" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -70,7 +71,7 @@
 	                        <circle cx="60" cy="60" r="50" stroke="gray"
 							stroke-width="2"
 							th:classappend="${termPaper?.themeDocument?.colorFillSvg}" />
-	                        <text x="50%" y="50%"
+	                        <text x="50%" y="50%" id="status-text"
 							alignment-baseline="middle" fill="white" text-anchor="middle"
 							font-weight="bold" transform="rotate(-30 60,60)"
 							th:text="#{${'theme.status.' + termPaper.themeDocument.status}}"> NA
@@ -81,42 +82,46 @@
 					th:text="#{theme.ph.advisorConsiderations}">Advisor
 					Considerations</label>
 				<div class="col-sm-6">
-					<textarea id="advisorConsiderations" class="form-control" rows="3"
+					<textarea id="advisor-considerations" class="form-control" rows="3"
 						disabled th:field="*{themeDocument.allConsiderations}"></textarea>
 				</div>
 			</div>
 		</div>
 		<div class="box-footer">
-			<button type="submit" class="btn btn-primary"
-				th:text="#{theme.save-draft}" th:disabled="${!isCurrentPeriod}">Save draft</button>
+			<button type="submit" class="btn btn-primary" id="save-draft"
+				th:text="#{theme.save-draft}" th:disabled="${!isCurrentPeriod}">Save
+				draft</button>
 			<button type="button" class="btn btn-danger pull-right"
-				th:disabled="${termPaper.themeSubmitted or !isCurrentPeriod}" data-toggle="modal"
-				data-target="#themeSubmitConfirmationModal" name="action"
-				th:text="#{theme.submit}">Submit for evaluation</button>
+				id="submit-for-evaluation"
+				th:disabled="${termPaper.themeSubmitted or !isCurrentPeriod}"
+				data-toggle="modal" data-target="#themeSubmitConfirmationModal"
+				name="action" th:text="#{theme.submit}">Submit for
+				evaluation</button>
 		</div>
 		<div class="modal fade" id="themeSubmitConfirmationModal"
 			tabindex="-1" role="dialog"
 			aria-labelledby="themeSubmitConfirmationModalLabel">
 			<div class="modal-dialog" role="document">
-				<div class="modal-content">
+				<div class="modal-content" id="submit-confirmation-modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h3 class="modal-title"
+						<h3 class="modal-title" id="submit-confirmation-title"
 							th:text="#{theme.submit-confirmation.title}">Are you sure?</h3>
 					</div>
 					<div class="modal-body">
-						<h4 th:text="#{theme.submit-confirmation.message}">After
-							sending it will no longer be possible to change the information
-							until the selected advisor evaluates your theme.</h4>
+						<h4 id="submit-confirmation-text"
+							th:text="#{theme.submit-confirmation.message}">After sending
+							it will no longer be possible to change the information until the
+							selected advisor evaluates your theme.</h4>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"
 							th:text="#{no}">No</button>
 						<button type="submit" class="btn btn-primary" name="action"
-							value="evaluation" th:text="#{yes}">Yes</button>
+							id="submit-yes" value="evaluation" th:text="#{yes}">Yes</button>
 					</div>
 				</div>
 			</div>

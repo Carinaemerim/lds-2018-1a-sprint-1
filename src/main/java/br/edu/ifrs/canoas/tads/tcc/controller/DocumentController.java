@@ -32,7 +32,6 @@ import br.edu.ifrs.canoas.tads.tcc.service.DocumentService;
 import br.edu.ifrs.canoas.tads.tcc.service.EvaluationService;
 import br.edu.ifrs.canoas.tads.tcc.service.FileService;
 import br.edu.ifrs.canoas.tads.tcc.service.MessageService;
-import br.edu.ifrs.canoas.tads.tcc.service.TaskService;
 import br.edu.ifrs.canoas.tads.tcc.service.TermPaperService;
 import br.edu.ifrs.canoas.tads.tcc.service.UserService;
 import br.edu.ifrs.canoas.tads.tcc.util.PeriodUtil;
@@ -52,7 +51,7 @@ public class DocumentController {
 	private final EvaluationService evaluationService;
 	private final FileService fileService;
 
-	@GetMapping(value = { "/", "/{period}/{academicYearId}" })
+	@GetMapping(value = { "", "/", "/{period}/{academicYearId}" })
 	public ModelAndView document(@AuthenticationPrincipal UserImpl activeUser,
 			@PathVariable Optional<Long> academicYearId, @PathVariable Optional<String> period) {
 		ModelAndView mav = new ModelAndView("/document/document");
@@ -89,13 +88,14 @@ public class DocumentController {
 		}
 	}
 
+	//TODO nicolas.w
 	@PostMapping(path = "/theme/submit")
 	public ModelAndView saveThemeDraft(@AuthenticationPrincipal UserImpl activeUser, @Valid TermPaper termPaper,
 			BindingResult bindingResult, RedirectAttributes redirectAttr, @PathVariable Optional<Long> academicYearId,
 			@PathVariable Optional<String> period) {
 		authorIsStudentValidation(activeUser, termPaper, bindingResult);
 		if (bindingResult.hasErrors()) {
-			return this.document(activeUser, null, null).addObject("termPaper", termPaper);
+			return this.document(activeUser, Optional.ofNullable(null), Optional.ofNullable(null)).addObject("termPaper", termPaper);
 		}
 		ModelAndView mav = new ModelAndView("redirect:/document/");
 		mav.addObject("termPaper", termPaperService.saveThemeDraft(termPaper));
@@ -103,6 +103,7 @@ public class DocumentController {
 		return mav;
 	}
 
+	//TODO nicolas.w
 	@PostMapping(path = "/theme/submit", params = "action=evaluation")
 	public ModelAndView submitThemeForEvaluation(@AuthenticationPrincipal UserImpl activeUser,
 			@Valid TermPaper termPaper, BindingResult bindingResult, RedirectAttributes redirectAttr,
@@ -113,7 +114,7 @@ public class DocumentController {
 			bindingResult.addError(new FieldError("termPaper", "advisor", messages.get("field.not-null")));
 		}
 		if (bindingResult.hasErrors()) {
-			return this.document(activeUser, null, null).addObject("termPaper", termPaper);
+			return this.document(activeUser, Optional.ofNullable(null), Optional.ofNullable(null)).addObject("termPaper", termPaper);
 		}
 		termPaper.setAuthor((Student) activeUser.getUser());
 		ModelAndView mav = new ModelAndView("redirect:/document/");
@@ -169,6 +170,7 @@ public class DocumentController {
 		return mav;
 	}
 
+	//TODO nicolas.w
 	@GetMapping(value= {"/theme", "/theme/{period}/{academicYearId}"})
 	public ModelAndView loadTheme(@AuthenticationPrincipal UserImpl activeUser, @PathVariable Optional<Long> academicYearId, @PathVariable Optional<String> period) {
 		ModelAndView mav = this.document(activeUser, academicYearId, period);

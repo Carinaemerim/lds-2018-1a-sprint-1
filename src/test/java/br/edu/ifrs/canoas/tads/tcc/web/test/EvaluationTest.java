@@ -5,14 +5,10 @@ import br.edu.ifrs.canoas.tads.tcc.web.page.EvaluationPage;
 import org.fluentlenium.core.annotation.Page;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.validation.constraints.AssertFalse;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.fluentlenium.assertj.FluentLeniumAssertions.*;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 public class EvaluationTest extends MyFluentTest {
 
@@ -24,6 +20,32 @@ public class EvaluationTest extends MyFluentTest {
         super.loginProfessor();
     }
 
+
+    @Test
+    public void asaveDraftEvaluationTermPaper() {
+
+        //Given
+        evaluationPage.go(port);
+        evaluationPage.isAt();
+        evaluationPage.selectTermPaperForEvaluationLastProfessor()
+                .awaitUntilFormEvaluationTermPaperAppear();
+        evaluationPage.isAtTermPaperEvaluation();
+        evaluationPage.awaitTwoSeconds();
+
+        //When
+        evaluationPage.fillTextAreaForm("Aprovado, revise o documento anexado");
+        evaluationPage.fillAndSubmitDraftForm("","9", "6", "7", "7", "5", "8","7", "8" , "9" , "10", "8", "7",evaluationPage.getFileAbsolutePath())
+                .awaitUntilAppraiserNameAppear();
+
+        //Then
+        assertThat(window().title()).isEqualTo("Avaliação de Monografia");
+        assertThat($(".callout")).hasSize(1);
+        assertThat(evaluationPage.getDateAndHour().text()).startsWith(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        assertThat(evaluationPage.getFinalGradeByProfessor().text()).containsIgnoringCase("7,6");
+    }
+
+
+
     @Test
     public void lastProfessorEvaluateTermPaper() {
 
@@ -33,6 +55,9 @@ public class EvaluationTest extends MyFluentTest {
         evaluationPage.selectTermPaperForEvaluationLastProfessor()
                 .awaitUntilFormEvaluationTermPaperAppear();
         evaluationPage.isAtTermPaperEvaluation();
+        // e o professor for o último professor associado a avaliar este trabalho
+        // e o outro avaliador informou os dados da avaliação escrita com 9, 6, 7, 7, 5 e 8
+        // e a apresentação oral com os valores 7, 8 , 9 , 10, 8  e 7
 
         //When
         evaluationPage.fillTextAreaForm("Aprovado, revise o documento anexado");
@@ -69,41 +94,62 @@ public class EvaluationTest extends MyFluentTest {
         assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
         assertThat(evaluationPage.getGradeFinalNotLastProfessor().text()).containsIgnoringCase("");
         assertThat(evaluationPage.getGradeStatusNotLastProfessor().text()).containsIgnoringCase("EM PROGRESSO");
-        // todo add mensagem com sucesso
 
     }
 
+
+
+
     @Test
-    public void saveDraftEvaluationTermPaper() {
+    public void studentNotPresentation() {
 
         //Given
         evaluationPage.go(port);
         evaluationPage.isAt();
-        evaluationPage.selectTermPaperForEvaluationLastProfessor()
+        evaluationPage.selectTermPaperForEvaluationLastProfessorTwo()
                 .awaitUntilFormEvaluationTermPaperAppear();
         evaluationPage.isAtTermPaperEvaluation();
+        evaluationPage.awaitTwoSeconds();
+        // e o professor for o último professor associado a avaliar este trabalho
+        // e o outro avaliador informou os dados da avaliação escrita com 9, 6, 7, 7, 5 e 8
+        // e a apresentação oral com os valores 7, 8 , 9 , 10, 8  e 7
 
         //When
-        evaluationPage.fillTextAreaForm("Aprovado, revise o documento anexado");
-        evaluationPage.fillAndSubmitDraftForm("","9", "6", "7", "7", "5", "8","7", "8" , "9" , "10", "8", "7",evaluationPage.getFileAbsolutePath())
-        .awaitUntilAppraiserNameAppear();
+        evaluationPage.fillTextAreaForm("Não apresentou o trabalho");
+        evaluationPage.fillAndSubmitForm("","0", "0", "0", "0", "0", "0","0", "0" , "0" , "0", "0", "0",evaluationPage.getFileAbsolutePath())
+                .awaitUntilConfirmationModal();
+        evaluationPage.selectConfirmSubmit()
+                .awaitUntilTableListEvaluateAppear();
 
         //Then
-        assertThat(window().title()).isEqualTo("Avaliação de Monografia");
-     /*   assertThat($(".div", withClass("callout callout-success lead")));
-        //assertThat($(".textarea")).hasT("Aprovado, revise o documento anexado");
-        assertThat(el("#considerations").text().equals("xAprovado, revise o documento anexado"));
-        assertThat(!(el("#considerations").displayed()));
-        //assertThat(el("#considerations").text().);*/
-        assertThat(el("#date-and-hour").text().contains("??"));
+        assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
+        assertThat(evaluationPage.getGradeFinalLastProfessorTwo().text()).containsIgnoringCase("0,0");
+        assertThat(evaluationPage.getGradeStatusLastProfessorTwo().text()).containsIgnoringCase("REPROVADO");
+    }
 
 
-        assertThat(evaluationPage.getDateAndHour());
-        //ok
-        assertThat(evaluationPage.getFinalGradeByProfessor().text()).containsIgnoringCase("7,6");
+    @Test
+    public void proposalEvaluationRedo() {
 
+        //Given
+        evaluationPage.go(port);
+        evaluationPage.isAt();
+        evaluationPage.selectProposalForEvaluationLastProfessor()
+                .awaitUntilFormEvaluationAdviceAppear();
+        evaluationPage.isAtProposalEvaluation();
+        // e o professor for o último professor associado a avaliar este trabalho
+        // e o outro avaliador aprovou a proposta
 
+        //When
+        evaluationPage.fillTextAreaForm("Não apresentou o trabalho");
+        evaluationPage.selectRadioEvaluateRedoAndSubmit()
+                .awaitUntilConfirmationModal();
+        evaluationPage.selectConfirmSubmit()
+                .awaitUntilTableListEvaluateAppear();
 
+        //Then
+        assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
+        assertThat(evaluationPage.getProposalStatusLastProfessor().text()).containsIgnoringCase("REFAZER");
     }
 
 }

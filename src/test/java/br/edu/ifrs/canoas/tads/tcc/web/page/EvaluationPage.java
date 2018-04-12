@@ -20,18 +20,32 @@ public class EvaluationPage extends FluentPage {
     @FindBy(css = "#theme-2")
     private FluentWebElement buttonTheme;
 
+    @FindBy(css = "#proposal-1")
+    private FluentWebElement buttonProposal;
+
     @FindBy(css = "#termPaper-4")
     private FluentWebElement buttonTermPaperAvailableForEvaluationLastProfessor;
 
     @FindBy(css = "#termPaper-0")
     private FluentWebElement buttonTermPaperAvailableForEvaluationNotLastProfessor;
 
+    @FindBy(css = "#termPaper-5")
+    private FluentWebElement buttonTermPaperAvailableForEvaluationNotLastProfessorTwo;
 
     @FindBy(css = "#grade-4")
     private FluentWebElement gradeFinalLastProfessor;
 
     @FindBy(css = "#grade-status-4")
     private FluentWebElement gradeStatusLastProfessor;
+
+    @FindBy(css = "#grade-5")
+    private FluentWebElement gradeFinalLastProfessorTwo;
+
+    @FindBy(css = "#grade-status-5")
+    private FluentWebElement gradeStatusLastProfessorTwo;
+
+    @FindBy(css = "#proposal-status-1")
+    private FluentWebElement proposalStatusLastProfessor;
 
     @FindBy(css = "#grade-0")
     private FluentWebElement gradeFinalNotLastProfessor;
@@ -45,6 +59,9 @@ public class EvaluationPage extends FluentPage {
     @FindBy(css = "#form-termpaper-advisor")
     private FluentWebElement formEvaluationTermPaper;
 
+    @FindBy(css = "#form-advice-evaluation")
+    private FluentWebElement formEvaluationAdvice;
+
     @FindBy(css = "#buttonSubmitEvaluation")
     private FluentWebElement buttonSubmitEvaluation;
 
@@ -52,8 +69,8 @@ public class EvaluationPage extends FluentPage {
     private FluentWebElement buttonDraftSubmitEvaluation;
 
 
-    @FindBy(css = "#gradeEvaluationSubmitConfirmationModal")
-    private FluentWebElement gradeEvaluationSubmitConfirmationModal;
+    @FindBy(css = "#evaluationSubmitConfirmationModal")
+    private FluentWebElement evaluationSubmitConfirmationModal;
 
     @FindBy(css = "#yesSubmit")
     private FluentWebElement buttonYesSubmitModal;
@@ -70,14 +87,12 @@ public class EvaluationPage extends FluentPage {
     @FindBy(css = "#final-grade-by-professor")
     private FluentWebElement finalGradeByProfessor;
 
-    @FindBy(css = "# date-and-hour")
+    @FindBy(css = "#date-and-hour")
     private FluentWebElement dateAndHour;
 
+    @FindBy(css = "#status3")
+    private FluentWebElement buttonRadioRedo;
 
-
-
-  /*  @FindBy(xpath = "//*[text() = Rascunho salvo com sucesso!")
-    private FluentWebElement messageDraftSaved;*/
 
     public void isAt() {
         assertThat(window().title()).isEqualTo("Avaliação de Trabalhos");
@@ -87,17 +102,40 @@ public class EvaluationPage extends FluentPage {
         assertThat(window().title()).isEqualTo("Avaliação de Monografia");
     }
 
+    public void isAtProposalEvaluation() {
+        assertThat(window().title()).isEqualTo("Avaliação de Proposta");
+    }
+
     public EvaluationPage selectTermPaperForEvaluationLastProfessor() {
         buttonTermPaperAvailableForEvaluationLastProfessor.click();
         return this;
 
     }
+
+    public EvaluationPage selectTermPaperForEvaluationLastProfessorTwo() {
+        buttonTermPaperAvailableForEvaluationNotLastProfessorTwo.click();
+        return this;
+
+    }
+
     public EvaluationPage selectTermPaperForEvaluationNotLastProfessor() {
         buttonTermPaperAvailableForEvaluationNotLastProfessor.click();
         return this;
 
     }
 
+    public EvaluationPage selectRadioEvaluateRedoAndSubmit() {
+        buttonRadioRedo.click();
+        buttonSubmitEvaluation.click();
+        return this;
+
+    }
+
+    public EvaluationPage selectProposalForEvaluationLastProfessor() {
+        buttonProposal.click();
+        return this;
+
+    }
     public EvaluationPage awaitUntilTermPaperAppear() {
         await().atMost(5, TimeUnit.SECONDS).until(termPaperDetail).present();
         return this;
@@ -105,6 +143,11 @@ public class EvaluationPage extends FluentPage {
 
     public EvaluationPage awaitUntilFormEvaluationTermPaperAppear() {
         await().atMost(5, TimeUnit.SECONDS).until(formEvaluationTermPaper).present();
+        return this;
+    }
+
+    public EvaluationPage awaitUntilFormEvaluationAdviceAppear() {
+        await().atMost(5, TimeUnit.SECONDS).until(formEvaluationAdvice).present();
         return this;
     }
     public EvaluationPage awaitUntilTableListEvaluateAppear() {
@@ -119,12 +162,19 @@ public class EvaluationPage extends FluentPage {
     }
 
 
-    public EvaluationPage awaitFiveSeconds() {
-        await().atMost(5, TimeUnit.SECONDS);
+    public EvaluationPage awaitTwoSeconds() {
+        await().atMost(2, TimeUnit.SECONDS).until(considerations).present();
+        await().atMost(5, TimeUnit.SECONDS).until($("textarea")).size(1);
         return this;
     }
 
     public EvaluationPage fillAndSubmitForm(String... paramsOrdered) {
+        $("input").fill().with(paramsOrdered);
+        buttonSubmitEvaluation.click();
+        return this;
+    }
+
+    public EvaluationPage fillAndSubmitAdviceForm(String... paramsOrdered) {
         $("input").fill().with(paramsOrdered);
         buttonSubmitEvaluation.click();
         return this;
@@ -137,7 +187,7 @@ public class EvaluationPage extends FluentPage {
     }
 
     public EvaluationPage awaitUntilConfirmationModal() {
-        await().atMost(5, TimeUnit.SECONDS).until(gradeEvaluationSubmitConfirmationModal).present();
+        await().atMost(5, TimeUnit.SECONDS).until(evaluationSubmitConfirmationModal).present();
         return this;
     }
 

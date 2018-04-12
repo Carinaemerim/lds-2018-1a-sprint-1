@@ -46,6 +46,7 @@ public abstract class MyFluentTest extends FluentTest {
         assertThat(window().title()).isEqualTo("Header");
     }
 
+
     public void loginUserWithoutTheme() {
     	loginPage.go(port);
     	loginPage.fillAndSubmitForm("user6", "user")

@@ -74,7 +74,8 @@ insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description, AC
 (1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103, 'Uma breve descrição do trabalho Scrum é a vida Jedi', 501),
 (1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico mais promissor que você ja viu', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 501),
 (1004, 'Engenharia de Software', 'Sistemas ERP: características, custos e tendências', 101, 108,'Uma breve descrição do trabalho Sistemas ERP: características, custos e tendências', 501),
-(1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico', 501);
+(1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico', 501),
+(1006, 'Arquitetura de Computadores', 'Pensando na vida: Relatos de um Chip Qualquer', 101, 103,'Uma breve descrição desse trabalho magnífico', 501);;
 
 
 
@@ -91,7 +92,10 @@ insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id )	valu
 (107,0,1,1004, 100),
 (108,0,1,1005, 100),
 (109,1,1,1005, 100),
-(110,2,1,1005, 100);
+(110,2,1,1005, 100),
+(111,0,1,1006, 100),
+(112,1,1,1006, 100),
+(113,2,1,1006, 100);
 
 
 insert into EVALUATION_BOARD (id, document_id) values
@@ -105,7 +109,10 @@ insert into EVALUATION_BOARD (id, document_id) values
 (107, 107),
 (108, 108),
 (109, 109),
-(110, 110);
+(110, 110),
+(111, 111),
+(112, 112),
+(113, 113);
 
 insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) values
 (99, 101),
@@ -121,13 +128,16 @@ insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) val
 (108, 101),
 (109, 101),
 (104, 106),
-(110, 101);
+(110, 101),
+(111, 101),
+(112, 101),
+(113, 101);
 
 
 --Evaluation
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (499, 'Advice', 97, 'Consideracoes do tema estao aqui. bom tema!', 1, 101, TRUE);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (500, 'Advice', 101, 'Consideracoes do tema estao aqui. bom tema!', 0, 101, TRUE);
-INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID ) VALUES (501, 'Advice', 105, 'Consideracoes do Proposta estao aqui. Melhor tentar novamente!', 2, 101);
+INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID ) VALUES (501, 'Advice', 105, 'Consideracoes do Proposta estao aqui. Melhor tentar novamente!', 1, 101);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (502, 'Advice', 103, 'Consideracoes do Proposta estao aqui. Parabéns!!', 0, 101, TRUE);
 
 --INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS ,ADEQUACY_OF_PRESENTATION ,CLOSING_EXPECTED_TIME ,CONCLUSION ,DEVELOPMENT_IN_LOGICAL_SEQUENCE ,EXPERIENCED_SOLUTION ,LITERATURE_REVIEW ,METHODOLOGY ,OBJECTIVE ,PRESENTATION ,SUBJECT_DOMAIN ,THEORETICAL_APPROACH ,VOCABULARY, APPRAISER_ID, IS_FINAL )
@@ -140,6 +150,9 @@ INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STAT
 
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (508, 'Advice', 108, 'Consideracoes do Proposta estao aqui. Parabéns Bommmm hein!!', 0, 101, TRUE);
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (509, 'Advice', 109, 'Consideracoes do Proposta estao aqui. Satisfatório!!', 0, 101, TRUE);
+
+INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (510, 'Advice', 111, 'Consideracoes do tema estao aqui. bom tema!', 0, 101, TRUE);
+INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (511, 'Advice', 112, 'Consideracoes do tema estao aqui. bom Proposta!', 0, 101, TRUE);
 -- SET EVALUATION_BOARD_ID IN Document
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 99  WHERE ID=  97;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 101  WHERE ID=  101;
@@ -152,6 +165,10 @@ UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 107  WHERE ID=  107;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 108  WHERE ID=  108;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 109  WHERE ID=  109;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 110  WHERE ID=  110;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 111  WHERE ID=  111;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 112  WHERE ID=  112;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 113  WHERE ID=  113;
+
 
 --Schedule
 INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('24/03/2018','dd/MM/yyyy'), 1);

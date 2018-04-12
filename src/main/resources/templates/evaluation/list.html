@@ -67,7 +67,8 @@
                                 <td><a th:if="${termPaper.proposalDocument != null}"
                                        th:href="@{|~/evaluation/proposal/${termPaper.id}|}" href="#"
                                        th:id="'proposal-'+ ${iter.index}">
-                                    <span th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"
+                                    <span th:id="'proposal-status-'+ ${iter.index}"
+                                            th:text="#{${'evaluation.status.'+termPaper?.proposalDocument?.status}}"
                                           th:classappend="${termPaper?.proposalDocument?.colorStatus}"
                                           class="btn btn-block btn-flat">Avaliar</span>
                                 </a>

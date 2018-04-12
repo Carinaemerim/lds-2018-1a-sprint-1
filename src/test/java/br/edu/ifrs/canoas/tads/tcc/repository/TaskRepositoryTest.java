@@ -20,6 +20,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import br.edu.ifrs.canoas.tads.tcc.domain.Task;
 import br.edu.ifrs.canoas.tads.tcc.domain.TypeEvaluation;
 
+/**
+ * Created by Mariele on 3/03/18.
+ */
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class TaskRepositoryTest {

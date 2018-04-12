@@ -3,14 +3,14 @@
 		<a th:disabled="${#bools.isFalse(isPrevious)}" href="#"
 			th:href="@{|/document/previous/${academicYear?.id}|}">
 			<button th:disabled="${#bools.isFalse(isPrevious)}"
-				th:value="${academicYear.title}"
+				th:value="${academicYear?.title}"
 				class="btn glyphicon glyphicon-menu-left"></button>
 		</a> <a><span class="btn btn-default"
-			th:text="${academicYear.title}"></span></a> <a
+			th:text="${academicYear?.title}"></span></a> <a
 			th:disabled="${#bools.isFalse(isNext)}" href="#"
 			th:href="@{|/document/next/${academicYear?.id}|}">
 			<button th:disabled="${#bools.isFalse(isNext)}"
-				th:value="${academicYear.title}"
+				th:value="${academicYear?.title}"
 				class="btn glyphicon glyphicon-menu-right"></button>
 		</a>
 	</div>

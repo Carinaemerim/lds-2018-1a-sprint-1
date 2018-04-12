@@ -29,7 +29,7 @@ public class LoginPage extends FluentPage {
 
 
     public LoginPage awaitUntilFormDisappear() {
-        await().atMost(5, TimeUnit.SECONDS).until(el(LOGIN_FORM)).not().present();
+        await().atMost(3, TimeUnit.SECONDS).until(el(LOGIN_FORM)).not().present();
         return this;
     }
 

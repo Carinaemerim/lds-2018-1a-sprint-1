@@ -1,7 +1,7 @@
 <!-- form start -->
 <div class="box box-primary">
     <form class="form-horizontal" method="post" action="#"
-          id="form-theme-evaluation" th:action="@{/evaluation/advice/submit}"
+          id="form-advice-evaluation" th:action="@{/evaluation/advice/submit}"
           th:object="${advice}">
         <div class="box-header bg-gray">
             <h3 class="box-title"><span th:text="#{evaluation}"/></h3>
@@ -51,8 +51,8 @@
                         <i class="fa fa-pencil"></i> <span th:text="#{button.draft}"/>
                     </button>
                     <button class="btn btn-primary" type="button"
-                            data-toggle="modal" data-target="#adviceEvaluationSubmitConfirmationModal"
-                            name="action">
+                            data-toggle="modal" data-target="#evaluationSubmitConfirmationModal"
+                            name="action" id="buttonSubmitEvaluation">
                         <i class="fa fa-check"></i> <span th:text="#{button.save}"/>
                     </button>
                 </div>
@@ -69,9 +69,9 @@
             </a>
         </div>
         <!-- /.box-footer -->
-        <div class="modal fade" id="adviceEvaluationSubmitConfirmationModal"
+        <div class="modal fade" id="evaluationSubmitConfirmationModal"
              role="dialog"
-             aria-labelledby="adviceEvaluationSubmitConfirmationModalLabel">
+             aria-labelledby="evaluationSubmitConfirmationModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -91,7 +91,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal"
                                 th:text="#{no}">No
                         </button>
-                        <button type="submit" class="btn btn-primary" name="action"
+                        <button type="submit" id="yesSubmit" class="btn btn-primary" name="action"
                                 value="evaluation" th:text="#{yes}">Yes
                         </button>
                     </div>

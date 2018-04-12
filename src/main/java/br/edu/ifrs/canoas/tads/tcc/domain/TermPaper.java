@@ -70,7 +70,7 @@ public class TermPaper {
 	@Transient
 	public Document getThemeDocument() {
 		if (documents != null)
-			for (Document doc : documents) {
+			for (Document doc : this.documents) {
 				if (doc.getDocumentType().equals(DocumentType.THEME) && doc.getIsFinal()) {
 					return doc;
 				}

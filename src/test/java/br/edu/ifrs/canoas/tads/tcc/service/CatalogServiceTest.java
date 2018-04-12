@@ -53,7 +53,7 @@ public class CatalogServiceTest {
         Iterable<TermPaper> papers = service.search("");
 
         //then
-        assertThat(papers).hasSize(7);
+        assertThat(papers).hasSize(8);
     }
 
 }

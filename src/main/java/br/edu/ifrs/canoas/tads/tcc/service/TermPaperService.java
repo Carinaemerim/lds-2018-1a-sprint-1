@@ -1,5 +1,6 @@
 package br.edu.ifrs.canoas.tads.tcc.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -40,6 +41,7 @@ public class TermPaperService {
 		return optionalTermPaper.isPresent() ? optionalTermPaper.get() : null;
 	}
 
+	//TODO nicolas.w
 	public TermPaper saveThemeDraft(TermPaper termPaper) {
 		TermPaper fetchedTermPaper = this.getOne(termPaper);
 		if (fetchedTermPaper == null || fetchedTermPaper.getId() == null) {
@@ -60,6 +62,7 @@ public class TermPaperService {
 		return termPaperRepository.save(fetchedTermPaper);
 	}
 
+	//TODO nicolas.w
 	public TermPaper submitThemeForEvaluation(TermPaper termPaper) {
 		termPaper = this.saveThemeDraft(termPaper);
 		documentService.createOrUpdateThemeDocument(termPaper);
@@ -75,6 +78,7 @@ public class TermPaperService {
 				termPaperRepository.findFirstByAuthorIdAndAcademicYearOrderByIdDesc(user.getId(), academicYear));
 	}
 
+	//TODO nicolas.w
 	public TermPaper getOneByUserAndAcademicYear(User user, AcademicYear academicYear) {
 		if (academicYear == null) {
 			throw new RuntimeException(messages.get("theme.academicYearNotDefined"));
@@ -84,20 +88,22 @@ public class TermPaperService {
 		return (termPaper == null) ? new TermPaper() : termPaper;
 	}
 
+	// TODO RNG023 nicolas.w
 	private TermPaper verifyThemeWaitingDuration(TermPaper termPaper) {
-		// TODO RNG023 Nicolas
 		if (termPaper != null) {
 			Document themeDocument = termPaper.getThemeDocument();
 			if (themeDocument != null && themeDocument.getStatus().equals(EvaluationStatus.IN_PROGRESS)
 					&& themeDocument.getCreatedOn() != null) {
 				long timeDiff = Calendar.getInstance().getTimeInMillis() - themeDocument.getCreatedOn().getTime();
 				double diffInHours = ((double) timeDiff) / (1000 * 60 * 60);
-				if (diffInHours > 72.0) {
+				if (diffInHours >= 72.0) {
 					Advice advice = (Advice) evaluationService.getOneEvaluation(themeDocument, termPaper.getAdvisor());
 					if (advice == null) {
 						advice = new Advice();
 						advice.setDocument(themeDocument);
 						advice.setIsFinal(true);
+						if (themeDocument.getEvaluations() == null)
+							themeDocument.setEvaluations(new ArrayList<>());
 						themeDocument.getEvaluations().add(advice);
 					}
 					advice.setAppraiser(termPaper.getAdvisor());

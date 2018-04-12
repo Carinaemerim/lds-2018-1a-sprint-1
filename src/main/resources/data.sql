@@ -15,7 +15,9 @@ INSERT into user(id, username, password, name, email, experience, skill, active,
 (106, 'orientador3', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Darth Vader 3','yodadv3@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 100, 'Professor'),
 (107, 'orientador4', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Darth Vader 4','yodadv4@stars.wars','Masters Unidentified Jedi, Garro, Qui-Gon Jinn', 'Deflect Force Lightning, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 100, 'Professor'),
 (108, 'user5', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Zezinho Fulano de Tal','yodouser@stars.wars','Slave Unidentified Jedi, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation','Sensing Death And Force-aided Acrobatics.',  TRUE, 100, 'Student'),
-(109, 'user6', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Luizinho vai Sambá','yodouser109@stars.wars','Slave Unidentified Jedi, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation','Sensing Death And Force-aided Acrobatics.',  TRUE, 100, 'Student');
+(109, 'user6', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Luizinho vai Sambá','yodouser109@stars.wars','Slave Unidentified Jedi, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation','Sensing Death And Force-aided Acrobatics.',  TRUE, 100, 'Student'),
+(110, 'userExpiredEvaluation', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Slave Yoda Expired','yodoexpired@stars.wars','Slave Unidentified Jedi, Strategic Mastery, Acting Skills, Indomitable Will, Battle Meditation','Sensing Death And Force-aided Acrobatics.',  TRUE, 100, 'Student'),
+(111, 'userWithoutSubmission', '$2a$10$Qji2/icFWIGGQEAv8bbwNuKGrSZyiUUPqE/0SNO2M.BpU.NA6xPhW', 'Master Yoda Without Submission','without_submission@mail.com','Master W. Submission, Strategic Mastery, Acting Skills',' Indomitable Will, Battle Meditation, Sensing Death And Force-aided Acrobatics.',  TRUE, 100, 'Student');
 
 --ROLES
 insert into role(id, role) values
@@ -42,6 +44,8 @@ insert into user_roles (user_id, roles_id) values
 (104, 3),
 (108, 3),
 (109, 3),
+(110, 3),
+(111, 3),
 (101, 4),
 (105, 4),
 (106, 4),
@@ -74,9 +78,8 @@ insert into TERM_PAPER (id, theme, title, advisor_id, author_id, description, AC
 (1002, 'Engenharia de Software', 'Scrum é a vida Jedi', 101, 103, 'Uma breve descrição do trabalho Scrum é a vida Jedi', 501),
 (1003, 'Inteligência Artificial', 'Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico mais promissor que você ja viu', 101, 104,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 501),
 (1004, 'Engenharia de Software', 'Sistemas ERP: características, custos e tendências', 101, 108,'Uma breve descrição do trabalho Sistemas ERP: características, custos e tendências', 501),
-(1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico', 501);
-
-
+(1005, 'Arquitetura de Computadores', 'Como o Hardware evoluiu em comparação a degradação mental dos humanos', 101, 109,'Uma breve descrição desse trabalho magnífico', 501),
+(1010, 'Inteligência Artificial 1', 'Modelo estatístico para verificar o tempo expirado da avaliação', 101, 110,'Uma breve descrição do trabalho Modelo estatístico para avaliar o desempenho de um sistema de correção de erro quântico', 501);
 
 insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id )	values
 (97,0,1,999, 100),
@@ -93,6 +96,8 @@ insert into DOCUMENT (id, document_type, is_final, term_paper_id, file_id )	valu
 (109,1,1,1005, 100),
 (110,2,1,1005, 100);
 
+insert into DOCUMENT (id, document_type, is_final, term_paper_id, created_on )	values
+(111,0,1,1010, '2018-04-08 12:00:00.762');
 
 insert into EVALUATION_BOARD (id, document_id) values
 (99, 97),
@@ -105,7 +110,8 @@ insert into EVALUATION_BOARD (id, document_id) values
 (107, 107),
 (108, 108),
 (109, 109),
-(110, 110);
+(110, 110),
+(111, 111);
 
 insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) values
 (99, 101),
@@ -121,8 +127,8 @@ insert into EVALUATION_BOARD_PROFESSORS (EVALUATION_BOARD_ID, PROFESSORS_ID) val
 (108, 101),
 (109, 101),
 (104, 106),
-(110, 101);
-
+(110, 101),
+(111, 101);
 
 --Evaluation
 INSERT INTO  EVALUATION (ID ,EVALUATION_TYPE, DOCUMENT_ID , CONSIDERATIONS, STATUS, APPRAISER_ID, IS_FINAL ) VALUES (499, 'Advice', 97, 'Consideracoes do tema estao aqui. bom tema!', 1, 101, TRUE);
@@ -152,6 +158,7 @@ UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 107  WHERE ID=  107;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 108  WHERE ID=  108;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 109  WHERE ID=  109;
 UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 110  WHERE ID=  110;
+UPDATE DOCUMENT SET EVALUATION_BOARD_ID = 111  WHERE ID=  111;
 
 --Schedule
 INSERT INTO  TASK (ID ,PERIOD, TITLE, DESCRIPTION , DEADLINE, TYPE_EVALUATION) VALUES (100, '2018/01', 'Definir Orientador', 'Encontrar ´professor com interresse na area', PARSEDATETIME('24/03/2018','dd/MM/yyyy'), 1);

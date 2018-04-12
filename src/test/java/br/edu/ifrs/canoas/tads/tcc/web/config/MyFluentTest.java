@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.concurrent.TimeUnit;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -46,10 +48,17 @@ public abstract class MyFluentTest extends FluentTest {
         assertThat(window().title()).isEqualTo("Header");
     }
 
-    public void loginUserWithoutTheme() {
+    public void loginUserWithoutSubmittedTheme() {
     	loginPage.go(port);
-    	loginPage.fillAndSubmitForm("user6", "user")
-    	.awaitUntilFormDisappear();
+    	loginPage.fillAndSubmitForm("userWithoutSubmission", "user");
+    	await().atMost(1, TimeUnit.SECONDS);
     	assertThat(window().title()).isEqualTo("Header");
     }
+
+	public void loginUserInEvaluationAfterExpirationTime() {
+		loginPage.go(port);
+		loginPage.fillAndSubmitForm("userExpiredEvaluation", "user");
+		await().atMost(1, TimeUnit.SECONDS);
+		assertThat(window().title()).isEqualTo("Header");
+	}
 }

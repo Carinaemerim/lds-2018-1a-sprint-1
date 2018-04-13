@@ -53,6 +53,9 @@ public class TaskPage extends FluentPage {
     @FindBy(xpath = "//*[text() = 'Não pode estar em branco']")
     private FluentWebElement notBlank;
     
+    @FindBy(xpath = "//*[@type = 'search']")
+    private FluentWebElement search;
+    
     @FindBy(xpath = "//*[@id = 'description']")
     private FluentWebElement inputDescription;
     
@@ -61,22 +64,35 @@ public class TaskPage extends FluentPage {
     
     @FindBy(xpath = "//*[@id = 'NOTAPPLICABLE']")
     private FluentWebElement naoAvaliativo;
+
+    @FindBy(xpath = "//*[text() = 'Delete']")
+	private FluentWebElement delete;
     
+    @FindBy(xpath = "//*[text() = 'Edit']")
+	private FluentWebElement edit;
+    
+    @FindBy(xpath = "//button[@class='btn glyphicon glyphicon-menu-right']")
+    private FluentWebElement btnRight;
+    
+    @FindBy(xpath = "//button[@class='btn glyphicon glyphicon-menu-left']")
+    private FluentWebElement btnLeft;
+    
+	@FindBy(xpath = "//*[text() = '2018/01']")
+	private FluentWebElement period201801;
+	 
+	@FindBy(xpath = "//*[text() = '2018/02']")
+	private FluentWebElement period201802;
+	 
+	@FindBy(xpath = "//*[text() = '2017/02']")
+	private FluentWebElement period201702;
+    
+	 @FindBy(xpath = "//*[text() = 'No data available in table']")
+	    private FluentWebElement noData;
 
 
     public void goUrl() {
     	if(btnCronograma.clickable())
 		btnCronograma.click();
-    }
-
-    public void isAt() {
-        try {
-			Thread.sleep(5000);
-
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-        assertThat(window().title()).isEqualTo("Cronograma");
     }
     
     public void clickNewTask() {
@@ -97,10 +113,10 @@ public class TaskPage extends FluentPage {
     	 assertThat(tituloLabel.displayed());
     }
     
-    public void checkAndFillTitulo() {
+    public void checkAndFillTitulo(String value) {
     	await().atMost(10, TimeUnit.SECONDS).until(inputTitle).present();
     	assertThat(inputTitle.displayed());
-    	inputTitle.fill().with("Entregar monografia");
+    	inputTitle.fill().with(value);
     }
 
 	public void clickSalvar() {
@@ -109,17 +125,17 @@ public class TaskPage extends FluentPage {
 		
 	}
 
-	public void checkAndFillTarefa() {
+	public void checkAndFillTarefa(String value) {
 		await().atMost(10, TimeUnit.SECONDS).until(inputDescription).present();
     	assertThat(inputDescription.displayed());
-    	inputDescription.fill().with("entregar trabalho completo com todas as sessçoes");
+    	inputDescription.fill().with(value);
 		
 	}
 
-	public void checkAndFillDataLimite() {
+	public void checkAndFillDataLimite(String value) {
 		await().atMost(10, TimeUnit.SECONDS).until(inputdeadline).present();
     	assertThat(inputdeadline.displayed());
-    	inputdeadline.fill().with("05/14/2018");
+    	inputdeadline.fill().with(value);
 		
 	}
 
@@ -128,6 +144,59 @@ public class TaskPage extends FluentPage {
     	assertThat(naoAvaliativo.displayed());
     	naoAvaliativo.click();
 		
+	}
+
+	public void serachTitulo(String value) {
+		await().atMost(10, TimeUnit.SECONDS).until(search).present();
+    	assertThat(search.displayed());
+    	search.fill().with(value);
+		
+	}
+
+	public void clickDelete() {
+		await().atMost(10, TimeUnit.SECONDS).until(delete).present();
+    	assertThat(delete.displayed());
+    	delete.click();
+		
+	}
+
+	public void clickEdit() {
+		await().atMost(10, TimeUnit.SECONDS).until(edit).present();
+    	assertThat(edit.displayed());
+    	edit.click();
+		
+	}
+	
+	public void clickRight() {
+		await().atMost(10, TimeUnit.SECONDS).until(btnRight).present();
+    	assertThat(btnRight.displayed());
+    	btnRight.click();
+	}
+	
+	public void clickLeft() {
+		await().atMost(10, TimeUnit.SECONDS).until(btnLeft).present();
+    	assertThat(btnLeft.displayed());
+    	btnLeft.click();
+	}
+	
+	public void searchPeriod201801() {
+		await().atMost(10, TimeUnit.SECONDS).until(period201801).present();
+    	assertThat(period201801.displayed());
+	}
+	
+	public void searchPeriod201802() {
+		await().atMost(10, TimeUnit.SECONDS).until(period201802).present();
+    	assertThat(period201802.displayed());
+	}
+	
+	public void searchPeriod201702() {
+		await().atMost(10, TimeUnit.SECONDS).until(period201702).present();
+    	assertThat(period201702.displayed());
+	}
+	
+	public void noDataInTheTable() {
+		await().atMost(10, TimeUnit.SECONDS).until(noData).present();
+    	assertThat(noData.displayed());
 	}
 }
 	

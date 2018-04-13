@@ -31,6 +31,38 @@ public class TaskPage extends FluentPage {
 
     @FindBy(xpath = "//*[text() = 2018/01")
 	private FluentWebElement period;
+    
+    @FindBy(xpath = "//section[@class='content-header']//h1//span[contains(text(),'Cronograma')]")
+    private FluentWebElement cronogramaHeader;
+    
+    @FindBy(xpath = "//*[text() = 'Nova Tarefa']")
+    private FluentWebElement novaTarefa;
+    
+    @FindBy(xpath = "//*[text() = 'Salvar']")
+    private FluentWebElement btnSalvar;
+    
+    @FindBy(xpath = "//*[text() = 'Titulo:']")
+    private FluentWebElement tituloLabel;
+    
+    @FindBy(xpath = "//*[@id = 'title']")
+    private FluentWebElement inputTitle;
+    
+    @FindBy(xpath = "//*[text() = 'Lista de Tarefas']")
+    private FluentWebElement listaDeTarefasLabel;
+    
+    @FindBy(xpath = "//*[text() = 'Não pode estar em branco']")
+    private FluentWebElement notBlank;
+    
+    @FindBy(xpath = "//*[@id = 'description']")
+    private FluentWebElement inputDescription;
+    
+    @FindBy(xpath = "//*[@id = 'deadline']")
+    private FluentWebElement inputdeadline;
+    
+    @FindBy(xpath = "//*[@id = 'NOTAPPLICABLE']")
+    private FluentWebElement naoAvaliativo;
+    
+
 
     public void goUrl() {
     	if(btnCronograma.clickable())
@@ -46,16 +78,56 @@ public class TaskPage extends FluentPage {
 		}
         assertThat(window().title()).isEqualTo("Cronograma");
     }
-
-    public TaskPage fillAndSubmitForm(String... paramsOrdered) {
-        $("input").fill().with(paramsOrdered);
-        btnCronograma.click();
-        return this;
+    
+    public void clickNewTask() {
+    	if(novaTarefa.clickable())
+    		novaTarefa.click();
     }
     
-    public TaskPage awaitLoadPeriodAppear() {
-		await().atMost(5, TimeUnit.SECONDS).until(period).present();
-        return new TaskPage();
+    public void checkListaDeTarefas() {
+    	 assertThat(listaDeTarefasLabel.displayed());
     }
+    
+    public void checkNotBlank() {
+   	 assertThat(notBlank.displayed());
+   }
+    
+    public void checkTituloLabel() {
+    	await().atMost(10, TimeUnit.SECONDS).until(tituloLabel).present();
+    	 assertThat(tituloLabel.displayed());
+    }
+    
+    public void checkAndFillTitulo() {
+    	await().atMost(10, TimeUnit.SECONDS).until(inputTitle).present();
+    	assertThat(inputTitle.displayed());
+    	inputTitle.fill().with("Entregar monografia");
+    }
+
+	public void clickSalvar() {
+		if(btnSalvar.clickable())
+			btnSalvar.click();
+		
+	}
+
+	public void checkAndFillTarefa() {
+		await().atMost(10, TimeUnit.SECONDS).until(inputDescription).present();
+    	assertThat(inputDescription.displayed());
+    	inputDescription.fill().with("entregar trabalho completo com todas as sessçoes");
+		
+	}
+
+	public void checkAndFillDataLimite() {
+		await().atMost(10, TimeUnit.SECONDS).until(inputdeadline).present();
+    	assertThat(inputdeadline.displayed());
+    	inputdeadline.fill().with("05/14/2018");
+		
+	}
+
+	public void checkAndFillAvaliacao() {
+		await().atMost(10, TimeUnit.SECONDS).until(naoAvaliativo).present();
+    	assertThat(naoAvaliativo.displayed());
+    	naoAvaliativo.click();
+		
+	}
 }
 	

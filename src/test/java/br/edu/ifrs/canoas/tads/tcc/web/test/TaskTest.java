@@ -19,26 +19,41 @@ public class TaskTest extends MyFluentTest{
 	
 	@Before
     public void loginUser(){
-        super.loginUser();
+        super.loginProfessor();
     }
 
     @Test
-    public void checkSearchForBoot() {
+    public void CadastroNovaTarefaSemDados() {
         //Given
     	taskPage.goUrl();
-    	taskPage.isAt();
-
-        //When
-    	//taskPage.fillAndSubmitForm("boot").awaitLoadPeriodAppear();
-        //and
-    	//taskPage.openResult();
-        //and
-    	//taskPage.downloadFile();
-
-
+    	taskPage.checkListaDeTarefas();;
         //Then
-        assertThat(window().title()).isEqualTo("Cronograma");
-       // assertThat(taskPage.getFirstResultDetails().displayed()).isTrue();
-       // assertThat(taskPage.getFirstResultDetails().text()).containsIgnoringCase("Assim como o título, o resumo");
+        taskPage.clickNewTask();
+        taskPage.checkTituloLabel();
+        taskPage.clickSalvar();
+        taskPage.checkNotBlank();
+        taskPage.checkTituloLabel();
+        
+    }
+    
+    @Test
+    public void CadastroNovaTarefa() {
+        //Given
+    	taskPage.goUrl();
+    	taskPage.checkListaDeTarefas();;
+        //Then
+        taskPage.clickNewTask();
+        taskPage.checkAndFillTitulo();
+        taskPage.checkAndFillTarefa();
+        taskPage.checkAndFillDataLimite();
+        taskPage.checkAndFillAvaliacao();
+        try {
+			Thread.sleep(50000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
     }
 }

@@ -31,6 +31,9 @@ public class ThemeTest extends MyFluentTest {
 
 		// Then
 		assertThat(themePage.getThemeErr().getElement().getText()).isEqualTo("Não pode estar em branco");
+		assertThat(themePage.getThemeInput().getElement().getAttribute("readonly")).isNotEqualTo("true");
+		assertThat(themePage.getSubmitForEvaluationButton().getElement().isEnabled()).isTrue();
+		assertThat(themePage.getSuccessMessage().present()).isFalse();
 	}
 
 	// TODO nicolas.w CdT005 - RNG022
@@ -48,6 +51,9 @@ public class ThemeTest extends MyFluentTest {
 
 		// Then
 		assertThat(themePage.getThemeErr().getElement().getText()).isEqualTo("tamanho deve estar entre 0 e 50");
+		assertThat(themePage.getThemeInput().getElement().getAttribute("readonly")).isNotEqualTo("true");
+		assertThat(themePage.getSubmitForEvaluationButton().getElement().isEnabled()).isTrue();
+		assertThat(themePage.getSuccessMessage().present()).isFalse();
 	}
 
 	// TODO nicolas.w CdT005 - RNG023
@@ -61,9 +67,12 @@ public class ThemeTest extends MyFluentTest {
 		themePage.isAt();
 
 		// Then
+		assertThat(themePage.getStatusText().getElement().isDisplayed()).isTrue();
+		assertThat(themePage.getAdvisorConsiderations().getElement().isDisplayed()).isTrue();
 		assertThat(themePage.getStatusText().getElement().getText()).isEqualTo("REPROVADO");
 		assertThat(themePage.getAdvisorConsiderations().getElement().getText())
 				.isEqualTo("Tema reprovado automaticamente por inatividade do orientador selecionado.");
+		assertThat(themePage.getThemeInput().getElement().getAttribute("readonly")).isNotEqualTo("true");
 	}
 
 	// TODO nicolas.w CdT005 - RNG038
@@ -79,6 +88,8 @@ public class ThemeTest extends MyFluentTest {
 		themePage.fillForm("Título Teste 1", "Tema de teste", 1, "Descrição de teste 1").submitForEvaluation();
 
 		// Then
+		assertThat(themePage.getModalTitle().getElement().isDisplayed()).isTrue();
+		assertThat(themePage.getModalText().getElement().isDisplayed()).isTrue();
 		assertThat(themePage.getModalTitle().getElement().getText()).isEqualTo("Você tem certeza?");
 		assertThat(themePage.getModalText().getElement().getText()).isEqualTo(
 				"Após o envio não será mais possível alterar as informações até que o orientador selecionado avalie o seu tema");
@@ -98,6 +109,9 @@ public class ThemeTest extends MyFluentTest {
 				.confirmSubmission().awaitUntilResultsAppear();
 
 		// Then
+		assertThat(themePage.getSuccessMessage().present()).isTrue();
+		assertThat(themePage.getSuccessMessage().getElement().getText()).isEqualToIgnoringCase("Formulário enviado com sucesso para avaliação");
+		assertThat(themePage.getStatusText().getElement().isDisplayed()).isTrue();
 		assertThat(themePage.getStatusText().getElement().getText()).isEqualTo("EM AVALIAÇÃO");
 		assertThat(themePage.getThemeInput().getElement().getAttribute("readonly")).isEqualTo("true");
 		assertThat(themePage.getAdvisorSelect().getElement().isEnabled()).isFalse();

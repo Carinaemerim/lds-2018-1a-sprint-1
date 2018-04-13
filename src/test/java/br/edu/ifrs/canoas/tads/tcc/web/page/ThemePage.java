@@ -55,6 +55,9 @@ public class ThemePage extends FluentPage {
 	@FindBy(css = "#submit-confirmation-text")
 	private FluentWebElement modalText;
 
+	@FindBy(css = "#success-message")
+	private FluentWebElement successMessage;
+	
 	public void isAt() {
 		assertThat(window().title()).isEqualTo("Gerenciamento de Documentos");
 	}

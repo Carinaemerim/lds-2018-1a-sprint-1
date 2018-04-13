@@ -46,8 +46,8 @@
 									<td th:text="${task.title}"></td>
 									<div sec:authorize="hasRole('ROLE_PROFESSOR')">
 										<td>						
-											<a th:href="@{/schedule/edit/{id}(id=${task.id})}"> <span class="badge glyphicon glyphicon-edit " th:text=" Editar" />
-											<a th:href="@{/schedule/delete/{id}(id=${task.id})}" onclick="deletar()"> <span class="badge glyphicon glyphicon-trash  " th:text="delete" />
+											<a th:href="@{/schedule/edit/{id}(id=${task.id})}"> <span class="badge glyphicon glyphicon-edit " th:text="Edit" />
+											<a th:href="@{/schedule/delete/{id}(id=${task.id})}" onclick="deletar()"> <span class="badge glyphicon glyphicon-trash  " th:text="Delete" />
 										</td>
 									</div>
 								</tr>								
